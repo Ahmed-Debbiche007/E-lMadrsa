@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="536.0" prefWidth="1168.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AjoutQuestionController">
+ <children>
+      <VBox layoutX="32.0" layoutY="95.0" prefHeight="247.0" prefWidth="195.0" spacing="80.0">
+         <children>
+            <Label text="énnoncé : ">
+ 
+            </Label>
+            <Label text="id Quiz :">
+ 
+            </Label>
+         </children>
+      </VBox>
+      <VBox layoutX="130.0" layoutY="89.0" prefHeight="247.0" prefWidth="276.0" spacing="30.0">
+         <children>
+            <TextArea fx:id="lbEnnonce" prefHeight="72.0" prefWidth="276.0" />
+            <TextField fx:id="lbIdQuiz" />
+         </children>
+      </VBox>
+      <Label layoutX="227.0" layoutY="24.0" prefHeight="38.0" prefWidth="459.0" text="Ajouter une Question  " textFill="#941515">
+ 
+      </Label>
+      <TableView fx:id="tvQuestion" layoutX="486.0" layoutY="89.0" prefHeight="307.0" prefWidth="630.0" styleClass="tab-view column-header-background" stylesheets="@../style/AjoutExamen.css">
+        <columns>
+          <TableColumn fx:id="colEnnonce" prefWidth="432.0" text="Ennoncé" />
+            <TableColumn fx:id="colIdQuiz" minWidth="0.0" prefWidth="197.0" text="id quiz" />
+        </columns>
+      </TableView>
+      <Button layoutX="32.0" layoutY="385.0" mnemonicParsing="false" onAction="#ajuoterQuestion" prefHeight="50.0" prefWidth="110.0" text="Insèrer" />
+      <Button layoutX="183.0" layoutY="385.0" mnemonicParsing="false" onAction="#modifierQuestion" prefHeight="50.0" prefWidth="110.0" text="Modifier" />
+      <Button layoutX="327.0" layoutY="385.0" mnemonicParsing="false" onAction="#supprimerQuestion" prefHeight="50.0" prefWidth="110.0" text="Supprimer" />
+      <Button layoutX="32.0" layoutY="28.0" mnemonicParsing="false" onAction="#BackToMain" text="Retour" />
+   </children>
+</AnchorPane>

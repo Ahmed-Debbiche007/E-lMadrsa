@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="570.0" prefWidth="1175.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AjoutQuizController">
+ 
+     <children>
+      <TableView fx:id="tvQuiz" layoutX="486.0" layoutY="89.0" prefHeight="307.0" prefWidth="630.0" styleClass="tab-view column-header-background" stylesheets="@../style/AjoutExamen.css">
+        <columns>
+          <TableColumn fx:id="colnq" prefWidth="318.0" text="Nom Quiz" />
+        </columns>
+      </TableView>
+      <Button layoutX="32.0" layoutY="310.0" mnemonicParsing="false" onAction="#ajuoterQuiz" prefHeight="50.0" prefWidth="110.0" text="Insèrer" />
+      <Button layoutX="183.0" layoutY="310.0" mnemonicParsing="false" onAction="#modifierQuiz" prefHeight="50.0" prefWidth="110.0" text="Modifier" />
+      <Button layoutX="327.0" layoutY="310.0" mnemonicParsing="false" onAction="#supprimerQuiz" prefHeight="50.0" prefWidth="110.0" text="Supprimer" />
+      <Button layoutX="32.0" layoutY="28.0" mnemonicParsing="false" onAction="#BackToMain" text="Retour" />
+      <VBox layoutX="24.0" layoutY="89.0" prefHeight="39.0" prefWidth="146.0" />
+      <VBox layoutX="32.0" layoutY="109.0" prefHeight="200.0" prefWidth="110.0" spacing="20.0">
+         <children>
+            <Label text="Nom Quiz :">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="115.0" text="Examen id :">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox layoutX="162.0" layoutY="109.0" prefHeight="200.0" prefWidth="263.0" spacing="20.0">
+         <children>
+            <TextField fx:id="lbNomQuiz" prefHeight="23.0" prefWidth="178.0" />
+            <TextField fx:id="lbExamenId" layoutX="10.0" layoutY="10.0" prefHeight="23.0" prefWidth="178.0" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
