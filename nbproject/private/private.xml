@@ -3,12 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/M:/E-lmadrsa-test/src/test/MainProgGUI.java</file>
-            <file>file:/M:/E-lmadrsa-test/src/style/AjoutExamen.css</file>
-            <file>file:/M:/E-lmadrsa-test/src/style/ajoutquestion.css</file>
-            <file>file:/M:/E-lmadrsa-test/src/gui/AjoutQuestionController.java</file>
-            <file>file:/M:/E-lmadrsa-test/src/gui/AjoutExamenController.java</file>
-            <file>file:/M:/E-lmadrsa-test/src/gui/AjoutExamen.fxml</file>
+            <file>file:/M:/E-lmadrsa/E-lMadrsa/src/services/ExamenService.java</file>
+            <file>file:/M:/E-lmadrsa/E-lMadrsa/src/gui/AjoutOptionController.java</file>
+            <file>file:/M:/E-lmadrsa/E-lMadrsa/src/gui/AjoutOption.fxml</file>
+            <file>file:/M:/E-lmadrsa/E-lMadrsa/src/entities/Option.java</file>
+            <file>file:/M:/E-lmadrsa/E-lMadrsa/src/gui/MainUIController.java</file>
+            <file>file:/M:/E-lmadrsa/E-lMadrsa/src/services/OptionService.java</file>
         </group>
     </open-files>
 </project-private>

@@ -45,7 +45,7 @@ public class MainUIController implements Initializable {
 
     @FXML
     private void getQuizCrud(ActionEvent event) throws IOException {
-            Stage stage ;
+    Stage stage ;
     Parent root = FXMLLoader.load(getClass().getResource("AjoutQuiz.fxml"));
     stage = (Stage)((Node)event.getSource()).getScene().getWindow();
     Scene scene=new Scene(root);
@@ -64,7 +64,15 @@ public class MainUIController implements Initializable {
     }
 
     @FXML
-    private void getOptionsCrud(ActionEvent event) {
+    private void getOptionsCrud(ActionEvent event) throws IOException {
+        
+                            Stage stage ;
+    Parent root = FXMLLoader.load(getClass().getResource("AjoutOption.fxml"));
+    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    Scene scene=new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+        
     }
     
 }

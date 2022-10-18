@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.util.List;
   import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import outils.MyDB;
 
 /**
@@ -149,8 +151,8 @@ public class OptionService implements IService<Option> {
     }
 
     @Override
-    public List<Option> afficher() {
-                   List<Option> listOption = new ArrayList<>();
+    public ObservableList<Option> afficher() {
+                   ObservableList<Option> listOption = FXCollections.observableArrayList();
 
             try {
                 String req = "select * from opt" ;
