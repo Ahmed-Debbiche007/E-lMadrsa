@@ -4,18 +4,14 @@
  */
 package gui;
 
-import entities.Examen;
  import entities.Question;
 import entities.Quiz;
+
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
 import java.util.Optional;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,13 +25,11 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
-import outils.MyDB;
-import services.ExamenService;
 import services.QuestionService;
+import services.QuizService;
 
 /**
  * FXML Controller class
@@ -47,27 +41,31 @@ public class AjoutQuestionController implements Initializable {
     @FXML
     private TextArea lbEnnonce;
     @FXML
-    private TextField lbIdQuiz;
-    @FXML
     private TableView<Question> tvQuestion;
     @FXML
     private TableColumn<Question,String> colEnnonce;
-    @FXML
     private TableColumn<Question, Long> colIdQuiz;
+    @FXML
+    private TableView<Quiz> tvQuiz;
+    @FXML
+    private TableColumn<Quiz,String> colQuizName;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        showQuestions();
+       showQuestions();
+        showQuiz() ;
       }    
 
     @FXML
     private void ajuoterQuestion(ActionEvent event) {
         
-                QuestionService  QS = new QuestionService() ;
-        QS.ajouter(new Question(lbEnnonce.getText()));
+        QuestionService  QS = new QuestionService() ;
+        Quiz q = tvQuiz.getSelectionModel().getSelectedItem() ;
+        QS.ajouter(new Question(lbEnnonce.getText(),q.getIdQuizz()));
+        System.out.println("id du quiz séléctionné : " + q.getIdQuizz()) ; 
         JOptionPane.showMessageDialog(null,"Question Ajoutée ! ");
         showQuestions() ;
         
@@ -121,34 +119,29 @@ public class AjoutQuestionController implements Initializable {
     }
     
     
-    
-    
-    
-            public  ObservableList<Question> afficher() {
-                   ObservableList<Question>  listQuestion =  FXCollections.observableArrayList() ;
-                       Connection cnx ; 
-                       cnx = MyDB.getInstance().getCnx();
-            try {
-                String req = "select * from Question" ;
-                PreparedStatement st = cnx.prepareStatement(req) ; 
-                 ResultSet rs = st.executeQuery(req) ;
- 
-                
-                            while (rs.next()) {
-                listQuestion.add(new Question( rs.getLong("idQuestion"),rs.getString("ennonce") ));
-            }    
-            } catch (SQLException ex) {
-                System.out.println("error occured");  
-            }
-              return listQuestion ;
-     }
+
           public void showQuestions() {
-        ObservableList<Question> list = afficher() ;
+        QuestionService QS = new QuestionService() ;
+        ObservableList<Question> list = QS.afficher() ;
         System.out.println(list ) ; 
         colEnnonce.setCellValueFactory(new PropertyValueFactory<Question,String>("ennonce"));
-         colIdQuiz.setCellValueFactory(new PropertyValueFactory<Question,Long>("idQuiz"));
         System.out.println(list);
         tvQuestion.setItems(list);        
+    }
+
+    @FXML
+    private void editQuestion(ActionEvent event) {
+    }
+    
+                      public void showQuiz() {
+                    QuizService QS= new QuizService() ;
+                    ObservableList<Quiz> list = QS.afficher() ;
+                    System.out.println(list ) ; 
+                    colQuizName.setCellValueFactory(new PropertyValueFactory<Quiz,String>("nameQuizz"));
+                    System.out.println(list);
+                    tvQuiz.setItems(list);
+                    System.out.println("pppppppppppp"  +  list ) ;
+        
     }
     
 }

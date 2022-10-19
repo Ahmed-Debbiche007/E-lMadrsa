@@ -115,7 +115,7 @@ public class AjoutQuizController implements Initializable {
                 stage.setScene(scene);
                 stage.show();
     }
-    
+    /*
             public  ObservableList<Quiz> afficher() {
                    ObservableList<Quiz>  listQuiz =  FXCollections.observableArrayList() ;
                        Connection cnx ; 
@@ -135,10 +135,11 @@ public class AjoutQuizController implements Initializable {
               return listQuiz ;
      }
     
-            
+            */
             
                   public void showQuiz() {
-                    ObservableList<Quiz> list = afficher() ;
+                    QuizService QS= new QuizService() ;
+                    ObservableList<Quiz> list = QS.afficher() ;
                     System.out.println(list ) ; 
                     colnq.setCellValueFactory(new PropertyValueFactory<Quiz,String>("nameQuizz"));
                     System.out.println(list);

@@ -10,12 +10,12 @@
 
 <AnchorPane id="AnchorPane" prefHeight="543.0" prefWidth="1162.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AjoutOptionController">
        <children>
-      <VBox layoutX="32.0" layoutY="95.0" prefHeight="247.0" prefWidth="195.0" spacing="15.0">
+      <VBox layoutX="32.0" layoutY="95.0" prefHeight="108.0" prefWidth="397.0" spacing="15.0">
          <children>
-            <Label text="ennoncé Option">
+            <Label text="ennoncé Option : ">
  
             </Label>
-            <Label text="id Question">
+            <Label prefHeight="68.0" prefWidth="388.0" text="la question reliée a cette option : ">
  
             </Label>
          </children>
@@ -23,7 +23,6 @@
       <VBox layoutX="189.0" layoutY="95.0" prefHeight="247.0" prefWidth="276.0" spacing="15.0">
          <children>
             <TextField fx:id="tfNomOption" prefHeight="31.0" prefWidth="263.0" />
-            <TextField fx:id="tfidQuestion" layoutX="10.0" layoutY="10.0" prefHeight="31.0" prefWidth="263.0" />
          </children>
       </VBox>
       <Label layoutX="218.0" layoutY="25.0" prefHeight="38.0" prefWidth="459.0" text="Ajouter une Option : " textFill="#941515">
@@ -31,8 +30,7 @@
       </Label>
       <TableView fx:id="tvOptions" layoutX="486.0" layoutY="89.0" prefHeight="307.0" prefWidth="630.0" styleClass="tab-view column-header-background" stylesheets="@../style/AjoutExamen.css">
         <columns>
-          <TableColumn fx:id="colNomOption" prefWidth="136.0" style="-fx-background-color: silver;" text="Ennoncé question" />
-            <TableColumn fx:id="colidQuestion" prefWidth="136.0" style="-fx-background-color: silver;" text="Id Question" />
+          <TableColumn fx:id="colNomOption" prefWidth="629.0" style="-fx-background-color: silver;" text="Ennoncé option " />
         </columns>
       </TableView>
       <Button layoutX="32.0" layoutY="385.0" mnemonicParsing="false" onAction="#ajuoterOption" prefHeight="50.0" prefWidth="110.0" text="Insèrer" />
@@ -40,5 +38,10 @@
       <Button layoutX="327.0" layoutY="385.0" mnemonicParsing="false" onAction="#supprimerOption" prefHeight="50.0" prefWidth="110.0" text="Supprimer" />
       <Button layoutX="32.0" layoutY="28.0" mnemonicParsing="false" onAction="#BackToMain" text="Retour" />
       <Button layoutX="486.0" layoutY="40.0" mnemonicParsing="false" onAction="#editOption" prefHeight="38.0" prefWidth="353.0" text="Modifier les attributs d'option selectionnée " />
+      <TableView fx:id="tvQuestions" layoutX="58.0" layoutY="193.0" prefHeight="159.0" prefWidth="388.0">
+        <columns>
+          <TableColumn fx:id="colEnnonce" prefWidth="387.0" text="Ennoncé question" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

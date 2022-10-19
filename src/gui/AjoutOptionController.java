@@ -6,6 +6,7 @@ package gui;
 
  
 import entities.Option;
+import entities.Question;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -27,6 +28,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import services.OptionService;
+import services.QuestionService;
 
 /**
  * FXML Controller class
@@ -38,13 +40,14 @@ public class AjoutOptionController implements Initializable {
     @FXML
     private TextField tfNomOption;
     @FXML
-    private TextField tfidQuestion;
-    @FXML
     private TableView<Option> tvOptions;
     @FXML
     private TableColumn<Option,String> colNomOption;
-    @FXML
     private TableColumn<Option,Long> colidQuestion;
+    @FXML
+    private TableView<Question> tvQuestions;
+    @FXML
+    private TableColumn<Question,String> colEnnonce;
 
     /**
      * Initializes the controller class.
@@ -52,6 +55,7 @@ public class AjoutOptionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
                showOptions() ;
+               showQuestions() ;
 
     }    
 
@@ -62,7 +66,9 @@ public class AjoutOptionController implements Initializable {
  
         else {
         OptionService  OS = new OptionService() ;
-        OS.ajouter(new Option(  tfNomOption.getText()) );
+        Question q = tvQuestions.getSelectionModel().getSelectedItem() ;
+        System.out.println("***********" + q.getIdQuestion()) ;
+        OS.ajouter(new Option(  tfNomOption.getText() ,q.getIdQuestion() ) );
        showOptions() ;
         JOptionPane.showMessageDialog(null,"Option Ajoutée ! ");
     }
@@ -117,8 +123,7 @@ public class AjoutOptionController implements Initializable {
         ObservableList<Option> list = SO.afficher() ;
         System.out.println(list ) ; 
         colNomOption.setCellValueFactory(new PropertyValueFactory<Option,String>("optionName"));
-        colidQuestion.setCellValueFactory(new PropertyValueFactory<Option,Long>("questionId"));
-        System.out.println(list);
+         System.out.println(list);
         tvOptions.setItems(list);
         
     }
@@ -130,5 +135,16 @@ public class AjoutOptionController implements Initializable {
              tfNomOption.setText(o.getOptionName());
 
     }
+    }
+    
+    
+    
+              public void showQuestions() {
+        QuestionService QS = new QuestionService() ;
+        ObservableList<Question> list = QS.afficher() ;
+        System.out.println(list ) ; 
+        colEnnonce.setCellValueFactory(new PropertyValueFactory<Question,String>("ennonce"));
+         System.out.println(list);
+        tvQuestions.setItems(list);        
     }
 }

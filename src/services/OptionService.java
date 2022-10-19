@@ -1,5 +1,6 @@
 package services;
 
+import entities.Examen;
  import entities.Option;
  import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -110,13 +111,14 @@ public class OptionService implements IService<Option> {
     @Override
     public void ajouter(Option o) {
                 try {
-            String req = "insert into opt (optionName) values(?);"  ;
+            String req = "insert into opt (optionName,questionId) values(?,?);"  ;
             PreparedStatement st = cnx.prepareStatement(req); 
             st.setString(1, o.getOptionName());
+            st.setLong(2, o.getIdQuestion());
             st.execute();
             System.out.println("option ajoutée ");
         } catch (SQLException ex) {
-            System.out.println("Erreur ! option non ajoutée ");
+            System.out.println("Erreur ! option non ajoutée " + ex.getMessage());
         }
     }
 
@@ -160,10 +162,11 @@ public class OptionService implements IService<Option> {
                 ResultSet rs = st.executeQuery() ;
                 
                 while(rs.next()) {
-                Option o = new Option();
-                o.setOptionName("a");
-      
-                listOption.add(o);
+
+                
+                
+                listOption.add(new Option( rs.getLong("idOption"),rs.getString("optionName"), rs.getLong("questionId")));
+
             }
                 
                 

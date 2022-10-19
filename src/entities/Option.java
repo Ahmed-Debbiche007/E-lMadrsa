@@ -15,6 +15,17 @@ public class Option {
     private String optionName ; 
     private Boolean etat ; 
     private Long idQuestion ; 
+
+    public Option(String optionName, Long idQuestion) {
+        this.optionName = optionName;
+        this.idQuestion = idQuestion;
+    }
+
+    public Option(Long idOption, String optionName, Long idQuestion) {
+        this.idOption = idOption;
+        this.optionName = optionName;
+        this.idQuestion = idQuestion;
+    }
     
 
 

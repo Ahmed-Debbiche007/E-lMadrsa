@@ -5,18 +5,17 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane id="AnchorPane" prefHeight="536.0" prefWidth="1168.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AjoutQuestionController">
  <children>
-      <VBox layoutX="32.0" layoutY="95.0" prefHeight="247.0" prefWidth="195.0" spacing="80.0">
+      <VBox layoutX="32.0" layoutY="95.0" prefHeight="247.0" prefWidth="377.0" spacing="80.0">
          <children>
             <Label text="énnoncé : ">
  
             </Label>
-            <Label text="id Quiz :">
+            <Label prefHeight="21.0" prefWidth="352.0" text="choisissez le quiz associé a cette question : ">
  
             </Label>
          </children>
@@ -24,7 +23,6 @@
       <VBox layoutX="130.0" layoutY="89.0" prefHeight="247.0" prefWidth="276.0" spacing="30.0">
          <children>
             <TextArea fx:id="lbEnnonce" prefHeight="72.0" prefWidth="276.0" />
-            <TextField fx:id="lbIdQuiz" />
          </children>
       </VBox>
       <Label layoutX="227.0" layoutY="24.0" prefHeight="38.0" prefWidth="459.0" text="Ajouter une Question  " textFill="#941515">
@@ -32,13 +30,18 @@
       </Label>
       <TableView fx:id="tvQuestion" layoutX="486.0" layoutY="89.0" prefHeight="307.0" prefWidth="630.0" styleClass="tab-view column-header-background" stylesheets="@../style/AjoutExamen.css">
         <columns>
-          <TableColumn fx:id="colEnnonce" prefWidth="432.0" text="Ennoncé" />
-            <TableColumn fx:id="colIdQuiz" minWidth="0.0" prefWidth="197.0" text="id quiz" />
+          <TableColumn fx:id="colEnnonce" prefWidth="629.0" text="Ennoncé" />
         </columns>
       </TableView>
-      <Button layoutX="32.0" layoutY="385.0" mnemonicParsing="false" onAction="#ajuoterQuestion" prefHeight="50.0" prefWidth="110.0" text="Insèrer" />
-      <Button layoutX="183.0" layoutY="385.0" mnemonicParsing="false" onAction="#modifierQuestion" prefHeight="50.0" prefWidth="110.0" text="Modifier" />
-      <Button layoutX="327.0" layoutY="385.0" mnemonicParsing="false" onAction="#supprimerQuestion" prefHeight="50.0" prefWidth="110.0" text="Supprimer" />
+      <Button layoutX="32.0" layoutY="403.0" mnemonicParsing="false" onAction="#ajuoterQuestion" prefHeight="50.0" prefWidth="110.0" text="Insèrer" />
+      <Button layoutX="183.0" layoutY="401.0" mnemonicParsing="false" onAction="#modifierQuestion" prefHeight="50.0" prefWidth="110.0" text="Modifier" />
+      <Button layoutX="327.0" layoutY="401.0" mnemonicParsing="false" onAction="#supprimerQuestion" prefHeight="50.0" prefWidth="110.0" text="Supprimer" />
       <Button layoutX="32.0" layoutY="28.0" mnemonicParsing="false" onAction="#BackToMain" text="Retour" />
+      <TableView fx:id="tvQuiz" layoutX="14.0" layoutY="242.0" prefHeight="129.0" prefWidth="439.0">
+        <columns>
+          <TableColumn fx:id="colQuizName" prefWidth="438.0" text="Nom quiz" />
+        </columns>
+      </TableView>
+      <Button layoutX="498.0" layoutY="28.0" mnemonicParsing="false" onAction="#editQuestion" text="edit" />
    </children>
 </AnchorPane>

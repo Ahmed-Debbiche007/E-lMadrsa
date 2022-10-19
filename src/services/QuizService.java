@@ -7,9 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import static java.util.Collections.list;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import outils.MyDB;
 
  
@@ -71,8 +74,8 @@ public class QuizService implements IService<Quiz> {
 }
 
     @Override
-    public List<Quiz> afficher() {
-         List<Quiz> List = new ArrayList<>();
+    public ObservableList<Quiz> afficher() {
+         ObservableList<Quiz> List = FXCollections.observableArrayList() ;
 
         
         try {
@@ -81,10 +84,7 @@ public class QuizService implements IService<Quiz> {
                  PreparedStatement st = cnx.prepareCall(req); 
                  ResultSet rs= st.executeQuery();
                 while(rs.next()){
-                  Quiz  q =new Quiz();
-                  q.setNameQuizz("quizname");
-        
-                   List.add(q);
+                    List.add(new Quiz( rs.getLong("idQuiz"),rs.getString("nameQuiz"),rs.getLong("examenId")));
                 }
              } catch (SQLException ex) {
                 System.out.println(ex.getMessage());

@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import outils.MyDB;
 
 public class QuestionService implements IService<Question> {
@@ -36,9 +38,10 @@ public class QuestionService implements IService<Question> {
     @Override
     public void ajouter(Question q) {
                 try {
-            String req = "insert into Question(ennonce) values(?) ; "  ;
+            String req = "insert into Question(ennonce,quizId) values(?,?) ; "  ;
             PreparedStatement st = cnx.prepareStatement(req);
             st.setString(1,q.getEnnonce());
+            st.setLong(2,q.getIdQuizz());
             st.execute();
             System.out.println("Question Ajoutée ! ");
         } catch (SQLException ex) {
@@ -77,8 +80,8 @@ public class QuestionService implements IService<Question> {
     }
 
     @Override
-    public List<Question> afficher() {
-                   List<Question> listQuestion = new ArrayList<>();
+    public ObservableList<Question> afficher() {
+                   ObservableList<Question> listQuestion = FXCollections.observableArrayList() ;
 
             try {
                 String req = "select * from Question" ;
@@ -86,9 +89,8 @@ public class QuestionService implements IService<Question> {
                 ResultSet rs = st.executeQuery(req) ;
                 
                 while(rs.next()) {
-                Question ex = new Question();
-                ex.setEnnonce("math");
-                listQuestion.add(ex);
+                listQuestion.add(new Question(rs.getLong("idQuestion"),rs.getString("ennonce"),rs.getLong("quizId"))) ;
+
             }
                 
                 
