@@ -62,13 +62,25 @@ public class AjoutQuestionController implements Initializable {
     @FXML
     private void ajuoterQuestion(ActionEvent event) {
         
+        
+        
+        if (lbEnnonce.getText().trim().equals(""))  
+                    JOptionPane.showMessageDialog(null," Veuillez remplir le champs ennonce question  ! ");
+      
+        
+        
+        
+        else 
+        
+        {
+        
         QuestionService  QS = new QuestionService() ;
         Quiz q = tvQuiz.getSelectionModel().getSelectedItem() ;
         QS.ajouter(new Question(lbEnnonce.getText(),q.getIdQuizz()));
         System.out.println("id du quiz séléctionné : " + q.getIdQuizz()) ; 
         JOptionPane.showMessageDialog(null,"Question Ajoutée ! ");
         showQuestions() ;
-        
+        }
         
     }
 

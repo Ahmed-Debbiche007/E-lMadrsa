@@ -68,6 +68,10 @@ public class AjoutExamenController implements Initializable {
     private TableView<Categorie> tvCategories;
     @FXML
     private TableColumn<Categorie, String> colNomCategorie;
+    @FXML
+    private TableColumn<Examen,String > colFormationex;
+    @FXML
+    private TableColumn<Examen,String > colCategorieex;
 
     /**
      * Initializes the controller class.
@@ -139,27 +143,7 @@ public class AjoutExamenController implements Initializable {
     
     
     
-    /*
-        public  ObservableList<Examen> afficher() {
-                   ObservableList<Examen>  listExamen =  FXCollections.observableArrayList() ;
-                       Connection cnx ; 
-                       cnx = MyDB.getInstance().getCnx();
-            try {
-                String req = "select * from Examen" ;
-                PreparedStatement st = cnx.prepareStatement(req) ; 
-                 ResultSet rs = st.executeQuery(req) ;
  
-                
-                            while (rs.next()) {
-                listExamen.add(new Examen( rs.getLong("idExamen"),rs.getString("nomExamen"), rs.getDouble("pourcentage"), rs.getInt("DureeExamen")));
-            }    
-            } catch (SQLException ex) {
-                System.out.println("error occured" +ex.getMessage());  
-            }
-              return listExamen ;
-     }
-    
-    */
     
 
     @FXML
@@ -194,6 +178,9 @@ public class AjoutExamenController implements Initializable {
         colNomExamen.setCellValueFactory(new PropertyValueFactory<Examen,String>("nomExamen"));
         colPourcentageExamen.setCellValueFactory(new PropertyValueFactory<Examen,Double>("Pourcentage"));
         colDureeExamen.setCellValueFactory(new PropertyValueFactory<Examen,Integer>("DureeExamen"));
+        
+        
+        
         System.out.println(list);
         tvExamens.setItems(list);
         
