@@ -34,11 +34,13 @@ public class ExamenService implements IService<Examen> {
     @Override
     public void ajouter(Examen e) {
                 try {
-            String req = "insert into Examen (nomExamen,pourcentage,DureeExamen) values(?,?,?)"  ;
+            String req = "insert into Examen (nomExamen,pourcentage,DureeExamen,formationId ,idcategorie) values(?,?,?,?,?)"  ;
             PreparedStatement st = cnx.prepareStatement(req) ; 
             st.setString(1, e.getNomExamen());
             st.setDouble(2, e.getPourcentage());
             st.setInt(3, e.getDureeExamen());
+            st.setLong(4, e.getFormationId());
+            st.setLong(5, e.getIdCategorie());
             st.execute();
             System.out.println("Examen  ajouté  !");
 
@@ -89,7 +91,7 @@ public class ExamenService implements IService<Examen> {
                  ResultSet rs = st.executeQuery(req) ;
                 
                 while(rs.next()) {
-                listExamen.add(new Examen( rs.getLong("idExamen"),rs.getString("nomExamen"), rs.getDouble("pourcentage"), rs.getInt("DureeExamen")));
+                listExamen.add(new Examen( rs.getLong("idExamen"),rs.getString("nomExamen"), rs.getDouble("pourcentage"), rs.getInt("DureeExamen") , rs.getLong("formationId") ,rs.getLong("idCategorie")));
 
             }
                 

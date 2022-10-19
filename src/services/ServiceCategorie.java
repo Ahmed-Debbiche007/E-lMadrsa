@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -64,8 +66,8 @@ public class ServiceCategorie {
         }
     }
     
-    public List<Categorie> afficher() {
-        List<Categorie> list = new ArrayList<>();
+    public ObservableList<Categorie> afficher() {
+        ObservableList<Categorie> list = FXCollections.observableArrayList();
 
         try {
             String requete = "SELECT idCategorie,nomCategorie FROM Categorie ";

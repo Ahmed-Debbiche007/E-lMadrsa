@@ -220,6 +220,8 @@ public class AjoutCategorieController implements Initializable {
         return list;
     }
     public void showcategorie(){
+        
+        
         ObservableList<Categorie> ListCat =  afficher() ; 
         System.out.println("pas de probleme");
         

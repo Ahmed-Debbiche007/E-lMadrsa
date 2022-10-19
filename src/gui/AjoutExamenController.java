@@ -4,6 +4,9 @@
  */
 package gui;
 
+import entites.Categorie;
+import entites.Formation;
+import entites.difficulté;
 import entities.Examen;
  import java.io.IOException;
  import java.net.URL;
@@ -33,6 +36,8 @@ import javafx.stage.Stage;
  import javax.swing.JOptionPane;
 import outils.MyDB;
 import services.ExamenService;
+import services.ServiceCategorie;
+import services.ServiceFormation;
  
 /**
  * FXML Controller class
@@ -56,9 +61,13 @@ public class AjoutExamenController implements Initializable {
     @FXML
     private TableColumn<Examen, Integer> colDureeExamen;
     @FXML
-    private TextField tfFormationIdExamen;
+    private TableView<Formation> tvFormations;
     @FXML
-    private TextField tfCategorieExamen;
+    private TableColumn<Formation, String> colSujetFormation;
+    @FXML
+    private TableView<Categorie> tvCategories;
+    @FXML
+    private TableColumn<Categorie, String> colNomCategorie;
 
     /**
      * Initializes the controller class.
@@ -71,6 +80,8 @@ public class AjoutExamenController implements Initializable {
      @Override
     public void initialize(URL url, ResourceBundle rb) {
         showExams() ;
+        showcategorie() ;
+        showformation() ;
          // TODO
     }    
 
@@ -93,7 +104,10 @@ public class AjoutExamenController implements Initializable {
         
        
         ExamenService  SE = new ExamenService() ;
-        SE.ajouter(new Examen(  tfNomExamen.getText()  ,   Double.parseDouble(tfPourcentageExamen.getText())     , Integer.parseInt(tfDureeExamen.getText())      ));
+           Formation f =  tvFormations.getSelectionModel().getSelectedItem() ;
+           Categorie c =  tvCategories.getSelectionModel().getSelectedItem() ; 
+           
+        SE.ajouter(new Examen(  tfNomExamen.getText()  ,   Double.parseDouble(tfPourcentageExamen.getText())     , Integer.parseInt(tfDureeExamen.getText() )    , f.getIdFormation() , c.getIdCategorie()   ));
         showExams() ;
         JOptionPane.showMessageDialog(null,"examen Ajoutée ! ");
         
@@ -125,7 +139,7 @@ public class AjoutExamenController implements Initializable {
     
     
     
-    
+    /*
         public  ObservableList<Examen> afficher() {
                    ObservableList<Examen>  listExamen =  FXCollections.observableArrayList() ;
                        Connection cnx ; 
@@ -145,7 +159,7 @@ public class AjoutExamenController implements Initializable {
               return listExamen ;
      }
     
-    
+    */
     
 
     @FXML
@@ -174,7 +188,8 @@ public class AjoutExamenController implements Initializable {
     }
     
       public void showExams() {
-        ObservableList<Examen> list = afficher() ;
+        ExamenService SE = new ExamenService() ; 
+        ObservableList<Examen> list = SE.afficher() ;
         System.out.println(list ) ; 
         colNomExamen.setCellValueFactory(new PropertyValueFactory<Examen,String>("nomExamen"));
         colPourcentageExamen.setCellValueFactory(new PropertyValueFactory<Examen,Double>("Pourcentage"));
@@ -208,4 +223,26 @@ public class AjoutExamenController implements Initializable {
                
     }                
     }
+    
+    
+        public void showcategorie(){
+            ServiceCategorie SC = new ServiceCategorie() ;
+        ObservableList<Categorie> ListCat =  SC.afficher() ; 
+        colNomCategorie.setCellValueFactory(new PropertyValueFactory<Categorie,String>("nomCategorie"));
+        tvCategories.setItems(ListCat);
+    }
+        
+            public void showformation(){
+         ServiceFormation SF = new ServiceFormation() ;
+        ObservableList<Formation> ListCat =  SF.afficher() ; 
+        colSujetFormation.setCellValueFactory(new PropertyValueFactory<Formation,String>("Sujet"));
+        tvFormations.setItems(ListCat);
+
+    }
+        
+    
+    
+    
+    
+    
 }

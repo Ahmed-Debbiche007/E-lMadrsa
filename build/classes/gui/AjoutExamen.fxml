@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="610.0" prefWidth="1139.0" stylesheets="@../style/AjoutExamen.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AjoutExamenController">
+<AnchorPane id="AnchorPane" prefHeight="803.0" prefWidth="1139.0" stylesheets="@../style/AjoutExamen.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AjoutExamenController">
    <children>
       <VBox layoutX="32.0" layoutY="95.0" prefHeight="247.0" prefWidth="195.0" spacing="15.0">
          <children>
@@ -33,11 +33,6 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label text="categorie :">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
          </children>
       </VBox>
       <VBox layoutX="189.0" layoutY="95.0" prefHeight="247.0" prefWidth="276.0" spacing="15.0">
@@ -45,8 +40,6 @@
             <TextField fx:id="tfNomExamen" prefHeight="31.0" prefWidth="263.0" />
             <TextField fx:id="tfPourcentageExamen" layoutX="10.0" layoutY="10.0" prefHeight="31.0" prefWidth="263.0" />
             <TextField fx:id="tfDureeExamen" layoutX="10.0" layoutY="41.0" prefHeight="31.0" prefWidth="263.0" />
-            <TextField fx:id="tfFormationIdExamen" layoutX="10.0" layoutY="72.0" prefHeight="31.0" prefWidth="263.0" />
-            <TextField fx:id="tfCategorieExamen" layoutX="10.0" layoutY="103.0" prefHeight="31.0" prefWidth="263.0" />
          </children>
       </VBox>
       <Label layoutX="227.0" layoutY="24.0" prefHeight="38.0" prefWidth="459.0" text="Ajouter un Examen : " textFill="#941515">
@@ -54,7 +47,7 @@
             <Font size="26.0" />
          </font>
       </Label>
-      <TableView fx:id="tvExamens" layoutX="486.0" layoutY="89.0" prefHeight="307.0" prefWidth="630.0" styleClass="tab-view column-header-background" stylesheets="@../style/AjoutExamen.css">
+      <TableView fx:id="tvExamens" layoutX="485.0" layoutY="81.0" prefHeight="307.0" prefWidth="630.0" styleClass="tab-view column-header-background" stylesheets="@../style/AjoutExamen.css">
         <columns>
           <TableColumn fx:id="colNomExamen" prefWidth="136.0" style="-fx-background-color: silver;" text="Nom Examen" />
           <TableColumn fx:id="colPourcentageExamen" prefWidth="137.0" style="-fx-background-color: silver;" text="Pourcentage" />
@@ -63,10 +56,25 @@
             <TableColumn prefWidth="119.0" style="-fx-background-color: silver;" text="Categorie" />
         </columns>
       </TableView>
-      <Button layoutX="32.0" layoutY="385.0" mnemonicParsing="false" onAction="#ajuoterExamen" prefHeight="50.0" prefWidth="110.0" text="Insèrer" />
-      <Button layoutX="183.0" layoutY="385.0" mnemonicParsing="false" onAction="#modifierExamen" prefHeight="50.0" prefWidth="110.0" text="Modifier" />
-      <Button layoutX="327.0" layoutY="385.0" mnemonicParsing="false" onAction="#supprimerExamen" prefHeight="50.0" prefWidth="110.0" text="Supprimer" />
+      <Button layoutX="618.0" layoutY="431.0" mnemonicParsing="false" onAction="#ajuoterExamen" prefHeight="50.0" prefWidth="110.0" text="Insèrer" />
+      <Button layoutX="769.0" layoutY="431.0" mnemonicParsing="false" onAction="#modifierExamen" prefHeight="50.0" prefWidth="110.0" text="Modifier" />
+      <Button layoutX="913.0" layoutY="431.0" mnemonicParsing="false" onAction="#supprimerExamen" prefHeight="50.0" prefWidth="110.0" text="Supprimer" />
       <Button layoutX="32.0" layoutY="28.0" mnemonicParsing="false" onAction="#BackToMain" text="Retour" />
-      <Button layoutX="506.0" layoutY="43.0" mnemonicParsing="false" onAction="#editExam" prefHeight="38.0" prefWidth="353.0" text="Modifier les attributs de exammen selectionné " />
+      <Button layoutX="507.0" layoutY="24.0" mnemonicParsing="false" onAction="#editExam" prefHeight="38.0" prefWidth="353.0" text="Modifier les attributs de exammen selectionné " />
+      <Label layoutX="34.0" layoutY="515.0" text="categorie :">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tvFormations" layoutX="27.0" layoutY="288.0" prefHeight="200.0" prefWidth="427.0">
+        <columns>
+          <TableColumn fx:id="colSujetFormation" prefWidth="425.9999694824219" text="Sujet Formation" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tvCategories" layoutX="34.0" layoutY="572.0" prefHeight="200.0" prefWidth="417.0">
+        <columns>
+          <TableColumn fx:id="colNomCategorie" prefWidth="416.0" text="Nom Catégorie " />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>
