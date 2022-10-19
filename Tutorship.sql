@@ -7,14 +7,14 @@
 # 
 # Host: 127.0.0.1 ((Ubuntu) 8.0.30)
 # Database: pidev
-# Generation time: 2022-10-19T18:00:48+01:00
+# Generation time: 2022-10-19T20:52:47+01:00
 # ************************************************************
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-SET NAMES utf8;
+SET NAMES utf8mb4;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
@@ -30,7 +30,7 @@ CREATE TABLE `chatSessions` (
   `idTutorshipSession` bigint NOT NULL,
   PRIMARY KEY (`idSession`),
   UNIQUE KEY `idTutorshipSession` (`idTutorshipSession`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 
@@ -47,8 +47,7 @@ CREATE TABLE `messages` (
   `body` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `statusDate` timestamp NOT NULL,
   PRIMARY KEY (`idMessage`),
-  KEY `idSession` (`idSession`),
-  CONSTRAINT `idSession` FOREIGN KEY (`idSession`) REFERENCES `chatSessions` (`idSession`) ON DELETE CASCADE ON UPDATE CASCADE
+  UNIQUE KEY `idSession` (`idSession`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
@@ -84,7 +83,7 @@ CREATE TABLE `tutorshipSessions` (
   `type` enum('VideoChat','MessagesChat') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `date` timestamp NOT NULL,
   PRIMARY KEY (`idSession`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 
@@ -97,8 +96,13 @@ CREATE TABLE `users` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `nom` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `prenom` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `age` int NOT NULL,
-  PRIMARY KEY (`id`)
+  `role` enum('Tutor','Student') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `status` enum('Disconnected','Connected') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `NEW_INDEX` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
@@ -116,4 +120,4 @@ CREATE TABLE `users` (
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
-# Dump completed on 2022-10-19T18:00:48+01:00
+# Dump completed on 2022-10-19T20:52:47+01:00
