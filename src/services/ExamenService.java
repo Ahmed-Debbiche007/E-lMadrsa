@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import outils.MyDB;
 
 /*
@@ -78,8 +80,8 @@ public class ExamenService implements IService<Examen> {
      }
 
     @Override
-    public List<Examen> afficher() {
-                   List<Examen> listExamen = new ArrayList<>();
+    public ObservableList<Examen> afficher() {
+                   ObservableList<Examen> listExamen =FXCollections.observableArrayList();
 
             try {
                 String req = "select * from Examen" ;
@@ -87,11 +89,8 @@ public class ExamenService implements IService<Examen> {
                  ResultSet rs = st.executeQuery(req) ;
                 
                 while(rs.next()) {
-                Examen ex = new Examen();
-                ex.setNomExamen("math");
-                ex.setPourcentage(60.0);
-                ex.setDureeExamen(20);
-                listExamen.add(ex);
+                listExamen.add(new Examen( rs.getLong("idExamen"),rs.getString("nomExamen"), rs.getDouble("pourcentage"), rs.getInt("DureeExamen")));
+
             }
                 
                 

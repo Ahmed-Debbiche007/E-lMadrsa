@@ -32,7 +32,7 @@ public class MainProgGUI extends Application {
         primaryStage.show();
         */
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/MainUI.fxml")) ;
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/MainUI.fxml")) ;
         Parent root = loader.load() ; 
         Scene scene = new Scene(root) ;
         primaryStage.setScene(scene);

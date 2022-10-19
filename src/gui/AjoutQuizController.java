@@ -6,6 +6,8 @@ package gui;
  */
 
 import entities.Examen;
+import entities.Option;
+import entities.Question;
 import entities.Quiz;
 import entities.Quiz;
 import entities.Quiz;
@@ -37,6 +39,7 @@ import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import outils.MyDB;
 import services.ExamenService;
+import services.OptionService;
 import services.QuizService;
 
 /**
@@ -53,13 +56,13 @@ public class AjoutQuizController implements Initializable {
     @FXML
     private TableColumn<Quiz,String> colnq;
     @FXML
-    private TableView<?> tvExams;
+    private TableView<Examen> tvExams;
     @FXML
-    private TableColumn<?, ?> colNomExamen;
+    private TableColumn<Examen,String> colNomExamen;
     @FXML
-    private TableColumn<?, ?> colPourcentage;
+    private TableColumn<Examen,Double> colPourcentage;
     @FXML
-    private TableColumn<?, ?> colDureeExmaen;
+    private TableColumn<Examen,Integer> colDureeExmaen;
 
     /**
      * Initializes the controller class.
@@ -67,16 +70,28 @@ public class AjoutQuizController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         showQuiz();
+        showExams() ;
         // TODO
     }    
 
     @FXML
     private void ajuoterQuiz(ActionEvent event) {
+ 
         
-                QuizService  SE = new QuizService() ;
-        SE.ajouter(new Quiz(  lbNomQuiz.getText()    ));
-        JOptionPane.showMessageDialog(null,"Quiz Ajoutée ! ");
-        showQuiz() ;
+        
+                if (lbNomQuiz.getText().trim().equals(""))  
+                    JOptionPane.showMessageDialog(null," Veuillez remplir le champs nom quiz ! ");
+ 
+                else {
+                QuizService  QS = new QuizService() ;
+                Examen e   = tvExams.getSelectionModel().getSelectedItem() ;
+                System.out.println("**************//////////"+ e) ; 
+                QS.ajouter(new Quiz(  lbNomQuiz.getText()  , e.getIdExamen()  ) );
+                showQuiz() ;
+                JOptionPane.showMessageDialog(null,"qUIZ Ajoutée ! ");
+            }
+        
+        
         
     }
 
@@ -136,4 +151,22 @@ public class AjoutQuizController implements Initializable {
     @FXML
     private void editQuiz(ActionEvent event) {
     }
+    
+    
+    
+          public void showExams() {
+        ExamenService ES = new ExamenService() ; 
+        ObservableList<Examen> list = ES.afficher() ;
+        System.out.println(list ) ; 
+        colNomExamen.setCellValueFactory(new PropertyValueFactory<Examen,String>("nomExamen"));
+        colPourcentage.setCellValueFactory(new PropertyValueFactory<Examen,Double>("Pourcentage"));
+        colDureeExmaen.setCellValueFactory(new PropertyValueFactory<Examen,Integer>("DureeExamen"));
+        System.out.println(list);
+        tvExams.setItems(list);
+        
+    }
 }
+
+
+
+  

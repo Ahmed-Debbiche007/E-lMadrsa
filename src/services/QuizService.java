@@ -29,9 +29,11 @@ public class QuizService implements IService<Quiz> {
     @Override
     public void ajouter(Quiz q) {
                 try {
-            String req="insert into Quiz(nameQuiz) values(?);" ;
+            String req="insert into Quiz(nameQuiz,examenId) values(?,?);" ;
             PreparedStatement st = cnx.prepareStatement(req);
             st.setString(1, q.getNameQuizz());
+            st.setLong(2,q.getIdExamen());
+
             st.execute() ; 
             System.out.println("quiz ajouté ") ;
            
@@ -84,10 +86,10 @@ public class QuizService implements IService<Quiz> {
                  PreparedStatement st = cnx.prepareCall(req); 
                  ResultSet rs= st.executeQuery();
                 while(rs.next()){
-                    List.add(new Quiz( rs.getLong("idQuiz"),rs.getString("nameQuiz"),rs.getLong("examenId")));
+                    List.add(new Quiz( rs.getLong("idQuiz"),rs.getString("nameQuiz"),rs.getLong("examenId") ));
                 }
              } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
+                System.out.println("*********" + ex.getErrorCode());
     }
         
  

@@ -74,5 +74,15 @@ public class MainUIController implements Initializable {
     stage.show();
         
     }
+
+    @FXML
+    private void getParticipationCrud(ActionEvent event) throws IOException {
+    Stage stage ;
+    Parent root = FXMLLoader.load(getClass().getResource("ParticipationCrud.fxml"));
+    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    Scene scene=new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+    }
     
 }
