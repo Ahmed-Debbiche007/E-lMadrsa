@@ -51,9 +51,15 @@ public class AjoutQuizController implements Initializable {
     @FXML
     private TextField lbNomQuiz;
     @FXML
-    private TextField lbQuizId;
-    @FXML
     private TableColumn<Quiz,String> colnq;
+    @FXML
+    private TableView<?> tvExams;
+    @FXML
+    private TableColumn<?, ?> colNomExamen;
+    @FXML
+    private TableColumn<?, ?> colPourcentage;
+    @FXML
+    private TableColumn<?, ?> colDureeExmaen;
 
     /**
      * Initializes the controller class.
@@ -115,28 +121,7 @@ public class AjoutQuizController implements Initializable {
                 stage.setScene(scene);
                 stage.show();
     }
-    /*
-            public  ObservableList<Quiz> afficher() {
-                   ObservableList<Quiz>  listQuiz =  FXCollections.observableArrayList() ;
-                       Connection cnx ; 
-                       cnx = MyDB.getInstance().getCnx();
-            try {
-                String req = "select * from Quiz" ;
-                PreparedStatement st = cnx.prepareStatement(req) ; 
-                 ResultSet rs = st.executeQuery(req) ;
- 
-                
-                            while (rs.next()) {
-                listQuiz.add(new Quiz( rs.getLong("idQuiz"),rs.getString("nameQuiz"),rs.getLong("examenId")));
-            }    
-            } catch (SQLException ex) {
-                System.out.println("error occured");  
-            }
-              return listQuiz ;
-     }
-    
-            */
-            
+
                   public void showQuiz() {
                     QuizService QS= new QuizService() ;
                     ObservableList<Quiz> list = QS.afficher() ;
@@ -146,5 +131,9 @@ public class AjoutQuizController implements Initializable {
                     tvQuiz.setItems(list);
                     System.out.println("pppppppppppp"  +  list ) ;
         
+    }
+
+    @FXML
+    private void editQuiz(ActionEvent event) {
     }
 }
