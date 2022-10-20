@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import services.ChatSessionService;
+import services.TutorshipRequestService;
 
 /**
  *
@@ -27,7 +28,7 @@ public class Test extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/tutorshiprequests/TutorshipRequests.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/AjoutUser.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);

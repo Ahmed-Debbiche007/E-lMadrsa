@@ -110,10 +110,9 @@ public class UserService {
         return users;
     }
     
-     public List<User> getUserByAge(String query, int age){
-        List<User> users = new ArrayList<>();
+     public User getUserByUsername(String username){
         try {
-            String req = "SELECT * FROM users WHERE "+query+"= "+ age;
+            String req = "SELECT * FROM users WHERE username = '"+ username+"'";
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
             
@@ -123,56 +122,16 @@ public class UserService {
                 u.setAge(rs.getInt("age"));
                 u.setNom(rs.getString("nom"));
                 u.setPrenom(rs.getString("prenom"));
-                users.add(u);
+                u.setPassword(rs.getString("password"));
+                u.setUsername(rs.getString("username"));
+                u.setRole(rs.getString("role"));
+                u.setStatus(rs.getString("status"));
+               return u;
             }
         } catch (SQLException ex) {
             System.out.println("Error!");
             System.out.println(ex);
         }
-        return users;
-    }
-     
-      public List<User> getUserByNom(String nom){
-        List<User> users = new ArrayList<>();
-        try {
-            String req = "SELECT * FROM users WHERE nom= '"+ nom+"'";
-            Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery(req);
-            
-            while (rs.next()){
-                User u = new User();
-                u.setId(rs.getInt("id"));
-                u.setAge(rs.getInt("age"));
-                u.setNom(rs.getString("nom"));
-                u.setPrenom(rs.getString("prenom"));
-                users.add(u);
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error!");
-            System.out.println(ex);
-        }
-        return users;
-    }
-      
-       public List<User> getUserByPrenom(String prenom){
-        List<User> users = new ArrayList<>();
-        try {
-            String req = "SELECT * FROM users WHERE prenom= '"+ prenom+"'";
-            Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery(req);
-            
-            while (rs.next()){
-                User u = new User();
-                u.setId(rs.getInt("id"));
-                u.setAge(rs.getInt("age"));
-                u.setNom(rs.getString("nom"));
-                u.setPrenom(rs.getString("prenom"));
-                users.add(u);
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error!");
-            System.out.println(ex);
-        }
-        return users;
-    }
+        return null;
+     }
 }

@@ -53,14 +53,7 @@ public class UpdateTutorshipSessionController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         hslider.valueProperty().addListener((observable, oldValue, newValue) -> {            
-            lheures.setText(Double.toString(newValue.intValue()));            
-        });
-        
-        mslider.valueProperty().addListener((observable, oldValue, newValue) -> {            
-            lminutes.setText(Double.toString(newValue.intValue()));            
-        });
-        
+             
         cmtype.getItems().setAll(typeChoices) ;
     }    
 

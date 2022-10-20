@@ -13,10 +13,12 @@ import java.util.List;
  * @author ahmed
  */
 public class TutorshipSession {
+
     long idTutorshipSession, idTutor, idStudent, idRequest;
     String url;
     RequestType type;
     Timestamp date;
+
     public TutorshipSession() {
     }
 
@@ -25,18 +27,24 @@ public class TutorshipSession {
         this.idStudent = idStudent;
         this.idRequest = idRequest;
         this.url = url;
-        this.type=type;
+        this.type = type;
         this.date = date;
     }
-    
-    public TutorshipSession(long idTutorshipSession, long idTutor, long idStudent, long idRequest, String url, RequestType type, Timestamp date) {
-        this.idTutorshipSession=idTutorshipSession;
+
+    public TutorshipSession(long idTutorshipSession, long idTutor, long idStudent, long idRequest, String url, String type, Timestamp date) {
+        boolean c = false;
+        this.idTutorshipSession = idTutorshipSession;
         this.idTutor = idTutor;
         this.idStudent = idStudent;
         this.idRequest = idRequest;
         this.url = url;
-        this.type=type;
         this.date = date;
+        for (RequestType t : RequestType.values()) {
+            if (t.name().equals(type)) {
+                this.type = t;
+                c = true;
+            }
+        }
     }
 
     public long getIdTutorshipSession() {
@@ -90,12 +98,12 @@ public class TutorshipSession {
     public void setType(String requestType) {
         boolean c = false;
         for (RequestType t : RequestType.values()) {
-        if (t.name().equals(requestType)) {
-           this.type = t;
-           c= true;
+            if (t.name().equals(requestType)) {
+                this.type = t;
+                c = true;
+            }
         }
-    }
-        if (!c){
+        if (!c) {
             System.out.println("Error!");
         }
     }
@@ -104,7 +112,6 @@ public class TutorshipSession {
         this.date = date;
     }
 
-    
     @Override
     public String toString() {
         return "TutorshipSession{" + "idTutorshipSession=" + idTutorshipSession + ", idTutor=" + idTutor + ", idStudent=" + idStudent + ", idRequest=" + idRequest + ", url=" + url + '}';
@@ -143,16 +150,16 @@ public class TutorshipSession {
         }
         return this.idRequest == other.idRequest;
     }
-    
-     public List<String> decompose(){
-      List<String> dates  = new  ArrayList<String>();
-      String date = this.date.toLocalDateTime().toLocalDate().toString();
-      String h = this.date.toString().split(" ")[1].split(":")[0];
-      String m= this.date.toString().split(" ")[1].split(":")[1];
-      dates.add(date);
-      dates.add(h);
-      dates.add(m);
-      return dates;
+
+    public List<String> decompose() {
+        List<String> dates = new ArrayList<String>();
+        String date = this.date.toLocalDateTime().toLocalDate().toString();
+        String h = this.date.toString().split(" ")[1].split(":")[0];
+        String m = this.date.toString().split(" ")[1].split(":")[1];
+        dates.add(date);
+        dates.add(h);
+        dates.add(m);
+        return dates;
     }
-    
+
 }

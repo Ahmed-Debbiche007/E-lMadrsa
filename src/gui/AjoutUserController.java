@@ -15,9 +15,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javax.swing.JOptionPane;
 import services.UserService;
+
 
 /**
  * FXML Controller class
@@ -29,21 +32,55 @@ public class AjoutUserController implements Initializable {
     @FXML
     private TextField fnom;
     @FXML
-    private TextField fprenom;
+    private PasswordField fprenom;
+    @FXML
+    private TextField fprenomshow;
+    @FXML
+    private CheckBox check;
 
     /**
      * Initializes the controller class.
+     * 
      */
+    private static User u1;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
-    private void AjoutPersonne(ActionEvent event) throws IOException  {
-         UserService  SP = new UserService() ;
-        SP.ajouterUser(new User(fnom.getText(),fprenom.getText()));
-        JOptionPane.showMessageDialog(null,"Personne Ajoutée ! ");
+    private void AjoutPersonne(ActionEvent event) throws IOException {
+        UserService SP = new UserService();
+        User u = SP.getUserByUsername(fnom.getText());
+        System.out.println(u);
+        String pass;
+        if (check.isSelected()) {
+            pass = fprenomshow.getText();
+        }else{
+            pass = fprenom.getText();
+        }
+        
+        
+        if (u.getPassword().equals(pass)) {
+            JOptionPane.showMessageDialog(null, "Connected ");
+            u1=u;
+            FXMLLoader loader = null;
+            if (u.getRole().name().equals("Student")){
+                loader = new FXMLLoader(getClass().getResource("./Students/Home.fxml"));
+            }
+            if (u.getRole().name().equals("Tutor")){
+                loader = new FXMLLoader(getClass().getResource("./Tutors/Home.fxml"));
+            }
+            
+            Parent root ; 
+        
+            root = loader.load();
+            check.getScene().setRoot(root);
+        } else {
+            JOptionPane.showMessageDialog(null, "Error! ");
+        }
+        /* JOptionPane.showMessageDialog(null,"Personne Ajoutée ! ");
       
         
         
@@ -59,8 +96,26 @@ public class AjoutUserController implements Initializable {
         dpc.setTfnom(fnom.getText());
         dpc.setTfprenom(fprenom.getText());
         
-        
-        
+         */
+
+    }
+
+    public User getU() {
+        return u1;
     }
     
+
+    @FXML
+    private void showpassword(ActionEvent event) {
+        if (check.isSelected()) {
+            fprenom.setOpacity(0);
+            fprenomshow.setOpacity(1);
+            fprenomshow.setText(fprenom.getText());
+        }else{
+             fprenom.setOpacity(1);
+            fprenomshow.setOpacity(0);
+            fprenom.setText(fprenomshow.getText());
+        }
+    }
+
 }

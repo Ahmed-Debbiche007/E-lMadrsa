@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="641.0" prefWidth="499.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Students.AddTutorshipRequestController">
+    <children>
+        <Label layoutX="136.0" layoutY="59.0" prefHeight="45.0" prefWidth="214.0" text="Demande de sceance de cours" />
+        <DatePicker fx:id="cldate" layoutX="136.0" layoutY="162.0" prefHeight="21.0" prefWidth="198.0" />
+        <Button fx:id="bvalider" layoutX="272.0" layoutY="469.0" mnemonicParsing="false" onAction="#valider" text="Vailder" />
+        <ComboBox fx:id="cmtype" layoutX="136.0" layoutY="300.0" prefHeight="26.0" prefWidth="192.0" promptText="--Select--" />
+        <TextArea fx:id="tobject" layoutX="132.0" layoutY="350.0" prefHeight="81.0" prefWidth="200.0" />
+        <Button fx:id="banuuler" layoutX="193.0" layoutY="469.0" mnemonicParsing="false" onAction="#annuler" text="Annuler" />
+        <ComboBox fx:id="cmtutor" layoutX="136.0" layoutY="111.0" prefHeight="26.0" prefWidth="192.0" />
+        <Label layoutX="51.0" layoutY="116.0" text="Formation" />
+        <Label layoutX="51.0" layoutY="167.0" text="Date" />
+        <Label layoutX="51.0" layoutY="219.0" text="Temps" />
+        <Label layoutX="51.0" layoutY="305.0" text="Type" />
+        <Label layoutX="51.0" layoutY="347.0" text="Objet" />
+        <Label fx:id="lheures" layoutX="342.0" layoutY="219.0" />
+        <Label fx:id="lminutes" layoutX="342.0" layoutY="259.0" />
+        <Label fx:id="datel" layoutX="352.0" layoutY="169.0" />
+        <Spinner fx:id="hspinner" initialValue="9" layoutX="132.0" layoutY="214.0" max="24" min="0" prefHeight="26.0" prefWidth="64.0" />
+        <Spinner fx:id="mspinner" initialValue="00" layoutX="209.0" layoutY="214.0" max="60" min="0" prefHeight="26.0" prefWidth="64.0" />
+    </children>
+</AnchorPane>
