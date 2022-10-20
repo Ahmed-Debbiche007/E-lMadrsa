@@ -7,7 +7,7 @@
 # 
 # Host: 127.0.0.1 ((Ubuntu) 8.0.30)
 # Database: pidev
-# Generation time: 2022-10-19T20:52:47+01:00
+# Generation time: 2022-10-20T01:55:35+01:00
 # ************************************************************
 
 
@@ -30,7 +30,9 @@ CREATE TABLE `chatSessions` (
   `idTutorshipSession` bigint NOT NULL,
   PRIMARY KEY (`idSession`),
   UNIQUE KEY `idTutorshipSession` (`idTutorshipSession`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
 
 
 
@@ -52,6 +54,8 @@ CREATE TABLE `messages` (
 
 
 
+
+
 # Dump of table requests
 # ------------------------------------------------------------
 
@@ -65,7 +69,9 @@ CREATE TABLE `requests` (
   `body` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `date` datetime NOT NULL,
   PRIMARY KEY (`idRequest`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
 
 
 
@@ -83,7 +89,9 @@ CREATE TABLE `tutorshipSessions` (
   `type` enum('VideoChat','MessagesChat') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `date` timestamp NOT NULL,
   PRIMARY KEY (`idSession`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
 
 
 
@@ -103,7 +111,17 @@ CREATE TABLE `users` (
   `status` enum('Disconnected','Connected') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `NEW_INDEX` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+
+INSERT INTO `users` (`id`, `nom`, `prenom`, `username`, `password`, `age`, `role`, `status`) VALUES
+	(1, "Tutor", "Tutor", "Tutor123", "2019", 33, "Tutor", "Disconnected"),
+	(2, "Student", "Student", "Student123", "2019", 18, "Student", "Disconnected");
+
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 
@@ -120,4 +138,4 @@ CREATE TABLE `users` (
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
-# Dump completed on 2022-10-19T20:52:47+01:00
+# Dump completed on 2022-10-20T01:55:35+01:00
