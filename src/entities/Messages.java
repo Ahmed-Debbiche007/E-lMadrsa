@@ -4,6 +4,7 @@
  */
 package entities;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -15,17 +16,26 @@ public class Messages {
     long idMessage, idSession, idSender;
     String Message;
     Status status;
-    Date statusDate;
+    Timestamp statusDate;
 
     public Messages() {
     }
 
-    public Messages(long idSession, long idSender, String Message, Status status, Date statusDate) {
+    public Messages(long idSession, long idSender, String Message, String status, Timestamp statusDate) {
+        boolean c = false;
         this.idSession = idSession;
         this.idSender = idSender;
         this.Message = Message;
-        this.status = status;
         this.statusDate = statusDate;
+          for (Status t : Status.values()) {
+        if (t.name().equals(status)) {
+           this.status = t;
+           c= true;
+        }
+    }
+        if (!c){
+            System.out.println("Error!");
+        }
     }
 
     public long getIdMessage() {
@@ -48,7 +58,7 @@ public class Messages {
         return status;
     }
 
-    public Date getStatusDate() {
+    public Timestamp getStatusDate() {
         return statusDate;
     }
 
@@ -81,7 +91,7 @@ public class Messages {
         }
     }
 
-    public void setStatusDate(Date statusDate) {
+    public void setStatusDate(Timestamp statusDate) {
         this.statusDate = statusDate;
     }
 

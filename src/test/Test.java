@@ -6,6 +6,7 @@ package test;
 //import entities.User;
 
 import entities.ChatSession;
+import gui.Tutors.TutorsTutorshipSessionsController;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import services.ChatSessionService;
+import services.MessagesService;
 import services.TutorshipRequestService;
 
 /**
@@ -23,7 +25,7 @@ public class Test extends Application {
 
     public static void main(String[] args) {
         launch(args);
-
+        
     }
 
     @Override

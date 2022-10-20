@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,6 +22,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import outils.chat.client.Client;
+import outils.chat.client.ClientApplication;
+import services.ChatSessionService;
 import services.TutorshipSessionService;
 
 /**
@@ -49,6 +55,11 @@ public class TutorsTutorshipSessionsController implements Initializable {
     private Button annuler;
 
     private static TutorshipSession t;
+    private ArrayList<Thread> threads;
+    @FXML
+    private Button connecter;
+    @FXML
+    private AnchorPane ap;
 
     /**
      * Initializes the controller class.
@@ -107,7 +118,39 @@ public class TutorsTutorshipSessionsController implements Initializable {
     public TutorshipSession getT() {
         return t;
     }
+
+    @FXML
+    private void connecter(ActionEvent event) throws IOException, InterruptedException {
+        t = Sessions.getSelectionModel().getSelectedItem();
+        this.clientchatapp().show();
+    }
     
+    private Stage clientchatapp() throws IOException, InterruptedException {
+        Thread.sleep(3000);
+        AjoutUserController cs = new AjoutUserController();
+        User u = cs.getU();
+        Client client = new Client("localhost", 8081, u.getNom());
+        Thread clientThread = new Thread(client);
+        clientThread.setDaemon(true);
+        clientThread.start();
+        threads = new ArrayList<Thread>();
+        threads.add(clientThread);
+        ClientApplication ca = new ClientApplication();
+        Stage primaryStage = (Stage) ap.getScene().getWindow();
+        primaryStage.close();
+        primaryStage.setScene(ca.makeChatUI(client, this.getSessionId()));
+        return primaryStage;
+    }
+    
+    public int getSessionId() {
+        ChatSessionService css = new ChatSessionService();
+        try {
+          return (int) css.getSession("idTutorshipSession",(int) this.getT().getIdTutorshipSession()).getIdTutorshipSession();
+        } catch (Exception e) {
+            System.out.println("aa"+e.getMessage());
+        }
+        return 0;
+    }
     
 
 }

@@ -31,16 +31,17 @@ public class MessagesService implements GenericService<Messages> {
     @Override
     public void add(Messages t) {
        try {
-            String req = "INSERT INTO messages(idSession, idSender, staus, body) VALUES(?,?,?,?)";
+            String req = "INSERT INTO messages(idSession, idSender, status, body, statusDate) VALUES(?,?,?,?,?)";
             PreparedStatement st = cnx.prepareStatement(req);
             st.setLong(1,t.getIdSession());
             st.setLong(2,t.getIdSender());
             st.setString(3, t.getStatus().name());
             st.setString(4, t.getMessage());
+            st.setTimestamp(5, t.getStatusDate());
             st.executeUpdate();
-            System.out.println("Request added successfully!");
+            System.out.println("Message added successfully!");
         } catch (SQLException ex) {
-            System.out.println("Error!");
+            System.out.println("InsertError!");
             System.out.println(ex);
         }
     }
@@ -80,7 +81,7 @@ public class MessagesService implements GenericService<Messages> {
     public ObservableList<Messages> getAll() {
         ObservableList<Messages> messages = FXCollections.observableArrayList();
         try {
-            String req = "SELECT * FROM requests";
+            String req = "SELECT * FROM messages";
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
             
@@ -91,7 +92,7 @@ public class MessagesService implements GenericService<Messages> {
                 t.setIdSender(rs.getLong("idSender"));
                 t.setMessage(rs.getString("body"));
                 t.setStatus(rs.getString("status"));
-                t.setStatusDate(rs.getDate("statusDate"));
+                t.setStatusDate(rs.getTimestamp("statusDate"));
                 messages.add(t);
             }
         } catch (SQLException ex) {
@@ -103,7 +104,27 @@ public class MessagesService implements GenericService<Messages> {
 
     @Override
     public ObservableList<Messages> getSingle(String query, int filter) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       ObservableList<Messages> messages = FXCollections.observableArrayList();
+        try {
+            String req = "SELECT * FROM messages WHERE "+query+"="+filter;
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            
+            while (rs.next()){
+                Messages t = new Messages();
+                t.setIdMessage(rs.getLong("IdMessage"));
+                t.setIdSession(rs.getLong("IdSession"));
+                t.setIdSender(rs.getLong("idSender"));
+                t.setMessage(rs.getString("body"));
+                t.setStatus(rs.getString("status"));
+                t.setStatusDate(rs.getTimestamp("statusDate"));
+                messages.add(t);
+            }
+        } catch (SQLException ex) {
+            System.out.println("GetSingleError!");
+            System.out.println(ex);
+        }
+        return messages;
     }
 
     @Override

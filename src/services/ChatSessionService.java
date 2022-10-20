@@ -92,7 +92,7 @@ public class ChatSessionService implements GenericService<ChatSession> {
     public ObservableList<ChatSession> getSingle(String query, int filter) {
       ObservableList<ChatSession> chatSessions = FXCollections.observableArrayList();
         try {
-            String req = "SELECT * FROM chatSession WHERE "+query+"="+filter;
+            String req = "SELECT * FROM chatSessions WHERE "+query+"="+filter;
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
             
@@ -112,6 +112,25 @@ public class ChatSessionService implements GenericService<ChatSession> {
     @Override
     public ObservableList<ChatSession> getSingle(String query, String filter) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    public ChatSession getSession(String query, int filter) {
+        try {
+            String req = "SELECT * FROM chatSessions WHERE "+query+"="+filter;
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            
+            while (rs.next()){
+                ChatSession t = new ChatSession();
+                t.setIdChatSession(rs.getLong("idSession"));
+                t.setIdTutorshipSession(rs.getLong("idTutorshipSession"));
+                return t;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error!");
+            System.out.println(ex);
+        }
+        return null;
     }
     
 }
