@@ -13,13 +13,14 @@ import java.util.Objects;
 public class Option {
     private Long idOption ; 
     private String optionName ; 
-    private Boolean etat ; 
+    private int  etat ; 
     private Long idQuestion ; 
 
     public Option(String optionName, Long idQuestion) {
         this.optionName = optionName;
         this.idQuestion = idQuestion;
     }
+    
 
     public Option(Long idOption, String optionName, Long idQuestion) {
         this.idOption = idOption;
@@ -29,25 +30,27 @@ public class Option {
     
 
 
-        public Option(Long idOption, String optionName, Boolean etat) {
+        public Option(Long idOption, String optionName, int etat) {
         this.idOption = idOption;
         this.optionName = optionName;
         this.etat = etat;
     }
 
-    public Option(String optionName, Boolean etat) {
+    public Option(String optionName, int etat) {
         this.optionName = optionName;
         this.etat = etat;
     }
+    
+    
 
-    public Option(Long idOption, String optionName, Boolean etat, Long idQuestion) {
+    public Option(Long idOption, String optionName, int etat, Long idQuestion) {
         this.idOption = idOption;
         this.optionName = optionName;
         this.etat = etat;
         this.idQuestion = idQuestion;
     }
 
-    public Option(String optionName, Boolean etat, Long idQuestion) {
+    public Option(String optionName, int etat, Long idQuestion) {
         this.optionName = optionName;
         this.etat = etat;
         this.idQuestion = idQuestion;
@@ -108,11 +111,11 @@ public class Option {
         
     }
 
-    public Boolean getEtat() {
+    public int getEtat() {
         return etat;
     }
 
-    public void setEtat(Boolean etat) {
+    public void setEtat(int etat) {
         this.etat = etat;
     }
 

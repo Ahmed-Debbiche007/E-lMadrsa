@@ -59,6 +59,15 @@ public class AjoutPersonneController implements Initializable {
         dpc.setLbPrenom(tfPrenom.getText());
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
   
     }
     

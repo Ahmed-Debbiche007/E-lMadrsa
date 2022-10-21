@@ -16,7 +16,12 @@ public class Examen {
    private int DureeExamen ;  
    private Long formationId ;
    private Long idCategorie ;
+   private String nomCat  ;
+   private  String nomFor ; 
 
+   
+   
+   
    
        public Examen() {}
        
@@ -49,6 +54,24 @@ public class Examen {
         this.formationId = formationId;
         this.idCategorie = idCategorie;
     }
+
+    public String getNomCat() {
+        return nomCat;
+    }
+
+    public String getNomFor() {
+        return nomFor;
+    }
+
+    public void setNomCat(String nomCat) {
+        this.nomCat = nomCat;
+    }
+
+    public void setNomFor(String nomFor) {
+        this.nomFor = nomFor;
+    }
+
+ 
        
        
 

@@ -16,31 +16,86 @@ import java.util.List;
 public class Question {
     private Long idQuestion ; 
     private String ennonce ;
-    private Long idQuiz ; 
+    private String option1 ; 
+    private String option2 ; 
+    private String option3 ; 
+    private String answer ; 
+    private Long idExamen ; 
+
+    public Question(Long idQuestion, String ennonce, String option1, String option2, String option3, String answer, Long idExamen) {
+        this.idQuestion = idQuestion;
+        this.ennonce = ennonce;
+        this.option1 = option1;
+        this.option2 = option2;
+        this.option3 = option3;
+        this.answer = answer;
+        this.idExamen = idExamen;
+    }
+
+    public Question(String ennonce, String option1, String option2, String option3, String answer, Long idExamen) {
+        this.ennonce = ennonce;
+        this.option1 = option1;
+        this.option2 = option2;
+        this.option3 = option3;
+        this.answer = answer;
+        this.idExamen = idExamen;
+    }
+
+    public Question(String ennonce, String option1, String option2, String option3, String answer) {
+        this.ennonce = ennonce;
+        this.option1 = option1;
+        this.option2 = option2;
+        this.option3 = option3;
+        this.answer = answer;
+    }
+
+    public String getOption1() {
+        return option1;
+    }
+
+    public String getOption2() {
+        return option2;
+    }
+
+    public String getOption3() {
+        return option3;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public Long getIdExamen() {
+        return idExamen;
+    }
+
+    public void setOption1(String option1) {
+        this.option1 = option1;
+    }
+
+    public void setOption2(String option2) {
+        this.option2 = option2;
+    }
+
+    public void setOption3(String option3) {
+        this.option3 = option3;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    public void setIdExamen(Long idExamen) {
+        this.idExamen = idExamen;
+    }
 
      
 
-
-    public Question() {
-    }
-
+ 
  
 
-    public Question(String ennonce, Long idQuiz) {
-        this.ennonce = ennonce;
-        this.idQuiz = idQuiz;
-    }
-
-    public Question(Long idQuestion, String ennonce, Long idQuiz) {
-        this.idQuestion = idQuestion;
-        this.ennonce = ennonce;
-        this.idQuiz = idQuiz;
-    }
-
-    public Question(String ennonce, List<String> options, String OptionCorrecte) {
-        this.ennonce = ennonce;
  
-    }
+    
 
     public Long getIdQuestion() {
         return idQuestion;
@@ -64,32 +119,26 @@ public class Question {
  
  
 
-    public Question(Long idQuestion, String ennonce) {
-        this.idQuestion = idQuestion;
-        this.ennonce = ennonce;
+    
+ 
+
+    public Long getidExamen() {
+        return idExamen ; 
     }
 
-    public Question(String ennonce) {
-        this.ennonce = ennonce;
+    public void setidExamen(Long idExamen) {
+        this.idExamen= idExamen;
     }
-
-    public Long getIdQuizz() {
-        return idQuiz;
-    }
-
-    public void setIdQuizz(Long idQuizz) {
-        this.idQuiz = idQuizz;
-    }
-    
-    
-    
-    
 
     @Override
     public String toString() {
-        return "Question{" + "idQuestion=" + idQuestion + ", ennonce=" + ennonce + ", idQuizz=" + idQuiz + '}';
+        return "Question{" + "idQuestion=" + idQuestion + ", ennonce=" + ennonce + ", option1=" + option1 + ", option2=" + option2 + ", option3=" + option3 + ", answer=" + answer + ", idExamen=" + idExamen + '}';
     }
-
+    
+    
+    
+    
+ 
     
  
 

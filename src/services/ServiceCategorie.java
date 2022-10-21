@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -41,6 +43,31 @@ public class ServiceCategorie {
     }
     
     
+    public Categorie getById(Long id ) {
+        
+        
+        String req = "Select * from Categorie where idCategore=?; " ;
+        PreparedStatement st;
+        Categorie c ; 
+        try {
+            st = cnx.prepareStatement(req);
+            st.setLong(1,id);
+            ResultSet rs = st.executeQuery();
+            //return rs.getObject(req, type) ; 
+            c = new Categorie(rs.getLong(1),rs.getString(2)) ; 
+            return  c ; 
+
+        } catch (SQLException ex) {
+            System.out.println("error" + ex.getMessage());
+        }
+        
+    return null ; 
+        
+        
+        
+    }
+    
+    
     public void modifier_categorie (Categorie C) {
         try {
             
@@ -58,6 +85,7 @@ public class ServiceCategorie {
         try {
             String requete = "DELETE FROM Categorie WHERE idCategorie=" + C.getIdCategorie() ;
             Statement st = cnx.createStatement();
+
             st.executeUpdate(requete);
             System.out.println(" Categorie supprimée !");
 

@@ -21,9 +21,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
@@ -48,6 +50,12 @@ public class AjoutOptionController implements Initializable {
     private TableView<Question> tvQuestions;
     @FXML
     private TableColumn<Question,String> colEnnonce;
+    @FXML
+    private RadioButton idbuttontrue;
+    @FXML
+    private RadioButton idbuttonFalse;
+    @FXML
+    private ToggleGroup optionStatus;
 
     /**
      * Initializes the controller class.
@@ -62,13 +70,13 @@ public class AjoutOptionController implements Initializable {
     @FXML
     private void ajuoterOption(ActionEvent event) {
         if (tfNomOption.getText().trim().equals(""))  
-                    JOptionPane.showMessageDialog(null," Veuillez remplir le champs nom examen ! ");
+                    JOptionPane.showMessageDialog(null," Veuillez remplir le champs nom option  ! ");
  
         else {
         OptionService  OS = new OptionService() ;
         Question q = tvQuestions.getSelectionModel().getSelectedItem() ;
         System.out.println("***********" + q.getIdQuestion()) ;
-        OS.ajouter(new Option(  tfNomOption.getText() ,q.getIdQuestion() ) );
+        OS.ajouter(new Option(  tfNomOption.getText() ,getStatus()  ,q.getIdQuestion() ) );
        showOptions() ;
         JOptionPane.showMessageDialog(null,"Option Ajoutée ! ");
     }
@@ -147,4 +155,31 @@ public class AjoutOptionController implements Initializable {
          System.out.println(list);
         tvQuestions.setItems(list);        
     }
+
+
+ 
+
+    @FXML
+    private void buttonRadio(ActionEvent event) {
+         if(idbuttonFalse.isSelected()){
+             
+         }   
+         if(idbuttontrue.isSelected()){
+             
+         }
+    }
+    
+    
+    
+    public int getStatus() {
+                if(idbuttonFalse.isSelected()) 
+                    return 0 ; 
+                if(idbuttontrue.isSelected())
+                    return 1 ;
+                
+                return -1 ;
+
+    }
+    
+    
 }

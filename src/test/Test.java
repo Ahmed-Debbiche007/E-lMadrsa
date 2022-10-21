@@ -4,6 +4,7 @@ package test;
 import entities.Examen;
 import entities.Option;
 import entities.Participation;
+import entities.Question;
  import entities.Quiz;
 import java.util.ArrayList;
 import java.util.List;
@@ -104,9 +105,24 @@ public class Test {
          Qs.supprimer(q1);
          System.out.print(Qs.afficher()) ; 
         */
+        /*
          Participation p1 = new Participation(50.0) ; 
          ParticipationsService Ps = new ParticipationsService() ;
          Ps.ajouter(p1);
+*/
+        
+        
+       
+         
+        
+        Question question1 = new Question("html","opt1","opt2","opt3","opt3") ; 
+                      QuestionService Qservice = new QuestionService() ;
+
+        Qservice.ajouter(question1);
+        
+           
+         
+ 
         
     }
     

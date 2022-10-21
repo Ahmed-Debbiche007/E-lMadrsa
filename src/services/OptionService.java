@@ -31,10 +31,11 @@ public class OptionService implements IService<Option> {
     @Override
     public void ajouter(Option o) {
                 try {
-            String req = "insert into opt (optionName,questionId) values(?,?);"  ;
+            String req = "insert into opt (optionName,etat,questionId) values(?,?,?);"  ;
             PreparedStatement st = cnx.prepareStatement(req); 
             st.setString(1, o.getOptionName());
-            st.setLong(2, o.getIdQuestion());
+            st.setLong(3, o.getIdQuestion());
+            st.setInt(2, o.getEtat());
             st.execute();
             System.out.println("option ajoutée ");
         } catch (SQLException ex) {
