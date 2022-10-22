@@ -119,7 +119,7 @@ public class AjoutExamenController implements Initializable {
            showExams() ;
            JOptionPane.showMessageDialog(null,"examen Ajoutée ! ");
         
-        
+        /*
             Node node = (Node) event.getSource();
             // go to the next interface : create questions 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("AjoutQuestion.fxml"));
@@ -139,7 +139,7 @@ public class AjoutExamenController implements Initializable {
         
         
         
-        
+        */
         
  
     }
@@ -199,7 +199,7 @@ public class AjoutExamenController implements Initializable {
         colFormationex.setCellValueFactory(new PropertyValueFactory<Examen,Long>("nomFor"));
         colCategorieex.setCellValueFactory(new PropertyValueFactory<Examen,Long>("nomCat"));
         
-        // System.out.println("///////////////////////" + colCategorieex.getCellFactory()); 
+        System.out.println("///////////////////////" + list); 
  
         System.out.println(list); 
         list.forEach((e)->{
@@ -249,6 +249,7 @@ public class AjoutExamenController implements Initializable {
         ObservableList<Categorie> ListCat =  SC.afficher() ; 
         colNomCategorie.setCellValueFactory(new PropertyValueFactory<Categorie,String>("nomCategorie"));
         tvCategories.setItems(ListCat);
+        System.out.print("*****" + ListCat);  
     }
         
         public void showformation(){
@@ -256,7 +257,7 @@ public class AjoutExamenController implements Initializable {
         ObservableList<Formation> ListCat =  SF.afficher() ; 
         colSujetFormation.setCellValueFactory(new PropertyValueFactory<Formation,String>("Sujet"));
         tvFormations.setItems(ListCat);
-
+            System.out.print("*****" + ListCat);   
     }
 
     @FXML

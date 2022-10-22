@@ -269,5 +269,46 @@ public Examen countExams( String nom ) {
                 return quizes;
                 }
             */   
+    
+    
+    
+    
+    
+    
+    
+    
+        public   Map<Examen, Integer> getAllWithQuestionCount() {
+                            Map<Examen, Integer> examesmap = new HashMap<>();
+                Examen key = null;
+            try {
+
+                
+                String req = " select examen.idExamen , Examen.nomExamen , count(*) as c   from  examen  join question on examen.idExamen = question.idExamen group by examen.idExamen ;";
+                
+                PreparedStatement st = cnx.prepareStatement(req) ;
+                ResultSet rs = st.executeQuery() ;
+                while(rs.next()) {
+                    Examen temp = new Examen();
+                    temp.setIdExamen(rs.getLong(1));
+                    temp.setNomExamen(rs.getString(2));
+                    int count = rs.getInt(3);
+                    examesmap.put(temp, count);
+                     System.out.println( examesmap);
+
+                } 
+            } catch (SQLException ex) {
+                 System.out.println("error occured" +ex.getMessage());
+            }
+                    
+ 
+        return examesmap;
+    }
+    
+    
+    
+    
+    
+    
+    
 
 }

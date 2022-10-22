@@ -16,25 +16,11 @@
       </Label>
       <VBox layoutX="70.0" layoutY="134.0" prefHeight="278.0" prefWidth="297.0" spacing="16.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#getExamenCrud" prefHeight="83.0" prefWidth="297.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="Crud Examens" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#getExamenCrud" prefHeight="54.0" prefWidth="297.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="Crud Examens" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="21.0" />
                </font></Button>
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#getQuizCrud" prefHeight="51.0" prefWidth="376.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="Crud Quiz" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="21.0" />
-               </font>
-               <opaqueInsets>
-                  <Insets right="32.0" top="53.0" />
-               </opaqueInsets></Button>
             <Button layoutX="10.0" layoutY="61.0" mnemonicParsing="false" onAction="#getQuestionCrud" prefHeight="51.0" prefWidth="376.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="Crud Questions" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="21.0" />
-               </font>
-               <opaqueInsets>
-                  <Insets right="32.0" top="53.0" />
-               </opaqueInsets></Button>
-            <Button layoutX="10.0" layoutY="112.0" mnemonicParsing="false" onAction="#getOptionsCrud" prefHeight="51.0" prefWidth="376.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="Crud Options" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>
@@ -59,6 +45,14 @@
          </opaqueInsets>
       </Button>
       <Button layoutX="440.0" layoutY="199.0" mnemonicParsing="false" onAction="#studedntpassExam" prefHeight="51.0" prefWidth="376.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="student pass exam " textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+         <opaqueInsets>
+            <Insets right="32.0" top="53.0" />
+         </opaqueInsets>
+      </Button>
+      <Button layoutX="440.0" layoutY="279.0" mnemonicParsing="false" onAction="#listExams" prefHeight="51.0" prefWidth="376.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="list of exams" textFill="WHITE">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="854.0" prefWidth="1264.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ListExamsController">
+   <children>
+      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="150.0">
+         <content>
+            <FlowPane fx:id="flowpanel" alignment="TOP_CENTER" columnHalignment="CENTER" hgap="20.0" prefHeight="200.0" prefWidth="200.0" vgap="20.0">
+              
+            </FlowPane>
+         </content>
+      </ScrollPane>
+      <Label layoutX="498.0" layoutY="47.0" text="List of exams " textFill="#e10000">
+         <font>
+            <Font size="45.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

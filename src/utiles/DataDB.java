@@ -15,7 +15,7 @@ public class DataDB {
     
     private static DataDB instance;
     private Connection cnx;
-    String url ="jdbc:mysql://localhost/E_lmadrsa";
+    String url ="jdbc:mysql://localhost/E_lmadrsa11";
     String user="root";
     String password="";
     

@@ -43,7 +43,6 @@ public class MainUIController implements Initializable {
 
     }
 
-    @FXML
     private void getQuizCrud(ActionEvent event) throws IOException {
     Stage stage ;
     Parent root = FXMLLoader.load(getClass().getResource("AjoutQuiz.fxml"));
@@ -63,7 +62,6 @@ public class MainUIController implements Initializable {
     stage.show();
     }
 
-    @FXML
     private void getOptionsCrud(ActionEvent event) throws IOException {
         
                             Stage stage ;
@@ -103,6 +101,17 @@ public class MainUIController implements Initializable {
     Scene scene=new Scene(root);
     stage.setScene(scene);
     stage.show();
+    }
+
+    @FXML
+    private void listExams(ActionEvent event) throws IOException {
+            Stage stage ;
+    Parent root = FXMLLoader.load(getClass().getResource("ListExams.fxml"));
+    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    Scene scene=new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+
     }
     
 }
