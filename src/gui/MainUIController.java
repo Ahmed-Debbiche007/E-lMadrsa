@@ -84,5 +84,25 @@ public class MainUIController implements Initializable {
     stage.setScene(scene);
     stage.show();
     }
+
+    @FXML
+    private void tutorAddQuiz(ActionEvent event) throws IOException {
+            Stage stage ;
+    Parent root = FXMLLoader.load(getClass().getResource("useraddexam.fxml"));
+    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    Scene scene=new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+    }
+
+    @FXML
+    private void studedntpassExam(ActionEvent event) throws IOException {
+            Stage stage ;
+    Parent root = FXMLLoader.load(getClass().getResource("useraddexam.fxml"));
+    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    Scene scene=new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+    }
     
 }

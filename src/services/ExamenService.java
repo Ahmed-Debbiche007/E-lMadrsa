@@ -49,6 +49,32 @@ public class ExamenService implements IService<Examen> {
                         System.out.println("erreur ! examen n'est pas ajouté") ; 
         }
      }
+    
+public Examen getLatest() {
+        try {
+            String req = "SELECT * FROM Examen ORDER BY idExamen DESC LIMIT 1 ";
+            PreparedStatement st = cnx.prepareStatement(req) ;
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()){
+                Examen e = new Examen();
+                e.setIdExamen(rs.getLong("idExamen"));
+                e.setNomExamen(rs.getString("nomExamen"));
+                e.setPourcentage(rs.getDouble("pourcentage"));
+                e.setDureeExamen(rs.getInt("DureeExamen"));
+                e.setFormationId(rs.getLong("formationId"));
+                e.setIdCategorie(rs.getLong("idCategorie"));
+                return e;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error!");
+            System.out.println(ex);
+        }
+        return null;
+    }
+    
+    
+    
 
     @Override
     public void supprimer(Examen e) {
@@ -94,7 +120,7 @@ public class ExamenService implements IService<Examen> {
                 listExamen.add(new Examen( rs.getLong("idExamen"),rs.getString("nomExamen"), rs.getDouble("pourcentage"), rs.getInt("DureeExamen") , rs.getLong("formationId") ,rs.getLong("idCategorie")));
 
             }
-                
+
                 
             } catch (SQLException ex) {
                 System.out.println("error occured");

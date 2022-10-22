@@ -9,14 +9,14 @@
 
 <AnchorPane id="AnchorPane" prefHeight="517.0" prefWidth="831.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainUIController">
    <children>
-      <Label layoutX="240.0" layoutY="75.0" text="Gestion Examens" textAlignment="CENTER" textFill="#ae0909">
+      <Label layoutX="240.0" layoutY="28.0" text="Gestion Examens" textAlignment="CENTER" textFill="#ae0909">
          <font>
             <Font name="System Bold" size="44.0" />
          </font>
       </Label>
-      <VBox layoutX="267.0" layoutY="179.0" prefHeight="278.0" prefWidth="297.0" spacing="16.0">
+      <VBox layoutX="70.0" layoutY="134.0" prefHeight="278.0" prefWidth="297.0" spacing="16.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#getExamenCrud" prefHeight="51.0" prefWidth="376.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="Crud Examens" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#getExamenCrud" prefHeight="83.0" prefWidth="297.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="Crud Examens" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="21.0" />
                </font></Button>
@@ -50,5 +50,21 @@
                </opaqueInsets></Button>
          </children>
       </VBox>
+      <Button layoutX="440.0" layoutY="126.0" mnemonicParsing="false" onAction="#tutorAddQuiz" prefHeight="51.0" prefWidth="376.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="tutor add quiz " textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+         <opaqueInsets>
+            <Insets right="32.0" top="53.0" />
+         </opaqueInsets>
+      </Button>
+      <Button layoutX="440.0" layoutY="199.0" mnemonicParsing="false" onAction="#studedntpassExam" prefHeight="51.0" prefWidth="376.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="student pass exam " textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+         <opaqueInsets>
+            <Insets right="32.0" top="53.0" />
+         </opaqueInsets>
+      </Button>
    </children>
 </AnchorPane>
