@@ -12,6 +12,7 @@ import entities.Messages;
 import entities.User;
 import gui.AjoutUserController;
 import gui.Students.StudentTutorshipSessionsController;
+import gui.Tutors.TutorsTutorshipSessionsController;
 import java.io.IOException;
 import java.net.ConnectException;
 import java.sql.Timestamp;
@@ -31,6 +32,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import services.MessagesService;
+import services.UserService;
 
 public class ClientApplication extends Application {
 
@@ -139,7 +141,8 @@ public class ClientApplication extends Application {
 		 * Make the Chat's listView and set it's source to the Client's chatLog
 		 * ArrayList
          */
-        ListView<String> chatListView = new ListView<String>();
+        ListView<String> chatListView;
+        chatListView = new ListView<>();
         chatListView.setItems(client.chatLog);
 
         /*
@@ -147,18 +150,18 @@ public class ClientApplication extends Application {
 		 * server
          */
         TextField chatTextField = new TextField();
-        StudentTutorshipSessionsController cn = new StudentTutorshipSessionsController();
         MessagesService ms = new MessagesService();
-        ms.getSingle("idSession", id).forEach(message -> client.writeToServer(message.getMessage(), u.getNom()));
-        chatTextField.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                // TODO Auto-generated method stub
-                Timestamp t = new Timestamp(System.currentTimeMillis());
-                ms.add(new Messages(cn.getSessionId(), u.getId(), chatTextField.getText(), "Delivered", t));
-                client.writeToServer(chatTextField.getText(), u.getNom());
-                chatTextField.clear();
+        ms.getSingle("idSession", id).forEach(message -> client.writeOldMessage(message));
+        chatTextField.setOnAction((ActionEvent event) -> {
+            // TODO Auto-generated method stub
+            Timestamp t = new Timestamp(System.currentTimeMillis());
+            if (u.getRole().equals("Student")) {
+                ms.add(new Messages(ms.getSingle("idSession", id).get(0).getIdSession(), u.getId(), chatTextField.getText(), "Delivered", t));
+            } else {
+                ms.add(new Messages(ms.getSingle("idSession", id).get(0).getIdSession(), u.getId(), chatTextField.getText(), "Delivered", t));
             }
+            client.writeToServer(chatTextField.getText(), u.getNom());
+            chatTextField.clear();
         });
 
         /* Add the components to the root pane */

@@ -88,26 +88,26 @@ public class UserService {
         return users;
     }
     
-    public List<User> getUserByID(int id){
+    public User getUserByID(int id){
         List<User> users = new ArrayList<>();
         try {
             String req = "SELECT * FROM users WHERE id= "+ id;
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
-            
+             User u = new User();
             while (rs.next()){
-                User u = new User();
+                
                 u.setId(rs.getInt("id"));
                 u.setAge(rs.getInt("age"));
                 u.setNom(rs.getString("nom"));
                 u.setPrenom(rs.getString("prenom"));
-                users.add(u);
+               return u;
             }
         } catch (SQLException ex) {
             System.out.println("Error!");
             System.out.println(ex);
         }
-        return users;
+       return null;
     }
     
      public User getUserByUsername(String username){

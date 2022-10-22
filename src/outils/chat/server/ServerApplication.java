@@ -55,16 +55,16 @@ public class ServerApplication extends Application {
 		rootPane.setAlignment(Pos.CENTER);
 
 		/* Text label and field for port Number */
-		Text portText = new Text("Port Number");
+		Text portText = new Text("Server Starting");
 		Label errorLabel = new Label();
 		errorLabel.setTextFill(Color.RED);
-		TextField portTextField = new TextField();
+		//TextField portTextField = new TextField();
 		portText.setFont(Font.font("Tahoma"));
 		/*
 		 * "Done" button and its click handler When clicked, another method is
 		 * called
 		 */
-		Button portApprovalButton = new Button("Done");
+		Button portApprovalButton = new Button("Start");
 		portApprovalButton.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -72,8 +72,7 @@ public class ServerApplication extends Application {
 				// TODO Auto-generated method stub
 				/* Make the server and it's thread, and run it */
 				try {
-					Server server = new Server(Integer.parseInt(portTextField
-							.getText()));
+					Server server = new Server(8081);
 					Thread serverThread = (new Thread(server));
 					serverThread.setName("Server Thread");
 					serverThread.setDaemon(true);
@@ -96,7 +95,7 @@ public class ServerApplication extends Application {
 		
 		/* Add the views to the pane */
 		rootPane.add(portText, 0, 0);
-		rootPane.add(portTextField, 0, 1);
+		//rootPane.add(portTextField, 0, 1);
 		rootPane.add(portApprovalButton, 0, 2);
 		rootPane.add(errorLabel, 0, 3);
 		/*

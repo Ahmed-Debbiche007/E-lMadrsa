@@ -8,11 +8,14 @@ package test;
 import entities.ChatSession;
 import gui.Tutors.TutorsTutorshipSessionsController;
 import java.io.IOException;
+import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import outils.chat.server.Server;
+import outils.chat.server.ServerApplication;
 import services.ChatSessionService;
 import services.MessagesService;
 import services.TutorshipRequestService;
@@ -22,11 +25,13 @@ import services.TutorshipRequestService;
  * @author ahmed
  */
 public class Test extends Application {
+    private ArrayList<Thread> threads1;
 
     public static void main(String[] args) {
         launch(args);
         
     }
+     
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -36,6 +41,7 @@ public class Test extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("WorkShop PIDEV");
         primaryStage.show();
+        
     }
 
 }

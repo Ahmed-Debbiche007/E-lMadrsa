@@ -5,27 +5,19 @@
  */
 package gui.Students;
 
-import gui.tutorshipSessions.*;
-import gui.tutorshiprequests.*;
-import entities.TutorshipRequest;
 import entities.TutorshipSession;
 import entities.User;
 import gui.AjoutUserController;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.ResourceBundle;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -34,11 +26,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import outils.chat.client.Client;
 import outils.chat.client.ClientApplication;
-import outils.chat.server.Server;
-import outils.chat.server.ServerApplication;
-import static outils.chat.server.ServerApplication.threads;
 import services.ChatSessionService;
-import services.TutorshipRequestService;
 import services.TutorshipSessionService;
 
 /**
@@ -122,7 +110,6 @@ public class StudentTutorshipSessionsController implements Initializable {
     @FXML
     private void connecter(ActionEvent event) throws IOException, InterruptedException {
         t = Sessions.getSelectionModel().getSelectedItem();
-        this.serverchatapp().show();
         //Thread.sleep(3000);
         this.clientchatapp().show();
 
@@ -143,20 +130,6 @@ public class StudentTutorshipSessionsController implements Initializable {
         primaryStage.close();
         primaryStage.setScene(ca.makeChatUI(client, this.getSessionId()));
         return primaryStage;
-    }
-
-    private Stage serverchatapp() throws IOException {
-        Server server = new Server(8081);
-        Thread serverThread = (new Thread(server));
-        serverThread.setName("Server Thread");
-        serverThread.setDaemon(true);
-        serverThread.start();
-        threads1 = new ArrayList<Thread>();
-        threads1.add(serverThread);
-        Stage ServerStage = new Stage();
-        ServerApplication serverapp = new ServerApplication();
-        ServerStage.setScene(serverapp.makeServerUI(server));
-        return ServerStage;
     }
 
     public int getSessionId() {

@@ -162,7 +162,6 @@ public class TutorshipSessionService implements GenericService<TutorshipSession>
     }
     
     public TutorshipSession getLatest() {
-        ObservableList<TutorshipSession> tutorshipSessions = FXCollections.observableArrayList();
         try {
             String req = "SELECT * FROM tutorshipSessions ORDER BY idSession DESC LIMIT 1 ";
             Statement st = cnx.createStatement();
