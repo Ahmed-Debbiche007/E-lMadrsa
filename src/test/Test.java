@@ -5,6 +5,7 @@
 package test;
 //import entities.User;
 
+import com.google.api.client.util.DateTime;
 import entities.ChatSession;
 import gui.Tutors.TutorsTutorshipSessionsController;
 import java.io.IOException;
@@ -25,13 +26,12 @@ import services.TutorshipRequestService;
  * @author ahmed
  */
 public class Test extends Application {
+
     private ArrayList<Thread> threads1;
 
     public static void main(String[] args) {
         launch(args);
-        
     }
-     
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -41,7 +41,7 @@ public class Test extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("WorkShop PIDEV");
         primaryStage.show();
-        
+
     }
 
 }

@@ -13,6 +13,7 @@ import entities.User;
 import gui.AjoutUserController;
 import java.io.IOException;
 import java.net.URL;
+import java.security.GeneralSecurityException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -31,6 +32,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
+import outils.CalendarQuickstart;
 import services.ChatSessionService;
 import services.TutorshipRequestService;
 import services.TutorshipSessionService;
@@ -108,13 +110,14 @@ public class TutorTutorshipRequestsController implements Initializable {
         return t;
     }
 @FXML
-    private void valider(ActionEvent event) throws IOException {
+    private void valider(ActionEvent event) throws IOException, GeneralSecurityException {
         TutorshipRequest t = requests.getSelectionModel().getSelectedItem();
         TutorshipRequestService ts = new TutorshipRequestService();
         ts.delete(t);
          String url = "url";
         if(t.getRequestType().name().equals("VideoChat")){
-             url = "url"+t.toString();
+            CalendarQuickstart calendar = new CalendarQuickstart();
+             url = "urlaa" ;
          }
         TutorshipSession s = new TutorshipSession(t.getIdTutor(), t.getIdStudent(), t.getIdRequest(), url,t.getRequestType(),t.getSessionDate());
         TutorshipSessionService ss = new TutorshipSessionService();
@@ -124,6 +127,7 @@ public class TutorTutorshipRequestsController implements Initializable {
             ChatSessionService cs = new ChatSessionService();
         cs.add(new ChatSession(s.getIdTutorshipSession()));
         }
+        
         JOptionPane.showMessageDialog(null, "Sceance Planifiée! ");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
             Parent root ; 

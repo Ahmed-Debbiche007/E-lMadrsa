@@ -132,7 +132,7 @@ public class StudentTutorshipRequestsController implements Initializable {
     private void valider(ActionEvent event) {
         TutorshipRequest t = requests.getSelectionModel().getSelectedItem();
         System.out.println(t);
-        TutorshipSession s = new TutorshipSession(t.getIdTutor(), t.getIdStudent(), t.getIdRequest(), "url", t.getRequestType(), t.getSessionDate());
+        TutorshipSession s = new TutorshipSession(t.getIdTutor(), t.getIdStudent(), t.getIdRequest(), null, t.getRequestType(), t.getSessionDate());
         TutorshipSessionService ss = new TutorshipSessionService();
         ss.add(s);
         s = ss.getLatest();
