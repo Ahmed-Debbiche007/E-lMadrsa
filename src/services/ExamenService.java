@@ -2,13 +2,16 @@
 package services;
 
 import entities.Examen;
+import entities.Question;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -102,7 +105,15 @@ public Examen countExams( String nom ) {
 }
     
     
-    
+        public boolean save(List<Question> questions) {
+        boolean flag = true;
+        QuestionService Qservice = new QuestionService() ;
+        for (Question q : questions) {
+             Qservice.ajouter(q);
+            System.out.println(flag);
+        }
+        return flag;
+    }
 
     @Override
     public void supprimer(Examen e) {
@@ -165,6 +176,98 @@ public Examen countExams( String nom ) {
 
  
 
+    public  Map<Examen, List<Question>> getAll() {                
+        Map<Examen, List<Question>> exams = new HashMap<>();
+                Examen key = null;
+        
+            try {
 
-   
+                
+                String req = " SELECT * from Examen e join Question q on e.idExamen=q.idExamen ;"  ;
+                PreparedStatement st = cnx.prepareStatement(req) ;
+                ResultSet rs = st.executeQuery() ;
+                while(rs.next()) {
+                    
+                 
+                Examen tempEX = new Examen();
+                tempEX.setIdExamen(rs.getLong(1));
+                tempEX.setNomExamen(rs.getString(2));
+                tempEX.setPourcentage(rs.getDouble(3));
+                tempEX.setDureeExamen(rs.getInt(4));
+                tempEX.setFormationId(rs.getLong(5));
+                tempEX.setIdCategorie(rs.getLong(6));
+                
+          
+                Question tempQuestion = new Question();
+                tempQuestion.setIdQuestion(rs.getLong(7));
+                tempQuestion.setEnnonce(rs.getString(8));
+                tempQuestion.setOption1(rs.getString(9));
+                tempQuestion.setOption2(rs.getString(10));
+                tempQuestion.setOption3(rs.getString(11));
+                tempQuestion.setAnswer(rs.getString(12));    
+                tempQuestion.setIdExamen(rs.getLong(13));    
+                if (key != null && key.equals(tempEX)) {
+                exams.get(key).add(tempQuestion);
+                } else {
+                ArrayList<Question> value = new ArrayList<>();
+                value.add(tempQuestion);
+                exams.put(tempEX, value);
+                }
+                
+                key = tempEX;
+                
+                
+                
+                }
+            
+            
+                        } catch (SQLException ex) {
+                                System.out.println("error occured" +ex.getMessage());
+            }
+                        return exams ; 
+}
+
+                
+                /*
+                try {
+                Class.forName(DatabaseConstants.DRIVER_CLASS);
+                try (Connection connection = DriverManager.getConnection(connectionUrl)) {
+                
+                PreparedStatement ps = connection.prepareStatement(query);
+                ResultSet result = ps.executeQuery();
+
+                while (result.next()) {
+                Quiz temp = new Quiz();
+                temp.setQuizId(result.getInt(1));
+                temp.setTitle(result.getString(2));
+                
+                Question tempQuestion = new Question();
+                tempQuestion.setQuestionId(result.getInt(3));
+                tempQuestion.setQuestion(result.getString(4));
+                tempQuestion.setOption1(result.getString(5));
+                tempQuestion.setOption2(result.getString(6));
+                tempQuestion.setOption3(result.getString(7));
+                tempQuestion.setOption4(result.getString(8));
+                tempQuestion.setAnswer(result.getString(9));
+                
+                if (key != null && key.equals(temp)) {
+                quizes.get(key).add(tempQuestion);
+                } else {
+                ArrayList<Question> value = new ArrayList<>();
+                value.add(tempQuestion);
+                quizes.put(temp, value);
+                }
+                
+                key = temp;
+                
+                }
+                }
+                } catch (Exception ex) {
+                ex.printStackTrace();
+                }
+                
+                return quizes;
+                }
+            */   
+
 }

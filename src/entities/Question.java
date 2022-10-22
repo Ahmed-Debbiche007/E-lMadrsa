@@ -13,6 +13,7 @@ import java.util.List;
  *
  * @author Msi
  */
+
 public class Question {
     private Long idQuestion ; 
     private String ennonce ;
@@ -22,6 +23,9 @@ public class Question {
     private String answer ; 
     private Long idExamen ; 
     private String nomExamen ; 
+
+    public Question() {
+    }
 
     public Question(Long idQuestion, String ennonce, String option1, String option2, String option3, String answer, Long idExamen) {
         this.idQuestion = idQuestion;

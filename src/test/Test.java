@@ -29,7 +29,7 @@ public class Test {
         //Examen Ex2 = new Examen(2,"francais",20.10,120); 
         // test ajout examen :
         //Es.ajouter(Ex1);
-       System.out.println("count :::::::"  +Es.countExams("allemand ") );  
+       System.out.println("count :::::::"  + Es.getAll());  
        
         //System.out.println(Es.afficher());
 
@@ -115,14 +115,14 @@ public class Test {
         
        
          
-        
+        /*
         Question question1 = new Question("html","opt1","opt2","opt3","opt3") ; 
                       QuestionService Qservice = new QuestionService() ;
 
         Qservice.afficher();
         
            
-         
+         */
  
         
     }
