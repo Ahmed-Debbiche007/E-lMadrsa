@@ -102,12 +102,45 @@ public class UseraddexamController implements Initializable {
 
     @FXML
     private void ajuoterExamen(ActionEvent event) {
+        
+        
+                ExamenService Es = new ExamenService() ; 
+
+        
+        
+        
                 if(tfNomExamen.getText().trim().isEmpty()){
             Notifications.create()
                     .darkStyle()
                     .position(Pos.CENTER)
                      .text("Enter valid Exam Title")
                     .title("Exam Title").showError();
+            }
+                
+                
+                if(Es.countExams(tfNomExamen.getText().trim())!=null)
+                {
+                                Notifications.create()
+                    .darkStyle()
+                    .position(Pos.CENTER)
+                    .text("this exam name already exist")
+                    .title("Exam Title").showError();
+                }
+                
+                else {
+                    
+                               
+            Formation f =  tvFormations.getSelectionModel().getSelectedItem() ;
+           Categorie c =  tvCategories.getSelectionModel().getSelectedItem() ; 
+           Examen newExam = new Examen(  tfNomExamen.getText()  ,   Double.parseDouble(tfPourcentageExamen.getText())     , Integer.parseInt(tfDureeExamen.getText() )    , f.getIdFormation() , c.getIdCategorie()   ) ; 
+           Es.ajouter(newExam);
+            JOptionPane.showMessageDialog(null,"examen Ajoutée ! "); 
+                    
+                }
+                
+                
+                
+                
         
              /*   
         if (tfNomExamen.getText().trim().equals(""))  
@@ -123,13 +156,7 @@ public class UseraddexamController implements Initializable {
         
         
         
-       
-        ExamenService  SE = new ExamenService() ;
-           Formation f =  tvFormations.getSelectionModel().getSelectedItem() ;
-           Categorie c =  tvCategories.getSelectionModel().getSelectedItem() ; 
-           Examen newExam = new Examen(  tfNomExamen.getText()  ,   Double.parseDouble(tfPourcentageExamen.getText())     , Integer.parseInt(tfDureeExamen.getText() )    , f.getIdFormation() , c.getIdCategorie()   ) ; 
-           SE.ajouter(newExam);
-            JOptionPane.showMessageDialog(null,"examen Ajoutée ! ");
+
         
  
             
@@ -143,7 +170,7 @@ public class UseraddexamController implements Initializable {
         
         
         
-    }
+    
     }
 
     @FXML

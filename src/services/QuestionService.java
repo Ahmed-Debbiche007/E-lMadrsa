@@ -90,18 +90,20 @@ public class QuestionService implements IService<Question> {
                    ObservableList<Question> listQuestion = FXCollections.observableArrayList() ;
 
             try {
-                String req = "select * from Question" ;
+                 
+                String req = "SELECT * FROM question  JOIN Examen  ON examen.idExamen=question.idExamen ; " ;
                 PreparedStatement st = cnx.prepareCall(req) ; 
                 ResultSet rs = st.executeQuery(req) ;
                 
                 while(rs.next()) {
-                listQuestion.add(new Question(rs.getLong("idQuestion"),rs.getString("ennonce"),rs.getString("option1"),rs.getString("option2"),rs.getString("option3"),rs.getString("answer"),rs.getLong("idExamen"))) ;
+                listQuestion.add(new Question(rs.getLong("idQuestion"),rs.getString("ennonce"),rs.getString("option1"),rs.getString("option2"),rs.getString("option3"),rs.getString("answer"),rs.getLong("idExamen"),rs.getString("nomExamen"))) ;
+                System.out.println("ffffffffff" + listQuestion);
 
             }
                 
                 
             } catch (SQLException ex) {
-                System.out.println("erreur lors de la selection des questions ! ");
+                System.out.println("erreur lors de la selection des questions ! " + ex.getMessage());
                 
             }
               return listQuestion ;

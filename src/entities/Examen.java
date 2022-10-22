@@ -31,6 +31,27 @@ public class Examen {
         this.pourcentage = pourcentage;
         this.DureeExamen = DureeExamen;
     }
+
+    public Examen(Long idExamen, String nomExamen, Double pourcentage, int DureeExamen, Long formationId, Long idCategorie, String nomCat, String nomFor) {
+        this.idExamen = idExamen;
+        this.nomExamen = nomExamen;
+        this.pourcentage = pourcentage;
+        this.DureeExamen = DureeExamen;
+        this.formationId = formationId;
+        this.idCategorie = idCategorie;
+        this.nomCat = nomCat;
+        this.nomFor = nomFor;
+    }
+
+    public Examen(String nomExamen, Double pourcentage, int DureeExamen, Long formationId, Long idCategorie, String nomCat, String nomFor) {
+        this.nomExamen = nomExamen;
+        this.pourcentage = pourcentage;
+        this.DureeExamen = DureeExamen;
+        this.formationId = formationId;
+        this.idCategorie = idCategorie;
+        this.nomCat = nomCat;
+        this.nomFor = nomFor;
+    }
            
        public Examen( String nomExamen, Double pourcentage, int DureeExamen) {
         this.nomExamen = nomExamen;

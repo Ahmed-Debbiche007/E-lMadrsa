@@ -23,12 +23,13 @@ public class Test {
         //User u = new User(1,"ahmed","gouiaa",23);
         //UserService us = new UserService() ;
         // creation du service Examen : 
-        //ExamenService Es = new ExamenService() ; 
+        ExamenService Es = new ExamenService() ; 
         // création d'un examen 1
-        //Examen Ex1 = new Examen("symfony",12.0,60); 
+        Examen Ex1 = new Examen("fr",12.0,60); 
         //Examen Ex2 = new Examen(2,"francais",20.10,120); 
         // test ajout examen :
         //Es.ajouter(Ex1);
+       System.out.println("count :::::::"  +Es.countExams("allemand ") );  
        
         //System.out.println(Es.afficher());
 
@@ -118,7 +119,7 @@ public class Test {
         Question question1 = new Question("html","opt1","opt2","opt3","opt3") ; 
                       QuestionService Qservice = new QuestionService() ;
 
-        Qservice.ajouter(question1);
+        Qservice.afficher();
         
            
          

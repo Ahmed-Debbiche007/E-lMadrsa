@@ -21,6 +21,7 @@ public class Question {
     private String option3 ; 
     private String answer ; 
     private Long idExamen ; 
+    private String nomExamen ; 
 
     public Question(Long idQuestion, String ennonce, String option1, String option2, String option3, String answer, Long idExamen) {
         this.idQuestion = idQuestion;
@@ -30,6 +31,17 @@ public class Question {
         this.option3 = option3;
         this.answer = answer;
         this.idExamen = idExamen;
+    }
+
+    public Question(Long idQuestion, String ennonce, String option1, String option2, String option3, String answer, Long idExamen, String nomExamen) {
+        this.idQuestion = idQuestion;
+        this.ennonce = ennonce;
+        this.option1 = option1;
+        this.option2 = option2;
+        this.option3 = option3;
+        this.answer = answer;
+        this.idExamen = idExamen;
+        this.nomExamen = nomExamen;
     }
 
     public Question(String ennonce, String option1, String option2, String option3, String answer, Long idExamen) {
@@ -87,6 +99,14 @@ public class Question {
 
     public void setIdExamen(Long idExamen) {
         this.idExamen = idExamen;
+    }
+
+    public String getNomExamen() {
+        return nomExamen;
+    }
+
+    public void setNomExamen(String nomExamen) {
+        this.nomExamen = nomExamen;
     }
 
      

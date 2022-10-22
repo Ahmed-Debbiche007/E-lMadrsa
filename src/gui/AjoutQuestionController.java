@@ -66,7 +66,7 @@ public class AjoutQuestionController implements Initializable {
     @FXML
     private TableColumn<Question, String> colanswer;
     @FXML
-    private TableColumn<Question, Long> colExamtvQuestions;
+    private TableColumn<Question, String> colExamtvQuestions;
     @FXML
     private TableView<Examen> tvExams;
     @FXML
@@ -247,8 +247,8 @@ public class AjoutQuestionController implements Initializable {
         coloption2.setCellValueFactory(new PropertyValueFactory<Question,String>("option2"));
         coloption3.setCellValueFactory(new PropertyValueFactory<Question,String>("option3"));
         colanswer.setCellValueFactory(new PropertyValueFactory<Question,String>("answer"));
-        colExamtvQuestions.setCellValueFactory(new PropertyValueFactory<Question,Long>("idExamen"));
-        System.out.println(list);
+        colExamtvQuestions.setCellValueFactory(new PropertyValueFactory<Question,String>("nomExamen"));
+        System.out.println("list questionsssssssssss" + list);
         tvQuestion.setItems(list);        
     }
 

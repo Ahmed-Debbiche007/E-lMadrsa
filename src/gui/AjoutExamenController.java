@@ -196,8 +196,8 @@ public class AjoutExamenController implements Initializable {
         colNomExamen.setCellValueFactory(new PropertyValueFactory<Examen,String>("nomExamen"));
         colPourcentageExamen.setCellValueFactory(new PropertyValueFactory<Examen,Double>("Pourcentage"));
         colDureeExamen.setCellValueFactory(new PropertyValueFactory<Examen,Integer>("DureeExamen"));
-        colFormationex.setCellValueFactory(new PropertyValueFactory<Examen,Long>("nomCat"));
-        colCategorieex.setCellValueFactory(new PropertyValueFactory<Examen,Long>("nomFor"));
+        colFormationex.setCellValueFactory(new PropertyValueFactory<Examen,Long>("nomFor"));
+        colCategorieex.setCellValueFactory(new PropertyValueFactory<Examen,Long>("nomCat"));
         
         // System.out.println("///////////////////////" + colCategorieex.getCellFactory()); 
  

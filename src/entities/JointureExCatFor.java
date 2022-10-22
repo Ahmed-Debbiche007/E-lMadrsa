@@ -6,8 +6,18 @@ package entities;
 
 /**
  *
+ * 
+ * SELECT *
+FROM examen
+JOIN categorie ON examen.idcategorie=categorie.idCategorie
+JOIN formation On examen.formationId= formation.idFormation
+WHERE examen.idExamen = 22 ; 
  * @author Msi
  */
-public class questionn {
+public class JointureExCatFor {
     
+    
+    
+    
+ 
 }

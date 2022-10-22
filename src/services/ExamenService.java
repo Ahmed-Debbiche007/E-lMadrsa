@@ -72,6 +72,34 @@ public Examen getLatest() {
         }
         return null;
     }
+
+
+public Examen countExams( String nom ) {
+            try {
+                String req = "SELECT  *  FROM Examen  where nomExamen=? ";
+                PreparedStatement st = cnx.prepareStatement(req) ;
+                            st.setString(1, nom);
+
+                ResultSet rs = st.executeQuery();
+            while (rs.next()){
+                Examen e = new Examen();
+                e.setIdExamen(rs.getLong("idExamen"));
+                e.setNomExamen(rs.getString("nomExamen"));
+                e.setPourcentage(rs.getDouble("pourcentage"));
+                e.setDureeExamen(rs.getInt("DureeExamen"));
+                e.setFormationId(rs.getLong("formationId"));
+                e.setIdCategorie(rs.getLong("idCategorie"));
+                return e;
+            }
+            } catch (SQLException ex) {
+                System.out.println("examen not found "  + ex.getMessage());
+                
+            }
+            
+            return null ;
+    
+    
+}
     
     
     
@@ -112,18 +140,24 @@ public Examen getLatest() {
                    ObservableList<Examen> listExamen =FXCollections.observableArrayList();
 
             try {
-                String req = "select * from Examen" ;
+                
+                  
+                
+                
+                
+                String req = "SELECT * FROM examen  JOIN categorie ON examen.idcategorie=categorie.idCategorie JOIN formation On examen.formationId= formation.idFormation" ;
                 PreparedStatement st = cnx.prepareStatement(req) ; 
                  ResultSet rs = st.executeQuery(req) ;
                 
                 while(rs.next()) {
-                listExamen.add(new Examen( rs.getLong("idExamen"),rs.getString("nomExamen"), rs.getDouble("pourcentage"), rs.getInt("DureeExamen") , rs.getLong("formationId") ,rs.getLong("idCategorie")));
+                listExamen.add(new Examen( rs.getLong("idExamen"),rs.getString("nomExamen"), rs.getDouble("pourcentage"), rs.getInt("DureeExamen") , rs.getLong("formationId") ,rs.getLong("idCategorie"),rs.getString("nomCategorie"),rs.getString("sujet")));
+                System.out.println("dddddddddddddddderfevrgtbrtb" + listExamen);
 
             }
 
                 
             } catch (SQLException ex) {
-                System.out.println("error occured");
+                System.out.println("error occured" +ex.getMessage());
                 
             }
               return listExamen ;
