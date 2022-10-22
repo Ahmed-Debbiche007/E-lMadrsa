@@ -127,7 +127,7 @@ public class CalendarQuickstart {
         }
     }
 
-    public static void main(String[] args) throws IOException, GeneralSecurityException {
+    public String generateMeetURL(String Description, String time) throws IOException, GeneralSecurityException {
         // Build a new authorized API client service.
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         Calendar service
@@ -142,13 +142,14 @@ public class CalendarQuickstart {
         Event event = new Event()
                 .setSummary("TutorshipSession")
                 .setLocation("Online")
-                .setDescription("aaa");
-        String time = "2022-10-23" + "T" + "09:00" + ":00Z";
+                .setDescription(Description);
+        
         DateTime startDateTime = new DateTime(time);//"2020-05-05T11:00:00+06:00");
         EventDateTime start = new EventDateTime()
                 .setDateTime(startDateTime)
                 .setTimeZone(ZonedDateTime.now().getZone().toString());
         event.setStart(start);
+        
 
         DateTime endDateTime = new DateTime(startDateTime.getValue() + 60 * 60 * 2000);//"2020-05-05T11:00:00+06:00");
         EventDateTime end = new EventDateTime()
@@ -200,6 +201,7 @@ public class CalendarQuickstart {
         }
 
         String meetingId = event.getHangoutLink();
-        System.out.println("What is meeting ID? = " + meetingId);
+       // System.out.println("What is meeting ID? = " + meetingId);
+        return meetingId;
     }
 }

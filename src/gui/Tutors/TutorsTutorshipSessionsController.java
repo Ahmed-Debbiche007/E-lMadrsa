@@ -7,7 +7,9 @@ package gui.Tutors;
 import entities.TutorshipSession;
 import entities.User;
 import gui.AjoutUserController;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -122,9 +124,17 @@ public class TutorsTutorshipSessionsController implements Initializable {
     @FXML
     private void connecter(ActionEvent event) throws IOException, InterruptedException {
         t = Sessions.getSelectionModel().getSelectedItem();
-        this.clientchatapp().show();
+        if (t.getType().equals("MessagesChat")) {
+            this.clientchatapp().show();
+        }else {
+            String command = "xdg-open "+t.getUrl();
+
+        Process proc = Runtime.getRuntime().exec(command);
+
+
+        }
     }
-    
+
     private Stage clientchatapp() throws IOException, InterruptedException {
         Thread.sleep(3000);
         AjoutUserController cs = new AjoutUserController();
@@ -141,16 +151,15 @@ public class TutorsTutorshipSessionsController implements Initializable {
         primaryStage.setScene(ca.makeChatUI(client, this.getSessionId()));
         return primaryStage;
     }
-    
+
     public int getSessionId() {
         ChatSessionService css = new ChatSessionService();
         try {
-          return (int) css.getSession("idTutorshipSession",(int) this.getT().getIdTutorshipSession()).getIdTutorshipSession();
+            return (int) css.getSession("idTutorshipSession", (int) this.getT().getIdTutorshipSession()).getIdTutorshipSession();
         } catch (Exception e) {
-            System.out.println("aa"+e.getMessage());
+            System.out.println("aa" + e.getMessage());
         }
         return 0;
     }
-    
 
 }

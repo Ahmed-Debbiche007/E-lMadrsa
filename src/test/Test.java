@@ -5,9 +5,6 @@
 package test;
 //import entities.User;
 
-import com.google.api.client.util.DateTime;
-import entities.ChatSession;
-import gui.Tutors.TutorsTutorshipSessionsController;
 import java.io.IOException;
 import java.util.ArrayList;
 import javafx.application.Application;
@@ -15,11 +12,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import outils.chat.server.Server;
-import outils.chat.server.ServerApplication;
-import services.ChatSessionService;
-import services.MessagesService;
-import services.TutorshipRequestService;
 
 /**
  *

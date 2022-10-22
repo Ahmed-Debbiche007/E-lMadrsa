@@ -117,7 +117,8 @@ public class TutorTutorshipRequestsController implements Initializable {
          String url = "url";
         if(t.getRequestType().name().equals("VideoChat")){
             CalendarQuickstart calendar = new CalendarQuickstart();
-             url = "urlaa" ;
+            String time = t.decompose().get(0)+"T"+t.decompose().get(1)+":"+t.decompose().get(2)+":00Z";
+             url = calendar.generateMeetURL(t.getRequestBody(), time) ;
          }
         TutorshipSession s = new TutorshipSession(t.getIdTutor(), t.getIdStudent(), t.getIdRequest(), url,t.getRequestType(),t.getSessionDate());
         TutorshipSessionService ss = new TutorshipSessionService();

@@ -111,7 +111,15 @@ public class StudentTutorshipSessionsController implements Initializable {
     private void connecter(ActionEvent event) throws IOException, InterruptedException {
         t = Sessions.getSelectionModel().getSelectedItem();
         //Thread.sleep(3000);
-        this.clientchatapp().show();
+        if (t.getType().equals("MessagesChat")) {
+            this.clientchatapp().show();
+        }else {
+            String command = "xdg-open "+t.getUrl();
+
+        Process proc = Runtime.getRuntime().exec(command);
+
+
+        }
 
     }
 
