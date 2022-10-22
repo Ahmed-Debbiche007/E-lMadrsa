@@ -117,8 +117,6 @@ public class StudentTutorshipSessionsController implements Initializable {
             String command = "xdg-open "+t.getUrl();
 
         Process proc = Runtime.getRuntime().exec(command);
-
-
         }
 
     }
