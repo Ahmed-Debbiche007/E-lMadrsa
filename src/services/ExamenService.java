@@ -7,7 +7,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -283,7 +282,7 @@ public Examen countExams( String nom ) {
             try {
 
                 
-                String req = " select examen.idExamen , Examen.nomExamen , count(*) as c   from  examen  join question on examen.idExamen = question.idExamen group by examen.idExamen ;";
+                String req = " select * , count(*) as c   from  examen  join question on examen.idExamen = question.idExamen group by examen.idExamen ;";
                 
                 PreparedStatement st = cnx.prepareStatement(req) ;
                 ResultSet rs = st.executeQuery() ;
@@ -291,7 +290,17 @@ public Examen countExams( String nom ) {
                     Examen temp = new Examen();
                     temp.setIdExamen(rs.getLong(1));
                     temp.setNomExamen(rs.getString(2));
-                    int count = rs.getInt(3);
+                    temp.setPourcentage(rs.getDouble(3));
+                    temp.setDureeExamen(rs.getInt(4));
+                    
+                    
+                    temp.setFormationId(rs.getLong(5));
+                    temp.setIdCategorie(rs.getLong(6));
+ 
+                    
+ 
+                    
+                    int count = rs.getInt("c");
                     examesmap.put(temp, count);
                      System.out.println( examesmap);
 
@@ -305,10 +314,37 @@ public Examen countExams( String nom ) {
     }
     
     
+  public List<Question> getQuestions(Long id) {
+       List<Question> listQuestion = new ArrayList<>();
+       
+       
+       
+            try {
+               
+                
+                String req = "SELECT * from question q where q.idExamen=? ;  " ;
+                
+                PreparedStatement st = cnx.prepareStatement(req) ;
+                st.setLong(1, id);
+                ResultSet rs = st.executeQuery() ;
+                
+                
+                while (rs.next()) {
+                listQuestion.add(new Question(rs.getLong("idQuestion"),rs.getString("ennonce"),rs.getString("option1"),rs.getString("option2"),rs.getString("option3"),rs.getString("answer"),rs.getLong("idExamen"))) ;
+                System.out.println("ffffffffff" + listQuestion);
+                }
+                    
+               
+                
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(ExamenService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
+            return  listQuestion ; 
     
     
     
-    
-    
-
+  }
 }

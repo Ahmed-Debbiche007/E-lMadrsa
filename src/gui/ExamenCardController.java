@@ -4,12 +4,16 @@
  */
 package gui;
 
+import Listners.NewScreenListener;
 import entities.Examen;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+  import javafx.scene.control.Label;
+import javafx.scene.layout.Region;
 
 /**
  * FXML Controller class
@@ -18,7 +22,7 @@ import javafx.scene.control.Label;
  */
 public class ExamenCardController implements Initializable {
 
-    
+    private NewScreenListener screenListener;
     private Examen E ; 
     @FXML
     private Label ExamTttle;
@@ -61,5 +65,27 @@ public class ExamenCardController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void startExam(ActionEvent event) {
+
+
+        try {
+                            FXMLLoader fxmlLoader = new FXMLLoader(getClass().
+                getResource("QuestionsScreen.fxml"));
+            Region node = fxmlLoader.load();
+            QuestionsScreenController questionsScreenController= fxmlLoader.getController();
+                
+                questionsScreenController.setExamen(this.E);
+                System.out.println("hedhi hiya " + this.E) ; 
+                ExamTttle.getScene().setRoot( node);
+                                questionsScreenController.setExamen(this.E);
+
+               // questionsScreenController.setScreenListener(this.screenListener);
+            //this.screenListener.ChangeScreen(node);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     
 }
