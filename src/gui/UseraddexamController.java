@@ -279,8 +279,8 @@ public class UseraddexamController implements Initializable {
                      Notifications.create()
                     .darkStyle()
                     .position(Pos.CENTER)
-                     .text("examen ajouté wiririiririir")
-                    .title("Exam Title").showError();
+                     .text("examen ajouté avec succée")
+                    .title("Exam Title").showInformation();
          
          
          

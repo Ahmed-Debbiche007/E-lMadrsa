@@ -33,6 +33,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import org.controlsfx.control.Notifications;
  
@@ -317,9 +318,77 @@ System.out.println("rights :" +numberOfRightAnswers) ;
 
     }
     @FXML
-    private void submit(ActionEvent event) {
-    }
+    private void submit(ActionEvent event) throws IOException {
+        /*
+                System.out.println(this.studentAnswers);
+         boolean result = quizResult.save(this.studentAnswers);
+        if (result) {
+            Notifications.create()
+                    .title("Message")
+                    .text("You Succesfully Attemped Quiz...")
+                    .position(Pos.BOTTOM_RIGHT)
+                    .showInformation();
+            timer.cancel();
+            openResultScreen();
+        } else {
+            Notifications.create()
+                    .title("Error")
+                    .text("Something Went Wrong..")
+                    .position(Pos.BOTTOM_RIGHT)
+                    .showError();
+        }
+*/       
+                    Notifications.create()
+                    .title("Message")
+                    .text("You Succesfully Attemped Quiz...")
+                    .position(Pos.BOTTOM_RIGHT)
+                    .showInformation();
+                    
+                            try {
+                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("resultatUI.fxml")) ;
+                                    Parent root = loader.load() ; 
+                                    question.getScene().setRoot(root);
+          //  Region node = fxmlLoader.load();
+                     ResultatUIController controller = loader.getController();
+                     System.out.println("user answers : " + this.studentAnswers) ; 
+                     System.out.println("number of right answers :  : " + this.numberOfRightAnswers) ; 
+                     System.out.println("exam :  :  : " + this.examen) ; 
+                     System.out.println("question list  :  :  : " + this.questionList) ; 
+                     
+            controller.setValues(this.studentAnswers , numberOfRightAnswers , examen , questionList);
+            
+            
+                                 System.out.println("get from other scree for ensure the set of values :  :  :  : " + controller.getNumberOfRightAnswers()) ; 
 
+          // this.screenListener.removeTopScreen();
+           // this.screenListener.ChangeScreen(node);
+        } catch (IOException ex) {
+            System.out.println(ex.getLocalizedMessage()) ; 
+            
+        }
+                    
+                            
+    
+                            
+   
+
+    }
+    private void openResultScreen() {
+        
+
+        try {
+                           FXMLLoader fxmlLoader = new FXMLLoader(getClass().
+                getResource("resultatUI.fxml"));
+            Region node = fxmlLoader.load();
+                      ResultatUIController controller = fxmlLoader.getController();
+            controller.setValues(this.studentAnswers , numberOfRightAnswers , examen , questionList);
+          // this.screenListener.removeTopScreen();
+           // this.screenListener.ChangeScreen(node);
+        } catch (IOException ex) {
+            System.out.println(ex.getCause()) ; 
+            
+        }
+    }
     @FXML
     private void exitfromExam(ActionEvent event) throws IOException {
             Stage stage ;
