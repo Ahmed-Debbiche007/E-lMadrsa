@@ -9,8 +9,9 @@ import javafx.beans.property.SimpleStringProperty;
  import entities.Examen;
 import entities.Question; 
 import java.io.IOException;
+import java.math.RoundingMode;
 import java.net.URL;
-import java.util.ArrayList;
+import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -195,7 +196,7 @@ public class QuestionsScreenController implements Initializable {
 
     
  private void setNextQuestion() {
-        System.out.println("current : " + currentIndex) ; System.out.println("size : " + questionList.size()) ; 
+        System.out.println("current : " + currentIndex) ; System.out.println("size : " + questionList.size()+ "number of r a" + this.numberOfRightAnswers ) ; 
         
         
                 if (!(currentIndex >= questionList.size())) {
@@ -319,25 +320,29 @@ System.out.println("rights :" +numberOfRightAnswers) ;
     }
     @FXML
     private void submit(ActionEvent event) throws IOException {
-        /*
-                System.out.println(this.studentAnswers);
-         boolean result = quizResult.save(this.studentAnswers);
-        if (result) {
-            Notifications.create()
-                    .title("Message")
-                    .text("You Succesfully Attemped Quiz...")
-                    .position(Pos.BOTTOM_RIGHT)
-                    .showInformation();
-            timer.cancel();
-            openResultScreen();
-        } else {
-            Notifications.create()
-                    .title("Error")
-                    .text("Something Went Wrong..")
-                    .position(Pos.BOTTOM_RIGHT)
-                    .showError();
-        }
-*/       
+
+          
+        
+        
+         boolean isRight = false;
+         
+            // checking answer
+            RadioButton selectedButton = (RadioButton) options.getSelectedToggle();
+            String userAnswer = selectedButton.getText();
+            String rightAnswer = this.currentQuestion.getAnswer();
+            if (userAnswer.trim().equalsIgnoreCase(rightAnswer.trim())) {
+                isRight = true;
+                this.numberOfRightAnswers++;
+            }
+
+             studentAnswers.put(this.currentQuestion, userAnswer);
+        
+         System.out.println("rights :" +numberOfRightAnswers) ; 
+
+
+        
+        
+        setNextQuestion() ; 
                     Notifications.create()
                     .title("Message")
                     .text("You Succesfully Attemped Quiz...")
@@ -345,27 +350,39 @@ System.out.println("rights :" +numberOfRightAnswers) ;
                     .showInformation();
                     
                             try {
-                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("resultatUI.fxml")) ;
-                                    Parent root = loader.load() ; 
-                                    question.getScene().setRoot(root);
-          //  Region node = fxmlLoader.load();
-                     ResultatUIController controller = loader.getController();
-                     System.out.println("user answers : " + this.studentAnswers) ; 
-                     System.out.println("number of right answers :  : " + this.numberOfRightAnswers) ; 
-                     System.out.println("exam :  :  : " + this.examen) ; 
-                     System.out.println("question list  :  :  : " + this.questionList) ; 
-                     
-            controller.setValues(this.studentAnswers , numberOfRightAnswers , examen , questionList);
-            
-            
-                                 System.out.println("get from other scree for ensure the set of values :  :  :  : " + controller.getNumberOfRightAnswers()) ; 
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("resultatUI.fxml")) ;
+                                Parent root = loader.load() ; 
+                                question.getScene().setRoot(root);
+                                ResultatUIController controller = loader.getController();
+                                System.out.println("user answers : " + this.studentAnswers) ; 
+                                System.out.println("number of right answers :  : " + this.numberOfRightAnswers) ; 
+                                System.out.println("exam :  :  : " + this.examen) ; 
+                                System.out.println("question list  :  :  : " + this.questionList) ; 
+                               double d ;
+                                   d  =  this.numberOfRightAnswers *100 ;
+                                   d= d/this.questionList.size() ;
+                                                                       System.out.println("****---" + this.questionList.size() );
+                                   System.out.println("****---" + this.numberOfRightAnswers );
 
-          // this.screenListener.removeTopScreen();
-           // this.screenListener.ChangeScreen(node);
-        } catch (IOException ex) {
-            System.out.println(ex.getLocalizedMessage()) ; 
-            
-        }
+                                   System.out.println("****---" +  d );
+                                  DecimalFormat df = new DecimalFormat("0.00");
+                                  df.setRoundingMode(RoundingMode.UP);
+                                  
+                                  
+ 
+                                controller.setResultlb(String.valueOf(this.numberOfRightAnswers)+"/"+String.valueOf(this.questionList.size()));
+                                controller.setTauxlb(String.valueOf(df.format(d)) + "%"); 
+                                controller.setValues(this.studentAnswers , numberOfRightAnswers , examen , questionList);
+                                
+                                
+                                
+                                 System.out.println("get from other scree for ensure the set of values :  :  :  : " + this.numberOfRightAnswers) ; 
+
+ 
+                                } catch (IOException ex) {
+                                    System.out.println(ex.getLocalizedMessage()) ; 
+
+                                }
                     
                             
     

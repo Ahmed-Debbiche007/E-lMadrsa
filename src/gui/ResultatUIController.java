@@ -44,6 +44,10 @@ public class ResultatUIController implements Initializable {
     private Integer attemped = 0 ;
     @FXML
     private Label resulttitle;
+    @FXML
+    private Label resultlb;
+    @FXML
+    private Label tauxlb;
 
     public void setNumberOfRightAnswers(Integer numberOfRightAnswers) {
         this.numberOfRightAnswers = numberOfRightAnswers;
@@ -80,6 +84,14 @@ public class ResultatUIController implements Initializable {
     public Integer getAttemped() {
         return attemped;
     }
+
+    public void setResultlb(String resultlb) {
+        this.resultlb.setText(resultlb);
+    }
+
+    public void setTauxlb(String tauxlb) {
+        this.tauxlb.setText(tauxlb); 
+    }
     
     public void  setValues(Map<Question, String> userAnswers,
                            Integer numberOfRightAnswers, Examen examen,
@@ -91,11 +103,13 @@ public class ResultatUIController implements Initializable {
 
         this.attemped = this.userAnswers.keySet().size();
         this.notAttemped = this.questionList.size() - attemped;
+       // System.out.println("*****" + );
+       
         
-//Stage newStage = new Stage();
- Stage thisStage = (Stage) resulttitle.getScene().getWindow();
- //Scene thisScene = (Scene) resulttitle.getScene().;
-      setValuesToChart(thisStage);
+Stage newStage = new Stage();
+// Stage thisStage = (Stage) resulttitle.getScene().getWindow();
+// cene thisScene = (Scene) resulttitle.getScene().;
+      setValuesToChart(newStage);
         //renderQuestions();
     }
     
@@ -122,22 +136,12 @@ public class ResultatUIController implements Initializable {
 
 
     private void setValuesToChart(Stage stage ){
-        System.out.println("attemped : " + this.attemped) ; 
+        System.out.println("attemped : " + this.attemped) ;  System.out.println(" not attemped : " + this.notAttemped) ; 
                 Scene scene = new Scene(new Group());
  
-        /*
-                ObservableList<PieChart.Data> pieChartData =
-                FXCollections.observableArrayList(  new PieChart.Data("taux des réponses vrais",10 ),
-                        
-                new PieChart.Data("taux des réponses fausses", 50)) ; 
-                */
-        //ObservableList<PieChart.Data> attempedData = this.attempedChart.getData();
-        //attempedData.add(new PieChart.Data(String.format("Attemped (%d)", this.attemped) , this.attemped));
-       // attempedData.add(new PieChart.Data(String.format("Not Attemped (%d)", this.notAttemped) , this.notAttemped));
-
-
-        ObservableList<PieChart.Data> scoreChartData = FXCollections.observableArrayList(new PieChart.Data(
-                String.format("Right Answers (%d)", this.numberOfRightAnswers) , this.numberOfRightAnswers),new PieChart.Data(String.format("Not Attemped (%d)", this.notAttemped) , this.notAttemped));
+                       
+         ObservableList<PieChart.Data> scoreChartData = FXCollections.observableArrayList(new PieChart.Data(
+                String.format("Right Answers (%d)", this.numberOfRightAnswers) , this.numberOfRightAnswers),new PieChart.Data(String.format("Not Attemped (%d)", (this.questionList.size()-this.numberOfRightAnswers)) , (this.questionList.size()-this.numberOfRightAnswers)));
         
       scoreChart =    new PieChart(scoreChartData);
          ((Group) scene.getRoot()).getChildren().add(scoreChart);

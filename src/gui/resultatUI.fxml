@@ -11,5 +11,25 @@
             <Font size="44.0" />
          </font>
       </Label>
+      <Label alignment="CENTER" layoutX="114.0" layoutY="241.0" prefHeight="107.0" prefWidth="486.0" text="La résultat de cet examen : ">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="114.0" layoutY="359.0" prefHeight="107.0" prefWidth="486.0" text="Le taux des réponses vrais : ">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Label>
+      <Label fx:id="resultlb" layoutX="664.0" layoutY="270.0" text="Label">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Label>
+      <Label fx:id="tauxlb" layoutX="664.0" layoutY="399.0" text="Label">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

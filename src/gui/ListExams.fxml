@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -8,11 +9,12 @@
 
 <AnchorPane id="AnchorPane" prefHeight="854.0" prefWidth="1264.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ListExamsController">
    <children>
-      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="150.0">
+      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="166.0">
          <content>
-            <FlowPane fx:id="flowpanel" alignment="TOP_CENTER" columnHalignment="CENTER" hgap="20.0" prefHeight="200.0" prefWidth="200.0" vgap="20.0">
-              
-            </FlowPane>
+            <FlowPane fx:id="flowpanel" alignment="TOP_CENTER" columnHalignment="CENTER" hgap="10.0" prefHeight="588.0" prefWidth="1262.0" vgap="10.0">
+               <padding>
+                  <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+               </padding></FlowPane>
          </content>
       </ScrollPane>
       <Label layoutX="498.0" layoutY="47.0" text="List of exams " textFill="#e10000">
