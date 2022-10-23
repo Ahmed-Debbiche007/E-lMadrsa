@@ -17,10 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
-import javafx.application.Platform;
+ 
  import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -80,8 +77,7 @@ public class QuestionsScreenController implements Initializable {
     private RadioButton option2;
     @FXML
     private RadioButton option3;
-    private RadioButton option4;
-    @FXML
+     @FXML
     private Button next;
     @FXML
     private Button submit;
@@ -102,6 +98,8 @@ public class QuestionsScreenController implements Initializable {
     public void setExamen(Examen examen) {
         this.examen = examen;
                 this.title.setText(this.examen.getNomExamen());
+                         //this.currentIndex =0;
+
          this.getData();
     }
 
@@ -120,122 +118,20 @@ public class QuestionsScreenController implements Initializable {
     public void setOption3(RadioButton option3) {
         this.option3 = option3;
     }
-    private long min, sec, hr, totalSec = 0; //250 4 min 10 sec
-    private Timer timer;
+ 
 
 
  
+ 
+ 
+  
 
-    private String format(long value) {
-        if (value < 10) {
-            return 0 + "" + value;
-        }
+ 
 
-        return value + "";
-    }
-
-    public void convertTime() {
-
-        min = TimeUnit.SECONDS.toMinutes(totalSec);
-        sec = totalSec - (min * 60);
-        hr = TimeUnit.MINUTES.toHours(min);
-        min = min - (hr * 60);
-        time.setText(format(hr) + ":" + format(min) + ":" + format(sec));
-
-        totalSec--;
-    }
-
-    private void setTimer() {
-        totalSec = this.questionList.size() * 2;
-        this.timer = new Timer();
-
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        System.out.println("After 1 sec...");
-                        convertTime();
-                        /*
-                        if (totalSec <= 0) {
-                            timer.cancel();
-                            time.setText("00:00:00");
-                            // saveing data to database
-                            submit(null);
-                            Notifications.create()
-                                    .title("Error")
-                                    .text("TIme Up")
-                                    .position(Pos.BOTTOM_RIGHT)
-                                    .showError();
-                        }
-                        */
-                    }
-                });
-            }
-        };
-
-        timer.schedule(timerTask, 0, 10000);
-    }
-     private void renderProgress() {
-                 for (int i = 0; i < this.questionList.size(); i++) {
-            FXMLLoader fxmlLoader = new FXMLLoader(
-                    getClass()
-                            .getResource("ProgressCircleFXML.fxml"));
-            try {
-                Node node = fxmlLoader.load();
-                ProgressCircleFXMLController  progressCircleFXMLController  = fxmlLoader.getController();
-                progressCircleFXMLController.setNumber(i + 1);
-                progressCircleFXMLController.setDefaultColor();
-                progressPane.getChildren().add(node);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-     }
+ 
 
     
- private void setNextQuestion() {
-        System.out.println("current : " + currentIndex) ; System.out.println("size : " + questionList.size()+ "number of r a" + this.numberOfRightAnswers ) ; 
-        
-        
-                if (!(currentIndex >= questionList.size())) {
-/*
-            {
-                // chaning the color
-                Node circleNode = this.progressPane.getChildren().get(currentIndex);
-                ProgressCircleFXMLController controller = (ProgressCircleFXMLController) circleNode.getUserData();
-                controller.setCurrentQuestionColor();
-            }
-*/
-            this.currentQuestion = this.questionList.get(currentIndex);
-          
- 
- 
-            this.currentQuestion.setOption1(currentQuestion.getOption1());
-            this.currentQuestion.setOption2(currentQuestion.getOption2());
-            this.currentQuestion.setOption3(this.currentQuestion.getOption3());
-  /*
-           this.question.setText(this.currentQuestion.getEnnonce());
-            this.option1.setText(options.get(0));
-             this.option2.setText(options.get(1));
-           this.option3.setText(options.get(2));
-//            this.option4.setText(options.get(3));
-            */
 
-            this.questionsObservable.setQuestion(this.currentQuestion);
-            currentIndex++;
-        } else {
-                              hideNextQuestionButton();
-            showSubmitQuizButton();
-                    System.out.println("exam completed ") ; 
-                 
-  
-                
-        }
-        
-        
-     }
  private void getData() {
         if (examen != null) {            ExamenService Es = new ExamenService() ;
 
@@ -243,7 +139,8 @@ public class QuestionsScreenController implements Initializable {
             this.questionList = Es.getQuestions(examen.getIdExamen());
             Collections.shuffle(this.questionList);
             //renderProgress();
-            setNextQuestion();
+             setNextQuestion();
+             System.out.println("curerent index fel function mta getdata " + this.currentIndex);
             //setTimer();
         }
     }
@@ -268,8 +165,9 @@ public class QuestionsScreenController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+         
 
-                           
+        System.out.println("************** current indexxxxx " + this.currentIndex );
         this.showNextQuestionButton();
         this.hideSubmitQuizButton();
 
@@ -302,22 +200,43 @@ public class QuestionsScreenController implements Initializable {
 
             // saving Answer to hashMap
             studentAnswers.put(this.currentQuestion, userAnswer);
+
+            System.out.println("rights :" +numberOfRightAnswers) ; 
+
+ 
+           
+            setNextQuestion();
+
+    }
+     private void setNextQuestion() {
+        System.out.println("current : " + currentIndex) ; System.out.println("size : " + questionList.size()+ "number of r a" + this.numberOfRightAnswers ) ; 
+        System.out.println("******** current question : "+this.currentQuestion) ;
         
-//        Node circleNode = this.progressPane.getChildren().get(currentIndex - 1);
-      //  ProgressCircleFXMLController controller = (ProgressCircleFXMLController) circleNode.getUserData();
-System.out.println("rights :" +numberOfRightAnswers) ; 
-/*
-        if (isRight) {
-            controller.setRightAnsweredColor();
+             if (!(currentIndex >= questionList.size())) {
+            this.currentQuestion = this.questionList.get(currentIndex);
+            System.out.println("******** current question : "+this.currentQuestion) ;System.out.println("******** all questions : "+this.questionList) ; 
+            this.currentQuestion.setOption1(currentQuestion.getOption1());
+            this.currentQuestion.setOption2(currentQuestion.getOption2());
+            this.currentQuestion.setOption3(currentQuestion.getOption3());
+            this.questionsObservable.setQuestion(this.currentQuestion);
+            currentIndex++;
         } else {
-            controller.setWrongAnsweredColor();
+                             this.currentQuestion = this.questionList.get(0);
+            System.out.println("******** current question : "+this.currentQuestion) ;System.out.println("******** all questions : "+this.questionList) ; 
+            this.currentQuestion.setOption1(currentQuestion.getOption1());
+            this.currentQuestion.setOption2(currentQuestion.getOption2());
+            this.currentQuestion.setOption3(currentQuestion.getOption3());
+            this.questionsObservable.setQuestion(this.currentQuestion);
+            hideNextQuestionButton();
+            showSubmitQuizButton();
+            System.out.println("exam completed ") ; 
+                 
+  
+                
         }
-    }
-
-*/
-        this.setNextQuestion();
-
-    }
+        
+        
+     }
     @FXML
     private void submit(ActionEvent event) throws IOException {
 
@@ -342,7 +261,7 @@ System.out.println("rights :" +numberOfRightAnswers) ;
 
         
         
-        setNextQuestion() ; 
+                   // setNextQuestion() ; 
                     Notifications.create()
                     .title("Message")
                     .text("You Succesfully Attemped Quiz...")

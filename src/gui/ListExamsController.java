@@ -4,6 +4,7 @@
  */
 package gui;
 
+import entites.Categorie;
 import entities.Examen;
 import java.io.IOException;
 import java.net.URL;
@@ -12,6 +13,8 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,10 +22,14 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import services.ExamenService;
+import services.ServiceCategorie;
  
 /**
  * FXML Controller class
@@ -38,39 +45,11 @@ public class ListExamsController implements Initializable {
    // private NewScreenListener screenListener;
     private Set<Examen> keys ;
 
- 
-/*
-    public void setScreenListener(NewScreenListener screenListener) {
-        this.screenListener = screenListener;
 
-    }
-
-*/
-    /*
-    public  void setCards(){
-
-        for(Examen e : keys){
-             FXMLLoader loader = new FXMLLoader(getClass().getResource("ExamenCard.fxml"));
-            try {
-                Node node ;  
-                node = loader.load();
-                
-                ExamenCardController examcardcontroller = loader.getController();
-                examcardcontroller.setE(e);
-                flowpanel.getChildren().add(node);
-
- 
- 
-            }
-        catch (IOException ey) {
-                ey.printStackTrace();
-            }
-        }
-    }
- 
-    
-    
-    */
+    @FXML
+    private TableView<Categorie> tabviewcategorie;
+    @FXML
+    private TableColumn<Categorie, String> nomcatcol;
    
     
     
@@ -83,21 +62,9 @@ public class ListExamsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        /*
-        for(int i= 0 ; i<20 ; i++) {
- 
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("ExamenCard.fxml"));
-            } catch (IOException ex) {
-                Logger.getLogger(ListExamsController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-  
-        }
- */
         
-        /*
+        showcategorie();
 
-        */
       
          ExamenService Es = new ExamenService() ; 
 
@@ -106,32 +73,69 @@ public class ListExamsController implements Initializable {
         System.out.println("ddd" +allexams) ; 
         keys = allexams.keySet();
  
-                for(Examen e : keys) {
+        for(Examen e : keys) {
  
-                                           FXMLLoader loader = new FXMLLoader(getClass().getResource("ExamenCard.fxml"));
-                
- 
-
+       FXMLLoader loader = new FXMLLoader(getClass().getResource("ExamenCard.fxml"));
             try {
 
-                                    
-                
-                                  Node node = loader.load();
-                                  ExamenCardController examcardcontroller = loader.getController();
-                                  examcardcontroller.setE(e);
-                                  examcardcontroller.setExamTttle(e.getNomExamen());
-                                  examcardcontroller.setNbq(allexams.get(e)+"");
-                                  System.out.println("nom ::::::" +e.getNomExamen());
-                                  flowpanel.getChildren().add(node) ; 
+                Node node = loader.load();
+                ExamenCardController examcardcontroller = loader.getController();
+                examcardcontroller.setE(e);
+                examcardcontroller.setExamTttle(e.getNomExamen());
+                examcardcontroller.setNbq(allexams.get(e)+"");
+                System.out.println("nom ::::::" +e.getNomExamen());
+                flowpanel.getChildren().add(node) ; 
 
             } catch (IOException ex) {
                 Logger.getLogger(ListExamsController.class.getName()).log(Level.SEVERE, null, ex);
             }
-         
-               
-            
+
         }
         // TODO
     }    
+    
+            public void showcategorie(){
+            ServiceCategorie SC = new ServiceCategorie() ;
+        ObservableList<Categorie> ListCat =  SC.afficher() ; 
+        nomcatcol.setCellValueFactory(new PropertyValueFactory<Categorie,String>("nomCategorie"));
+        tabviewcategorie.setItems(ListCat);
+        System.out.print("*****" + ListCat);  
+    }
+
+    @FXML
+    private void chercherparcategorie(ActionEvent event) {
+        
+        Categorie t = tabviewcategorie.getSelectionModel().getSelectedItem();
+        Long idcategorie = t.getIdCategorie() ; 
+        flowpanel.getChildren().clear();
+        
+         ExamenService Es = new ExamenService() ; 
+
+        
+        ObservableList<Examen> allexamsbycat = Es.getAllWithQuestionCountbycategorieid(idcategorie);
+        System.out.println("ddd" +allexams) ; 
+  
+        allexamsbycat.forEach((e) -> {
+               FXMLLoader loader = new FXMLLoader(getClass().getResource("ExamenCard.fxml"));
+            try {
+
+                Node node = loader.load();
+                ExamenCardController examcardcontroller = loader.getController();
+                examcardcontroller.setE(e);
+                examcardcontroller.setExamTttle(e.getNomExamen());
+                //examcardcontroller.setNbq(allexams.get(e)+"");
+                System.out.println("nom ::::::" +e.getNomExamen());
+                
+                flowpanel.getChildren().add(node) ; 
+                
+
+            } catch (IOException ex) {
+                Logger.getLogger(ListExamsController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }); {
+ 
+    }
+        
+    }
     
 }

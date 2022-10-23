@@ -313,7 +313,28 @@ public Examen countExams( String nom ) {
         return examesmap;
     }
     
-    
+            public  ObservableList<Examen> getAllWithQuestionCountbycategorieid(Long id ) {
+                   ObservableList<Examen> listExamen =FXCollections.observableArrayList();
+
+            try {
+
+                String req = "SELECT * FROM examen  where examen.idcategorie= ? ;" ;
+                PreparedStatement st = cnx.prepareStatement(req) ; 
+                st.setLong(1, id);
+                 ResultSet rs = st.executeQuery() ;
+                
+                while(rs.next()) {
+                listExamen.add(new Examen( rs.getLong("idExamen"),rs.getString("nomExamen"), rs.getDouble("pourcentage"), rs.getInt("DureeExamen") , rs.getLong("formationId") ,rs.getLong("idCategorie") ));
+ 
+            }
+
+                
+            } catch (SQLException ex) {
+                System.out.println("error occured" +ex.getMessage());
+                
+            }
+              return listExamen ;
+    }
   public List<Question> getQuestions(Long id) {
        List<Question> listQuestion = new ArrayList<>();
        
