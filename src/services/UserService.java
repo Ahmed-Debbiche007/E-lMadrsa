@@ -28,7 +28,7 @@ public class UserService {
 
     public void ajouterUser(User u) {
         try {
-            String req = "INSERT INTO users(nom,prenom,age) VALUES('" + u.getNom() + "','" + u.getPrenom() + "'," + u.getAge() + ")";
+            String req = "INSERT INTO users(nom,prenom,age,mail) VALUES('" + u.getNom() + "','" + u.getPrenom() + "'," + u.getAge()+","+u.getMail() + ")";
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("User added successfully!");
@@ -40,12 +40,13 @@ public class UserService {
 
     public void modifierUser(User u) {
         try {
-            String req = "UPDATE users SET nom=?, prenom=?, age=? WHERE id=?";
+            String req = "UPDATE users SET nom=?, prenom=?, age=?, mail=? WHERE id=?";
             PreparedStatement st = cnx.prepareStatement(req);
             st.setString(1, u.getNom());
             st.setString(2, u.getPrenom());
             st.setInt(3, u.getAge());
-            st.setInt(4, u.getId());
+            st.setString(4, u.getMail());
+            st.setInt(5, u.getId());
             st.executeUpdate();
             System.out.println("User modified successfully!");
         } catch (SQLException ex) {
@@ -79,6 +80,7 @@ public class UserService {
                 u.setAge(rs.getInt("age"));
                 u.setNom(rs.getString("nom"));
                 u.setPrenom(rs.getString("prenom"));
+                u.setMail(rs.getString("mail"));
                 users.add(u);
             }
         } catch (SQLException ex) {
@@ -101,6 +103,7 @@ public class UserService {
                 u.setAge(rs.getInt("age"));
                 u.setNom(rs.getString("nom"));
                 u.setPrenom(rs.getString("prenom"));
+                u.setMail(rs.getString("mail"));
                return u;
             }
         } catch (SQLException ex) {
@@ -126,6 +129,7 @@ public class UserService {
                 u.setUsername(rs.getString("username"));
                 u.setRole(rs.getString("role"));
                 u.setStatus(rs.getString("status"));
+                u.setMail(rs.getString("mail"));
                return u;
             }
         } catch (SQLException ex) {

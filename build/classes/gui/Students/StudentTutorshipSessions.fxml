@@ -9,11 +9,10 @@
    <children>
       <TableView fx:id="Sessions" layoutX="8.0" layoutY="46.0" prefHeight="200.0" prefWidth="582.0">
         <columns>
-          <TableColumn fx:id="clstudnet" prefWidth="75.0" text="Etudiant" />
           <TableColumn fx:id="cltutor" prefWidth="75.0" text="Tuteur" />
             <TableColumn fx:id="cltype" prefWidth="75.0" text="Type" />
             <TableColumn fx:id="cldate" prefWidth="151.0" text="Date" />
-            <TableColumn fx:id="clurl" prefWidth="205.0" text="url" />
+            <TableColumn fx:id="clurl" prefWidth="280.0" text="url" />
         </columns>
       </TableView>
       <Button fx:id="connecter" layoutX="506.0" layoutY="273.0" mnemonicParsing="false" onAction="#connecter" text="Connecter" />

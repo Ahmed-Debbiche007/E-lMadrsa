@@ -74,12 +74,11 @@ public class StudentTutorshipSessionsController implements Initializable {
         try {
             AjoutUserController cs = new AjoutUserController();
             User u = cs.getU();
-            clstudnet.setCellValueFactory(new PropertyValueFactory<TutorshipSession, Long>("idStudent"));
-            cltutor.setCellValueFactory(new PropertyValueFactory<TutorshipSession, Long>("idTutor"));
+            cltutor.setCellValueFactory(new PropertyValueFactory<TutorshipSession, Long>("nomTut"));
             cltype.setCellValueFactory(new PropertyValueFactory<TutorshipSession, String>("type"));
             cldate.setCellValueFactory(new PropertyValueFactory<TutorshipSession, Timestamp>("date"));
             clurl.setCellValueFactory(new PropertyValueFactory<TutorshipSession, String>("url"));
-            Sessions.setItems(sp.getSingle("idStudent", u.getId()));
+            Sessions.setItems(sp.getList("idStudent", u.getId()));
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -111,12 +110,14 @@ public class StudentTutorshipSessionsController implements Initializable {
     private void connecter(ActionEvent event) throws IOException, InterruptedException {
         t = Sessions.getSelectionModel().getSelectedItem();
         //Thread.sleep(3000);
-        if (t.getType().equals("MessagesChat")) {
+        if (t.getType().name().equals("MessagesChat")) {
             this.clientchatapp().show();
         }else {
             String command = "xdg-open "+t.getUrl();
 
         Process proc = Runtime.getRuntime().exec(command);
+
+
         }
 
     }
@@ -141,7 +142,7 @@ public class StudentTutorshipSessionsController implements Initializable {
     public int getSessionId() {
         ChatSessionService css = new ChatSessionService();
         try {
-          return (int) css.getSession("idTutorshipSession",(int) this.getT().getIdTutorshipSession()).getIdTutorshipSession();
+            return (int) css.getSession("idTutorshipSession", (int) this.getT().getIdTutorshipSession()).getIdTutorshipSession();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

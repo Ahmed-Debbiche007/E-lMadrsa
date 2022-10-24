@@ -21,6 +21,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -74,27 +76,35 @@ public class AddTutorshipRequestController implements Initializable {
 
     @FXML
     private void valider(ActionEvent event) throws IOException {
-        TutorshipRequestService sp = new TutorshipRequestService();
-        String date = cldate.getValue().toString() + " " + (int) hspinner.getValue() + ":" + (int) mspinner.getValue() + ":00";
-        Timestamp time = Timestamp.valueOf(date);
-        AjoutUserController cs = new AjoutUserController();
-        User u = cs.getU();
-        sp.add(new TutorshipRequest((long) 3, u.getId(), tobject.getText(), cmtype.getValue(), time));
-        JOptionPane.showMessageDialog(null, "Demande Ajoutée ! ");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
-            Parent root ; 
-        
+        if (tobject.getText().equals("") || cmtype.getValue().equals("") || cldate.getValue() == null) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Eror Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Demande Invalide!");
+            alert.showAndWait();
+        } else {
+            TutorshipRequestService sp = new TutorshipRequestService();
+            String date = cldate.getValue().toString() + " " + (int) hspinner.getValue() + ":" + (int) mspinner.getValue() + ":00";
+            Timestamp time = Timestamp.valueOf(date);
+            AjoutUserController cs = new AjoutUserController();
+            User u = cs.getU();
+            sp.add(new TutorshipRequest((long) 1, u.getId(), tobject.getText(), cmtype.getValue(), time));
+            JOptionPane.showMessageDialog(null, "Demande Ajoutée ! ");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
+            Parent root;
+
             root = loader.load();
             lheures.getScene().setRoot(root);
+        }
     }
 
     @FXML
     private void annuler(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
-            Parent root ; 
-        
-            root = loader.load();
-            lheures.getScene().setRoot(root);
+        Parent root;
+
+        root = loader.load();
+        lheures.getScene().setRoot(root);
     }
 
 }

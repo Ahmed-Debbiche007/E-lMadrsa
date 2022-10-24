@@ -76,12 +76,11 @@ public class TutorsTutorshipSessionsController implements Initializable {
         try {
             AjoutUserController cs = new AjoutUserController();
             User u = cs.getU();
-            clstudnet.setCellValueFactory(new PropertyValueFactory<TutorshipSession, Long>("idStudent"));
-            cltutor.setCellValueFactory(new PropertyValueFactory<TutorshipSession, Long>("idTutor"));
+            clstudnet.setCellValueFactory(new PropertyValueFactory<TutorshipSession, Long>("nomStudent"));
             cltype.setCellValueFactory(new PropertyValueFactory<TutorshipSession, String>("type"));
             cldate.setCellValueFactory(new PropertyValueFactory<TutorshipSession, Timestamp>("date"));
             clurl.setCellValueFactory(new PropertyValueFactory<TutorshipSession, String>("url"));
-            Sessions.setItems(sp.getSingle("idTutor", u.getId()));
+            Sessions.setItems(sp.getList("idTutor", u.getId()));
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -124,7 +123,7 @@ public class TutorsTutorshipSessionsController implements Initializable {
     @FXML
     private void connecter(ActionEvent event) throws IOException, InterruptedException {
         t = Sessions.getSelectionModel().getSelectedItem();
-        if (t.getType().equals("MessagesChat")) {
+        if (t.getType().name().equals("MessagesChat")) {
             this.clientchatapp().show();
         }else {
             String command = "xdg-open "+t.getUrl();

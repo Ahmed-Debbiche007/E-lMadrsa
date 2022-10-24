@@ -18,6 +18,7 @@ public class TutorshipSession {
     String url;
     RequestType type;
     Timestamp date;
+    private String nomTut, nomStudent;
 
     public TutorshipSession() {
     }
@@ -29,6 +30,19 @@ public class TutorshipSession {
         this.url = url;
         this.type = type;
         this.date = date;
+    }
+    
+    
+    
+    public TutorshipSession(long idTutor, long idStudent, long idRequest, String url, RequestType type, Timestamp date, String stud, String tut) {
+        this.idTutor = idTutor;
+        this.idStudent = idStudent;
+        this.idRequest = idRequest;
+        this.url = url;
+        this.type = type;
+        this.date = date;
+        this.nomStudent=stud;
+        this.nomTut=tut;
     }
 
     public TutorshipSession(long idTutorshipSession, long idTutor, long idStudent, long idRequest, String url, String type, Timestamp date) {
@@ -161,5 +175,23 @@ public class TutorshipSession {
         dates.add(m);
         return dates;
     }
+
+    public String getNomTut() {
+        return nomTut;
+    }
+
+    public void setNomTut(String nomTut) {
+        this.nomTut = nomTut;
+    }
+
+    public String getNomStudent() {
+        return nomStudent;
+    }
+
+    public void setNomStudent(String nomStudent) {
+        this.nomStudent = nomStudent;
+    }
+    
+    
 
 }

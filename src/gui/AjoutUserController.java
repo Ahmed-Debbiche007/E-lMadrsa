@@ -4,9 +4,11 @@
  */
 package gui;
 
+import com.google.common.hash.Hashing;
 import entities.User;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,16 +55,16 @@ public class AjoutUserController implements Initializable {
     private void AjoutPersonne(ActionEvent event) throws IOException {
         UserService SP = new UserService();
         User u = SP.getUserByUsername(fnom.getText());
-        System.out.println(u);
+        //System.out.println(u);
         String pass;
         if (check.isSelected()) {
             pass = fprenomshow.getText();
         }else{
             pass = fprenom.getText();
         }
+        String  hashPass = Hashing.sha256().hashString(pass, StandardCharsets.UTF_8).toString();
         
-        
-        if (u.getPassword().equals(pass)) {
+        if (u.getPassword().equals(hashPass)) {
             JOptionPane.showMessageDialog(null, "Connected ");
             u1=u;
             FXMLLoader loader = null;

@@ -16,9 +16,9 @@ import java.sql.SQLException;
  */
 public class MyDB {
 
-    String url = "jdbc:mysql://localhost:3306/pidev?useUnicode=true" + "&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&" + "serverTimezone=UTC";
-    String user = "brad";
-    String password = "Azerty2019/";
+    String url = "jdbc:mysql://sql.freedb.tech:3306/freedb_El-Madrsa?useUnicode=true" + "&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&" + "serverTimezone=UTC";
+    String user = "freedb_bradly";
+    String password = "szRGyj$TzFRM77*";
     Connection cnx;
     static MyDB instance;
 

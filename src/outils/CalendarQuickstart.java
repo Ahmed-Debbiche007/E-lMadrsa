@@ -29,6 +29,7 @@ import com.google.api.services.calendar.model.EventAttendee;
 import com.google.api.services.calendar.model.EventDateTime;
 import com.google.api.services.calendar.model.EventReminder;
 import com.google.api.services.calendar.model.Events;
+import entities.User;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -127,7 +128,7 @@ public class CalendarQuickstart {
         }
     }
 
-    public String generateMeetURL(String Description, String time) throws IOException, GeneralSecurityException {
+    public String generateMeetURL(String Description, String time, User u) throws IOException, GeneralSecurityException {
         // Build a new authorized API client service.
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         Calendar service
@@ -136,7 +137,7 @@ public class CalendarQuickstart {
                         .build();
 
         // List the next 10 events from the primary calendar.
-        list(service);
+        //list(service);
         //System.out.println(CalendarScopes.CALENDAR);
 
         Event event = new Event()
@@ -144,14 +145,14 @@ public class CalendarQuickstart {
                 .setLocation("Online")
                 .setDescription(Description);
         
-        DateTime startDateTime = new DateTime(time);//"2020-05-05T11:00:00+06:00");
+        DateTime startDateTime = new DateTime(time);
         EventDateTime start = new EventDateTime()
                 .setDateTime(startDateTime)
                 .setTimeZone(ZonedDateTime.now().getZone().toString());
         event.setStart(start);
         
 
-        DateTime endDateTime = new DateTime(startDateTime.getValue() + 60 * 60 * 2000);//"2020-05-05T11:00:00+06:00");
+        DateTime endDateTime = new DateTime(startDateTime.getValue() + 60 * 60 * 2000);
         EventDateTime end = new EventDateTime()
                 .setDateTime(endDateTime)
                 .setTimeZone(ZonedDateTime.now().getZone().toString());
@@ -160,7 +161,7 @@ public class CalendarQuickstart {
         String[] recurrence = new String[]{"RRULE:FREQ=DAILY;COUNT=1"};
         event.setRecurrence(Arrays.asList(recurrence));
 
-        String s1 = "ahmed.debbiche@esprit.tn";
+        String s1 = u.getMail();
 
         EventAttendee[] attendees = new EventAttendee[]{
             new EventAttendee().setEmail(s1)};

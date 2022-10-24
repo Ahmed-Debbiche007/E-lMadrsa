@@ -5,7 +5,6 @@
  */
 package gui.tutorshipSessions;
 
-import gui.tutorshiprequests.*;
 import entities.TutorshipRequest;
 import entities.TutorshipSession;
 import java.io.IOException;

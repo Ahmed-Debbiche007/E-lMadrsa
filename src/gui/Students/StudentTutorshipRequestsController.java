@@ -5,7 +5,6 @@
  */
 package gui.Students;
 
-import gui.tutorshiprequests.*;
 import entities.ChatSession;
 import entities.TutorshipRequest;
 import entities.TutorshipSession;
@@ -75,12 +74,11 @@ public class StudentTutorshipRequestsController implements Initializable {
         try {
             AjoutUserController cs = new AjoutUserController();
             User u = cs.getU();
-            clstudnet.setCellValueFactory(new PropertyValueFactory<TutorshipRequest, Long>("idStudent"));
-            cltutor.setCellValueFactory(new PropertyValueFactory<TutorshipRequest, Long>("idTutor"));
+            cltutor.setCellValueFactory(new PropertyValueFactory<TutorshipRequest, Long>("nomTut"));
             cltype.setCellValueFactory(new PropertyValueFactory<TutorshipRequest, String>("requestType"));
             cldate.setCellValueFactory(new PropertyValueFactory<TutorshipRequest, Timestamp>("sessionDate"));
             clobject.setCellValueFactory(new PropertyValueFactory<TutorshipRequest, String>("requestBody"));
-            requests.setItems(sp.getSingle("idStudent", u.getId()));
+            requests.setItems(sp.getList("idStudent", u.getId()));
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

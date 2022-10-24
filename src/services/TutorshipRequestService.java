@@ -153,4 +153,30 @@ public class TutorshipRequestService implements GenericService<TutorshipRequest>
         return requests;
     }
     
+    public ObservableList<TutorshipRequest> getList(String query, int filter) {
+        ObservableList<TutorshipRequest> requests = FXCollections.observableArrayList();
+        try {
+            String req = "select users.nom, requests.*, u.nom as tutor from users join requests on requests.idStudent=users.id join users as u on u.id=requests.idTutor WHERE " + query + "=" + filter;
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+
+            while (rs.next()) {
+                TutorshipRequest t = new TutorshipRequest();
+                t.setIdRequest(rs.getLong("idRequest"));
+                t.setIdStudent(rs.getLong("idStudent"));
+                t.setIdTutor(rs.getLong("idTutor"));
+                t.setRequestBody(rs.getString("body"));
+                t.setSessionDate(rs.getTimestamp("date"));
+                t.setRequestType(rs.getString("type"));
+                t.setNomTut(rs.getString("tutor"));
+                t.setNomStudent(rs.getString("nom"));
+                requests.add(t);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error!");
+            System.out.println(ex);
+        }
+        return requests;
+    }
+    
 }

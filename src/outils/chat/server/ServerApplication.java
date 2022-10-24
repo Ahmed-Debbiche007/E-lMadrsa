@@ -72,7 +72,7 @@ public class ServerApplication extends Application {
 				// TODO Auto-generated method stub
 				/* Make the server and it's thread, and run it */
 				try {
-					Server server = new Server(8081);
+					Server server = new Server(8082);
 					Thread serverThread = (new Thread(server));
 					serverThread.setName("Server Thread");
 					serverThread.setDaemon(true);

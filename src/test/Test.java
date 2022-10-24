@@ -5,7 +5,9 @@
 package test;
 //import entities.User;
 
+import com.google.common.hash.Hashing;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +25,8 @@ public class Test extends Application {
 
     public static void main(String[] args) {
         launch(args);
-    }
+        
+       }
 
     @Override
     public void start(Stage primaryStage) throws IOException {

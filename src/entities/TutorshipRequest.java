@@ -17,7 +17,7 @@ import javafx.scene.control.TextArea;
  */
 public class TutorshipRequest {
         long idRequest, idStudent, idTutor;
-        String requestBody;
+        String requestBody, nomTut, nomStudent;
         RequestType requestType;
         Timestamp sessionDate;
 
@@ -167,6 +167,22 @@ public class TutorshipRequest {
       dates.add(h);
       dates.add(m);
       return dates;
+    }
+
+    public String getNomTut() {
+        return nomTut;
+    }
+
+    public void setNomTut(String nomTut) {
+        this.nomTut = nomTut;
+    }
+
+    public String getNomStudent() {
+        return nomStudent;
+    }
+
+    public void setNomStudent(String nomStudent) {
+        this.nomStudent = nomStudent;
     }
         
         

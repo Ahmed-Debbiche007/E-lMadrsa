@@ -5,7 +5,6 @@
  */
 package gui.Tutors;
 
-import gui.tutorshiprequests.*;
 import entities.ChatSession;
 import entities.TutorshipRequest;
 import entities.TutorshipSession;
@@ -36,6 +35,7 @@ import outils.CalendarQuickstart;
 import services.ChatSessionService;
 import services.TutorshipRequestService;
 import services.TutorshipSessionService;
+import services.UserService;
 
 /**
  * FXML Controller class
@@ -76,12 +76,11 @@ public class TutorTutorshipRequestsController implements Initializable {
         try {
             AjoutUserController cs = new AjoutUserController();
             User u = cs.getU();
-            clstudnet.setCellValueFactory(new PropertyValueFactory<TutorshipRequest, Long>("idStudent"));
-            cltutor.setCellValueFactory(new PropertyValueFactory<TutorshipRequest, Long>("idTutor"));
+            clstudnet.setCellValueFactory(new PropertyValueFactory<TutorshipRequest, Long>("nomStudent"));
             cltype.setCellValueFactory(new PropertyValueFactory<TutorshipRequest, String>("requestType"));
             cldate.setCellValueFactory(new PropertyValueFactory<TutorshipRequest, Timestamp>("sessionDate"));
             clobject.setCellValueFactory(new PropertyValueFactory<TutorshipRequest, String>("requestBody"));
-            requests.setItems(sp.getSingle("idTutor",u.getId()));
+            requests.setItems(sp.getList("idStudent", u.getId()));
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -113,12 +112,14 @@ public class TutorTutorshipRequestsController implements Initializable {
     private void valider(ActionEvent event) throws IOException, GeneralSecurityException {
         TutorshipRequest t = requests.getSelectionModel().getSelectedItem();
         TutorshipRequestService ts = new TutorshipRequestService();
+        UserService service = new UserService();
+        User student = service.getUserByID((int)t.getIdStudent());
         ts.delete(t);
-         String url = "url";
+         String url = null;
         if(t.getRequestType().name().equals("VideoChat")){
             CalendarQuickstart calendar = new CalendarQuickstart();
             String time = t.decompose().get(0)+"T"+t.decompose().get(1)+":"+t.decompose().get(2)+":00Z";
-             url = calendar.generateMeetURL(t.getRequestBody(), time) ;
+             url = calendar.generateMeetURL(t.getRequestBody(), time, student) ;
          }
         TutorshipSession s = new TutorshipSession(t.getIdTutor(), t.getIdStudent(), t.getIdRequest(), url,t.getRequestType(),t.getSessionDate());
         TutorshipSessionService ss = new TutorshipSessionService();

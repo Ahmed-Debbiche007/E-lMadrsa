@@ -11,14 +11,15 @@ package entities;
 public class User {
 
     private int id, age;
-    private String nom, prenom, username, password;
+    private String nom, prenom, username, password, mail;
     private UserStatus status;
     private Role role;
+    
 
     public User() {
     }
 
-    public User(int id, int age, String nom, String prenom, String username, String password, UserStatus status, Role role) {
+    public User(int id, int age, String nom, String prenom, String username, String password, UserStatus status, Role role, String mail) {
         this.id = id;
         this.age = age;
         this.nom = nom;
@@ -27,9 +28,10 @@ public class User {
         this.password = password;
         this.status = status;
         this.role = role;
+        this.mail=mail;
     }
 
-    public User(int age, String nom, String prenom, String username, String password, UserStatus status, Role role) {
+    public User(int age, String mail, String nom, String prenom, String username, String password, UserStatus status, Role role) {
         this.age = age;
         this.nom = nom;
         this.prenom = prenom;
@@ -37,6 +39,7 @@ public class User {
         this.password = password;
         this.status = status;
         this.role = role;
+        this.mail=mail;
     }
 
     public User(String nom, String prenom) {
@@ -131,5 +134,15 @@ public class User {
     public String toString() {
         return "User{" + "id=" + id + ", age=" + age + ", nom=" + nom + ", prenom=" + prenom + ", username=" + username + ", password=" + password + ", status=" + status + ", role=" + role + '}';
     }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+    
+    
 
 }
