@@ -9,19 +9,22 @@ package entites;
  * @author User
  */
 public enum difficulté {
-    FACILE, MOYEN , DIFFICILE;
+   facile, moyen , difficile;
 
     public static difficulté getFACILE() {
-        return FACILE;
+        return facile;
     }
 
     public static difficulté getMOYEN() {
-        return MOYEN;
+        return moyen ;
     }
 
     public static difficulté getDIFFICILE() {
-        return DIFFICILE;
+        return difficile;
     }
+
+   
+    
     
     
  

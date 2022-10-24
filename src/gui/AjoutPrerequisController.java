@@ -60,6 +60,8 @@ public class AjoutPrerequisController implements Initializable {
     Connection cnx = DataDB.getInstance().getCnx();
     @FXML
     private Button idretour;
+    @FXML
+    private Button btenr;
 
     /**
      * Initializes the controller class.
@@ -85,15 +87,10 @@ public class AjoutPrerequisController implements Initializable {
 
     @FXML
     private void modifprerequis(ActionEvent event) {
-        Prerequis P =tab.getSelectionModel().getSelectedItem();
-        ServicePrerequis spPM= new ServicePrerequis();
-        System.out.println("Service prerequis Created");
-        
-        System.out.println("object  prerequis Created");
-        P.setNomPrerequis(tfnom.getText());
-        spPM.modifier_prerequise(P);
-        JOptionPane.showMessageDialog(null,"Prerequis Modifiée ! ");
-        showprerequis();
+        if(tab.getSelectionModel().getSelectedItem()!=null) {
+             Prerequis P =tab.getSelectionModel().getSelectedItem();
+             tfnom.setText(P.getNomPrerequis());
+        }
     }
 
     @FXML
@@ -149,6 +146,20 @@ public class AjoutPrerequisController implements Initializable {
         Scene scene=new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    private void enregistpre(ActionEvent event) {
+        Prerequis P =tab.getSelectionModel().getSelectedItem();
+        ServicePrerequis spPM= new ServicePrerequis();
+        System.out.println("Service prerequis Created");
+        
+        System.out.println("object  prerequis Created");
+        P.setNomPrerequis(tfnom.getText());
+        spPM.modifier_prerequise(P);
+        JOptionPane.showMessageDialog(null,"Prerequis Modifiée ! ");
+        showprerequis();
+        tfnom.setText("");
     }
     
 }

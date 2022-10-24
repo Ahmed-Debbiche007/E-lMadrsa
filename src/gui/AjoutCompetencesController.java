@@ -29,6 +29,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import utiles.DataDB;
@@ -60,6 +61,8 @@ public class AjoutCompetencesController implements Initializable {
     Connection cnx = DataDB.getInstance().getCnx();
     @FXML
     private Button btret;
+    @FXML
+    private Button btenregistrcomp;
 
     /**
      * Initializes the controller class.
@@ -81,23 +84,44 @@ public class AjoutCompetencesController implements Initializable {
         //sp.ajouter_categorie(new Competenecs(tfNomC.getText()));
         Competences Comp = new Competences ();
         System.out.println("object  competence Created");
-        Comp.setNomCompetence(tfnomComp.getText());
-        sp.ajouter_competence(Comp);
-        System.out.println("ok ");
-        JOptionPane.showMessageDialog(null,"Competence Ajoutée ! ");
-        showcompetences();
+        String oldValue = tfnomComp.getText();
+        if(tfnomComp.getText().trim().equals(""))
+            JOptionPane.showMessageDialog(null," Veuillez remplir le champs nom Competence ! ");
+        else{
+        //int numSms = Integer.parseInt(oldValue);
+        try {
+            
+            
+            
+                        int numSms = Integer.parseInt(oldValue);
+			System.out.println("le nom de Competence ");
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Nom Competence Erreur");
+                        alert.setHeaderText(null);
+                        alert.setContentText("La competence saisie n'a pas un format valide ");
+                        alert.showAndWait();
+		} catch (NumberFormatException e){
+                        Comp.setNomCompetence(tfnomComp.getText());
+                        sp.ajouter_competence(Comp);
+                        Alert alert=new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setContentText("La Competence est ajouté avec succé");
+                        alert.showAndWait();
+                        showcompetences();
+
+                        tfnomComp.setText("");
+                    
+			System.out.println("La chaine contient au moins un caractère");
+		}
+        
+    }
     }
 
     @FXML
     private void modifcomp(ActionEvent event) {
-        Competences Comp =tabcomp.getSelectionModel().getSelectedItem();
-        ServiceCompetences sp = new ServiceCompetences();
-        System.out.println("1");
-         Comp.setNomCompetence(tfnomComp.getText());
-         sp.modifier_competence(Comp);
-         System.out.println("ok ");
-        JOptionPane.showMessageDialog(null,"Competence Modifiée ! ");
-        showcompetences();
+        if(tabcomp.getSelectionModel().getSelectedItem()!=null) {
+             Competences C =tabcomp.getSelectionModel().getSelectedItem();
+             tfnomComp.setText(C.getNomCompetence());
+        }
     }
 
     @FXML
@@ -151,6 +175,20 @@ public class AjoutCompetencesController implements Initializable {
         Scene scene=new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    private void enregistermodif(ActionEvent event) {
+        Competences Comp =tabcomp.getSelectionModel().getSelectedItem();
+        ServiceCompetences sp = new ServiceCompetences();
+        System.out.println("1");
+         Comp.setNomCompetence(tfnomComp.getText());
+         sp.modifier_competence(Comp);
+         System.out.println("ok ");
+        JOptionPane.showMessageDialog(null,"Competence Modifiée ! ");
+        showcompetences();
+        tfnomComp.setText("");
+        
     }
     
 }

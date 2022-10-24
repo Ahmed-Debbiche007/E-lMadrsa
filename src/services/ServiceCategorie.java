@@ -83,5 +83,53 @@ public class ServiceCategorie {
 
         return list;
     }
+     public Categorie VerifUninciteCategorie( String Cat ) {
+          
+            try {
+                String req = "SELECT  *  FROM Categorie  where nomCategorie=? ";
+                PreparedStatement st = cnx.prepareStatement(req) ;
+                            st.setString(1, Cat);
+
+                ResultSet rs = st.executeQuery();
+            while (rs.next()){
+                Categorie C = new Categorie();
+                C.setIdCategorie(rs.getLong("idCategorie"));
+                C.setNomCategorie(rs.getString("nomCategorie"));
+                
+                return C;
+            }
+            } catch (SQLException ex) {
+                System.out.println("Categorie Introuvable "  + ex.getMessage());
+
+            }
+
+            return null ;
+
+
+}
+      public Categorie getById(Long id ) {
+        
+        
+        String req = "Select * from Categorie where idCategore=?; " ;
+        PreparedStatement st;
+        Categorie c ; 
+        try {
+            st = cnx.prepareStatement(req);
+            st.setLong(1,id);
+            ResultSet rs = st.executeQuery();
+            //return rs.getObject(req, type) ; 
+            c = new Categorie(rs.getLong(1),rs.getString(2)) ; 
+            return  c ; 
+
+        } catch (SQLException ex) {
+            System.out.println("error" + ex.getMessage());
+        }
+        
+    return null ; 
+        
+        
+        
+    }
+    
     
 }

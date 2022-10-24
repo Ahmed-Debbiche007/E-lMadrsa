@@ -15,12 +15,12 @@
             <Font size="34.0" />
          </font>
       </Label>
-      <Label layoutX="268.0" layoutY="111.0" prefHeight="59.0" prefWidth="195.0" text="Date d'Aquisation " textFill="#281bb9">
+      <Label layoutX="114.0" layoutY="111.0" prefHeight="59.0" prefWidth="195.0" text="Date d'Aquisation  : " textFill="#281bb9">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <TextField id="tfdateA" fx:id="tfdateA" layoutX="519.0" layoutY="125.0" />
+      <TextField id="tfdateA" fx:id="tfdateA" layoutX="269.0" layoutY="125.0" />
       <Button id="btAjout" fx:id="btAjout" layoutX="234.0" layoutY="227.0" mnemonicParsing="false" onAction="#ajoutAtt" text="Ajouter" />
       <Button id="btModifer" fx:id="btModifer" layoutX="455.0" layoutY="227.0" mnemonicParsing="false" onAction="#modifAtt" text="Modifier" />
       <Button id="btSupprimer" fx:id="btSupprimer" layoutX="715.0" layoutY="227.0" mnemonicParsing="false" onAction="#supprimerAtt" text="Supprimer" />
@@ -28,9 +28,16 @@
         <columns>
           <TableColumn id="colidA" fx:id="colidA" minWidth="0.0" prefWidth="0.0" text="idAttestation" />
           <TableColumn id="colidparticipation" fx:id="colidparticipation" minWidth="0.0" prefWidth="0.0" text="idparticipation" />
-            <TableColumn id="coldate" fx:id="coldate" prefWidth="625.0" text="dateAcq" />
+            <TableColumn id="coldate" fx:id="coldate" prefWidth="312.0" text="dateAcq" />
+            <TableColumn id="colResultat" fx:id="colResultat" prefWidth="312.0" text="Resultat" />
         </columns>
       </TableView>
       <Button id="btretour" fx:id="btretour" layoutX="55.0" layoutY="31.0" mnemonicParsing="false" onAction="#retourattestation" prefHeight="49.0" prefWidth="89.0" text="Retour" />
+      <Label layoutX="500.0" layoutY="111.0" prefHeight="59.0" prefWidth="195.0" text="Resultat :" textFill="#281bb9">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <TextField id="tfresultat" fx:id="tfresultat" layoutX="602.0" layoutY="125.0" />
    </children>
 </AnchorPane>

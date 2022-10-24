@@ -22,7 +22,7 @@
       </Label>
       <TextField id="tfnomComp" fx:id="tfnomComp" layoutX="448.0" layoutY="175.0" />
       <Button id="btAjout" fx:id="btAjout" layoutX="151.0" layoutY="282.0" mnemonicParsing="false" onAction="#ajoutcomp" prefHeight="46.0" prefWidth="123.0" text="Ajouter" />
-      <Button id="btmodif" fx:id="btmodif" layoutX="419.0" layoutY="282.0" mnemonicParsing="false" onAction="#modifcomp" prefHeight="46.0" prefWidth="123.0" text="Modifier" />
+      <Button id="btmodif" fx:id="btmodif" layoutX="378.0" layoutY="282.0" mnemonicParsing="false" onAction="#modifcomp" prefHeight="46.0" prefWidth="123.0" text="Modifier" />
       <Button id="btsupprimer" fx:id="btsupprimer" layoutX="736.0" layoutY="282.0" mnemonicParsing="false" onAction="#supprimercat" prefHeight="46.0" prefWidth="123.0" text="Supprimer" />
       <TableView id="tabcomp" fx:id="tabcomp" layoutX="151.0" layoutY="380.0" prefHeight="246.0" prefWidth="804.0">
         <columns>
@@ -31,5 +31,6 @@
         </columns>
       </TableView>
       <Button id="btret" fx:id="btret" layoutX="59.0" layoutY="40.0" mnemonicParsing="false" onAction="#retourcomp" prefHeight="38.0" prefWidth="123.0" text="Retour" />
+      <Button id="btenregistrcomp" fx:id="btenregistrcomp" layoutX="520.0" layoutY="282.0" mnemonicParsing="false" onAction="#enregistermodif" prefHeight="46.0" prefWidth="123.0" text="Enregistrer" />
    </children>
 </AnchorPane>

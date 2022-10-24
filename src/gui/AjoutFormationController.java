@@ -6,6 +6,10 @@
 package gui;
 
 import entites.Categorie;
+import entites.Prerequis;
+import entites.Competences;
+import entites.Categorie;
+import entites.Examen;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -17,8 +21,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import entites.Formation;
-import entites.difficulté;
+
 import services.ServiceFormation;
+import services.ServiceCompetences;
+import services.ServicePrerequis;
+import services.ServiceCategorie;
+import services.ServiceExamen;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,6 +41,7 @@ import utiles.DataDB;
 import javafx.scene.control.cell.PropertyValueFactory ; 
 import entites.difficulté;
 import java.io.IOException;
+import java.sql.PreparedStatement;
 import static java.util.Arrays.equals;
 import static java.util.Arrays.equals;
 import static java.util.Arrays.equals;
@@ -77,7 +86,7 @@ public class AjoutFormationController implements Initializable {
     @FXML
     private TableColumn<Formation, String> coldescription;
     @FXML
-    private TableColumn<Formation, difficulté> coldiff;
+    private TableColumn<Formation, String> coldiff;
     @FXML
     private TableColumn<Formation, Integer> colduree;
     @FXML
@@ -93,6 +102,32 @@ public class AjoutFormationController implements Initializable {
     private Button btretour;
     @FXML
     private Button btenregistrer;
+    @FXML
+    private TableColumn<Prerequis, Long> colidPreA;
+    @FXML
+    private TableColumn<Prerequis, String> colnomPrerequis;
+    @FXML
+    private TableColumn<Competences, Long> colidCompetenceA;
+    @FXML
+    private TableColumn<Competences, String> colnomComp;
+    @FXML
+    private TableView<Prerequis> tabPre;
+    @FXML
+    private TableView<Competences> tabcomp;
+    @FXML
+    private TableView<Categorie> tabCat;
+    @FXML
+    private TableColumn<Categorie,Long> colidCat;
+    @FXML
+    private TableColumn<Categorie, String> colnomCat;
+    @FXML
+    private TableView<Examen> tabExam;
+    @FXML
+    private TableColumn<Examen, Long> colidexamen;
+    @FXML
+    private TableColumn<Examen, String> colnomExamen;
+    private TableColumn<Formation, String> colcat;
+    private TableColumn<Formation, String> colcomp;
 
     /**
      * Initializes the controller class.
@@ -100,8 +135,14 @@ public class AjoutFormationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         showformation();
+        showcompetences();
+         showprerequis();
+         showcategorie();
+         showcExamen();
         // TODO
     }    
+    
+
 
     @FXML
     private void ajoutformation(ActionEvent event) {
@@ -111,39 +152,68 @@ public class AjoutFormationController implements Initializable {
         Formation F= new Formation();
         
         System.out.println(" objet Formation created SUCCED");
-        if(tfSujet.getText().trim().equals(""))
-            JOptionPane.showMessageDialog(null," Veuillez remplir le champs nom formation ! ");
+        
+        if(tfSujet.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null," Attention, Veuillez remplir le champs Sujet ! ");
+         }
+        
+        if(sp.VerifUninciteFormation(tfSujet.getText().trim())!=null){
+            JOptionPane.showMessageDialog(null," Ce Sujet de formation Existe déjà  ! ");
+            
+            
+        }
         else{
+        Prerequis P = tabPre.getSelectionModel().getSelectedItem() ;
+        Competences Comp = tabcomp.getSelectionModel().getSelectedItem() ;
+        Examen E = tabExam.getSelectionModel().getSelectedItem() ;
+        Categorie C = tabCat.getSelectionModel().getSelectedItem() ;
         F.setSujet(tfSujet.getText());
         System.out.println(" 11");
+        if(tfDescription.getText().trim().equals(""))
+            JOptionPane.showMessageDialog(null," Attention, Veuillez remplir le champs Description ! ");
+        else{
+        
         F.setDescription(tfDescription.getText());
         
         System.out.println(" 12");
         if(checkFacile.isSelected()){
-            F.setDifficulté(difficulté.FACILE);
+            F.setDifficulté("facile");
         }
         if (checkMoyen.isSelected()){
-            F.setDifficulté(difficulté.MOYEN);
+            F.setDifficulté("moyen");
         }
         if(checkDifficile.isSelected()){
-            F.setDifficulté(difficulté.DIFFICILE);
+            F.setDifficulté("difficile");
         }
         //F.setDifficulté(difficulté.DIFFICILE);
         System.out.println("13");
+        if(tfDuree.getText().trim().equals(""))
+            JOptionPane.showMessageDialog(null," Attention, Veuillez remplir le champs Durée ! ");
+        
         int resultat = Integer.parseInt(tfDuree.getText());
         F.setDurée(resultat);
         System.out.println("14");
-        F.setIdPrerequis(Long.remainderUnsigned(3,3));
+        F.setIdPrerequis(P.getIdPrerequis());
         System.out.println("15");
-        F.setIdCompetence(Long.remainderUnsigned(2,8));
+        F.setIdCompetence(Comp.getIdCompetence());
         System.out.println("16");
-        F.setIdCategorie(Long.remainderUnsigned(1,7));
+        F.setIdCategorie(C.getIdCategorie());
         System.out.println("17");
-        F.setIdExamen(Long.remainderUnsigned(9,9));
+        F.setIdExamen(E.getIdExamen());
         System.out.println("18");
         sp.ajouter_formation(F);
         JOptionPane.showMessageDialog(null,"Formation Ajoutée! ");
          showformation();
+         tfSujet.setText("");
+         tfDescription.setText("");
+         tfDuree.setText("");
+         checkFacile.setSelected(false);
+         checkMoyen.setSelected(false);
+         checkDifficile.setSelected(false);
+         
+         
+        
+        }
         }
         
     }
@@ -167,7 +237,7 @@ public class AjoutFormationController implements Initializable {
 
              tfDescription.setText(F.getDescription());
              tfSujet.setText(F.getSujet());
-             if(F.getDifficulté()==difficulté.FACILE){
+             if(F.getDifficulté()=="facile"){
                  checkFacile.setSelected(true);
                  checkMoyen.setSelected(false);
                  checkDifficile.setSelected(false);   
@@ -176,7 +246,7 @@ public class AjoutFormationController implements Initializable {
                  checkDifficile.setIndeterminate(true);
                  
              }
-             if(F.getDifficulté()==difficulté.MOYEN){
+             if(F.getDifficulté()=="Moyen"){
                  checkFacile.setSelected(false);
                  checkMoyen.setSelected(true);
                  checkDifficile.setSelected(false);   
@@ -184,7 +254,7 @@ public class AjoutFormationController implements Initializable {
                  checkMoyen.setIndeterminate(true);
                  checkDifficile.setIndeterminate(true);
              }
-             if(F.getDifficulté()==difficulté.DIFFICILE){
+             if(F.getDifficulté()=="difficile"){
                  checkFacile.setSelected(false);
                  checkMoyen.setSelected(false);
                  checkDifficile.setSelected(true);
@@ -205,12 +275,25 @@ public class AjoutFormationController implements Initializable {
         
 
          try {
-            String requete = "SELECT idFormation,sujet,description,durée,idPrerequis,idCompetence,idExamen,idCategorie FROM Formation";
-            Statement st = cnx.createStatement();
+            String requete = "SELECT * FROM formation JOIN categorie ON formation.idCategorie=categorie.idCategorie JOIN competences On formation.idCompetence= competences.idCompetence JOIN prerequis ON formation.idPrerequis=prerequis.idPrerequis JOIN examen ON examen.idExamen=formation.idExamen;";
+            PreparedStatement st = cnx.prepareStatement(requete) ;
             ResultSet rs = st.executeQuery(requete);
+            difficulté dif [] = difficulté.values();
+            System.out.println(dif[0]);
+            System.out.println(rs);
             while (rs.next()) {
-                list.add(new Formation(rs.getLong("idFormation"), rs.getString("sujet"), rs.getString("description"),rs.getInt("durée"),rs.getLong(6),rs.getLong(7),rs.getLong(8),rs.getLong(8)));
+               
+                
+             
+                list.add(new Formation(rs.getLong("idFormation"), rs.getString("sujet"), rs.getString("description"),rs.getString("difficulté"),rs.getInt("durée"),rs.getLong("idPrerequis"),rs.getLong("idCompetence"),rs.getLong("idExamen"),rs.getLong("idCategorie"),rs.getString("nomCategorie"),rs.getString("nomCompetence"),rs.getString("nomPrerequis"),rs.getString("nomExamen")));
+                System.out.println("heeeeeeeeeeey" + list);
+            
+            
             }
+            
+            
+            
+            
 
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -220,20 +303,34 @@ public class AjoutFormationController implements Initializable {
     }
     public void showformation(){
         ObservableList<Formation> ListCat =  afficher() ; 
-        System.out.println("pas de probleme");
+        //System.out.println("pas de probleme");
+        Formation F = new Formation();
+        System.out.println(ListCat.size());
         
         colidformation.setCellValueFactory(new PropertyValueFactory<Formation,Long>("idFormation"));
         colsujet.setCellValueFactory(new PropertyValueFactory<Formation,String>("Sujet"));
         coldescription.setCellValueFactory(new PropertyValueFactory<Formation,String>("Description"));
-        coldiff.setCellValueFactory(new PropertyValueFactory<Formation,difficulté>("Difficulté"));
+        coldiff.setCellValueFactory(new PropertyValueFactory<Formation,String>("Difficulté"));
         colduree.setCellValueFactory(new PropertyValueFactory<Formation,Integer>("durée"));
-        colidPrerequis.setCellValueFactory(new PropertyValueFactory<Formation,Long>("idPrerequis"));
-        colidCompetence.setCellValueFactory(new PropertyValueFactory<Formation,Long>("idCompetence"));
-        colidExamen.setCellValueFactory(new PropertyValueFactory<Formation,Long>("idExamen"));
-        colidCategorie.setCellValueFactory(new PropertyValueFactory<Formation,Long>("idCategorie"));
-        System.out.println("Pas de Soucis ");
+        
+        colidCompetence.setCellValueFactory(new PropertyValueFactory<Formation,Long>("nomCompetence"));
+        colidCategorie.setCellValueFactory(new PropertyValueFactory<Formation,Long>("nomCategorie"));
+        colidPrerequis.setCellValueFactory(new PropertyValueFactory<Formation,Long>("nomPrerequis"));
+        colidExamen.setCellValueFactory(new PropertyValueFactory<Formation,Long>("nomExamen"));
+         
+        ListCat.forEach((e)->{
+            ServiceCategorie es = new ServiceCategorie() ; 
+               // e.setNomCat(es.getById(e.getIdExamen()).getNomCategorie());
+                //System.out.println(es.getById(e.getIdExamen()).getNomCategorie()) ; 
+               //e.setNomFor(nomFor);
+          
+                });
+        //colcat.setCellValueFactory(new PropertyValueFactory<Formation,String>("nomCategorie"));
+         //System.out.println(ListCat);
+        //colcomp.setCellValueFactory(new PropertyValueFactory<Formation,String>("nomCompetence"));
+        //System.out.println("Pas de Soucis ");
         tabFormation.setItems(ListCat);
-        System.out.println("pas de probleme2");
+        //System.out.println("pas de probleme2");
         
         
         
@@ -243,8 +340,8 @@ public class AjoutFormationController implements Initializable {
         
         //colidC.setCellValueFactory(new PropertyValueFactory<Categorie,Long>("idCategorie"));
         
-        System.out.println("Pas de Soucis ");
-        tabFormation.setItems(ListCat);
+        //System.out.println("Pas de Soucis ");
+        //tabFormation.setItems(ListCat);
         System.out.println("pas de probleme2");
         
         
@@ -262,7 +359,7 @@ public class AjoutFormationController implements Initializable {
 
     @FXML
     private void enregistrermodif(ActionEvent event) {
-        Formation F =tabFormation.getSelectionModel().getSelectedItem();
+       Formation F =tabFormation.getSelectionModel().getSelectedItem();
        ServiceFormation sp = new ServiceFormation();
        System.out.println("création d'un objet Service Formation SUCCED");
        F.setSujet(tfSujet.getText());
@@ -270,13 +367,13 @@ public class AjoutFormationController implements Initializable {
         
         System.out.println(" 12");
         if(checkFacile.isSelected()){
-            F.setDifficulté(difficulté.FACILE);
+            F.setDifficulté("facile");
         }
         if (checkMoyen.isSelected()){
-            F.setDifficulté(difficulté.MOYEN);
+            F.setDifficulté("moyen");
         }
         if(checkDifficile.isSelected()){
-            F.setDifficulté(difficulté.DIFFICILE);
+            F.setDifficulté("difficile");
         }
         //F.setDifficulté(difficulté.DIFFICILE);
         System.out.println("13");
@@ -287,8 +384,126 @@ public class AjoutFormationController implements Initializable {
         sp.modifier_formation(F);
         JOptionPane.showMessageDialog(null,"Formation Modifiée");
         showformation();
+        tfSujet.setText("");
+        tfDescription.setText("");
+        tfDuree.setText("");
+        
         
     }
+     public ObservableList<Prerequis> afficher_Pre() {
+        System.out.println("1");
+        ObservableList<Prerequis> list = FXCollections.observableArrayList();
+
+        try {
+            String requete = "SELECT idPrerequis,nomPrerequis FROM Prerequis ";
+            Statement st = cnx.createStatement();
+           
+            ResultSet rs = st.executeQuery(requete);
+            
+            while (rs.next()) {
+                list.add(new Prerequis(rs.getLong(1),rs.getString(2)));
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return list;
+    }
+     public void showprerequis(){
+        ObservableList<Prerequis> ListCat =  afficher_Pre() ; 
+        System.out.println("pas de probleme");
+        
+        colnomPrerequis.setCellValueFactory(new PropertyValueFactory<Prerequis,String>("nomPrerequis"));
+        //colidC.setCellValueFactory(new PropertyValueFactory<Categorie,Long>("idCategorie"));
+        
+        System.out.println("Pas de Soucis ");
+        tabPre.setItems(ListCat);
+        System.out.println("pas de probleme2");
+        
+        
+    }
+      public ObservableList<Competences> afficher_comp() {
+        System.out.println("1");
+        ObservableList<Competences> list = FXCollections.observableArrayList();
+
+        try {
+            String requete = "SELECT idCompetence,nomCompetence FROM Competences ";
+            Statement st = cnx.createStatement();
+           
+            ResultSet rs = st.executeQuery(requete);
+            
+            while (rs.next()) {
+                list.add(new Competences(rs.getLong(1),rs.getString(2)));
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return list;
+    }
+       public void showcompetences(){
+        ObservableList<Competences> ListCat =  afficher_comp() ; 
+        //System.out.println("pas de probleme");
+        
+        colnomComp.setCellValueFactory(new PropertyValueFactory<Competences,String>("nomCompetence"));
+        //colidC.setCellValueFactory(new PropertyValueFactory<Categorie,Long>("idCategorie"));
+        
+        //System.out.println("Pas de Soucis ");
+        tabcomp.setItems(ListCat);
+        //System.out.println("pas de probleme2");
+        
+        
+    }
+       public ObservableList<Categorie> afficher_cat() {
+        
+        ObservableList<Categorie> list = FXCollections.observableArrayList();
+
+        try {
+            String requete = "SELECT idCategorie,nomCategorie FROM Categorie ";
+           Statement st = cnx.createStatement();
+           
+            ResultSet rs = st.executeQuery(requete);
+            
+            while (rs.next()) {
+                list.add(new Categorie(rs.getLong(1),rs.getString(2)));
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return list;
+    }
+       public void showcategorie(){
+        ObservableList<Categorie> ListCat =  afficher_cat() ; 
+        
+        
+        colnomCat.setCellValueFactory(new PropertyValueFactory<Categorie,String>("nomCategorie"));
+        //colidC.setCellValueFactory(new PropertyValueFactory<Categorie,Long>("idCategorie"));
+        
+        
+        tabCat.setItems(ListCat);
+        
+        
+        
+    }
+       public void showcExamen(){
+           ServiceExamen SE= new ServiceExamen();
+        ObservableList<Examen> ListCat =  SE.afficher() ; 
+        
+        
+        colnomExamen.setCellValueFactory(new PropertyValueFactory<Examen,String>("nomExamen"));
+        //colidC.setCellValueFactory(new PropertyValueFactory<Categorie,Long>("idCategorie"));
+        
+        
+        tabExam.setItems(ListCat);
+        
+        
+        
+    }
+
     
     
 }

@@ -35,6 +35,8 @@ public class WelcomeController implements Initializable {
     private Button btPrerequis;
     @FXML
     private Button btAttestation;
+    @FXML
+    private Button BtGestionAtt;
 
     /**
      * Initializes the controller class.
@@ -105,6 +107,17 @@ public class WelcomeController implements Initializable {
         Scene scene=new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    private void GestionAtt(ActionEvent event) throws IOException {
+        Stage stage ;
+        Parent root = FXMLLoader.load(getClass().getResource("GestionAttestation.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene=new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
     }
     
 }

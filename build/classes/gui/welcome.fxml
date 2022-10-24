@@ -15,7 +15,8 @@
       <Button id="btformation" fx:id="btformation" layoutX="267.0" layoutY="141.0" mnemonicParsing="false" onAction="#crudformation" prefHeight="51.0" prefWidth="222.0" text="CRUD FORMATION" />
       <Button id="BTCOMP" fx:id="BTCOMP" layoutX="267.0" layoutY="280.0" mnemonicParsing="false" onAction="#crudcomp" prefHeight="51.0" prefWidth="222.0" text="CRUD COMPETENCES" />
       <Button id="btcategorie" fx:id="btcategorie" layoutX="267.0" layoutY="211.0" mnemonicParsing="false" onAction="#crudcategorie" prefHeight="51.0" prefWidth="222.0" text="CRUD CATEGORIE" />
-      <Button id="btPrerequis" fx:id="btPrerequis" layoutX="267.0" layoutY="362.0" mnemonicParsing="false" onAction="#crudprerequis" prefHeight="51.0" prefWidth="222.0" text="CRUD PREREQUIS" />
-      <Button id="btAttestation" fx:id="btAttestation" layoutX="267.0" layoutY="464.0" mnemonicParsing="false" onAction="#crudattestation" prefHeight="51.0" prefWidth="222.0" text="CRUD ATTESTATION" />
+      <Button id="btPrerequis" fx:id="btPrerequis" layoutX="267.0" layoutY="348.0" mnemonicParsing="false" onAction="#crudprerequis" prefHeight="51.0" prefWidth="222.0" text="CRUD PREREQUIS" />
+      <Button id="btAttestation" fx:id="btAttestation" layoutX="267.0" layoutY="411.0" mnemonicParsing="false" onAction="#crudattestation" prefHeight="51.0" prefWidth="222.0" text="CRUD ATTESTATION" />
+      <Button id="btAttestation" fx:id="BtGestionAtt" layoutX="267.0" layoutY="495.0" mnemonicParsing="false" onAction="#GestionAtt" prefHeight="51.0" prefWidth="222.0" text="GESTION ATTESTATION " />
    </children>
 </AnchorPane>

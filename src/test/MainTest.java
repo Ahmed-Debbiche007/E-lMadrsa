@@ -14,9 +14,9 @@ import services.ServiceFormation;*/
 public class MainTest {
     
     
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         System.out.println("in main");
-        
+        /*
         ServiceFormation sp = new ServiceFormation();
         System.out.println("création d'un objet Service Formation SUCCED");
         
@@ -35,5 +35,5 @@ public class MainTest {
        
     }*/
     
-    
+    }
 }

@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Calendar ;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -54,7 +56,7 @@ public class ServiceAttestation {
     
     public void supprimer_attestation(Attestation A ) {
         try {
-            String requete = "DELETE FROM Attestation WHERE idAttestation=" + 1 ;
+            String requete = "DELETE FROM Attestation WHERE idAttestation=" + A.getIdAttestation() ;
             Statement st = cnx.createStatement();
             st.executeUpdate(requete);
             System.out.println("Attestation supprimée !");
@@ -75,6 +77,26 @@ public class ServiceAttestation {
             
             while (rs.next()) {
                 list.add(new Attestation(rs.getLong(1),rs.getLong(2),rs.getDate(3)));
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return list;
+    }
+     public ObservableList<Attestation> afficher_Att() {
+        System.out.println("1");
+        ObservableList<Attestation> list = FXCollections.observableArrayList();
+
+        try {
+            String requete = "select * from attestation JOIN participation On attestation.idParticipation=participation.idParticipation join user ON participation.idUser=user.idUser; ";
+            Statement st = cnx.createStatement();
+           
+            ResultSet rs = st.executeQuery(requete);
+            
+            while (rs.next()) {
+                list.add(new Attestation(rs.getLong("idAttestation"),rs.getLong("idParticipation"),rs.getDate("dateAcq"),rs.getString("nom"),rs.getString("prenom")));
             }
 
         } catch (SQLException ex) {

@@ -65,11 +65,11 @@ public class ServiceFormation {
         List<Formation> list = new ArrayList<>();
 
         try {
-            String requete = "SELECT idFormation,sujet,description,durée,idPrerequis,idCompetence,idExamen,idCategorie FROM Formation";
+            String requete = "SELECT idFormation,sujet,description,difficulté,durée,idPrerequis,idCompetence,idExamen,idCategorie FROM Formation";
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(requete);
             while (rs.next()) {
-                list.add(new Formation(rs.getLong("idFormation"), rs.getString("sujet"), rs.getString("description"),rs.getInt("durée"),rs.getLong(6),rs.getLong(7),rs.getLong(8),rs.getLong(8)));
+                list.add(new Formation(rs.getLong("idFormation"), rs.getString("sujet"), rs.getString("description"),rs.getString("description"),rs.getInt("durée"),rs.getLong(6),rs.getLong(7),rs.getLong(8),rs.getLong(8)));
             }
 
         } catch (SQLException ex) {
@@ -78,6 +78,35 @@ public class ServiceFormation {
 
         return list;
     }
+      public Formation VerifUninciteFormation( String sujet ) {
+          
+            try {
+                String req = "SELECT  *  FROM Formation  where sujet=? ";
+                PreparedStatement st = cnx.prepareStatement(req) ;
+                            st.setString(1, sujet);
+
+                ResultSet rs = st.executeQuery();
+            while (rs.next()){
+                Formation F = new Formation();
+                F.setIdFormation(rs.getLong("idFormation"));
+                F.setSujet(rs.getString("sujet"));
+                F.setDescription(rs.getString("description"));
+                F.setDifficulté(rs.getString("difficulté"));
+                F.setIdPrerequis(rs.getLong("idPrerequis"));
+                F.setIdCompetence(rs.getLong("idCompetence"));
+                F.setIdExamen(rs.getLong("idExamen"));
+                F.setIdCategorie(rs.getLong("idCategorie"));
+                return F;
+            }
+            } catch (SQLException ex) {
+                System.out.println("Formation Introuvable "  + ex.getMessage());
+
+            }
+
+            return null ;
+
+
+}
     
     
 }
