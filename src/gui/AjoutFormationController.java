@@ -31,6 +31,7 @@ import entites.difficulté;
  
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import entities.Participation;
  
 import java.io.IOException;
 import java.net.URL;
@@ -66,6 +67,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import services.ParticipationsService;
 
 /**
  * FXML Controller class
@@ -375,16 +377,22 @@ public class AjoutFormationController implements Initializable {
                            
                             if (tabFormation.getSelectionModel().getSelectedItem() != null) {
                                 System.out.println("participer a une formation ......");
-                                /*
-                                staticpost = tvpost.getSelectionModel().getSelectedItem();
-                                FXMLLoader loader = new FXMLLoader(getClass().getResource("post_edit_add.fxml"));
+                                ParticipationsService PS = new ParticipationsService() ;
+                                Formation f = tabFormation.getSelectionModel().getSelectedItem(); 
+                                long x =1;
+                                Participation p = new Participation(f.getIdFormation(),x) ; 
+                                PS.ajouter(p);
+                                
+                                
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("ParticipationCrud.fxml"));
                                 Parent root;
                                 try {
                                     root = loader.load();
-                                    tvpost.getScene().setRoot(root);
+                                    tabFormation.getScene().setRoot(root);
                                 } catch (IOException ex) {
-                                    Logger.getLogger(PostController.class.getName()).log(Level.SEVERE, null, ex);
-                                */
+                                    System.out.println("error");
+                                }
+                                    
                                 }
                                 
  

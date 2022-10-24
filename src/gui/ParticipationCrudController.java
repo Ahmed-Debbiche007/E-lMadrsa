@@ -20,7 +20,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
- import services.ParticipationService;
+ import services.ParticipationsService;
 
 /**
  * FXML Controller class
@@ -50,7 +50,7 @@ public class ParticipationCrudController implements Initializable {
     
     
               public void showParticipants() {
-        ParticipationService PS = new ParticipationService() ; 
+        ParticipationsService PS = new ParticipationsService() ; 
         ObservableList<Participation> list = PS.afficher() ;
         System.out.println(list ) ; 
         colDtParticipation.setCellValueFactory(new PropertyValueFactory<Participation,Double>("resultat"));

@@ -22,6 +22,11 @@ public class Participation {
         this.resultat = resultat;
     }
 
+    public Participation(Long idUser, Long idFormation) {
+        this.idUser = idUser;
+        this.idFormation = idFormation;
+    }
+
     public Participation(Double resultat, Long idUser, Long idFormation) {
         this.resultat = resultat;
         this.idUser = idUser;

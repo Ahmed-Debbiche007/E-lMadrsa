@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import outils.MyDB;
 
 /**
@@ -27,9 +29,11 @@ public class ParticipationsService implements IService<Participation> {
     @Override
     public void ajouter(Participation p) {
                         try {
-            String req="insert into Participation(Resultat) values(?);" ;
+            String req="insert into Participation(idFormation,idUser) values(?,?);" ;
             PreparedStatement st = cnx.prepareStatement(req);
-            st.setDouble(1, p.getResultat());
+            st.setLong(1, p.getIdFormation());
+            st.setLong(2, p.getIdUser());
+
             st.execute() ; 
             System.out.println("Participation ajouté ") ;
            
@@ -71,18 +75,22 @@ public class ParticipationsService implements IService<Participation> {
      }
 
     @Override
-    public List<Participation> afficher() {
-                 List<Participation> List = new ArrayList<>();
+    public  ObservableList<Participation> afficher() {
+                 ObservableList<Participation> List = FXCollections.observableArrayList();
 
         
         try {
             
-                 String req="select * from Partcipation";
+                 String req="select * from participation";
                  PreparedStatement st = cnx.prepareCall(req); 
                  ResultSet rs= st.executeQuery();
                 while(rs.next()){
                   Participation  p =new Participation();
-                  p.setResultat(1.0);
+                  p.setIdParticipation(rs.getLong(1));
+                  p.setIdUser(rs.getLong(2));
+                  p.setIdFormation(rs.getLong(3));
+                  p.setResultat(rs.getDouble(4));
+                  
         
                    List.add(p);
                 }
