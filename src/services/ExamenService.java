@@ -335,6 +335,67 @@ public Examen countExams( String nom ) {
             }
               return listExamen ;
     }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            //  
+            
+             public   Map<Examen, Integer> getAllWithQuestionCountByCategory(Long id) {
+                            Map<Examen, Integer> examesmap = new HashMap<>();
+                Examen key = null;
+            try {
+
+                
+                String req = "select * , count(*) as c   from  examen  join question on examen.idExamen = question.idExamen and examen.idcategorie=? group by examen.idExamen;";
+                
+                PreparedStatement st = cnx.prepareStatement(req) ;
+                                 st.setLong(1, id);
+
+                ResultSet rs = st.executeQuery() ;
+                while(rs.next()) {
+                    Examen temp = new Examen();
+                    temp.setIdExamen(rs.getLong(1));
+                    temp.setNomExamen(rs.getString(2));
+                    temp.setPourcentage(rs.getDouble(3));
+                    temp.setDureeExamen(rs.getInt(4));
+                    
+                    
+                    temp.setFormationId(rs.getLong(5));
+                    temp.setIdCategorie(rs.getLong(6));
+ 
+                    
+ 
+                    
+                    int count = rs.getInt("c");
+                    examesmap.put(temp, count);
+                     System.out.println( examesmap);
+
+                } 
+            } catch (SQLException ex) {
+                 System.out.println("error occured" +ex.getMessage());
+            }
+                    
+ 
+        return examesmap;
+    }
+            
+            
+            
+            
+            
+            
+            
   public List<Question> getQuestions(Long id) {
        List<Question> listQuestion = new ArrayList<>();
        

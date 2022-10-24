@@ -16,7 +16,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="503.0" prefWidth="769.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.QuestionsScreenController">
  <children>
-      <SplitPane dividerPositions="0.75" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -24,7 +24,7 @@
                      <children>
                         <ToolBar>
                            
-                                                   <Label fx:id="title" text="Title" textFill="#b90000">
+                                                   <Label fx:id="title" text="titre" textFill="#b90000">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font>
@@ -34,7 +34,7 @@
                               </Label>
                           
                                              
-                              <Label fx:id="time" alignment="CENTER" contentDisplay="CENTER" prefHeight="55.0" prefWidth="404.0" text="Timing" textFill="#6ec300" BorderPane.alignment="CENTER">
+                              <Label fx:id="time" alignment="CENTER" contentDisplay="CENTER" prefHeight="55.0" prefWidth="404.0" text="Timer" textFill="#6ec300" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font>
@@ -110,9 +110,9 @@
                            </VBox.margin>
                         </Separator>
                         <ToolBar>
-                               <FlowPane alignment="CENTER_RIGHT" BorderPane.alignment="CENTER">
+                               <FlowPane alignment="CENTER" prefHeight="47.0" prefWidth="743.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <Button fx:id="next" onAction="#nextQuestions" style="-fx-background-radius: 10; -fx-background-color: BLUE;" text="Next Question" textFill="WHITE">
+                                    <Button fx:id="next" onAction="#nextQuestions" style="-fx-background-radius: 10; -fx-background-color: BLUE;" text="Question suivant" textFill="WHITE">
                                        <padding>
                                           <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                                        </padding>
@@ -120,7 +120,7 @@
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </FlowPane.margin>
                                     </Button>
-                                    <Button fx:id="submit" onAction="#submit" style="-fx-background-radius: 10; -fx-background-color: GREEN;" text="Submit Quiz" textFill="WHITE">
+                                    <Button fx:id="submit" onAction="#submit" style="-fx-background-radius: 10; -fx-background-color: GREEN;" text="Enregistrer Examen" textFill="WHITE">
                                        <padding>
                                           <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                                        </padding>
@@ -138,23 +138,6 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
-               </children>
-            </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-               <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="28.0" prefWidth="146.0" text="Quiz Progress" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <font>
-                        <Font name="System Bold Italic" size="23.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </Label>
-                  <FlowPane fx:id="progressPane" alignment="TOP_CENTER" hgap="10.0" layoutY="54.0" prefHeight="344.0" prefWidth="146.0" vgap="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="54.0">
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </FlowPane>
                </children>
             </AnchorPane>
         </items>

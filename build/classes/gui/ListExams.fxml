@@ -20,7 +20,7 @@
                </padding></FlowPane>
          </content>
       </ScrollPane>
-      <Label layoutX="498.0" layoutY="47.0" text="List of exams " textFill="#e10000">
+      <Label layoutX="498.0" layoutY="47.0" text="liste des examens" textFill="#e10000">
          <font>
             <Font size="45.0" />
          </font>

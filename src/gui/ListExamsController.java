@@ -106,10 +106,33 @@ public class ListExamsController implements Initializable {
     private void chercherparcategorie(ActionEvent event) {
         
         Categorie t = tabviewcategorie.getSelectionModel().getSelectedItem();
-        Long idcategorie = t.getIdCategorie() ; 
+        Long idcategorie = t.getIdCategorie() ;
+                 ExamenService Es = new ExamenService() ; 
         flowpanel.getChildren().clear();
+        this.allexams =  Es.getAllWithQuestionCountByCategory(idcategorie) ; 
+
+       keys = allexams.keySet();
+ 
+        for(Examen e : keys) {
+ 
+       FXMLLoader loader = new FXMLLoader(getClass().getResource("ExamenCard.fxml"));
+            try {
+
+                Node node = loader.load();
+                ExamenCardController examcardcontroller = loader.getController();
+                examcardcontroller.setE(e);
+                examcardcontroller.setExamTttle(e.getNomExamen());
+                examcardcontroller.setNbq(allexams.get(e)+"");
+                System.out.println("nom ::::::" +e.getNomExamen());
+                flowpanel.getChildren().add(node) ; 
+
+            } catch (IOException ex) {
+                Logger.getLogger(ListExamsController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         
-         ExamenService Es = new ExamenService() ; 
+        /*
+        
 
         
         ObservableList<Examen> allexamsbycat = Es.getAllWithQuestionCountbycategorieid(idcategorie);
@@ -133,7 +156,10 @@ public class ListExamsController implements Initializable {
                 Logger.getLogger(ListExamsController.class.getName()).log(Level.SEVERE, null, ex);
             }
     }); {
+
  
+    }
+  */      
     }
         
     }

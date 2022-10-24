@@ -293,6 +293,17 @@ public class QuestionsScreenController implements Initializable {
                                 controller.setTauxlb(String.valueOf(df.format(d)) + "%"); 
                                 controller.setValues(this.studentAnswers , numberOfRightAnswers , examen , questionList);
                                 
+                                if (examen.getPourcentage()< d){
+                                    controller.setDescisionlb("Admin !  félciitation ! ");
+                                }  
+                                else {
+                                 controller.setDescisionlb("Refusé ! ");
+                                
+                                }
+                                    
+                                
+                                     
+                                
                                 
                                 
                                  System.out.println("get from other scree for ensure the set of values :  :  :  : " + this.numberOfRightAnswers) ; 

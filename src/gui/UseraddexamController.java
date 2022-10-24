@@ -146,10 +146,11 @@ public class UseraddexamController implements Initializable {
          boolean valid = true ;
         Question question = new Question();
         if(valid){
+            System.out.println("optionù&&" + option1.getText()) ; 
             //save  
-            question.setOption1(option1.getText().trim());
-            question.setOption2(option2.getText().trim());
-            question.setOption3(option3.getText().trim());
+            question.setOption1(lboption1.getText().trim());
+            question.setOption2(lboption2.getText().trim());
+            question.setOption3(lboption3.getText().trim());
             Toggle selectedOption = options.getSelectedToggle() ; 
             String ans = "";
             if(selectedOption == option1){

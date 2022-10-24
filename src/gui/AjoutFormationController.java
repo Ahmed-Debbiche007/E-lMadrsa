@@ -424,7 +424,7 @@ props.put("mail.smtp.ssl.enable", true);
       
                                     Message message = new MimeMessage(session);
                                     message.setFrom(new InternetAddress("springforfever@gmail.com"));
-                                    message.setRecipients(Message.RecipientType.TO,InternetAddress.parse("springforfever@gmail.com") );
+                                    message.setRecipients(Message.RecipientType.TO,InternetAddress.parse("hmddebbiche@gmail.com") );
                                     message.setSubject("formation news from elmadrsa");
                                     message.setText("Bonjour vous avez participer a la formatoin :" + f.getSujet());
                                     Transport.send(message);

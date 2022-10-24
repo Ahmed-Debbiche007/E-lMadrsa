@@ -42,12 +42,11 @@ public class NewFXMain extends Application {
   
         final PieChart chart = new PieChart(pieChartData);
         chart.setTitle("Résultat Examen : ");
- 
+  
         ((Group) scene.getRoot()).getChildren().add(chart);
         stage.setScene(scene);
         stage.show();
-        
-        /*
+         /*
                 Scene scene = new Scene(new Group());
         stage.setTitle("Imported Fruits");
         stage.setWidth(1000);

@@ -48,6 +48,8 @@ public class ResultatUIController implements Initializable {
     private Label resultlb;
     @FXML
     private Label tauxlb;
+    @FXML
+    private Label Descisionlb;
 
     public void setNumberOfRightAnswers(Integer numberOfRightAnswers) {
         this.numberOfRightAnswers = numberOfRightAnswers;
@@ -81,13 +83,27 @@ public class ResultatUIController implements Initializable {
         return notAttemped;
     }
 
+    public Label getResultlb() {
+        return resultlb;
+    }
+
+    public void setResultlb(String resultlb) {
+        this.resultlb.setText(resultlb) ; 
+    }
+
+    public void setDescisionlb(String Descisionlb) {
+        this.Descisionlb.setText(Descisionlb) ;
+    }
+
     public Integer getAttemped() {
         return attemped;
     }
 
-    public void setResultlb(String resultlb) {
-        this.resultlb.setText(resultlb);
+    public Label getDescisionlb() {
+        return Descisionlb;
     }
+
+ 
 
     public void setTauxlb(String tauxlb) {
         this.tauxlb.setText(tauxlb); 
@@ -117,21 +133,7 @@ Stage newStage = new Stage();
     
     
         private void renderQuestions(){
-            /*
-        for(int i = 0 ; i < this.questionList.size() ; i ++){
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().
-                    getResource("/fxml/student/QuizResultSingleQuestionFXML.fxml"));
 
-            try {
-                Node node = fxmlLoader.load();
-                QuizResultSingleQuestionFXMLController controller= fxmlLoader.getController();
-                controller.setValues(this.questionList.get(i) , this.userAnswers.get(this.questionList.get(i)));
-                questionsContainer.getChildren().add(node);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-            */
     }
 
 
@@ -141,23 +143,51 @@ Stage newStage = new Stage();
  
                        
          ObservableList<PieChart.Data> scoreChartData = FXCollections.observableArrayList(new PieChart.Data(
-                String.format("Right Answers (%d)", this.numberOfRightAnswers) , this.numberOfRightAnswers),new PieChart.Data(String.format("Not Attemped (%d)", (this.questionList.size()-this.numberOfRightAnswers)) , (this.questionList.size()-this.numberOfRightAnswers)));
+                String.format("Réponses correctes (%d)", this.numberOfRightAnswers) , this.numberOfRightAnswers),new PieChart.Data(String.format("réponses fausses (%d)", (this.questionList.size()-this.numberOfRightAnswers)) , (this.questionList.size()-this.numberOfRightAnswers)));
         
-      scoreChart =    new PieChart(scoreChartData);
-         ((Group) scene.getRoot()).getChildren().add(scoreChart);
+            scoreChart =  new PieChart(scoreChartData);
+            //scoreChart.setLegendVisible(false);
+                    ((Group) scene.getRoot()).getChildren().add(scoreChart);
+       try
+      {
+         scene.getStylesheets().add("../style/chart.css");
+      }
+      catch (Exception ex)
+      {
+         System.err.println("Cannot acquire stylesheet: " + ex.toString());
+      }
+
         stage.setScene(scene);
         stage.show();
 
     }
     
     
-    /**
-     * Initializes the controller class.
-     */
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("exam : " +this.examen) ; 
          
+      // System.out.println("******" + this.examen.getPourcentage()) ; 
+     //  System.out.println((this.tauxlb) ) ; 
+       
+        /*
+        if ( this.examen.getPourcentage()  <  Double.parseDouble(this.tauxlb)) {
+            Descisionlb.setText("Admin ! , félicitations"); 
+        }
+        */
+        
+        System.out.println("exam : " +this.examen) ; 
+ 
+
     }
+    
+      private void applyCustomColorSequence(ObservableList<PieChart.Data> pieChartData, String... pieColors) {
+    int i = 0;
+    for (PieChart.Data data : pieChartData) {
+      data.getNode().setStyle("-fx-pie-color: " + pieColors[i % pieColors.length] + ";");
+      i++;
+    }
+  }
+    
     
 }
