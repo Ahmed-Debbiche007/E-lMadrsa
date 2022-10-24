@@ -4,15 +4,12 @@
  */
 package gui.Students;
 
-import entities.RequestType;
 import entities.TutorshipRequest;
 import entities.User;
 import gui.AjoutUserController;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
