@@ -5,43 +5,67 @@
  */
 package gui;
 
-import entites.Categorie;
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+ 
+ 
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+ 
 import javafx.scene.control.TextField;
 import entites.Formation;
-import entites.difficulté;
-import services.ServiceFormation;
+ import services.ServiceFormation;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+ 
 import javafx.collections.FXCollections;
+ 
+import utiles.DataDB;
+ 
+import entites.difficulté;
+
+
+
+
+
+ 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+ 
+import java.io.IOException;
+import java.net.URL;
+import java.sql.Timestamp;
+import java.util.Optional;
+import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import utiles.DataDB;
-import javafx.scene.control.cell.PropertyValueFactory ; 
-import entites.difficulté;
-import java.io.IOException;
-import static java.util.Arrays.equals;
-import static java.util.Arrays.equals;
-import static java.util.Arrays.equals;
-import javafx.fxml.FXMLLoader;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javax.swing.JOptionPane;
+ 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import javax.swing.JOptionPane;
+import javafx.util.Callback;
 
 /**
  * FXML Controller class
@@ -93,13 +117,16 @@ public class AjoutFormationController implements Initializable {
     private Button btretour;
     @FXML
     private Button btenregistrer;
+    @FXML
+    private TableColumn<Formation, String> colpart;
+    private ObservableList<Formation> ListCat ; 
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        showformation();
+       loadingg() ;
         // TODO
     }    
 
@@ -218,8 +245,9 @@ public class AjoutFormationController implements Initializable {
 
         return list;
     }
+    
     public void showformation(){
-        ObservableList<Formation> ListCat =  afficher() ; 
+          ListCat =  afficher() ; 
         System.out.println("pas de probleme");
         
         colidformation.setCellValueFactory(new PropertyValueFactory<Formation,Long>("idFormation"));
@@ -288,6 +316,111 @@ public class AjoutFormationController implements Initializable {
         JOptionPane.showMessageDialog(null,"Formation Modifiée");
         showformation();
         
+    }
+    
+    private void loadingg() {
+
+         showformation() ; 
+         
+        colidformation.setCellValueFactory(new PropertyValueFactory<Formation,Long>("idFormation"));
+        colsujet.setCellValueFactory(new PropertyValueFactory<Formation,String>("Sujet"));
+        coldescription.setCellValueFactory(new PropertyValueFactory<Formation,String>("Description"));
+        coldiff.setCellValueFactory(new PropertyValueFactory<Formation,difficulté>("Difficulté"));
+        colduree.setCellValueFactory(new PropertyValueFactory<Formation,Integer>("durée"));
+        colidPrerequis.setCellValueFactory(new PropertyValueFactory<Formation,Long>("idPrerequis"));
+        colidCompetence.setCellValueFactory(new PropertyValueFactory<Formation,Long>("idCompetence"));
+        colidExamen.setCellValueFactory(new PropertyValueFactory<Formation,Long>("idExamen"));
+        colidCategorie.setCellValueFactory(new PropertyValueFactory<Formation,Long>("idCategorie"));
+  
+        //add cell of button edit 
+        Callback<TableColumn<Formation, String>, TableCell<Formation, String>> cellFoctory = (TableColumn<Formation, String> param) -> {
+            // make cell containing buttons
+            final TableCell<Formation, String> cell = new TableCell<Formation, String>() {
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    //that cell created only on non-empty rows
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+
+                    } else {
+
+                         FontAwesomeIconView deleteIcon = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
+                        FontAwesomeIconView editIcon = new FontAwesomeIconView(FontAwesomeIcon.PLUS);
+ 
+                        deleteIcon.setStyle(
+                                " -fx-cursor: hand ;"
+                                + "-glyph-size:28px;"
+                                + "-fx-fill:#ff1744;"
+                        );
+                        
+                        editIcon.setStyle(
+                                " -fx-cursor: hand ;"
+                                + "-glyph-size:28px;"
+                                + "-fx-fill:#00E676;"
+                        );
+                   
+                        deleteIcon.setOnMouseClicked((MouseEvent event) -> {
+
+                        System.out.println("participer a une formation ......");
+
+
+                        }
+                       
+                        );
+ 
+                        editIcon.setOnMouseClicked((MouseEvent event) -> {
+                            
+                           
+                            if (tabFormation.getSelectionModel().getSelectedItem() != null) {
+                                System.out.println("participer a une formation ......");
+                                /*
+                                staticpost = tvpost.getSelectionModel().getSelectedItem();
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("post_edit_add.fxml"));
+                                Parent root;
+                                try {
+                                    root = loader.load();
+                                    tvpost.getScene().setRoot(root);
+                                } catch (IOException ex) {
+                                    Logger.getLogger(PostController.class.getName()).log(Level.SEVERE, null, ex);
+                                */
+                                }
+                                
+ 
+                            /*
+                                Post_edit_addController pea = loader.getController();
+                                pea.getTapostcontent().setText(staticpost.getPostCONTENT());
+                                pea.getTaposttitle().setText(staticpost.getPostTITLE());
+                                pea.getTfuseridpost().setText(Long.toString(staticpost.getUserID()));
+*/
+                            });
+                                
+
+                     
+
+                        HBox managebtn = new HBox(editIcon);
+                        managebtn.setStyle("-fx-alignment:center");
+                       HBox.setMargin(deleteIcon, new Insets(2, 2, 0, 3));
+                        HBox.setMargin(editIcon, new Insets(2, 3, 0, 2));
+
+                        setGraphic(managebtn);
+
+                        setText(null);
+
+                    }
+                }
+
+            };
+
+            return cell;
+        };
+        colpart.setCellFactory(cellFoctory);
+        
+         showformation() ; 
+        //studentsTable.setItems(StudentList);
+        //tabFormation.setItems(this.ListCat);
+
     }
     
     

@@ -85,7 +85,5 @@
           <TableColumn fx:id="colNomCategorie" prefWidth="416.0" text="Nom Catégorie " />
         </columns>
       </TableView>
-      <Button layoutX="979.0" layoutY="515.0" mnemonicParsing="false" onAction="#GOTOEXAM" text="GO TO EXAM " />
-      <Button layoutX="627.0" layoutY="610.0" mnemonicParsing="false" onAction="#createQuestionGUI" prefHeight="125.0" prefWidth="395.0" text="complete exaam insertion = go to creation questions " />
    </children>
 </AnchorPane>

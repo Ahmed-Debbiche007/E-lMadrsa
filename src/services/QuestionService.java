@@ -97,8 +97,7 @@ public class QuestionService implements IService<Question> {
                 
                 while(rs.next()) {
                 listQuestion.add(new Question(rs.getLong("idQuestion"),rs.getString("ennonce"),rs.getString("option1"),rs.getString("option2"),rs.getString("option3"),rs.getString("answer"),rs.getLong("idExamen"),rs.getString("nomExamen"))) ;
-                System.out.println("ffffffffff" + listQuestion);
-
+ 
             }
                 
                 
@@ -108,5 +107,9 @@ public class QuestionService implements IService<Question> {
             }
               return listQuestion ;
     }
+    
+     
+    
+    
     
 }

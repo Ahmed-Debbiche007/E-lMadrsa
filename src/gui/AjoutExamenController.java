@@ -38,6 +38,8 @@ import javafx.stage.Stage;
  import javax.swing.JOptionPane;
 import outils.MyDB;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
+import org.controlsfx.control.Notifications;
 
 import services.ExamenService;
 import services.ServiceCategorie;
@@ -97,50 +99,48 @@ public class AjoutExamenController implements Initializable {
     private void ajuoterExamen(ActionEvent event) throws IOException {
         
         
-        if (tfNomExamen.getText().trim().equals(""))  
-                    JOptionPane.showMessageDialog(null," Veuillez remplir le champs nom examen ! ");
-        if (tfPourcentageExamen.getText().trim().isEmpty())  
-                    JOptionPane.showMessageDialog(null," Veuillez remplir le champs pourcentage ! ");
-        if (tfDureeExamen.getText().trim().isEmpty())  
-                    JOptionPane.showMessageDialog(null," Veuillez remplir le champs durée examen ! ");
+        if (tfNomExamen.getText().trim().equals("") ||
+                (tfPourcentageExamen.getText().trim().isEmpty()||
+                tfDureeExamen.getText().trim().isEmpty()))  
+                     {
+                     Notifications.create()
+                    .darkStyle()
+                    .position(Pos.CENTER)
+                    .text("tout les champs doivent être remplis")
+                    .title("Exam Title").showError();
+                     }     
+        else  {
  
-        
-        
-        
-        
-        
-        
+ 
+            
+ 
+ 
        
         ExamenService  SE = new ExamenService() ;
+            if(SE.countExams(tfNomExamen.getText().trim())!=null)
+                {
+                     Notifications.create()
+                    .darkStyle()
+                    .position(Pos.CENTER)
+                    .text("this exam name already exist")
+                    .title("Exam Title").showError();
+                }        
+       
            Formation f =  tvFormations.getSelectionModel().getSelectedItem() ;
            Categorie c =  tvCategories.getSelectionModel().getSelectedItem() ; 
            Examen newExam = new Examen(  tfNomExamen.getText()  ,   Double.parseDouble(tfPourcentageExamen.getText())     , Integer.parseInt(tfDureeExamen.getText() )    , f.getIdFormation() , c.getIdCategorie()   ) ; 
            SE.ajouter(newExam);
+                                Notifications.create()
+                    .darkStyle()
+                    .position(Pos.CENTER)
+                    .text("Examen ajouté avec succée")
+                    .title("Exam Title").showInformation();
            showExams() ;
-           JOptionPane.showMessageDialog(null,"examen Ajoutée ! ");
+           //JOptionPane.showMessageDialog(null,"examen Ajoutée ! ");
         
-        /*
-            Node node = (Node) event.getSource();
-            // go to the next interface : create questions 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("AjoutQuestion.fxml"));
-            Parent root = loader.load() ;
-            tvExamens.getScene().setRoot(root);
-            // Step 3
-            AjoutQuestionController controller =  loader.getController();
-            
-            
-            
-            
-            ObservableList<Examen> list = SE.afficher() ;
-             Examen latestExam = list.get((list.size()-1)); 
-            System.out.println("******* name : " + newExam.getNomExamen() + "exam id : " + newExam.getIdExamen() + newExam );
-            
-            controller.setIdExamlabel(latestExam.getIdExamen().toString());
+ 
         
-        
-        
-        */
-        
+        }
  
     }
 

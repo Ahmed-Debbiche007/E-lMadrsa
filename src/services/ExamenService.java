@@ -161,7 +161,7 @@ public Examen countExams( String nom ) {
                 
                 while(rs.next()) {
                 listExamen.add(new Examen( rs.getLong("idExamen"),rs.getString("nomExamen"), rs.getDouble("pourcentage"), rs.getInt("DureeExamen") , rs.getLong("formationId") ,rs.getLong("idCategorie"),rs.getString("nomCategorie"),rs.getString("sujet")));
-                System.out.println("dddddddddddddddderfevrgtbrtb" + listExamen);
+                
 
             }
 

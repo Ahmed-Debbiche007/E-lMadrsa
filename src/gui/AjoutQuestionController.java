@@ -18,6 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -34,6 +35,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
+import org.controlsfx.control.Notifications;
 import services.ExamenService;
 import services.QuestionService;
 import services.QuizService;
@@ -124,15 +126,20 @@ public class AjoutQuestionController implements Initializable {
     @FXML
     private void ajuoterQuestion(ActionEvent event) {
        
+        Toggle selectedOption = options.getSelectedToggle() ; 
 
-        /*
+       
         if (lbEnnonce.getText().trim().isEmpty() ||
                 lbOption1.getText().isEmpty() ||
                 lbOption2.getText().isEmpty() ||
                 lbOption3.getText().isEmpty()||
                 selectedOption==null)  
-                    JOptionPane.showMessageDialog(null," Veuillez remplir tous les champs   ! ");
-*/
+                                      Notifications.create()
+                    .darkStyle()
+                    .position(Pos.CENTER)
+                    .text("tout les champs doivent être remplis")
+                    .title("Exam Title").showWarning();
+ 
       
 
             
@@ -142,15 +149,17 @@ public class AjoutQuestionController implements Initializable {
      
         
         
-        /* 
+       
                 else 
-        
         {
-        */
+       
+        
+ 
+        
+        
         QuestionService  QS = new QuestionService() ;
         Examen e = tvExams.getSelectionModel().getSelectedItem() ;
                             String ans = null ;
-    Toggle selectedOption = options.getSelectedToggle() ; 
 
                     if(selectedOption == option1){
                 ans = lbOption1.getText().trim();
@@ -160,13 +169,13 @@ public class AjoutQuestionController implements Initializable {
                   else if(selectedOption == option3){
                 ans = lbOption3.getText().trim();
                    }
-        System.out.print("*******" + ans  );
-        QS.ajouter(new Question(lbEnnonce.getText() , lbOption1.getText()    ,    lbOption2.getText() , lbOption3.getText() ,ans,  e.getIdExamen()));
+            System.out.print("*******" + ans  );
+           QS.ajouter(new Question(lbEnnonce.getText() , lbOption1.getText()    ,    lbOption2.getText() , lbOption3.getText() ,ans,  e.getIdExamen()));
        
         
-         JOptionPane.showMessageDialog(null,"Question Ajoutée ! ");
-        showQuestions() ;
-        //}
+           JOptionPane.showMessageDialog(null,"Question Ajoutée ! ");
+          showQuestions() ;
+        }
         
     }
 

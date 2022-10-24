@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="702.0" prefWidth="1018.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AjoutFormationController">
+<AnchorPane id="AnchorPane" prefHeight="702.0" prefWidth="1162.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AjoutFormationController">
    <children>
       <Label alignment="CENTER" layoutX="352.0" layoutY="31.0" prefHeight="65.0" prefWidth="295.0" text="Formation " textFill="#e81fb2" underline="true">
          <font>
@@ -29,17 +29,18 @@
       <Button id="btAjout" fx:id="btAjout" layoutX="68.0" layoutY="373.0" mnemonicParsing="false" onAction="#ajoutformation" text="Ajouter" />
       <Button id="btsupprimer" fx:id="btsupprimer" layoutX="509.0" layoutY="373.0" mnemonicParsing="false" onAction="#supprimerformation" text="Supprimer" />
       <Button id="btmodif" fx:id="btmodif" layoutX="245.0" layoutY="373.0" mnemonicParsing="false" onAction="#modifformation" text="Modifier" />
-      <TableView fx:id="tabFormation" layoutX="68.0" layoutY="436.0" prefHeight="226.0" prefWidth="886.0">
+      <TableView fx:id="tabFormation" layoutX="14.0" layoutY="440.0" prefHeight="226.0" prefWidth="1138.0">
         <columns>
           <TableColumn id="colidformation" fx:id="colidformation" minWidth="0.0" prefWidth="0.0" text="idFormation" />
-          <TableColumn id="colsujet" fx:id="colsujet" prefWidth="189.0" text="sujet" />
-            <TableColumn id="coldescription" fx:id="coldescription" prefWidth="348.0" text="description" />
+          <TableColumn id="colsujet" fx:id="colsujet" prefWidth="108.0" text="sujet" />
+            <TableColumn id="coldescription" fx:id="coldescription" prefWidth="429.0" text="description" />
             <TableColumn id="coldiff" fx:id="coldiff" minWidth="0.0" prefWidth="0.0" text="difficulté" />
-            <TableColumn id="colduree" fx:id="colduree" prefWidth="348.0" text="durée" />
+            <TableColumn id="colduree" fx:id="colduree" prefWidth="303.0" text="durée" />
             <TableColumn id="colidPrerequis" fx:id="colidPrerequis" minWidth="0.0" prefWidth="0.0" text="idPrerequis" />
             <TableColumn id="colidCompetence" fx:id="colidCompetence" minWidth="0.0" prefWidth="0.0" text="idCompetence" />
             <TableColumn id="colidCategorie" fx:id="colidCategorie" minWidth="0.0" prefWidth="0.0" text="idCategorie" />
             <TableColumn id="colidExamen" fx:id="colidExamen" minWidth="0.0" prefWidth="0.0" text="idExamen" />
+            <TableColumn id="colsujet" fx:id="colpart" prefWidth="297.0" text="Participer" />
         </columns>
       </TableView>
       <Button id="btretour" fx:id="btretour" layoutX="61.0" layoutY="39.0" mnemonicParsing="false" onAction="#retourformation" prefHeight="50.0" prefWidth="123.0" text="Retour" />
