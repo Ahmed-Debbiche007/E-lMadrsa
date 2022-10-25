@@ -5,6 +5,7 @@
 package services;
 
 import entities.Participation;
+import entities.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -96,7 +97,7 @@ public class ParticipationsService implements IService<Participation> {
         
         try {
             
-                 String req="select * from participation";
+                 String req="SELECT * FROM participation p  JOIN formation f ON f.idFormation=p.idFormation JOIN user On user.idUtilisateur=p.idUser ;";
                  PreparedStatement st = cnx.prepareCall(req); 
                  ResultSet rs= st.executeQuery();
                 while(rs.next()){
@@ -105,6 +106,9 @@ public class ParticipationsService implements IService<Participation> {
                   p.setIdUser(rs.getLong(2));
                   p.setIdFormation(rs.getLong(3));
                   p.setResultat(rs.getDouble(4));
+                  p.setNomFormation(rs.getString(6));
+                  p.setNomUser(rs.getString(15));
+                  
                   
         
                    List.add(p);
@@ -120,10 +124,8 @@ public class ParticipationsService implements IService<Participation> {
     
     
     
-        public  long  getParticipation(Long idUser , Long idFormation) {
-                Participation  p = null ; 
-                long l = 0 ; 
-
+        public  Participation  getParticipation(Long idUser , Long idFormation) {
+ 
         
         try {
             
@@ -133,12 +135,14 @@ public class ParticipationsService implements IService<Participation> {
                 st.setLong(2,idFormation );
                  ResultSet rs= st.executeQuery();
                 while(rs.next()){
+                                    Participation  p = new Participation()  ; 
+
                    p.setIdParticipation(rs.getLong(1));
                   p.setIdUser(rs.getLong(2));
                   p.setIdFormation(rs.getLong(3));
                   p.setResultat(rs.getDouble(4));
                   System.out.println("paaaart" +p);
-                  return p.getIdParticipation() ;
+                  return p ;
                   
         
              }
@@ -147,13 +151,44 @@ public class ParticipationsService implements IService<Participation> {
     }
         
  
-        return l   ;   
+        return null   ;   
      }
     
     
     
-    
-    
+        // 
+
+            public  ObservableList<User>  getParticipation(Long id) {
+ 
+       ObservableList<User> list = FXCollections.observableArrayList();
+        try {
+            
+                 String req="SELECT * FROM participation p INNER JOIN user u  ON p.idUser = u.idUtilisateur  JOIN formation f ON p.idFormation = f.idFormation  where p.idFormation=? ORDER BY p.resultat desc limit 3";
+                 PreparedStatement st = cnx.prepareCall(req); 
+                st.setDouble(1,id );
+                 ResultSet rs= st.executeQuery();
+                while(rs.next()){
+               User  u = new User()  ; 
+               
+               u.setNom(rs.getString(5));
+               u.setPrenom(rs.getString(6));
+               u.setResultat(rs.getDouble(4));
+               
+               list.add(u);
+
+
+                   
+        
+             }
+                
+                return list  ;
+             } catch (SQLException ex) {
+                System.out.println("*********************" +ex.getLocalizedMessage());
+    }
+        
+ 
+        return list   ;   
+     }
     
     
 }

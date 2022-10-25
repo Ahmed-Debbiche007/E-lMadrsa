@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,9 +23,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import services.ParticipationsService;
+import services.ServiceCategorie;
 
 /**
  * FXML Controller class
@@ -53,6 +59,16 @@ public class ResultatUIController implements Initializable {
     private Label tauxlb;
     @FXML
     private Label Descisionlb;
+    @FXML
+    private TableView<User> tvTopUsers;
+    @FXML
+    private TableColumn<User,String> nomEtud;
+    @FXML
+    private TableColumn<User, String> prenomEtud;
+    @FXML
+    private TableColumn<User, Double> resultatCol;
+    @FXML
+    private Label resulttitle1;
 
     public void setNumberOfRightAnswers(Integer numberOfRightAnswers) {
         this.numberOfRightAnswers = numberOfRightAnswers;
@@ -151,15 +167,7 @@ Stage newStage = new Stage();
             scoreChart =  new PieChart(scoreChartData);
             //scoreChart.setLegendVisible(false);
                     ((Group) scene.getRoot()).getChildren().add(scoreChart);
-       try
-      {
-         scene.getStylesheets().add("../style/chart.css");
-      }
-      catch (Exception ex)
-      {
-         System.err.println("Cannot acquire stylesheet: " + ex.toString());
-      }
-
+      
         stage.setScene(scene);
         stage.show();
 
@@ -169,19 +177,9 @@ Stage newStage = new Stage();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         
-      // System.out.println("******" + this.examen.getPourcentage()) ; 
-     //  System.out.println((this.tauxlb) ) ; 
-       
-        /*
-        if ( this.examen.getPourcentage()  <  Double.parseDouble(this.tauxlb)) {
-            Descisionlb.setText("Admin ! , félicitations"); 
-        }
-        */
-        
+        showTopStudents() ;
         System.out.println("exam : " +this.examen) ; 
  
-
     }
     
       private void applyCustomColorSequence(ObservableList<PieChart.Data> pieChartData, String... pieColors) {
@@ -192,5 +190,24 @@ Stage newStage = new Stage();
     }
   }
     
-    
+          public void showTopStudents() {
+        ParticipationsService SE = new ParticipationsService() ;
+        long x=1 ;
+         ObservableList<User> list = SE.getParticipation(x);
+        System.out.println(list ) ; 
+        nomEtud.setCellValueFactory(new PropertyValueFactory<User,String>("nom"));
+        prenomEtud.setCellValueFactory(new PropertyValueFactory<User,String>("prenom"));
+        resultatCol.setCellValueFactory(new PropertyValueFactory<User,Double>("Resultat"));
+
+ 
+
+        tvTopUsers.setItems(list);
+   
+    }
+
+    @FXML
+    private void top3onpress(ActionEvent event) {
+        //showTopStudents() ;
+         
+     }
 }

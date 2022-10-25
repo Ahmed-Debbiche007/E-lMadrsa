@@ -204,10 +204,7 @@ public class AjoutExamenController implements Initializable {
         System.out.println(list); 
         list.forEach((e)->{
             ServiceCategorie es = new ServiceCategorie() ; 
-               // e.setNomCat(es.getById(e.getIdExamen()).getNomCategorie());
-                //System.out.println(es.getById(e.getIdExamen()).getNomCategorie()) ; 
-               //e.setNomFor(nomFor);
-          
+
                 });
         System.out.println(list);
 

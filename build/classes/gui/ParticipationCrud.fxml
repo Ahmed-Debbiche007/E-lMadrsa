@@ -16,7 +16,7 @@
       </Label>
       <TableView fx:id="tvParticipations" layoutX="77.0" layoutY="153.0" prefHeight="400.0" prefWidth="780.0">
         <columns>
-          <TableColumn fx:id="colDtParticipation" prefWidth="254.0" text="Date  Participation" />
+          <TableColumn fx:id="colResultat" prefWidth="254.0" text="Resultat" />
             <TableColumn fx:id="coluser" prefWidth="235.0" text="Utilisateur " />
             <TableColumn fx:id="colFormation" prefWidth="290.0" text="Formation" />
         </columns>

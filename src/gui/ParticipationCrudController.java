@@ -31,12 +31,13 @@ public class ParticipationCrudController implements Initializable {
 
     @FXML
     private TableView<Participation> tvParticipations;
-    @FXML
     private TableColumn<Participation, Double> colDtParticipation;
     @FXML
-    private TableColumn<Participation, Long> coluser;
+    private TableColumn<Participation, String> coluser;
     @FXML
-    private TableColumn<Participation, Long> colFormation;
+    private TableColumn<Participation, String> colFormation;
+    @FXML
+    private TableColumn<Participation, Double> colResultat;
 
     /**
      * Initializes the controller class.
@@ -53,9 +54,9 @@ public class ParticipationCrudController implements Initializable {
         ParticipationsService PS = new ParticipationsService() ; 
         ObservableList<Participation> list = PS.afficher() ;
         System.out.println(list ) ; 
-        colDtParticipation.setCellValueFactory(new PropertyValueFactory<Participation,Double>("resultat"));
-        coluser.setCellValueFactory(new PropertyValueFactory<Participation,Long>("idUser"));
-        colFormation.setCellValueFactory(new PropertyValueFactory<Participation,Long>("idFormation"));
+        colResultat.setCellValueFactory(new PropertyValueFactory<Participation,Double>("resultat"));
+        coluser.setCellValueFactory(new PropertyValueFactory<Participation,String>("nomUser"));
+        colFormation.setCellValueFactory(new PropertyValueFactory<Participation,String>("nomFormation"));
         System.out.println(list);
         tvParticipations.setItems(list);
         

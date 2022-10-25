@@ -9,6 +9,7 @@ import javafx.beans.property.SimpleStringProperty;
  import entities.Examen;
 import entities.Participation;
 import entities.Question; 
+import entities.User;
 import java.io.IOException;
 import java.math.RoundingMode;
 import java.net.URL;
@@ -18,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
  
  import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,12 +34,14 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import org.controlsfx.control.Notifications;
  
 import services.ExamenService;
 import services.ParticipationsService;
+import services.ServiceCategorie;
 /**
  * FXML Controller class
  *
@@ -302,12 +306,15 @@ public class QuestionsScreenController implements Initializable {
                                  controller.setDescisionlb("Refusé ! ");
                                 
                                 }
-                                /*
+                                
                                 ParticipationsService PS = new ParticipationsService() ;
-                                long l = 2 ; 
-                                long  p = PS.getParticipation(l, examen.getFormationId());
-                                PS.AffecterResultat(d,p);
-                                */
+                                long l = 3 ; 
+                                System.out.println("id formation  : " +  examen.getFormationId() ) ; 
+                                System.out.println("id part  : " +   PS.getParticipation(l, examen.getFormationId())) ; 
+                                Participation  p = PS.getParticipation(l, examen.getFormationId());
+                                
+                                PS.AffecterResultat(d,p.getIdParticipation());
+                                
                                     
                                 
                                      
@@ -354,4 +361,10 @@ public class QuestionsScreenController implements Initializable {
     stage.show();
     }
     
+    
+    
+    
+    
+    
+  
 }

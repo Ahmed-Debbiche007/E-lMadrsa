@@ -7,8 +7,7 @@ package gui;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-import entites.Categorie;
-import entites.Prerequis;
+ import entites.Prerequis;
 import entites.Competences;
 import entites.Categorie;
  import java.net.URL;
@@ -555,36 +554,26 @@ public class AjoutFormationController implements Initializable {
 
                     } else {
 
-                        FontAwesomeIconView deleteIcon = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
-                        FontAwesomeIconView editIcon = new FontAwesomeIconView(FontAwesomeIcon.PLUS);
+                        FontAwesomeIconView ParticipateIcon = new FontAwesomeIconView(FontAwesomeIcon.PLUS);
 
-                        deleteIcon.setStyle(
-                                " -fx-cursor: hand ;"
-                                + "-glyph-size:28px;"
-                                + "-fx-fill:#ff1744;"
-                        );
+     
 
-                        editIcon.setStyle(
+                        ParticipateIcon.setStyle(
                                 " -fx-cursor: hand ;"
                                 + "-glyph-size:28px;"
                                 + "-fx-fill:#00E676;"
                         );
 
-                        deleteIcon.setOnMouseClicked((MouseEvent event) -> {
+      
 
-                            System.out.println("participer a une formation ......");
-
-                        }
-                        );
-
-                        editIcon.setOnMouseClicked((MouseEvent event) -> {
+                        ParticipateIcon.setOnMouseClicked((MouseEvent event) -> {
 
                             if (tabFormation.getSelectionModel().getSelectedItem() != null) {
                                 System.out.println("participer a une formation ......");
                                 ParticipationsService PS = new ParticipationsService();
                                 Formation f = tabFormation.getSelectionModel().getSelectedItem();
                                 long x = 1;
-                                Participation p = new Participation(f.getIdFormation(), x);
+                                Participation p = new Participation(x,f.getIdFormation());
                                 PS.ajouter(p);
 
                                 String username = "springforfever@gmail.com";
@@ -622,7 +611,7 @@ public class AjoutFormationController implements Initializable {
                                     Examen CurrentExam = ES.getExamById(f.getIdExamen()) ;
                                   //  User currentUser = US.getByUserId(CurrentExam.get)
                                     
-                                    message.setRecipients(Message.RecipientType.TO,InternetAddress.parse("hmddebbiche@gmail.com") );
+                                    message.setRecipients(Message.RecipientType.TO,InternetAddress.parse("springforfever@gmail.com") );
                                     message.setSubject("formation news from elmadrsa");
                                     message.setText("Bonjour vous avez participer a la formatoin :" + f.getSujet());
                                     Transport.send(message);
@@ -645,10 +634,9 @@ public class AjoutFormationController implements Initializable {
 
                         });
 
-                        HBox managebtn = new HBox(editIcon);
+                        HBox managebtn = new HBox(ParticipateIcon);
                         managebtn.setStyle("-fx-alignment:center");
-                        HBox.setMargin(deleteIcon, new Insets(2, 2, 0, 3));
-                        HBox.setMargin(editIcon, new Insets(2, 3, 0, 2));
+                        HBox.setMargin(ParticipateIcon, new Insets(2, 3, 0, 2));
 
                         setGraphic(managebtn);
 

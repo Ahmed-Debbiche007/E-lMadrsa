@@ -22,6 +22,7 @@ public class User {
     private Date dateNaissance ;
     private String image;
     private String role;
+    private Double Resultat ; 
     
     
 
@@ -69,6 +70,14 @@ public class User {
         this.dateNaissance = dateNaissance;
         this.image = image;
         this.role = role;
+    }
+
+    public Double getResultat() {
+        return Resultat;
+    }
+
+    public void setResultat(Double Resultat) {
+        this.Resultat = Resultat;
     }
 
  

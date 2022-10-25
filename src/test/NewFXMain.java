@@ -4,8 +4,7 @@
  */
 package test;
 
-import io.quickchart.QuickChart;
-import java.io.IOException;
+ import java.io.IOException;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
