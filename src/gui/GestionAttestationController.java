@@ -5,12 +5,20 @@
  */
 package gui;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.encoder.QRCode;
+
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.sun.javafx.iio.ImageStorage.ImageType;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -36,6 +44,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.cell.PropertyValueFactory;
 import utiles.DataDB;
 import entites.Attestation;
+import java.io.ByteArrayOutputStream;
+import java.nio.file.Paths;
 import services.ServiceAttestation;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -57,6 +67,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import utiles.DataDB;
 import javafx.scene.control.cell.PropertyValueFactory ;
@@ -108,9 +119,9 @@ public class GestionAttestationController implements Initializable {
     @FXML
     private Button btBestForm;
     @FXML
-    private TextField tfBestForm;
-    @FXML
     private Button btStat;
+    @FXML
+    private Label idLabel;
 
     /**
      * Initializes the controller class.
@@ -189,10 +200,11 @@ public class GestionAttestationController implements Initializable {
     }
 
     @FXML
-    private void GénererAtt(ActionEvent event) throws DocumentException  {
+    private void GénererAtt(ActionEvent event) throws DocumentException, WriterException, IOException  {
        Participation P = tabGestionAtt.getSelectionModel().getSelectedItem() ;
         
         Document Doc = new Document();
+        GenererCodeQR();
         try {
             PdfWriter.getInstance(Doc,new FileOutputStream("C:\\Users\\User\\Documents\\Attestation\\Etudiant.pdf") );
             Doc.open();
@@ -203,14 +215,22 @@ public class GestionAttestationController implements Initializable {
             img.setAlignment(Image.ALIGN_CENTER);
             Doc.add(img);
             Doc.add(new Paragraph(" "));
-            Doc.add(new Paragraph("Je soussigné, Ahmed Gouiaa, agissant en qualité de responsable de  l'organisme de formation E-lmadrsa atteste que :\n" +"\n" +"Madame / Monsieur " + P.getNom()+"  "+ P.getPrenom() +"\n"
+            Doc.add(new Paragraph("Je soussigné, Ahmed Gouiaa, agissant en qualité de responsable de  l'organisme de formation E-lmadrsa atteste que :\n" +"\n" +"Madame / Monsieur " + P.getNom()+ "  "+ P.getPrenom() +"\n"
             + "A suivi avec assiduité et réussite une formation de " +P.getSujet()+" au sein de notre plateform E-lmadrsa avec passage d un examen  \n"+"Le Resultat obtenu est : " + P.getResultat() +"%"));
             Doc.add(new Paragraph("\n "));
             Doc.add(new Paragraph("\n "));
             Doc.add(new Paragraph("\n "));
             Image img1 = Image.getInstance("C:\\Users\\User\\Documents\\1.png ");
-            img1.setAlignment(Image.ALIGN_RIGHT);
+            img1.setAlignment(Image.ALIGN_LEFT);
+            img1.scaleAbsoluteHeight(70);
+            img1.scaleAbsoluteWidth(400);
             Doc.add(img1);
+            Image img2 = Image.getInstance("C:\\Users\\User\\Documents\\code.png ");
+            img2.setAlignment(Image.ORIGINAL_PNG);
+            img2.scaleAbsoluteHeight(200);
+            img2.scaleAbsoluteWidth(200);
+            Doc.add(img2);
+            
             
             //Doc.add(new Paragraph("atteste que :\n" +"\n" +"Madame / Monsieur " + P.getNom()+ P.getPrenom() ));
             Doc.close();
@@ -222,6 +242,8 @@ public class GestionAttestationController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(GestionAttestationController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
 
         
 
@@ -241,6 +263,13 @@ public class GestionAttestationController implements Initializable {
         
         
     }
+     public void GenererCodeQR() throws WriterException, IOException{
+         Participation P = tabGestionAtt.getSelectionModel().getSelectedItem() ;
+         String details=" Cette Attestation est délivrée à "+P.getNom()+""+ P.getPrenom()+ " aprés son réussite à la formation "+P.getSujet()+" Par E-lmadrsa";
+         String path="C:\\Users\\User\\Documents\\code.png";
+         BitMatrix matrix = new MultiFormatWriter().encode(details, BarcodeFormat.QR_CODE, 500, 500) ;
+         MatrixToImageWriter.writeToFile(matrix,"png", new File(path));
+     }
 
     @FXML
     private void AjouterAtt(ActionEvent event) throws ParseException {
@@ -348,8 +377,8 @@ public class GestionAttestationController implements Initializable {
         }
          Participation P = new Participation() ;
          String ch= list.get(0).getSujet();
-          tfBestForm.setText(ch);
-           
+          
+          idLabel.setText(ch);
             
             
             

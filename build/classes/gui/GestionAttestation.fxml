@@ -73,11 +73,14 @@
             <Font size="19.0" />
          </font>
       </Button>
-      <TextField id="tfBestForm" fx:id="tfBestForm" layoutX="901.0" layoutY="803.0" />
       <Button id="btGenererAtt" fx:id="btStat" layoutX="713.0" layoutY="696.0" mnemonicParsing="false" onAction="#StatFormation" prefHeight="69.0" prefWidth="333.0" style="-fx-background-color: #5dbf5f;" text="Statistiques des Participations" textFill="#070606">
          <font>
             <Font size="19.0" />
          </font>
       </Button>
+      <Label id="idLabel" fx:id="idLabel" alignment="CENTER" layoutX="905.0" layoutY="808.0" prefHeight="38.0" prefWidth="161.0" textFill="#322dc9">
+         <font>
+            <Font size="23.0" />
+         </font></Label>
    </children>
 </AnchorPane>

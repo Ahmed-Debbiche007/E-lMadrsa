@@ -17,7 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javax.swing.JOptionPane;
 import services.ServiceCategorie;
-import gui.AfficheCategorieController;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
