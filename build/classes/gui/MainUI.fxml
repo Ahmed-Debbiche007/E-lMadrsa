@@ -34,6 +34,22 @@
                <opaqueInsets>
                   <Insets right="32.0" top="53.0" />
                </opaqueInsets></Button>
+            <Button mnemonicParsing="false" onAction="#ajouterReclamation" prefHeight="51.0" prefWidth="376.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="Ajouter Réclamation " textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets right="32.0" top="53.0" />
+               </opaqueInsets>
+            </Button>
+            <Button layoutX="10.0" layoutY="214.0" mnemonicParsing="false" onAction="#ConsulterReclamation" prefHeight="51.0" prefWidth="376.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="Consulter Réclamations " textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets right="32.0" top="53.0" />
+               </opaqueInsets>
+            </Button>
          </children>
       </VBox>
       <Button layoutX="440.0" layoutY="126.0" mnemonicParsing="false" onAction="#tutorAddQuiz" prefHeight="51.0" prefWidth="376.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="tutor add quiz " textFill="WHITE">

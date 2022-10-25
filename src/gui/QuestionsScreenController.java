@@ -7,6 +7,7 @@ import Listners.NewScreenListener;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
  import entities.Examen;
+import entities.Participation;
 import entities.Question; 
 import java.io.IOException;
 import java.math.RoundingMode;
@@ -36,6 +37,7 @@ import javafx.stage.Stage;
 import org.controlsfx.control.Notifications;
  
 import services.ExamenService;
+import services.ParticipationsService;
 /**
  * FXML Controller class
  *
@@ -300,6 +302,12 @@ public class QuestionsScreenController implements Initializable {
                                  controller.setDescisionlb("Refusé ! ");
                                 
                                 }
+                                /*
+                                ParticipationsService PS = new ParticipationsService() ;
+                                long l = 2 ; 
+                                long  p = PS.getParticipation(l, examen.getFormationId());
+                                PS.AffecterResultat(d,p);
+                                */
                                     
                                 
                                      

@@ -113,5 +113,25 @@ public class MainUIController implements Initializable {
     stage.show();
 
     }
+
+    @FXML
+    private void ajouterReclamation(ActionEvent event) throws IOException {
+            Stage stage ;
+    Parent root = FXMLLoader.load(getClass().getResource("AjoutRéclamations.fxml"));
+    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    Scene scene=new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+    }
+
+    @FXML
+    private void ConsulterReclamation(ActionEvent event) throws IOException {
+                    Stage stage ;
+    Parent root = FXMLLoader.load(getClass().getResource("listReclamations.fxml"));
+    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    Scene scene=new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+    }
     
 }

@@ -131,35 +131,7 @@ public class ListExamsController implements Initializable {
             }
 
         
-        /*
-        
-
-        
-        ObservableList<Examen> allexamsbycat = Es.getAllWithQuestionCountbycategorieid(idcategorie);
-        System.out.println("ddd" +allexams) ; 
-  
-        allexamsbycat.forEach((e) -> {
-               FXMLLoader loader = new FXMLLoader(getClass().getResource("ExamenCard.fxml"));
-            try {
-
-                Node node = loader.load();
-                ExamenCardController examcardcontroller = loader.getController();
-                examcardcontroller.setE(e);
-                examcardcontroller.setExamTttle(e.getNomExamen());
-                //examcardcontroller.setNbq(allexams.get(e)+"");
-                System.out.println("nom ::::::" +e.getNomExamen());
-                
-                flowpanel.getChildren().add(node) ; 
-                
-
-            } catch (IOException ex) {
-                Logger.getLogger(ListExamsController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-    }); {
-
- 
-    }
-  */      
+   
     }
         
     }

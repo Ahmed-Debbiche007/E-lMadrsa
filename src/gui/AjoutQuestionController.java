@@ -38,8 +38,7 @@ import javax.swing.JOptionPane;
 import org.controlsfx.control.Notifications;
 import services.ExamenService;
 import services.QuestionService;
-import services.QuizService;
-
+ 
 /**
  * FXML Controller class
  *

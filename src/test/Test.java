@@ -2,18 +2,10 @@
 package test;
 //import entities.User;
 import entities.Examen;
-import entities.Option;
-import entities.Participation;
-import entities.Question;
- import entities.Quiz;
-import java.util.ArrayList;
-import java.util.List;
+ 
 import outils.MyDB ;
 import services.ExamenService;
-import services.OptionService;
-import services.ParticipationsService;
-import services.QuestionService;
-import services.QuizService;
+ 
  
 public class Test {
     public static void main (String args[]) {
