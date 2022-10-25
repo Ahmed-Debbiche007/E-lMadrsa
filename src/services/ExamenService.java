@@ -74,6 +74,29 @@ public Examen getLatest() {
         }
         return null;
     }
+public Examen getExamById(Long id ) {
+        try {
+            String req = "SELECT * FROM Examen  where idExamen = ? ";
+            PreparedStatement st = cnx.prepareStatement(req) ;
+            st.setLong(1, id);
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()){
+                Examen e = new Examen();
+                e.setIdExamen(rs.getLong("idExamen"));
+                e.setNomExamen(rs.getString("nomExamen"));
+                e.setPourcentage(rs.getDouble("pourcentage"));
+                e.setDureeExamen(rs.getInt("DureeExamen"));
+                e.setFormationId(rs.getLong("formationId"));
+                e.setIdCategorie(rs.getLong("idCategorie"));
+                return e;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error!");
+            System.out.println(ex);
+        }
+        return null;
+    }
 
 
 public Examen countExams( String nom ) {

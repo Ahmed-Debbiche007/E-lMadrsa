@@ -3,10 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
 package gui;
-
 import entities.Examen;
 import entities.Question;
+import entities.User;
 import java.net.URL;
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -30,11 +31,13 @@ import javafx.stage.Stage;
  *
  * @author Msi
  */
+
 public class ResultatUIController implements Initializable {
         public PieChart attempedChart;
     public PieChart scoreChart;
     public VBox questionsContainer;
-
+ 
+ 
     // not fxml varibale
     private Map<Question , String> userAnswers ;
     private Integer numberOfRightAnswers = 0;
