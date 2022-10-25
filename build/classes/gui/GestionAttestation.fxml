@@ -51,12 +51,12 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button id="btmodifAtt" fx:id="btmodifAtt" layoutX="693.0" layoutY="678.0" mnemonicParsing="false" onAction="#ModiferAtt" prefHeight="69.0" prefWidth="125.0" style="-fx-background-color: #cf74dd;" text="Modifier">
+      <Button id="btmodifAtt" fx:id="btmodifAtt" layoutX="670.0" layoutY="600.0" mnemonicParsing="false" onAction="#ModiferAtt" prefHeight="69.0" prefWidth="125.0" style="-fx-background-color: #cf74dd;" text="Modifier">
          <font>
             <Font size="19.0" />
          </font>
       </Button>
-      <Button id="btSupprimAtt" fx:id="btSupprimAtt" layoutX="901.0" layoutY="678.0" mnemonicParsing="false" onAction="#SupprimerAtt" prefHeight="69.0" prefWidth="125.0" style="-fx-background-color: #cf74dd;" text="Supprimer">
+      <Button id="btSupprimAtt" fx:id="btSupprimAtt" layoutX="890.0" layoutY="600.0" mnemonicParsing="false" onAction="#SupprimerAtt" prefHeight="69.0" prefWidth="125.0" style="-fx-background-color: #cf74dd;" text="Supprimer">
          <font>
             <Font size="19.0" />
          </font>
@@ -74,5 +74,10 @@
          </font>
       </Button>
       <TextField id="tfBestForm" fx:id="tfBestForm" layoutX="901.0" layoutY="803.0" />
+      <Button id="btGenererAtt" fx:id="btStat" layoutX="713.0" layoutY="696.0" mnemonicParsing="false" onAction="#StatFormation" prefHeight="69.0" prefWidth="333.0" style="-fx-background-color: #5dbf5f;" text="Statistiques des Participations" textFill="#070606">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

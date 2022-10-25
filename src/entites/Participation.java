@@ -20,6 +20,7 @@ public class Participation {
     private String Prenom;
     private Date dateAcq;
     private String Sujet;
+    private int nbParticipation;
 
     public Participation() {
     }
@@ -58,6 +59,16 @@ public class Participation {
         this.Prenom = Prenom;
         this.Sujet=sujet;
     }
+
+    public Participation(Long idParticipation, Long idUser, Long idFormation, double resultat, String Sujet, int nbParticipation) {
+        this.idParticipation = idParticipation;
+        this.idUser = idUser;
+        this.idFormation = idFormation;
+        this.resultat = resultat;
+        this.Sujet = Sujet;
+        this.nbParticipation = nbParticipation;
+    }
+     
 
     public Participation(Long idParticipation, Long idUser, Long idFormation, double resultat, String Sujet) {
         this.idParticipation = idParticipation;
@@ -134,6 +145,15 @@ public class Participation {
     public void setSujet(String Sujet) {
         this.Sujet = Sujet;
     }
+
+    public int getNbParticipation() {
+        return nbParticipation;
+    }
+
+    public void setNbParticipation(int nbParticipation) {
+        this.nbParticipation = nbParticipation;
+    }
+    
     
     
 

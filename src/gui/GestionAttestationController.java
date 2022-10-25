@@ -53,11 +53,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.TextField;
 import utiles.DataDB;
 import javafx.scene.control.cell.PropertyValueFactory ;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
+
 
 /**
  * FXML Controller class
@@ -103,6 +109,8 @@ public class GestionAttestationController implements Initializable {
     private Button btBestForm;
     @FXML
     private TextField tfBestForm;
+    @FXML
+    private Button btStat;
 
     /**
      * Initializes the controller class.
@@ -305,6 +313,10 @@ public class GestionAttestationController implements Initializable {
     @FXML
     private void BestForm(ActionEvent event) {
          ObservableList<Participation> list = FXCollections.observableArrayList();
+         ObservableList<Participation> list2 = FXCollections.observableArrayList();
+         int i,j=0;
+         i=list2.size();
+         
           
        
         
@@ -322,7 +334,7 @@ public class GestionAttestationController implements Initializable {
                 
              
                 list.add(new Participation(rs.getLong("idParticipation"), rs.getLong("idUser"), rs.getLong("idFormation"),rs.getLong("resultat"),rs.getString("sujet")));
-                System.out.println("heeeeeeeeeeey" + list);
+                //System.out.println("heeeeeeeeeeey" + list);
             
             
             }
@@ -337,9 +349,33 @@ public class GestionAttestationController implements Initializable {
          Participation P = new Participation() ;
          String ch= list.get(0).getSujet();
           tfBestForm.setText(ch);
+           
+            
+            
+            
+
+        
+           
+            
+           
+           
+           
+           
+           
+           
          
          
          
+    }
+
+    @FXML
+    private void StatFormation(ActionEvent event) throws IOException {
+        Stage stage ;
+        Parent root = FXMLLoader.load(getClass().getResource("LineChart.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene=new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
          
 
