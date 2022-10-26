@@ -30,6 +30,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Spinner;
 import javax.swing.JOptionPane;
 import services.TutorshipRequestService;
+import services.UtilisateurService;
 
 /**
  * FXML Controller class
@@ -51,15 +52,15 @@ public class UpdateTutorshipRequestController implements Initializable {
     @FXML
     private Button banuuler;
     @FXML
-    private ComboBox<?> cmtutor;
+    private ComboBox<String> cmtutor;
     @FXML
     private Label lheures;
     @FXML
     private Label lminutes;
     @FXML
     private Label datel;
-    
-    ObservableList typeChoices = FXCollections.observableArrayList("MessagesChat","VideoChat");
+
+    ObservableList typeChoices = FXCollections.observableArrayList("MessagesChat", "VideoChat");
     @FXML
     private Spinner<Integer> hspinner;
     @FXML
@@ -70,41 +71,47 @@ public class UpdateTutorshipRequestController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        UtilisateurService us = new UtilisateurService();
+        ObservableList<User> tutors = us.afficherTuteurs();
+        ObservableList<String> tutorNames = FXCollections.observableArrayList();
+        tutors.forEach(tutor -> tutorNames.add(tutor.getNom()));
+        cmtutor.getItems().setAll(tutorNames);
         cmtype.getItems().setAll(typeChoices);
     }
 
     @FXML
     private void valider(ActionEvent event) throws IOException {
         StudentTutorshipRequestsController trc = new StudentTutorshipRequestsController();
-        TutorshipRequest t =trc.getT();
+        TutorshipRequest t = trc.getT();
         TutorshipRequestService sp = new TutorshipRequestService();
         String date = cldate.getValue().toString() + " " + (int) hspinner.getValue() + ":" + (int) mspinner.getValue() + ":00";
         Timestamp time = Timestamp.valueOf(date);
         AjoutUserController cs = new AjoutUserController();
-        User u = cs.getU();          
-        sp.update(new TutorshipRequest(t.getIdRequest(),  u.getId(), (long)3,tobject.getText(),cmtype.getValue(),time));
-        JOptionPane.showMessageDialog(null,"Demande Modifiée ! ");
-        
+        User u = cs.getU();
+        UtilisateurService us = new UtilisateurService();
+        sp.update(new TutorshipRequest(t.getIdRequest(), u.getId(),us.getByName(cmtutor.getValue()), tobject.getText(), cmtype.getValue(), time));
+        JOptionPane.showMessageDialog(null, "Demande Modifiée ! ");
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
-            Parent root ; 
-        
-            root = loader.load();
-            mspinner.getScene().setRoot(root);
+        Parent root;
+
+        root = loader.load();
+        mspinner.getScene().setRoot(root);
     }
 
     @FXML
     private void annuler(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("./Home.fxml"));
-            Parent root;
+        Parent root;
 
-            root = loader.load();
-            mspinner.getScene().setRoot(root);
+        root = loader.load();
+        mspinner.getScene().setRoot(root);
     }
+
     public void setCldate(LocalDate cldate) {
-        
+
         this.cldate.setValue(cldate);
     }
-
 
     public void setCmtype(RequestType cmtype) {
         this.cmtype.setValue(cmtype.name());
@@ -114,8 +121,8 @@ public class UpdateTutorshipRequestController implements Initializable {
         this.tobject.setText(tobject);
     }
 
-    public void setCmtutor(RequestType cmtype) {
-        
+    public void setCmtutor(String cmtype) {
+
     }
 
     public void setLheures(double lheures) {
@@ -133,8 +140,5 @@ public class UpdateTutorshipRequestController implements Initializable {
     public void setMspinner(int mspinner) {
         this.mspinner.getValueFactory().setValue(mspinner);
     }
-    
-    
-    
-    
+
 }

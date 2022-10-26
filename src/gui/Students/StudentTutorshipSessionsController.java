@@ -78,7 +78,7 @@ public class StudentTutorshipSessionsController implements Initializable {
             cltype.setCellValueFactory(new PropertyValueFactory<TutorshipSession, String>("type"));
             cldate.setCellValueFactory(new PropertyValueFactory<TutorshipSession, Timestamp>("date"));
             clurl.setCellValueFactory(new PropertyValueFactory<TutorshipSession, String>("url"));
-            Sessions.setItems(sp.getList("idStudent", u.getId()));
+            //Sessions.setItems(sp.getList("idStudent", u.getId()));
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

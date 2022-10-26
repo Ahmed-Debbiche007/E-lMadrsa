@@ -189,10 +189,10 @@ public class TutorshipSessionService implements GenericService<TutorshipSession>
         return null;
     }
 
-    public ObservableList<TutorshipSession> getList(String query, int filter) {
+    public ObservableList<TutorshipSession> getList(String query, long filter) {
         ObservableList<TutorshipSession> tutorshipSessions = FXCollections.observableArrayList();
         try {
-            String req = "select users.nom, tutorshipSessions.*, u.nom as tutor from users join tutorshipSessions on tutorshipSessions.idStudent=users.id join users as u on u.id=tutorshipSessions.idTutor WHERE " + query + "=" + filter;
+            String req = "select user.nom, tutorshipSessions.*, u.nom as tutor from user join tutorshipSessions on tutorshipSessions.idStudent=user.idUtilisateur join user as u on u.idUtilisateur=tutorshipSessions.idTutor WHERE " + query + "=" + filter;
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
 

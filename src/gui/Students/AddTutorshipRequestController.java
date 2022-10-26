@@ -29,6 +29,7 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.TextArea;
 import javax.swing.JOptionPane;
 import services.TutorshipRequestService;
+import services.UtilisateurService;
 
 /**
  * FXML Controller class
@@ -50,7 +51,7 @@ public class AddTutorshipRequestController implements Initializable {
     @FXML
     private Button banuuler;
     @FXML
-    private ComboBox<?> cmtutor;
+    private ComboBox<String> cmtutor;
     @FXML
     private Label lheures;
     @FXML
@@ -68,12 +69,17 @@ public class AddTutorshipRequestController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        UtilisateurService us = new UtilisateurService();
+        ObservableList<User> tutors = us.afficherTuteurs();
+        ObservableList<String> tutorNames = FXCollections.observableArrayList();
+        tutors.forEach(tutor -> tutorNames.add(tutor.getNom()));
+        cmtutor.getItems().setAll(tutorNames);
         cmtype.getItems().setAll(typeChoices);
     }
 
     @FXML
     private void valider(ActionEvent event) throws IOException {
-        if (tobject.getText().equals("") || cmtype.getValue().equals("") || cldate.getValue() == null) {
+        if (tobject.getText().equals("") || cmtype.getValue().equals("") || cldate.getValue() == null || cmtutor.getValue().equals("")) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Eror Message");
             alert.setHeaderText(null);
@@ -85,7 +91,8 @@ public class AddTutorshipRequestController implements Initializable {
             Timestamp time = Timestamp.valueOf(date);
             AjoutUserController cs = new AjoutUserController();
             User u = cs.getU();
-            sp.add(new TutorshipRequest((long) 1, u.getId(), tobject.getText(), cmtype.getValue(), time));
+            UtilisateurService us = new UtilisateurService();
+            sp.add(new TutorshipRequest((long) us.getByName(cmtutor.getValue()), u.getId(), tobject.getText(), cmtype.getValue(), time));
             JOptionPane.showMessageDialog(null, "Demande Ajoutée ! ");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
             Parent root;

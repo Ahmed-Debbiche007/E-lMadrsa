@@ -54,7 +54,7 @@ public class AjoutUserController implements Initializable {
     @FXML
     private void AjoutPersonne(ActionEvent event) throws IOException {
         UserService SP = new UserService();
-        User u = SP.getUserByUsername(fnom.getText());
+        User u = SP.getByUserName(fnom.getText());
         //System.out.println(u);
         String pass;
         if (check.isSelected()) {
@@ -64,14 +64,14 @@ public class AjoutUserController implements Initializable {
         }
         String  hashPass = Hashing.sha256().hashString(pass, StandardCharsets.UTF_8).toString();
         
-        if (u.getPassword().equals(hashPass)) {
+        if (u.getmotDePasse().equals(hashPass)) {
             JOptionPane.showMessageDialog(null, "Connected ");
             u1=u;
             FXMLLoader loader = null;
-            if (u.getRole().name().equals("Student")){
+            if (u.getrole().equals("Student")){
                 loader = new FXMLLoader(getClass().getResource("./Students/Home.fxml"));
             }
-            if (u.getRole().name().equals("Tutor")){
+            if (u.getrole().equals("Tutor")){
                 loader = new FXMLLoader(getClass().getResource("./Tutors/Home.fxml"));
             }
             

@@ -172,7 +172,7 @@ public class ParticipationsService implements IService<Participation> {
                
                u.setNom(rs.getString(5));
                u.setPrenom(rs.getString(6));
-               u.setResultat(rs.getDouble(4));
+               u.setResultat(rs.getDouble(4)/100);
                
                list.add(u);
 

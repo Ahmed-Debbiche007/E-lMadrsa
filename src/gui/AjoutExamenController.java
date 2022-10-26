@@ -251,7 +251,7 @@ public class AjoutExamenController implements Initializable {
         
         public void showformation(){
         ServiceFormation SF = new ServiceFormation() ;
-        ObservableList<Formation> ListCat =  SF.afficher() ; 
+        ObservableList<Formation> ListCat =  SF.afficherFormation(); 
         colSujetFormation.setCellValueFactory(new PropertyValueFactory<Formation,String>("Sujet"));
         tvFormations.setItems(ListCat);
             System.out.print("*****" + ListCat);   

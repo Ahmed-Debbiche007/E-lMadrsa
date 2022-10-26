@@ -312,14 +312,14 @@ public class QuestionsScreenController implements Initializable {
                                 controller.setValues(this.studentAnswers , numberOfRightAnswers , examen , questionList);
                                 controller.setLidcat(examen.getFormationId());
                                 if (examen.getPourcentage()< d){
-                                    controller.setDescisionlb("Admis !  félcitation ! ");
+                                    controller.setDescisionlb("Admis !  félcitations ! ");
                                 }  
                                 else {
                                  controller.setDescisionlb("Refusé ! ");
                                 
                                 }
                                 ParticipationsService PS = new ParticipationsService() ;
-                                long l = 3 ; 
+                                long l = 1 ; 
                                 System.out.println("id formation  : " +  examen.getFormationId() ) ; 
                                 System.out.println("id part  : " +   PS.getParticipation(l, examen.getFormationId())) ; 
                                 Participation  p = PS.getParticipation(l, examen.getFormationId());

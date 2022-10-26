@@ -126,9 +126,9 @@ public class TutorsTutorshipSessionsController implements Initializable {
         if (t.getType().name().equals("MessagesChat")) {
             this.clientchatapp().show();
         }else {
-            String command = "xdg-open "+t.getUrl();
+            String command = "cmd /c start "+t.getUrl();
 
-        Process proc = Runtime.getRuntime().exec(command);
+        Process process = Runtime.getRuntime().exec(command);
 
 
         }
@@ -138,7 +138,7 @@ public class TutorsTutorshipSessionsController implements Initializable {
         Thread.sleep(3000);
         AjoutUserController cs = new AjoutUserController();
         User u = cs.getU();
-        Client client = new Client("localhost", 8081, u.getNom());
+        Client client = new Client("localhost", 8082, u.getNom());
         Thread clientThread = new Thread(client);
         clientThread.setDaemon(true);
         clientThread.start();

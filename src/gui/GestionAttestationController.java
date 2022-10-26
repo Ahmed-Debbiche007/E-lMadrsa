@@ -132,40 +132,13 @@ public class GestionAttestationController implements Initializable {
         showAttestation();
         // TODO
     }    
-     public ObservableList<Participation> afficher_DemandeAttestation() {
-        System.out.println("1");
-        ObservableList<Participation> list = FXCollections.observableArrayList();
+ 
+            
+            
+            
+ 
+
        
-        
-        
-
-         try {
-            String requete = "SELECT * from participation join user on user.idUser=participation.idUser JOIN formation on participation.idFormation=formation.idFormation; ";
-            PreparedStatement st = cnx.prepareStatement(requete) ;
-            ResultSet rs = st.executeQuery(requete);
-            
-           
-            System.out.println(rs);
-            while (rs.next()) {
-               
-                
-             
-                list.add(new Participation(rs.getLong("idParticipation"), rs.getLong("idUser"), rs.getLong("idFormation"),rs.getLong("resultat"),rs.getString("nom"),rs.getString("Prenom"),rs.getString("sujet")));
-                System.out.println("heeeeeeeeeeey" + list);
-            
-            
-            }
-            
-            
-            
-            
-
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        }
-
-        return list;
-    }
     public void showDemande_Attestation(){
         ServiceGestionAttestation  SGA = new ServiceGestionAttestation();
         ObservableList<Participation> ListCat =  SGA.afficher_DemandeAttestation() ; 
@@ -207,10 +180,10 @@ public class GestionAttestationController implements Initializable {
         Document Doc = new Document();
         GenererCodeQR();
         try {
-            PdfWriter.getInstance(Doc,new FileOutputStream("C:\\Users\\User\\Documents\\Attestation\\Etudiant.pdf") );
+            PdfWriter.getInstance(Doc,new FileOutputStream("C:\\Attestation\\Etudiant.pdf") );
             Doc.open();
             Doc.add(new Paragraph("E-lmadrsa "));
-            Image img= Image.getInstance("C:\\Users\\User\\Documents\\Att1.png ");
+            Image img= Image.getInstance("C:\\signature\\Att1.png ");
             img.scaleAbsoluteHeight(90);
             img.scaleAbsoluteWidth(600);
             img.setAlignment(Image.ALIGN_CENTER);
@@ -221,12 +194,12 @@ public class GestionAttestationController implements Initializable {
             Doc.add(new Paragraph("\n "));
             Doc.add(new Paragraph("\n "));
             Doc.add(new Paragraph("\n "));
-            Image img1 = Image.getInstance("C:\\Users\\User\\Documents\\1.png ");
+            Image img1 = Image.getInstance("C:\\signature\\1.png ");
             img1.setAlignment(Image.ALIGN_LEFT);
             img1.scaleAbsoluteHeight(70);
             img1.scaleAbsoluteWidth(400);
             Doc.add(img1);
-            Image img2 = Image.getInstance("C:\\Users\\User\\Documents\\code.png ");
+            Image img2 = Image.getInstance("C:\\signature\\code.png ");
             img2.setAlignment(Image.ORIGINAL_PNG);
             img2.scaleAbsoluteHeight(200);
             img2.scaleAbsoluteWidth(200);
@@ -235,7 +208,7 @@ public class GestionAttestationController implements Initializable {
             
             //Doc.add(new Paragraph("atteste que :\n" +"\n" +"Madame / Monsieur " + P.getNom()+ P.getPrenom() ));
             Doc.close();
-            Desktop.getDesktop().open(new File("C:\\Users\\User\\Documents\\Attestation\\Etudiant.pdf"));
+            Desktop.getDesktop().open(new File("C:\\Attestation\\Etudiant.pdf"));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(GestionAttestationController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (BadElementException ex) {
@@ -267,7 +240,7 @@ public class GestionAttestationController implements Initializable {
      public void GenererCodeQR() throws WriterException, IOException{
          Participation P = tabGestionAtt.getSelectionModel().getSelectedItem() ;
          String details=" Cette Attestation est délivrée à "+P.getNom()+""+ P.getPrenom()+ " aprés son réussite à la formation "+P.getSujet()+" Par E-lmadrsa";
-         String path="C:\\Users\\User\\Documents\\code.png";
+         String path="C:\\signature\\code.png";
          BitMatrix matrix = new MultiFormatWriter().encode(details, BarcodeFormat.QR_CODE, 500, 500) ;
          MatrixToImageWriter.writeToFile(matrix,"png", new File(path));
      }

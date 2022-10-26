@@ -6,30 +6,10 @@
         <group/>
 =======
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/e_lmadrsa1/E-lMadrsa/src/services/ServiceParticipation.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/e_lmadrsa1/E-lMadrsa/src/services/ServiceExamen.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/e_lmadrsa1/E-lMadrsa/src/gui/ItemController.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/e_lmadrsa1/E-lMadrsa/src/entites/Examen.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/e_lmadrsa1/E-lMadrsa/src/gui/FiltrageController.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/e_lmadrsa1/E-lMadrsa/src/gui/WelcomeController.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/e_lmadrsa1/E-lMadrsa/src/gui/AjoutCategorieController.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/e_lmadrsa1/E-lMadrsa/src/entites/Participation.java</file>
-=======
-            <file>file:/M:/E-lmadrsa/E-lMadrsa/src/services/ExamenService.java</file>
-            <file>file:/M:/E-lmadrsa/E-lMadrsa/src/gui/ListReclamationsController.java</file>
-            <file>file:/M:/E-lmadrsa/E-lMadrsa/src/test/NewFXMain.java</file>
-            <file>file:/M:/E-lmadrsa/E-lMadrsa/src/test/MainProgGUI.java</file>
-            <file>file:/M:/E-lmadrsa/E-lMadrsa/src/entities/User.java</file>
+            <file>file:/M:/E-lmadrsa/E-lMadrsa/src/gui/AjoutRéclamationsController.java</file>
             <file>file:/M:/E-lmadrsa/E-lMadrsa/src/gui/QuestionsScreenController.java</file>
-            <file>file:/M:/E-lmadrsa/E-lMadrsa/src/gui/AjoutFormationController.java</file>
-            <file>file:/M:/E-lmadrsa/E-lMadrsa/src/gui/GenerateQuoresController.java</file>
-            <file>file:/M:/E-lmadrsa/E-lMadrsa/src/gui/MainUIController.java</file>
-            <file>file:/M:/E-lmadrsa/E-lMadrsa/src/services/ParticipationsService.java</file>
-            <file>file:/M:/E-lmadrsa/E-lMadrsa/src/gui/ListExamsController.java</file>
+            <file>file:/M:/E-lmadrsa/E-lMadrsa/src/services/ServiceFormation.java</file>
             <file>file:/M:/E-lmadrsa/E-lMadrsa/src/gui/ResultatUIController.java</file>
-            <file>file:/M:/E-lmadrsa/E-lMadrsa/src/gui/generateQuores.fxml</file>
->>>>>>> d8830c0b19eba436c8ca2f7097fafbe0f99f6f79
         </group>
 >>>>>>> 9928149c4ae4b367f896e153472a4d05af21dca7
     </open-files>
