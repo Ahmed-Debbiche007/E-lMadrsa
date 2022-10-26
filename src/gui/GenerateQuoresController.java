@@ -25,6 +25,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import static jdk.nashorn.internal.objects.NativeArray.map;
 import static jdk.nashorn.internal.objects.NativeDebug.map;
+import org.json.JSONException;
 
 /**
  * FXML Controller class
@@ -51,9 +52,15 @@ public class GenerateQuoresController implements Initializable {
 
             HttpResponse<JsonNode> apiResponse = Unirest.get("https://api.adviceslip.com/advice").asJson();
              String responseJsonAsString = apiResponse.getBody().toString();
-           String quote = apiResponse.getBody().getObject().getJSONObject("slip").getString("advice") ;
-           System.out.print(quote);
-             lbQuote.setText(quote);             
+           String quote ;
+            try {
+                quote = apiResponse.getBody().getObject().getJSONObject("slip").getString("advice");
+                           System.out.print(quote);
+             lbQuote.setText(quote);  
+            } catch (JSONException ex) {
+                Logger.getLogger(GenerateQuoresController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
 
             
         } catch (UnirestException ex) {

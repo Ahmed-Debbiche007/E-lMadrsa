@@ -3,7 +3,11 @@
     <type>org.netbeans.modules.java.j2seproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
+<<<<<<< HEAD
+            <name>SpringFever</name>
+=======
             <name>e_lmadrsa</name>
+>>>>>>> 9928149c4ae4b367f896e153472a4d05af21dca7
             <source-roots>
                 <root id="src.dir"/>
             </source-roots>

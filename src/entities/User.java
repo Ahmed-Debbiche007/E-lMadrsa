@@ -4,6 +4,7 @@
  */
 package entities;
 
+
 import java.sql.Date;
 
 /**
@@ -88,15 +89,18 @@ public class User {
 
     public void setId(long idUtilisateur) {
         this.idUtilisateur = idUtilisateur;
+
     }
 
     public String getNom() {
         return nom;
     }
 
+
     public void setNom(String nom) {
         this.nom = nom;
     }
+
 
     public String getPrenom() {
         return prenom;
@@ -164,6 +168,7 @@ public class User {
 
     @Override
     public String toString() {
+
         return "user{" + "idUtilisateur=" + idUtilisateur + ", nom=" + nom + ", prenom=" + prenom + ", nomUtilisateur=" + nomUtilisateur + ", tel=" + tel + ", email=" + email + ", motDePasse=" + motDePasse + ", dateNaissance=" + dateNaissance + ", image=" + image +", role=" + role + '}';
     }
 

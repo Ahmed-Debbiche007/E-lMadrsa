@@ -109,6 +109,26 @@ public class UtilisateurService implements IService<User> {
         return list;
     }
     
+    public ObservableList<User> afficherTuteurs() {
+        ObservableList<User> list = FXCollections.observableArrayList();
+       
+        try {
+            String requete = "SELECT * FROM user where role =?";
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setString(1, "Tutor");
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                User u = new User(rs.getLong("idUtilisateur"), rs.getString("nom"), rs.getString("prenom"), rs.getString("nomUtilisateur"), rs.getString("tel"), rs.getString("email"),rs.getString("motDePasse"), rs.getDate("dateNaissance"), rs.getString("image"),rs.getString("role")) ;
+                list.add(u);
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return list;
+    }
+    
     public User getByUserName(String userName) {
         ObservableList<User> list = FXCollections.observableArrayList();
        
@@ -127,6 +147,26 @@ public class UtilisateurService implements IService<User> {
         }
 
         return null;
+    }
+    
+    public long getByName(String userName) {
+        ObservableList<User> list = FXCollections.observableArrayList();
+       
+        try {
+            String requete = "select * from user where nom=?";
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setString(1, userName);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                User u = new User(rs.getLong("idUtilisateur"), rs.getString("nom"), rs.getString("prenom"), rs.getString("nomUtilisateur"), rs.getString("tel"), rs.getString("email"),rs.getString("motDePasse"), rs.getDate("dateNaissance"), rs.getString("image"),rs.getString("role")) ;
+                return u.getId();
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return 0;
     }
     
     
