@@ -76,5 +76,13 @@
             <Insets right="32.0" top="53.0" />
          </opaqueInsets>
       </Button>
+      <Button layoutX="440.0" layoutY="358.0" mnemonicParsing="false" onAction="#generatequotes" prefHeight="51.0" prefWidth="376.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="générer une citation" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+         <opaqueInsets>
+            <Insets right="32.0" top="53.0" />
+         </opaqueInsets>
+      </Button>
    </children>
 </AnchorPane>

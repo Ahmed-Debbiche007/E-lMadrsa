@@ -575,6 +575,11 @@ public class AjoutFormationController implements Initializable {
                                 long x = 1;
                                 Participation p = new Participation(x,f.getIdFormation());
                                 PS.ajouter(p);
+                                
+                                
+                                
+                                
+                                // send mail about formation  participation : made by gouiaa
 
                                 String username = "springforfever@gmail.com";
                                 String password = "kmcovmkdwmxwscsz";

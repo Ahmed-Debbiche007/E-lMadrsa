@@ -4,9 +4,21 @@
  */
 package gui;
 
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import static com.itextpdf.text.html.HtmlTags.P;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -132,6 +144,30 @@ public class MainUIController implements Initializable {
     Scene scene=new Scene(root);
     stage.setScene(scene);
     stage.show();
+    }
+
+    @FXML
+    private void generatequotes(ActionEvent event) throws IOException, DocumentException {
+        
+        
+        
+    Stage stage ;
+    Parent root = FXMLLoader.load(getClass().getResource("generateQuores.fxml"));
+    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    Scene scene=new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+
+  
+        
+   
+    
+    
+    
+    
+    
+    
+    
     }
     
 }

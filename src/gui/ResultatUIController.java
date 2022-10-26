@@ -69,7 +69,7 @@ public class ResultatUIController implements Initializable {
     private TableColumn<User, Double> resultatCol;
     @FXML
     private Label resulttitle1;
-
+    private long lidcat ;
     public void setNumberOfRightAnswers(Integer numberOfRightAnswers) {
         this.numberOfRightAnswers = numberOfRightAnswers;
     }
@@ -80,6 +80,14 @@ public class ResultatUIController implements Initializable {
 
     public void setNotAttemped(Integer notAttemped) {
         this.notAttemped = notAttemped;
+    }
+
+    public long getLidcat() {
+        return lidcat;
+    }
+
+    public void setLidcat(long lidcat) {
+        this.lidcat = lidcat;
     }
 
     public void setAttemped(Integer attemped) {
@@ -118,8 +126,8 @@ public class ResultatUIController implements Initializable {
         return attemped;
     }
 
-    public Label getDescisionlb() {
-        return Descisionlb;
+    public String getDescisionlb() {
+        return Descisionlb.getText();
     }
 
  
@@ -192,8 +200,9 @@ Stage newStage = new Stage();
     
           public void showTopStudents() {
         ParticipationsService SE = new ParticipationsService() ;
-        long x=1 ;
-         ObservableList<User> list = SE.getParticipation(x);
+        //long x=1 ;
+        System.out.println("**************** formation idddddd" + this.lidcat) ; 
+         ObservableList<User> list = SE.getParticipation(QuestionsScreenController.examen.getFormationId());
         System.out.println(list ) ; 
         nomEtud.setCellValueFactory(new PropertyValueFactory<User,String>("nom"));
         prenomEtud.setCellValueFactory(new PropertyValueFactory<User,String>("prenom"));

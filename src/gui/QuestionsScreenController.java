@@ -4,13 +4,24 @@
  */
 package gui;
 import Listners.NewScreenListener;
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
  import entities.Examen;
 import entities.Participation;
 import entities.Question; 
 import entities.User;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.URL;
 import java.text.DecimalFormat;
@@ -34,6 +45,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
@@ -42,12 +54,16 @@ import org.controlsfx.control.Notifications;
 import services.ExamenService;
 import services.ParticipationsService;
 import services.ServiceCategorie;
+import javafx.scene.control.ProgressBar;
 /**
  * FXML Controller class
  *
  * @author Msi
  */
 public class QuestionsScreenController implements Initializable {
+
+    @FXML
+    private ProgressBar prog;
 
 
    
@@ -67,8 +83,6 @@ public class QuestionsScreenController implements Initializable {
             this.answer.setValue(question.getAnswer());
         }
     }
-    @FXML
-    private FlowPane progressPane;
      @FXML
     private Label title;
     @FXML
@@ -93,7 +107,7 @@ public class QuestionsScreenController implements Initializable {
     
     private NewScreenListener screenListener;
 
-    private Examen examen  ;
+    static Examen examen  ;
     private List<Question> questionList;
     private Question currentQuestion;
     int currentIndex = 0;
@@ -133,9 +147,7 @@ public class QuestionsScreenController implements Initializable {
   
 
  
-
  
-
     
 
  private void getData() {
@@ -244,7 +256,7 @@ public class QuestionsScreenController implements Initializable {
         
      }
     @FXML
-    private void submit(ActionEvent event) throws IOException {
+    private void submit(ActionEvent event) throws IOException, DocumentException {
 
           
         
@@ -298,15 +310,14 @@ public class QuestionsScreenController implements Initializable {
                                 controller.setResultlb(String.valueOf(this.numberOfRightAnswers)+"/"+String.valueOf(this.questionList.size()));
                                 controller.setTauxlb(String.valueOf(df.format(d)) + "%"); 
                                 controller.setValues(this.studentAnswers , numberOfRightAnswers , examen , questionList);
-                                
+                                controller.setLidcat(examen.getFormationId());
                                 if (examen.getPourcentage()< d){
-                                    controller.setDescisionlb("Admin !  félciitation ! ");
+                                    controller.setDescisionlb("Admis !  félcitation ! ");
                                 }  
                                 else {
                                  controller.setDescisionlb("Refusé ! ");
                                 
                                 }
-                                
                                 ParticipationsService PS = new ParticipationsService() ;
                                 long l = 3 ; 
                                 System.out.println("id formation  : " +  examen.getFormationId() ) ; 
@@ -315,6 +326,41 @@ public class QuestionsScreenController implements Initializable {
                                 
                                 PS.AffecterResultat(d,p.getIdParticipation());
                                 
+                                
+                                
+                                //generate pdf : 
+                                
+                                               // generate pdf : 
+    
+         
+                                                Document Doc = new Document();
+                                                 try {
+                                                    PdfWriter.getInstance(Doc,new FileOutputStream("C:\\Reclamation\\reclamation.pdf") );
+                                                    
+                                                    Doc.open();
+                                                    Doc.add(new Paragraph("E-lmadrsa"));
+                                                    Doc.add(new Paragraph("Résultat Examen  " + this.examen.getNomExamen() + ":"));
+                                                    Doc.add(new Paragraph("décision final : " + controller.getDescisionlb()));
+                                                    Doc.add(new Paragraph("Résultat : " + d));            Doc.add(new Paragraph("\n "));
+                                                    Doc.add(new Paragraph("\n "));
+                                                    Doc.add(new Paragraph("\n "));                                                   
+                                                    Doc.add(new Paragraph("\n "));                                                     
+                                                    Doc.add(new Paragraph("\n "));
+
+                                                    Image img= Image.getInstance("C:\\Reclamation\\stamp.png ");
+                                                    img.scaleAbsoluteHeight(200);
+                                                    img.scaleAbsoluteWidth(200);
+                                                    img.setAlignment(Image.ALIGN_RIGHT);
+                                                     Doc.add(img);
+                                                    Doc.add(new Paragraph("\n "));
+                                                    Doc.add(new Paragraph("\n "));
+                                                    Doc.add(new Paragraph("\n "));
+                                                    Doc.close();
+                                                    Desktop.getDesktop().open(new File("C:\\Reclamation\\reclamation.pdf"));
+                                                } catch (FileNotFoundException ex) {
+                                                 } catch (BadElementException ex) {
+                                                 } catch (IOException ex) {
+                                                 }
                                     
                                 
                                      
@@ -335,7 +381,8 @@ public class QuestionsScreenController implements Initializable {
    
 
     }
-    private void openResultScreen() {
+    
+    private void openResultScreen() throws DocumentException {
         
 
         try {
@@ -344,21 +391,39 @@ public class QuestionsScreenController implements Initializable {
             Region node = fxmlLoader.load();
                       ResultatUIController controller = fxmlLoader.getController();
             controller.setValues(this.studentAnswers , numberOfRightAnswers , examen , questionList);
-          // this.screenListener.removeTopScreen();
-           // this.screenListener.ChangeScreen(node);
+ 
         } catch (IOException ex) {
             System.out.println(ex.getCause()) ; 
             
         }
+        
+        
+   
+        
+        
+        
+        
+        
+        
     }
     @FXML
-    private void exitfromExam(ActionEvent event) throws IOException {
-            Stage stage ;
+    private void exitfromExam(ActionEvent event) throws IOException, DocumentException {
+        
+
+        
+    Stage stage ;
     Parent root = FXMLLoader.load(getClass().getResource("MainUI.fxml"));
     stage = (Stage)((Node)event.getSource()).getScene().getWindow();
     Scene scene=new Scene(root);
     stage.setScene(scene);
     stage.show();
+    
+    
+    
+    
+    
+    
+    
     }
     
     
