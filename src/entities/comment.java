@@ -19,9 +19,29 @@ public class comment {
     public long postID;
     private int commentVOTE;
     private Timestamp commentDATE;
+    private String userNAME;
 
     public comment() {
     }
+
+    public String getUserNAME() {
+        return userNAME;
+    }
+
+    public void setUserNAME(String userNAME) {
+        this.userNAME = userNAME;
+    }
+
+    public comment(long commentID, String commentCONTENT, long userID, long postID, int commentVOTE, Timestamp commentDATE, String userNAME) {
+        this.commentID = commentID;
+        this.commentCONTENT = commentCONTENT;
+        this.userID = userID;
+        this.postID = postID;
+        this.commentVOTE = commentVOTE;
+        this.commentDATE = commentDATE;
+        this.userNAME = userNAME;
+    }
+    
 
     public comment(long commentID, String commentCONTENT, long userID, long postID, int commentVOTE, Timestamp commentDATE) {
         this.commentID = commentID;

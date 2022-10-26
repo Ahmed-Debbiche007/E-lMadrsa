@@ -3,6 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package services;
+
+
+import static gui.CatController.connectedUser;
+
+
+
+
 import entities.category;
 import entities.post;
 import utils.DataSource;

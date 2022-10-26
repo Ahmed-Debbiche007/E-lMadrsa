@@ -5,7 +5,7 @@
 package services;
 import entities.category;
 import entities.post;
-import entities.user;
+import entities.OLD;
 import utils.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,10 +18,10 @@ import java.util.List;
  *
  * @author SBS
  */
-public class ServiceUser implements IService<user>{
+public class ServiceOld implements IService<OLD>{
   Connection cnx = DataSource.getInstance().getCnx();
     @Override
-    public void ajouter(user c) {
+    public void ajouter(OLD c) {
         try {
             String requete = "INSERT INTO user (userNAME,badgeID,karmaCOUNT,userIMAGE) VALUES (?,?,?,?)";
             PreparedStatement pst = cnx.prepareStatement(requete);
@@ -40,7 +40,7 @@ public class ServiceUser implements IService<user>{
     }
 
     @Override
-    public void supprimer(user t) {
+    public void supprimer(OLD t) {
               try {
             String requete = "DELETE FROM user WHERE userID=?";
             PreparedStatement pst = cnx.prepareStatement(requete);
@@ -54,20 +54,20 @@ public class ServiceUser implements IService<user>{
     }
 
     @Override
-    public void modifier(user t) {
+    public void modifier(OLD t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public List<user> afficher() {
-        List<user> list = new ArrayList<>();
+    public List<OLD> afficher() {
+        List<OLD> list = new ArrayList<>();
 
         try {
             String requete = "SELECT * FROM user";
             PreparedStatement pst = cnx.prepareStatement(requete);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                list.add(new user( rs.getLong(1),rs.getString(2),rs.getLong(3),rs.getInt(4),rs.getString(5)));
+                list.add(new OLD( rs.getLong(1),rs.getString(2),rs.getLong(3),rs.getInt(4),rs.getString(5)));
             }
 
         } catch (SQLException ex) {

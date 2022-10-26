@@ -7,13 +7,13 @@ package test;
 import entities.category;
 import entities.post;
 import entities.badge;
-import entities.user;
+import entities.OLD;
 import entities.comment;
 import services.ServiceBadge;
 import services.ServiceCategory;
 import services.ServiceComment;
 import services.ServicePost;
-import services.ServiceUser;
+import services.ServiceOld;
 import gui.CatController;
 import static gui.CatController.staticcat;
 
@@ -53,7 +53,7 @@ public class MainProg {
        
        ServiceCategory sc = new ServiceCategory();
        //sc.afficher().forEach(System.out::println);
-       user userr=new user("hamma",1L,1,"sdghfjihgf");
+       OLD userr=new OLD("hamma",1L,1,"sdghfjihgf");
        //comment commentt=new comment("auzeghfujqgsfhjkqGKHQGFHQGSKFGQHJKGSFKQJHSFGHK",1L,2L,555);
       // post postt=new post(4L,"postaaaaaaaaaaaaaa","bhazvbdeahgezau",1L,3L,5,6);
         badge badgee=new badge("silverrrrrrrrr","sghhjdaqjksd");
@@ -63,7 +63,7 @@ public class MainProg {
         post postt2=new post("post2","bhazvbdeahgezau",1L,1L,5,6);
        
          ServiceBadge sb =new ServiceBadge();
-         ServiceUser su = new ServiceUser();
+         ServiceOld su = new ServiceOld();
         
          //sp.ajouter(postt);
         // sp.ajouter(postt2);

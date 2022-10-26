@@ -5,6 +5,8 @@
 package entities;
 
 import java.util.Objects;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  *
@@ -14,6 +16,18 @@ public class category {
     public long categoryID ;
     private String categoryNAME;
     private String categoryIMAGE;
+    private ImageView image;
+
+    public void setImage(ImageView image) {
+        this.image = image;
+    }
+
+    public ImageView getImage() {
+        return image;
+    }
+    
+    
+    
 
     public category() {
     }
@@ -28,6 +42,14 @@ public class category {
         this.categoryNAME = categoryNAME;
         this.categoryIMAGE = categoryIMAGE;
     }
+
+    public category(long categoryID, String categoryNAME, String categoryIMAGE, ImageView image) {
+        this.categoryID = categoryID;
+        this.categoryNAME = categoryNAME;
+        this.categoryIMAGE = categoryIMAGE;
+        this.image = image;
+    }
+    
 
     public long getCategoryID() {
         return categoryID;
@@ -55,8 +77,10 @@ public class category {
 
     @Override
     public String toString() {
-        return "category{" + "categoryID=" + categoryID + ", categoryNAME=" + categoryNAME + ", categoryIMAGE=" + categoryIMAGE + '}';
+        return "category{" + "categoryID=" + categoryID + ", categoryNAME=" + categoryNAME + ", categoryIMAGE=" + categoryIMAGE + ", image=" + image + '}';
     }
+
+    
 
     @Override
     public int hashCode() {

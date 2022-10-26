@@ -22,10 +22,23 @@ public class post {
     private int postVOTE;
     private int postNBCOM;
     private Timestamp postDATE;
+    private String userNAME;
 
     public post() {
     }
 
+    public post(long postID, String postTITLE, String postCONTENT, long userID, long categoryID, int postVOTE, int postNBCOM, Timestamp postDATE, String userNAME) {
+        this.postID = postID;
+        this.postTITLE = postTITLE;
+        this.postCONTENT = postCONTENT;
+        this.userID = userID;
+        this.categoryID = categoryID;
+        this.postVOTE = postVOTE;
+        this.postNBCOM = postNBCOM;
+        this.postDATE = postDATE;
+        this.userNAME = userNAME;
+    }
+    
     public post(long postID,String postTITLE, String postCONTENT) {
         this.postTITLE = postTITLE;
         this.postCONTENT = postCONTENT;
@@ -95,6 +108,14 @@ public class post {
         this.postCONTENT = postCONTENT;
         this.postVOTE = postVOTE;
         this.postNBCOM = postNBCOM;
+    }
+
+    public String getUserNAME() {
+        return userNAME;
+    }
+
+    public void setUserNAME(String userNAME) {
+        this.userNAME = userNAME;
     }
 
  
