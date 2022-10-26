@@ -3,10 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/User/Documents/NetBeansProjects/e_lmadrsa1/E-lMadrsa/src/services/ServiceParticipation.java</file>
+            <file>file:/C:/Users/User/Documents/NetBeansProjects/e_lmadrsa1/E-lMadrsa/src/services/ServiceExamen.java</file>
             <file>file:/C:/Users/User/Documents/NetBeansProjects/e_lmadrsa1/E-lMadrsa/src/gui/ItemController.java</file>
+            <file>file:/C:/Users/User/Documents/NetBeansProjects/e_lmadrsa1/E-lMadrsa/src/entites/Examen.java</file>
             <file>file:/C:/Users/User/Documents/NetBeansProjects/e_lmadrsa1/E-lMadrsa/src/gui/FiltrageController.java</file>
             <file>file:/C:/Users/User/Documents/NetBeansProjects/e_lmadrsa1/E-lMadrsa/src/gui/WelcomeController.java</file>
             <file>file:/C:/Users/User/Documents/NetBeansProjects/e_lmadrsa1/E-lMadrsa/src/gui/AjoutCategorieController.java</file>
+            <file>file:/C:/Users/User/Documents/NetBeansProjects/e_lmadrsa1/E-lMadrsa/src/entites/Participation.java</file>
         </group>
     </open-files>
 </project-private>
