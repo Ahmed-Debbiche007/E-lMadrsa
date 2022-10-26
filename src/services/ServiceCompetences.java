@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -60,8 +62,48 @@ public class ServiceCompetences {
             System.err.println(ex.getMessage());
         }
     }
-    public List<Competences> afficher() {
+    /*public List<Competences> afficher() {
         List<Competences> list = new ArrayList<>();
+
+        try {
+            String requete = "SELECT idCompetence,nomCompetence FROM Competences ";
+            Statement st = cnx.createStatement();
+           
+            ResultSet rs = st.executeQuery(requete);
+            
+            while (rs.next()) {
+                list.add(new Competences(rs.getLong(1),rs.getString(2)));
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return list;
+    }*/
+    public ObservableList<Competences> afficher_comp() {
+        System.out.println("1");
+        ObservableList<Competences> list = FXCollections.observableArrayList();
+
+        try {
+            String requete = "SELECT idCompetence,nomCompetence FROM Competences ";
+            Statement st = cnx.createStatement();
+           
+            ResultSet rs = st.executeQuery(requete);
+            
+            while (rs.next()) {
+                list.add(new Competences(rs.getLong(1),rs.getString(2)));
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return list;
+    }
+    public ObservableList<Competences> afficher() {
+        System.out.println("1");
+        ObservableList<Competences> list = FXCollections.observableArrayList();
 
         try {
             String requete = "SELECT idCompetence,nomCompetence FROM Competences ";

@@ -35,6 +35,8 @@ public class WelcomeController implements Initializable {
     private Button btPrerequis;
     @FXML
     private Button BtGestionAtt;
+    @FXML
+    private Button BtFiltrer;
 
     /**
      * Initializes the controller class.
@@ -108,6 +110,16 @@ public class WelcomeController implements Initializable {
         stage.setScene(scene);
         stage.show();
 
+    }
+
+    @FXML
+    private void FilterFormationCat(ActionEvent event) throws IOException {
+        Stage stage ;
+        Parent root = FXMLLoader.load(getClass().getResource("Filtrage.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene=new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
     
 }

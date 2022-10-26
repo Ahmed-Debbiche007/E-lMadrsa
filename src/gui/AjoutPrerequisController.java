@@ -104,28 +104,11 @@ public class AjoutPrerequisController implements Initializable {
         
         
     }
-     public ObservableList<Prerequis> afficher() {
-        System.out.println("1");
-        ObservableList<Prerequis> list = FXCollections.observableArrayList();
-
-        try {
-            String requete = "SELECT idPrerequis,nomPrerequis FROM Prerequis ";
-            Statement st = cnx.createStatement();
-           
-            ResultSet rs = st.executeQuery(requete);
-            
-            while (rs.next()) {
-                list.add(new Prerequis(rs.getLong(1),rs.getString(2)));
-            }
-
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        }
-
-        return list;
-    }
+     
      public void showprerequis(){
-        ObservableList<Prerequis> ListCat =  afficher() ; 
+         ServicePrerequis SP = new ServicePrerequis();
+         
+        ObservableList<Prerequis> ListCat =  SP.afficher() ; 
         System.out.println("pas de probleme");
         
         colnom.setCellValueFactory(new PropertyValueFactory<Prerequis,String>("nomPrerequis"));

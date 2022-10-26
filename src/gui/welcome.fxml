@@ -17,5 +17,6 @@
       <Button id="btcategorie" fx:id="btcategorie" layoutX="267.0" layoutY="211.0" mnemonicParsing="false" onAction="#crudcategorie" prefHeight="51.0" prefWidth="222.0" text="CRUD CATEGORIE" />
       <Button id="btPrerequis" fx:id="btPrerequis" layoutX="267.0" layoutY="348.0" mnemonicParsing="false" onAction="#crudprerequis" prefHeight="51.0" prefWidth="222.0" text="CRUD PREREQUIS" />
       <Button id="btAttestation" fx:id="BtGestionAtt" layoutX="267.0" layoutY="418.0" mnemonicParsing="false" onAction="#GestionAtt" prefHeight="51.0" prefWidth="222.0" text="GESTION ATTESTATION " />
+      <Button id="btAttestation" fx:id="BtFiltrer" layoutX="267.0" layoutY="487.0" mnemonicParsing="false" onAction="#FilterFormationCat" prefHeight="51.0" prefWidth="222.0" text="Filtrer Les Formations " />
    </children>
 </AnchorPane>

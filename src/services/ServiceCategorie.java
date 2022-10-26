@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -64,25 +66,7 @@ public class ServiceCategorie {
         }
     }
     
-    public List<Categorie> afficher() {
-        List<Categorie> list = new ArrayList<>();
-
-        try {
-            String requete = "SELECT idCategorie,nomCategorie FROM Categorie ";
-            Statement st = cnx.createStatement();
-           
-            ResultSet rs = st.executeQuery(requete);
-            
-            while (rs.next()) {
-                list.add(new Categorie(rs.getLong(1),rs.getString(2)));
-            }
-
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        }
-
-        return list;
-    }
+   
      public Categorie VerifUninciteCategorie( String Cat ) {
           
             try {
@@ -129,6 +113,46 @@ public class ServiceCategorie {
         
         
         
+    }
+      public ObservableList<Categorie> afficher_cat() {
+        
+        ObservableList<Categorie> list = FXCollections.observableArrayList();
+
+        try {
+            String requete = "SELECT idCategorie,nomCategorie FROM Categorie ";
+           Statement st = cnx.createStatement();
+           
+            ResultSet rs = st.executeQuery(requete);
+            
+            while (rs.next()) {
+                list.add(new Categorie(rs.getLong(1),rs.getString(2)));
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return list;
+    }
+      public ObservableList<Categorie> afficher() {
+        
+        ObservableList<Categorie> list = FXCollections.observableArrayList();
+
+        try {
+            String requete = "SELECT idCategorie,nomCategorie FROM Categorie ";
+           Statement st = cnx.createStatement();
+           
+            ResultSet rs = st.executeQuery(requete);
+            
+            while (rs.next()) {
+                list.add(new Categorie(rs.getLong(1),rs.getString(2)));
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return list;
     }
     
     

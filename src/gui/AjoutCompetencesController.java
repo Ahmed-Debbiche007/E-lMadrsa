@@ -133,28 +133,10 @@ public class AjoutCompetencesController implements Initializable {
         JOptionPane.showMessageDialog(null,"Competence Modifiée ! ");
         showcompetences();
     }
-    public ObservableList<Competences> afficher() {
-        System.out.println("1");
-        ObservableList<Competences> list = FXCollections.observableArrayList();
-
-        try {
-            String requete = "SELECT idCompetence,nomCompetence FROM Competences ";
-            Statement st = cnx.createStatement();
-           
-            ResultSet rs = st.executeQuery(requete);
-            
-            while (rs.next()) {
-                list.add(new Competences(rs.getLong(1),rs.getString(2)));
-            }
-
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        }
-
-        return list;
-    }
+    
     public void showcompetences(){
-        ObservableList<Competences> ListCat =  afficher() ; 
+        ServiceCompetences Scomp = new ServiceCompetences();
+        ObservableList<Competences> ListCat =  Scomp.afficher() ; 
         System.out.println("pas de probleme");
         
         colnomcomp.setCellValueFactory(new PropertyValueFactory<Competences,String>("nomCompetence"));

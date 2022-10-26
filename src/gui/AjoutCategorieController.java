@@ -38,6 +38,7 @@ import entites.Formation;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
+import services.ServiceFormation;
 
 
 /**
@@ -76,20 +77,7 @@ public class AjoutCategorieController implements Initializable {
     
 
     
-    /*private void ajoutercategorie(ActionEvent event) throws IOException{
-            ServiceCategorie sp = new ServiceCategorie();
-            Categorie C = new Categorie();
-            C.setNomCategorie(tfNomC.getText());
-            sp.ajouter_categorie(C);//la méthode getText() retourne toujours une chaine de caractère 
-            JOptionPane.showMessageDialog(null,"Categorie Ajoutée !");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("AfficheCategorie.fxml"));
-            Parent root = loader.load();
-            tfNomC.getScene().setRoot(root);
-            AfficheCategorieController auc = loader.getController();
-            auc.setLabelcategorie(tfNomC.getText());*/
-     
-           
-    //}//
+   
     
     /**
      * Initializes the controller class.
@@ -109,16 +97,7 @@ public class AjoutCategorieController implements Initializable {
         // TODO@FXML
     
     }    
-    /*private void ajoutercategorie(ActionEvent event) throws IOException{
-            ServiceCategorie sp = new ServiceCategorie();
-            Categorie C = new Categorie();
-            C.setNomCategorie(tfNomC.getText());
-            sp.ajouter_categorie(C);//la méthode getText() retourne toujours une chaine de caractère 
-            JOptionPane.showMessageDialog(null,"Categorie Ajoutée !");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("AjoutCategorie.fxml"));
-            Parent root = loader.load();
-            tfNomC.getScene().setRoot(root);
-    }*/ 
+    
 
     @FXML
     private void modifcategorie(ActionEvent event) {
@@ -129,14 +108,7 @@ public class AjoutCategorieController implements Initializable {
         
         
     }
-    /*@FXML
-    private void modifierQuestion(ActionEvent event) {
-        Question q = tvQuestion.getSelectionModel().getSelectedItem();
-        QuestionService  QE = new QuestionService() ;
-        QE.modifier(new Question(q.getIdQuestion(),lbEnnonce.getText()));
-        JOptionPane.showMessageDialog(null,"Question modifié ! ");
-        showQuestions() ;
-    }*/
+    
 
     @FXML
     private void ajoutcat(ActionEvent event) {
@@ -212,28 +184,10 @@ public class AjoutCategorieController implements Initializable {
         JOptionPane.showMessageDialog(null,"Categorie Supprimée ! ");
         showcategorie();
     }
-    public ObservableList<Categorie> afficher() {
-        
-        ObservableList<Categorie> list = FXCollections.observableArrayList();
-
-        try {
-            String requete = "SELECT idCategorie,nomCategorie FROM Categorie ";
-           Statement st = cnx.createStatement();
-           
-            ResultSet rs = st.executeQuery(requete);
-            
-            while (rs.next()) {
-                list.add(new Categorie(rs.getLong(1),rs.getString(2)));
-            }
-
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        }
-
-        return list;
-    }
+    
     public void showcategorie(){
-        ObservableList<Categorie> ListCat =  afficher() ; 
+        ServiceCategorie SC = new ServiceCategorie();
+        ObservableList<Categorie> ListCat = SC.afficher() ; 
         
         
         ColNomC.setCellValueFactory(new PropertyValueFactory<Categorie,String>("nomCategorie"));
@@ -274,38 +228,17 @@ public class AjoutCategorieController implements Initializable {
         
         
     }
-    public ObservableList<Formation> afficher_catformation(){
-        System.out.println("1");
-        ObservableList<Formation> list1 = FXCollections.observableArrayList();
-        
-        String ch= tfNomC.getText();
-        
-        //String query1="select * from "+db+".vehicules where ( '"+s+"'='"+re+"' ) ";
-
-        try {
-            String requete = "SELECT sujet FROM Formation JOIN Categorie ON Formation.idCategorie=Categorie.idCategorie  ";
-           Statement st = cnx.createStatement();
-           System.out.println("cv ");
-            ResultSet rs = st.executeQuery(requete);
-            
-            while (rs.next()) {
-                list1.add(new Formation(rs.getString("sujet")));
-            }
-
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        }
-
-        return list1;
-    }
+    
 
     @FXML
     private void chercherformation(ActionEvent event) {
-        
-         ObservableList<Categorie> ListCat1 =  afficher() ;
-          ObservableList<Formation> ListCat =  afficher_catformation () ;
+         ServiceCategorie SC = new ServiceCategorie();
+         ServiceFormation SF = new ServiceFormation();
+         ObservableList<Categorie> ListCat1 =  SC.afficher() ;
+          ObservableList<Formation> ListCat =  SF.afficher_catformation () ;
           
           int i,j,i1 =0;
+          Boolean test = false;
         /*Predicate<String> predicate = new Predicate<String>() {
             
             public boolean delegate(String value) {
@@ -332,6 +265,7 @@ public class AjoutCategorieController implements Initializable {
             
             
             if(ch1.equals(tfNomC.getText())){
+                 test =true;
                 System.out.println("true");
                 m=ListCat1.get(j).getIdCategorie();
                 ch1= ListCat1.get(j).getNomCategorie();
@@ -344,6 +278,11 @@ public class AjoutCategorieController implements Initializable {
                 
                 
            }
+        if (test==false){
+            JOptionPane.showMessageDialog(null," Pas des Formations dans cette catégorie ! ");
+            
+        }
+        else {
             
             while(j<=ListCat.size()){
                 
@@ -357,12 +296,14 @@ public class AjoutCategorieController implements Initializable {
                     
                 }
             }
+       
             System.out.println(ListCat.size());
             colnomformation.setCellValueFactory(new PropertyValueFactory<Formation,String>("sujet"));
             //colidC.setCellValueFactory(new PropertyValueFactory<Categorie,Long>("idCategorie"));
         
         System.out.println("Pas de Soucis ");
        tabformationcat.setItems(ListCat);
+        }
             
             
             
@@ -371,10 +312,12 @@ public class AjoutCategorieController implements Initializable {
           
     }
     public String filtrer(){
-         ObservableList<Categorie> ListCat1 =  afficher() ;
-          ObservableList<Formation> ListCat =  afficher_catformation () ;
+         ServiceCategorie SC = new ServiceCategorie();
+         ServiceFormation SF = new ServiceFormation();
+         ObservableList<Categorie> ListCat1 =  SC.afficher() ;
+          ObservableList<Formation> ListCat =  SF.afficher_catformation () ;
           
-          int i,j,i1 =0;
+          int i,j,i1,n =0;
         /*Predicate<String> predicate = new Predicate<String>() {
             
             public boolean delegate(String value) {
@@ -412,6 +355,7 @@ public class AjoutCategorieController implements Initializable {
             System.out.println(ch1);
             if(ch1==tfNomC.getText()){
                 m=ListCat1.get(j).getIdCategorie();
+                n++;
                 
                 
                 

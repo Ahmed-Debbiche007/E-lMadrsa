@@ -46,7 +46,7 @@ import utiles.DataDB;
 import entites.Attestation;
 import java.io.ByteArrayOutputStream;
 import java.nio.file.Paths;
-import services.ServiceAttestation;
+import services.ServiceGestionAttestation;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -128,11 +128,11 @@ public class GestionAttestationController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        showParticipation();
+        showDemande_Attestation();
         showAttestation();
         // TODO
     }    
-     public ObservableList<Participation> afficher() {
+     public ObservableList<Participation> afficher_DemandeAttestation() {
         System.out.println("1");
         ObservableList<Participation> list = FXCollections.observableArrayList();
        
@@ -166,8 +166,9 @@ public class GestionAttestationController implements Initializable {
 
         return list;
     }
-    public void showParticipation(){
-        ObservableList<Participation> ListCat =  afficher() ; 
+    public void showDemande_Attestation(){
+        ServiceGestionAttestation  SGA = new ServiceGestionAttestation();
+        ObservableList<Participation> ListCat =  SGA.afficher_DemandeAttestation() ; 
         //System.out.println("pas de probleme");
         Participation P = new Participation();
         System.out.println(ListCat.size());
@@ -250,7 +251,7 @@ public class GestionAttestationController implements Initializable {
 
     }
      public void showAttestation(){
-         ServiceAttestation SA = new ServiceAttestation ();
+         ServiceGestionAttestation SA = new ServiceGestionAttestation ();
         ObservableList<Attestation> ListCat =  SA.afficher_Att(); 
        
         
@@ -274,7 +275,7 @@ public class GestionAttestationController implements Initializable {
     @FXML
     private void AjouterAtt(ActionEvent event) throws ParseException {
         Participation P= tabGestionAtt.getSelectionModel().getSelectedItem();
-        ServiceAttestation spA = new ServiceAttestation();
+        ServiceGestionAttestation spA = new ServiceGestionAttestation();
         System.out.println("1");
         Attestation A = new Attestation();
         
@@ -304,7 +305,7 @@ public class GestionAttestationController implements Initializable {
          
          
         
-        ServiceAttestation spAM= new ServiceAttestation();
+        ServiceGestionAttestation spAM= new ServiceGestionAttestation();
         System.out.println("Service Attestation Created");
        
         System.out.println("object  Attestation Created");
@@ -322,7 +323,7 @@ public class GestionAttestationController implements Initializable {
     private void SupprimerAtt(ActionEvent event) {
         Attestation A = tabAttD.getSelectionModel().getSelectedItem();
         
-        ServiceAttestation spAM= new ServiceAttestation();
+        ServiceGestionAttestation spAM= new ServiceGestionAttestation();
         System.out.println("Service Attestation Created");
         spAM.supprimer_attestation(A);
         JOptionPane.showMessageDialog(null,"Attestation Supprimée ! ");

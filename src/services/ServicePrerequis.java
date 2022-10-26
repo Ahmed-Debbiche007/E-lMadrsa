@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 /**
  *
  * @author User
@@ -58,6 +60,46 @@ public class ServicePrerequis {
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
+    }
+       public ObservableList<Prerequis> afficher_Pre() {
+        System.out.println("1");
+        ObservableList<Prerequis> list = FXCollections.observableArrayList();
+
+        try {
+            String requete = "SELECT idPrerequis,nomPrerequis FROM Prerequis ";
+            Statement st = cnx.createStatement();
+           
+            ResultSet rs = st.executeQuery(requete);
+            
+            while (rs.next()) {
+                list.add(new Prerequis(rs.getLong(1),rs.getString(2)));
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return list;
+    }
+       public ObservableList<Prerequis> afficher() {
+        System.out.println("1");
+        ObservableList<Prerequis> list = FXCollections.observableArrayList();
+
+        try {
+            String requete = "SELECT idPrerequis,nomPrerequis FROM Prerequis ";
+            Statement st = cnx.createStatement();
+           
+            ResultSet rs = st.executeQuery(requete);
+            
+            while (rs.next()) {
+                list.add(new Prerequis(rs.getLong(1),rs.getString(2)));
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return list;
     }
     
     

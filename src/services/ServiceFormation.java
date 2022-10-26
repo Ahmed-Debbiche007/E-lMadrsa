@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package services;
+import entites.Categorie;
 import entites.Formation;
+import entites.difficulté;
 import utiles.DataDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +14,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -61,23 +65,7 @@ public class ServiceFormation {
         }
     }
       
-      public List<Formation> afficher() {
-        List<Formation> list = new ArrayList<>();
-
-        try {
-            String requete = "SELECT idFormation,sujet,description,difficulté,durée,idPrerequis,idCompetence,idExamen,idCategorie FROM Formation";
-            Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery(requete);
-            while (rs.next()) {
-                list.add(new Formation(rs.getLong("idFormation"), rs.getString("sujet"), rs.getString("description"),rs.getString("description"),rs.getInt("durée"),rs.getLong(6),rs.getLong(7),rs.getLong(8),rs.getLong(8)));
-            }
-
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        }
-
-        return list;
-    }
+     
       public Formation VerifUninciteFormation( String sujet ) {
           
             try {
@@ -107,6 +95,65 @@ public class ServiceFormation {
 
 
 }
+       public ObservableList<Formation> afficher() {
+        System.out.println("1");
+        ObservableList<Formation> list = FXCollections.observableArrayList();
+       
+        
+        
+
+         try {
+            String requete = "SELECT * FROM formation JOIN categorie ON formation.idCategorie=categorie.idCategorie JOIN competences On formation.idCompetence= competences.idCompetence JOIN prerequis ON formation.idPrerequis=prerequis.idPrerequis JOIN examen ON examen.idExamen=formation.idExamen;";
+            PreparedStatement st = cnx.prepareStatement(requete) ;
+            ResultSet rs = st.executeQuery(requete);
+            difficulté dif [] = difficulté.values();
+            System.out.println(dif[0]);
+            System.out.println(rs);
+            while (rs.next()) {
+               
+                
+             
+                list.add(new Formation(rs.getLong("idFormation"), rs.getString("sujet"), rs.getString("description"),rs.getString("difficulté"),rs.getInt("durée"),rs.getLong("idPrerequis"),rs.getLong("idCompetence"),rs.getLong("idExamen"),rs.getLong("idCategorie"),rs.getString("nomCategorie"),rs.getString("nomCompetence"),rs.getString("nomPrerequis"),rs.getString("nomExamen")));
+                System.out.println("heeeeeeeeeeey" + list);
+            
+            
+            }
+            
+            
+            
+            
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return list;
+    }
+       public ObservableList<Formation> afficher_catformation(){
+        System.out.println("1");
+        ObservableList<Formation> list1 = FXCollections.observableArrayList();
+        
+        //String ch= tfNomC.getText();
+        
+        //String query1="select * from "+db+".vehicules where ( '"+s+"'='"+re+"' ) ";
+
+        try {
+            String requete = "SELECT sujet,description FROM Formation JOIN Categorie ON Formation.idCategorie=Categorie.idCategorie  ";
+           Statement st = cnx.createStatement();
+           System.out.println("cv ");
+            ResultSet rs = st.executeQuery(requete);
+            
+            while (rs.next()) {
+                list1.add(new Formation(rs.getString("sujet"),rs.getString("description")));
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return list1;
+    }
+
     
     
 }

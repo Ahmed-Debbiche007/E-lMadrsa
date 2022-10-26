@@ -76,6 +76,12 @@ public class Formation {
         this.idExamen = idExamen;
     }
 
+    public Formation(String sujet, String description) {
+        this.sujet = sujet;
+        this.description = description;
+    }
+    
+
     public Formation(String sujet) {
         this.sujet=sujet ; //To change body of generated methods, choose Tools | Templates.
     }
