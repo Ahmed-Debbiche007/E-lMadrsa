@@ -186,9 +186,15 @@ public class AjoutCategorieController implements Initializable {
     }
     
     public void showcategorie(){
+
         ServiceCategorie SC = new ServiceCategorie();
         ObservableList<Categorie> ListCat = SC.afficher() ; 
+
         
+        
+         
+    
+
         
         ColNomC.setCellValueFactory(new PropertyValueFactory<Categorie,String>("nomCategorie"));
         //colidC.setCellValueFactory(new PropertyValueFactory<Categorie,Long>("idCategorie"));

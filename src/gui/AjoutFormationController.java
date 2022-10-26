@@ -5,12 +5,20 @@
  */
 package gui;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+ import entites.Prerequis;
+import entites.Competences;
 import entites.Categorie;
+
 import entites.Prerequis;
 import entites.Competences;
 import entites.Categorie;
-import entites.Examen;
+import entities.Examen;
 import java.net.URL;
+
+ import java.net.URL;
+
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,8 +34,12 @@ import services.ServiceFormation;
 import services.ServiceCompetences;
 import services.ServicePrerequis;
 import services.ServiceCategorie;
-import services.ServiceExamen;
+
+import services.ExamenService;
 import java.sql.Connection;
+
+ import java.sql.Connection;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -40,17 +52,40 @@ import javafx.scene.control.TableView;
 import utiles.DataDB;
 import javafx.scene.control.cell.PropertyValueFactory ; 
 import entites.difficulté;
+import entities.Examen;
+import entities.Participation;
 import java.io.IOException;
+
+
+import java.security.Security;
+
 import java.sql.PreparedStatement;
 import static java.util.Arrays.equals;
 import static java.util.Arrays.equals;
 import static java.util.Arrays.equals;
+import java.util.Properties;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableCell;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javafx.util.Callback;
+import javax.mail.Address;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
+import services.ExamenService;
+import services.ParticipationsService;
+import services.UtilisateurService;
 
 /**
  * FXML Controller class
@@ -129,12 +164,19 @@ public class AjoutFormationController implements Initializable {
     private TableColumn<Formation, String> colcat;
     private TableColumn<Formation, String> colcomp;
 
+
+    @FXML
+    private TableColumn<Formation, String> colpart;
+
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         showformation();
+
+        loadingg();
         showcompetences();
          showprerequis();
          showcategorie();
@@ -267,10 +309,13 @@ public class AjoutFormationController implements Initializable {
        
     }
     }
+
    
     public void showformation(){
         ServiceFormation SF = new ServiceFormation();
         ObservableList<Formation> ListCat = SF.afficher() ; 
+
+  
         //System.out.println("pas de probleme");
         Formation F = new Formation();
         System.out.println(ListCat.size());
@@ -358,10 +403,12 @@ public class AjoutFormationController implements Initializable {
         
         
     }
+
      
      public void showprerequis(){
          ServicePrerequis SP = new ServicePrerequis() ; 
         ObservableList<Prerequis> ListCat = SP.afficher_Pre()  ; 
+
         System.out.println("pas de probleme");
         
         colnomPrerequis.setCellValueFactory(new PropertyValueFactory<Prerequis,String>("nomPrerequis"));
@@ -373,10 +420,12 @@ public class AjoutFormationController implements Initializable {
         
         
     }
+
       
        public void showcompetences(){
         ServiceCompetences Scom = new ServiceCompetences();
         ObservableList<Competences> ListCat = Scom.afficher_comp()  ; 
+
         //System.out.println("pas de probleme");
         
         colnomComp.setCellValueFactory(new PropertyValueFactory<Competences,String>("nomCompetence"));
@@ -388,10 +437,12 @@ public class AjoutFormationController implements Initializable {
         
         
     }
+
       
        public void showcategorie(){
         ServiceCategorie SC = new ServiceCategorie();
         ObservableList<Categorie> ListCat = SC.afficher_cat()  ; 
+
         
         
         colnomCat.setCellValueFactory(new PropertyValueFactory<Categorie,String>("nomCategorie"));
@@ -404,7 +455,11 @@ public class AjoutFormationController implements Initializable {
         
     }
        public void showcExamen(){
-           ServiceExamen SE= new ServiceExamen();
+
+          
+
+           ExamenService SE= new ExamenService();
+
         ObservableList<Examen> ListCat =  SE.afficher() ; 
         
         
@@ -417,6 +472,142 @@ public class AjoutFormationController implements Initializable {
         
         
     }
+
+
+           private void loadingg() {
+
+        showformation();
+
+        colidformation.setCellValueFactory(new PropertyValueFactory<Formation,Long>("idFormation"));
+        colsujet.setCellValueFactory(new PropertyValueFactory<Formation,String>("Sujet"));
+        coldescription.setCellValueFactory(new PropertyValueFactory<Formation,String>("Description"));
+        coldiff.setCellValueFactory(new PropertyValueFactory<Formation,String>("Difficulté"));
+        colduree.setCellValueFactory(new PropertyValueFactory<Formation,Integer>("durée"));
+        colidCompetence.setCellValueFactory(new PropertyValueFactory<Formation,Long>("nomCompetence"));
+        colidCategorie.setCellValueFactory(new PropertyValueFactory<Formation,Long>("nomCategorie"));
+        colidPrerequis.setCellValueFactory(new PropertyValueFactory<Formation,Long>("nomPrerequis"));
+        colidExamen.setCellValueFactory(new PropertyValueFactory<Formation,Long>("nomExamen"));
+
+        //add cell of button edit 
+        Callback<TableColumn<Formation, String>, TableCell<Formation, String>> cellFoctory = (TableColumn<Formation, String> param) -> {
+            // make cell containing buttons
+            final TableCell<Formation, String> cell = new TableCell<Formation, String>() {
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    //that cell created only on non-empty rows
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+
+                    } else {
+
+                        FontAwesomeIconView ParticipateIcon = new FontAwesomeIconView(FontAwesomeIcon.PLUS);
+
+     
+
+                        ParticipateIcon.setStyle(
+                                " -fx-cursor: hand ;"
+                                + "-glyph-size:28px;"
+                                + "-fx-fill:#00E676;"
+                        );
+
+      
+
+                        ParticipateIcon.setOnMouseClicked((MouseEvent event) -> {
+
+                            if (tabFormation.getSelectionModel().getSelectedItem() != null) {
+                                System.out.println("participer a une formation ......");
+                                ParticipationsService PS = new ParticipationsService();
+                                Formation f = tabFormation.getSelectionModel().getSelectedItem();
+                                long x = 1;
+                                Participation p = new Participation(x,f.getIdFormation());
+                                PS.ajouter(p);
+                                
+                                
+                                
+                                
+                                // send mail about formation  participation : made by gouiaa
+
+                                String username = "springforfever@gmail.com";
+                                String password = "kmcovmkdwmxwscsz";
+                                Properties props = new Properties();
+                                Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+                                props.put("mail.smtp.port", "465");
+                                props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+                                props.put("mail.smtp.ssl.enable", true); 
+                                props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+                                props.put("mail.smtp.socketFactory.port", "465");
+                                props.put("mail.smtp.socketFactory.fallback", "false");
+                                props.put("mail.smtp.host", "smtp.gmail.com");
+                                props.put("mail.smtp.auth", "true");
+                                props.setProperty("mail.debug", "true");
+                                props.setProperty("mail.transport.protocol", "smtp");
+                                props.put("mail.smtp.starttls.enable", "true"); 
+                                Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+
+                                    protected PasswordAuthentication getPasswordAuthentication() {
+                                        return new PasswordAuthentication(username, password);
+                                    }
+                                });
+
+                                try {
+                                    Address a = new InternetAddress("springforfever@gmail.com");
+      
+                                    Message message = new MimeMessage(session);
+                                    message.setFrom(new InternetAddress("springforfever@gmail.com"));
+                                    
+                                    
+                                    UtilisateurService US = new UtilisateurService() ;
+                                    ExamenService  ES = new ExamenService()  ;
+                                     
+                                    Examen CurrentExam = ES.getExamById(f.getIdExamen()) ;
+                                  //  User currentUser = US.getByUserId(CurrentExam.get)
+                                    
+                                    message.setRecipients(Message.RecipientType.TO,InternetAddress.parse("springforfever@gmail.com") );
+                                    message.setSubject("formation news from elmadrsa");
+                                    message.setText("Bonjour vous avez participer a la formatoin :" + f.getSujet());
+                                    Transport.send(message);
+
+                                } catch (MessagingException mex) {
+                                    System.out.println("send failed, exception: " + mex.getMessage());
+                                }
+
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("ParticipationCrud.fxml"));
+                                Parent root;
+                                try {
+                                    root = loader.load();
+                                    tabFormation.getScene().setRoot(root);
+                                } catch (IOException ex) {
+                                    System.out.println("error");
+                                }
+
+                            }
+
+
+                        });
+
+                        HBox managebtn = new HBox(ParticipateIcon);
+                        managebtn.setStyle("-fx-alignment:center");
+                        HBox.setMargin(ParticipateIcon, new Insets(2, 3, 0, 2));
+
+                        setGraphic(managebtn);
+
+                        setText(null);
+
+                    }
+                }
+
+            };
+
+            return cell;
+        };
+        colpart.setCellFactory(cellFoctory);
+        showformation();
+
+
+    }
+
 
     
     

@@ -5,7 +5,7 @@
  */
 package services;
 import entites.Attestation;
-import entites.Participation;
+import entities.Participation;
 import utiles.DataDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

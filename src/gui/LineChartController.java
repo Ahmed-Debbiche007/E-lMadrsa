@@ -5,7 +5,7 @@
  */
 package gui;
 
-import entites.Participation;
+import entities.Participation;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;

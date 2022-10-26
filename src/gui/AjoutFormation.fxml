@@ -31,6 +31,7 @@
       <Button id="btmodif" fx:id="btmodif" layoutX="245.0" layoutY="373.0" mnemonicParsing="false" onAction="#modifformation" text="Modifier" />
       <Button id="btretour" fx:id="btretour" layoutX="61.0" layoutY="39.0" mnemonicParsing="false" onAction="#retourformation" prefHeight="50.0" prefWidth="123.0" text="Retour" />
       <Button id="btenregistrer" fx:id="btenregistrer" layoutX="330.0" layoutY="373.0" mnemonicParsing="false" onAction="#enregistrermodif" text="Enregistrer" />
+<<<<<<< HEAD
       <TableView id="tabFormation" fx:id="tabFormation" layoutX="31.0" layoutY="439.0" prefHeight="433.0" prefWidth="897.0">
         <columns>
           <TableColumn id="colidformation" fx:id="colidformation" prefWidth="75.0" text="idFormation" visible="false" />
@@ -45,24 +46,53 @@
         </columns>
       </TableView>
       <TableView id="tabPre" fx:id="tabPre" layoutX="645.0" layoutY="58.0" prefHeight="236.0" prefWidth="267.0">
+=======
+      <TableView id="tabFormation" fx:id="tabFormation" layoutX="31.0" layoutY="439.0" prefHeight="433.0" prefWidth="913.0">
+        <columns>
+          <TableColumn id="colidformation" fx:id="colidformation" prefWidth="75.0" text="idFormation" visible="false" />
+          <TableColumn id="colsujet" fx:id="colsujet" prefWidth="75.0" text="sujet" />
+            <TableColumn id="coldescription" fx:id="coldescription" prefWidth="99.0" text="description" />
+            <TableColumn id="coldiff" fx:id="coldiff" prefWidth="90.0" text="difficulté" />
+            <TableColumn id="colduree" fx:id="colduree" prefWidth="98.0" text="durée" />
+            <TableColumn id="colidPrerequis" fx:id="colidPrerequis" prefWidth="113.0" text="nomPrerequis" />
+            <TableColumn id="colidCompetence" fx:id="colidCompetence" prefWidth="136.0" text="nomCompetence" />
+            <TableColumn id="colidCategorie" fx:id="colidCategorie" prefWidth="113.0" text="nomCategorie" />
+            <TableColumn id="colidExamen" fx:id="colidExamen" prefWidth="106.0" text="nomExamen" />
+            <TableColumn id="colidExamen" fx:id="colpart" prefWidth="82.0" text="Participer" />
+        </columns>
+      </TableView>
+      <TableView id="tabPre" fx:id="tabPre" layoutX="647.0" layoutY="59.0" prefHeight="236.0" prefWidth="267.0">
+>>>>>>> d8830c0b19eba436c8ca2f7097fafbe0f99f6f79
         <columns>
           <TableColumn id="colidPreA" fx:id="colidPreA" prefWidth="75.0" text="idPrerequis" visible="false" />
           <TableColumn id="colnomPrerequis" fx:id="colnomPrerequis" prefWidth="175.0" text="nomPrerequis" />
         </columns>
       </TableView>
+<<<<<<< HEAD
       <TableView fx:id="tabcomp" layoutX="937.0" layoutY="60.0" prefHeight="228.0" prefWidth="295.0">
+=======
+      <TableView fx:id="tabcomp" layoutX="949.0" layoutY="60.0" prefHeight="228.0" prefWidth="283.0">
+>>>>>>> d8830c0b19eba436c8ca2f7097fafbe0f99f6f79
         <columns>
           <TableColumn id="colidCompetenceA" fx:id="colidCompetenceA" prefWidth="75.0" text="idCompetence" visible="false" />
           <TableColumn id="colnomComp" fx:id="colnomComp" prefWidth="180.0" text="nomCompetence" />
         </columns>
       </TableView>
+<<<<<<< HEAD
       <TableView fx:id="tabCat" layoutX="937.0" layoutY="313.0" prefHeight="252.0" prefWidth="295.0">
+=======
+      <TableView fx:id="tabCat" layoutX="949.0" layoutY="313.0" prefHeight="252.0" prefWidth="283.0">
+>>>>>>> d8830c0b19eba436c8ca2f7097fafbe0f99f6f79
         <columns>
           <TableColumn id="colidCat" fx:id="colidCat" prefWidth="75.0" text="idCategorie" visible="false" />
           <TableColumn id="colnomCat" fx:id="colnomCat" prefWidth="219.0" text="nomCategorie" />
         </columns>
       </TableView>
+<<<<<<< HEAD
       <TableView id="tabExam" fx:id="tabExam" layoutX="935.0" layoutY="583.0" prefHeight="266.0" prefWidth="305.0">
+=======
+      <TableView id="tabExam" fx:id="tabExam" layoutX="951.0" layoutY="583.0" prefHeight="266.0" prefWidth="295.0">
+>>>>>>> d8830c0b19eba436c8ca2f7097fafbe0f99f6f79
         <columns>
           <TableColumn id="colidexamen" fx:id="colidexamen" prefWidth="75.0" text="idExamen" visible="false" />
           <TableColumn id="colnomExamen" fx:id="colnomExamen" prefWidth="294.0" text="nomExamen" />

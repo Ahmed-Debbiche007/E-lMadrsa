@@ -65,6 +65,7 @@ public class ServiceFormation {
         }
     }
       
+
      
       public Formation VerifUninciteFormation( String sujet ) {
           
@@ -95,7 +96,9 @@ public class ServiceFormation {
 
 
 }
-       public ObservableList<Formation> afficher() {
+      
+
+    public ObservableList<Formation> afficher() {
         System.out.println("1");
         ObservableList<Formation> list = FXCollections.observableArrayList();
        
@@ -118,6 +121,7 @@ public class ServiceFormation {
             
             
             }
+
             
             
             
@@ -129,6 +133,7 @@ public class ServiceFormation {
 
         return list;
     }
+
        public ObservableList<Formation> afficher_catformation(){
         System.out.println("1");
         ObservableList<Formation> list1 = FXCollections.observableArrayList();
@@ -154,6 +159,12 @@ public class ServiceFormation {
         return list1;
     }
 
+    
+    
+    
+    
+
+     
     
     
 }

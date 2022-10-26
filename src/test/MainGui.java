@@ -26,8 +26,8 @@ import gui.AjoutCategorieController;
 public class MainGui extends Application {
     
     @Override
-    public void start(Stage primaryStage)  {
-        
+    public void start(Stage primaryStage) throws IOException  {
+        /*
         try{
         FXMLLoader loader = new FXMLLoader (getClass().getResource("../gui/welcome.fxml")) ; 
         Parent root = loader.load();
@@ -43,6 +43,14 @@ public class MainGui extends Application {
             System.out.println("Error Message");
             
         }
+        */
+               // FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/Welcome.fxml")) ;
+                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/Welcome.fxml")) ;
+        Parent root = loader.load() ; 
+        Scene scene = new Scene(root) ;
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Crud Examen ");
+        primaryStage.show();
             
         }
         
