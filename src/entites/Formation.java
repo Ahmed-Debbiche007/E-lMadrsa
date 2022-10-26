@@ -27,6 +27,17 @@ public class Formation {
     public Formation() {
     }
 
+    public Formation(Long idFormation, String sujet, String description, String difficulté, int durée, Long idPrerequis, Long idCompetence, Long idCategorie) {
+        this.idFormation = idFormation;
+        this.sujet = sujet;
+        this.description = description;
+        this.difficulté = difficulté;
+        this.durée = durée;
+        this.idPrerequis = idPrerequis;
+        this.idCompetence = idCompetence;
+        this.idCategorie = idCategorie;
+    }
+
     public Formation(Long idFormation, String sujet, String description, String difficulté, int durée, Long idPrerequis, Long idCompetence, Long idCategorie, Long idExamen) {
         this.idFormation = idFormation;
         this.sujet = sujet;

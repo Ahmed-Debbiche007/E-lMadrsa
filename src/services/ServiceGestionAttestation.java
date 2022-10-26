@@ -91,7 +91,7 @@ public class ServiceGestionAttestation {
         ObservableList<Attestation> list = FXCollections.observableArrayList();
 
         try {
-            String requete = "select * from attestation JOIN participation On attestation.idParticipation=participation.idParticipation join user ON participation.idUser=user.idUser; ";
+            String requete = "select * from attestation JOIN participation On attestation.idParticipation=participation.idParticipation join user ON participation.idUser=user.idUtilisateur; ";
             Statement st = cnx.createStatement();
            
             ResultSet rs = st.executeQuery(requete);
@@ -115,7 +115,7 @@ public class ServiceGestionAttestation {
         
 
          try {
-            String requete = "SELECT * from participation join user on user.idUser=participation.idUser JOIN formation on participation.idFormation=formation.idFormation; ";
+            String requete = "SELECT * from participation join user on user.idUtilisateur=participation.idUser JOIN formation on participation.idFormation=formation.idFormation; ";
             PreparedStatement st = cnx.prepareStatement(requete) ;
             ResultSet rs = st.executeQuery(requete);
             
@@ -125,7 +125,7 @@ public class ServiceGestionAttestation {
                
                 
              
-                list.add(new Participation(rs.getLong("idParticipation"), rs.getLong("idUser"), rs.getLong("idFormation"),rs.getLong("resultat"),rs.getString("nom"),rs.getString("Prenom"),rs.getString("sujet")));
+                list.add(new Participation(rs.getLong("idParticipation"), rs.getLong("idUtilisateur"), rs.getLong("idFormation"),rs.getLong("resultat"),rs.getString("nom"),rs.getString("Prenom"),rs.getString("sujet")));
                 System.out.println("heeeeeeeeeeey" + list);
             
             

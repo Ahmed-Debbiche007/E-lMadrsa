@@ -133,6 +133,44 @@ public class ServiceFormation {
 
         return list;
     }
+    
+    
+    
+    
+    
+    
+    
+        public ObservableList<Formation> afficherFormation() {
+        System.out.println("1");
+        ObservableList<Formation> list = FXCollections.observableArrayList();
+       
+        
+        
+
+         try {
+            String requete = "SELECT * FROM formation";
+            PreparedStatement st = cnx.prepareStatement(requete) ;
+            ResultSet rs = st.executeQuery(requete);
+            difficulté dif [] = difficulté.values();
+            System.out.println(dif[0]);
+            System.out.println(rs);
+            while (rs.next()) {
+               
+                
+             
+                list.add(new Formation(rs.getLong("idFormation"), rs.getString("sujet"), rs.getString("description"),rs.getString("difficulté"),rs.getInt("durée"),rs.getLong("idPrerequis"),rs.getLong("idCompetence"),rs.getLong("idCategorie")));
+                System.out.println("heeeeeeeeeeey" + list);
+            
+            
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return list;
+    }
+    
 
        public ObservableList<Formation> afficher_catformation(){
         System.out.println("1");
