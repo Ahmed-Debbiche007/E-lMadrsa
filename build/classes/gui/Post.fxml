@@ -5,27 +5,22 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.PostController">
    <children>
-      <TableView fx:id="tvpost" layoutX="143.0" layoutY="136.0" prefHeight="530.0" prefWidth="1123.0">
+      <TableView fx:id="tvpost" layoutX="154.0" layoutY="146.0" prefHeight="526.0" prefWidth="1112.0">
         <columns>
-          <TableColumn fx:id="colposttitle" prefWidth="595.0" text="POSTS" />
-          <TableColumn fx:id="colpostedby" minWidth="0.0" prefWidth="175.0" text="POSTED BY" />
-            <TableColumn fx:id="colpostvotes" minWidth="8.0" prefWidth="65.0" text="VOTES" />
-            <TableColumn fx:id="colpostcomments" minWidth="8.0" prefWidth="101.0" text="COMMENTS" />
-            <TableColumn fx:id="colpostdate" minWidth="8.0" prefWidth="186.0" text="DATE" />
+            <TableColumn fx:id="action" minWidth="8.0" prefWidth="180.0" text="ACTION" />
+          <TableColumn fx:id="colposttitle" prefWidth="468.0" text="POSTS" />
+          <TableColumn fx:id="colpostedby" minWidth="0.0" prefWidth="120.0" text="POSTED BY" />
+            <TableColumn fx:id="colpostvotes" minWidth="8.0" prefWidth="89.0" text="VOTES" />
+            <TableColumn fx:id="colpostcomments" minWidth="0.0" prefWidth="118.0" text="COMMENTS" />
+            <TableColumn fx:id="colpostdate" minWidth="8.0" prefWidth="135.0" resizable="false" text="DATE" />
         </columns>
       </TableView>
-      <Label fx:id="lbcatpost" layoutX="600.0" layoutY="30.0" text="cat???" textFill="#ff7700">
-         <font>
-            <Font name="System Bold" size="58.0" />
-         </font></Label>
-      <Button layoutX="30.0" layoutY="219.0" mnemonicParsing="false" onAction="#kbalajouterpost" prefHeight="31.0" prefWidth="88.0" text="Ajouter" />
-      <Button layoutX="30.0" layoutY="279.0" mnemonicParsing="false" onAction="#supprimerpost" prefHeight="31.0" prefWidth="88.0" text="supprimer" />
-      <Button layoutX="30.0" layoutY="337.0" mnemonicParsing="false" onAction="#modifierpost" prefHeight="31.0" prefWidth="88.0" text="Modifier" />
+      <Label fx:id="lbcatpost" layoutX="620.0" layoutY="68.0" text="cat???" />
+      <Button layoutX="30.0" layoutY="195.0" mnemonicParsing="false" onAction="#kbalajouterpost" prefHeight="31.0" prefWidth="88.0" text="Ajouter" />
       <Button layoutX="30.0" layoutY="30.0" mnemonicParsing="false" onAction="#BackToMain" prefHeight="31.0" prefWidth="88.0" text="Return" />
-      <Button layoutX="30.0" layoutY="395.0" mnemonicParsing="false" onAction="#acceder" prefHeight="31.0" prefWidth="88.0" text="Acceder" />
+      <Button layoutX="30.0" layoutY="236.0" mnemonicParsing="false" onAction="#acceder" onMouseEntered="#hoveraccpost" prefHeight="31.0" prefWidth="88.0" text="Acceder" />
    </children>
 </AnchorPane>
