@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="667.0" prefWidth="1082.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AjoutCompetencesController">
+   <children>
+      <Label alignment="CENTER" layoutX="360.0" layoutY="47.0" prefHeight="76.0" prefWidth="350.0" text="Competences " textAlignment="CENTER" textFill="#e11d9c" underline="true">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Label>
+      <Label layoutX="216.0" layoutY="167.0" prefHeight="46.0" prefWidth="189.0" text="Nom Competence : ">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField id="tfnomComp" fx:id="tfnomComp" layoutX="448.0" layoutY="175.0" />
+      <Button id="btAjout" fx:id="btAjout" layoutX="151.0" layoutY="282.0" mnemonicParsing="false" onAction="#ajoutcomp" prefHeight="46.0" prefWidth="123.0" text="Ajouter" />
+      <Button id="btmodif" fx:id="btmodif" layoutX="378.0" layoutY="282.0" mnemonicParsing="false" onAction="#modifcomp" prefHeight="46.0" prefWidth="123.0" text="Modifier" />
+      <Button id="btsupprimer" fx:id="btsupprimer" layoutX="736.0" layoutY="282.0" mnemonicParsing="false" onAction="#supprimercat" prefHeight="46.0" prefWidth="123.0" text="Supprimer" />
+      <TableView id="tabcomp" fx:id="tabcomp" layoutX="151.0" layoutY="380.0" prefHeight="246.0" prefWidth="804.0">
+        <columns>
+          <TableColumn id="colidcomp" fx:id="colidcomp" minWidth="0.0" prefWidth="0.0" text="idCompetence" />
+          <TableColumn id="colnomcomp" fx:id="colnomcomp" minWidth="0.0" prefWidth="803.0" text="nomCompetence" />
+        </columns>
+      </TableView>
+      <Button id="btret" fx:id="btret" layoutX="59.0" layoutY="40.0" mnemonicParsing="false" onAction="#retourcomp" prefHeight="38.0" prefWidth="123.0" text="Retour" />
+      <Button id="btenregistrcomp" fx:id="btenregistrcomp" layoutX="520.0" layoutY="282.0" mnemonicParsing="false" onAction="#enregistermodif" prefHeight="46.0" prefWidth="123.0" text="Enregistrer" />
+   </children>
+</AnchorPane>

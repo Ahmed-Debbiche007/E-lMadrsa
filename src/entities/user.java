@@ -4,6 +4,7 @@
  */
 package entities;
 
+
 import java.sql.Date;
 
 /**
@@ -22,6 +23,7 @@ public class User {
     private Date dateNaissance ;
     private String image;
     private String role;
+    private Double Resultat ; 
     
     
 
@@ -53,6 +55,18 @@ public class User {
         this.role = role;
     }
 
+    public User(Long idUtilisateur, String nom, String prenom, String nomUtilisateur, String tel, String email, String motDePasse, Date dateNaissance, String role) {
+        this.idUtilisateur = idUtilisateur;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.nomUtilisateur = nomUtilisateur;
+        this.tel = tel;
+        this.email = email;
+        this.motDePasse = motDePasse;
+        this.dateNaissance = dateNaissance;
+        this.role = role;
+    }
+
      public User( String nom, String prenom, String nomUtilisateur,String tel, String email, String motDePasse, Date dateNaissance, String image , String role) {
         
         this.nom = nom;
@@ -66,21 +80,34 @@ public class User {
         this.role = role;
     }
 
+    public Double getResultat() {
+        return Resultat;
+    }
+
+    public void setResultat(Double Resultat) {
+        this.Resultat = Resultat;
+    }
+
+ 
+
     public Long getId() {
         return idUtilisateur;
     }
 
     public void setId(long idUtilisateur) {
         this.idUtilisateur = idUtilisateur;
+
     }
 
     public String getNom() {
         return nom;
     }
 
+
     public void setNom(String nom) {
         this.nom = nom;
     }
+
 
     public String getPrenom() {
         return prenom;
@@ -148,6 +175,7 @@ public class User {
 
     @Override
     public String toString() {
+
         return "user{" + "idUtilisateur=" + idUtilisateur + ", nom=" + nom + ", prenom=" + prenom + ", nomUtilisateur=" + nomUtilisateur + ", tel=" + tel + ", email=" + email + ", motDePasse=" + motDePasse + ", dateNaissance=" + dateNaissance + ", image=" + image +", role=" + role + '}';
     }
 

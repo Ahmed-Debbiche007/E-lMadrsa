@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="741.0" prefWidth="1066.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AjoutPrerequisController">
+   <children>
+      <Label alignment="CENTER" layoutX="305.0" layoutY="25.0" prefHeight="79.0" prefWidth="385.0" text="Prerequis" textFill="#da289f" underline="true">
+         <font>
+            <Font size="39.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="231.0" layoutY="160.0" prefHeight="51.0" prefWidth="192.0" text="Nom Prerequis : " textAlignment="CENTER">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <TextField id="tfnom" fx:id="tfnom" layoutX="473.0" layoutY="170.0" />
+      <Button id="btajout" fx:id="btajout" layoutX="147.0" layoutY="284.0" mnemonicParsing="false" onAction="#ajoutprerequis" prefHeight="42.0" prefWidth="129.0" text="Ajouter" />
+      <Button id="btmodif" fx:id="btmodif" layoutX="376.0" layoutY="284.0" mnemonicParsing="false" onAction="#modifprerequis" prefHeight="42.0" prefWidth="137.0" text="Modifier" />
+      <Button id="btsupprimer" fx:id="btsupprimer" layoutX="775.0" layoutY="284.0" mnemonicParsing="false" onAction="#supprimerprerequis" prefHeight="42.0" prefWidth="137.0" text="Supprimer" />
+      <TableView fx:id="tab" layoutX="180.0" layoutY="399.0" prefHeight="282.0" prefWidth="717.0">
+        <columns>
+          <TableColumn id="colid" fx:id="colid" minWidth="0.0" prefWidth="0.0" text="idPrerequis" />
+          <TableColumn id="colnom" fx:id="colnom" prefWidth="716.0" text="nomPrerequis" />
+        </columns>
+      </TableView>
+      <Button id="idretour" fx:id="idretour" layoutX="73.0" layoutY="38.0" mnemonicParsing="false" onAction="#retourprerequis" prefHeight="42.0" prefWidth="116.0" text="Retour" />
+      <Button id="btenr" fx:id="btenr" layoutX="533.0" layoutY="284.0" mnemonicParsing="false" onAction="#enregistpre" prefHeight="42.0" prefWidth="137.0" text="enregistrer" />
+   </children>
+</AnchorPane>
