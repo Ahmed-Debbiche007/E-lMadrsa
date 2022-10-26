@@ -1,8 +1,6 @@
-
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package services;
 
@@ -10,12 +8,14 @@ import java.util.List;
 
 /**
  *
- * @author aissa
- * @param <T>
+ * @author lmol
  */
 public interface IService<T> {
-    public void ajouter(T t);
-    public void supprimer(T t);
-    public void modifier(T t);
-    public List<T> afficher();
+     void insert(T t);
+   void delete(int id);
+   
+   void update(T t);
+    List<T>read();
+    
+    T readById(int id);
 }
