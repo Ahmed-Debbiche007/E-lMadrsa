@@ -17,20 +17,24 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author aymen
+ * @author Nour
  */
 public class guimain extends Application {
     
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/cat.fxml")) ;
-        Parent root = loader.load() ; 
-        Scene scene = new Scene(root) ;
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Crud publication");
-        primaryStage.show();
-    }
-
+       FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/auth.fxml"));
+       
+       Parent root = loader.load();
+       
+       Scene scene = new Scene(root);
+       primaryStage.setScene(scene);
+       primaryStage.setTitle("E-lMadrsa");     //////titre de la page 
+       primaryStage.show();
+    
+       }
+    
+  
     /**
      * @param args the command line arguments
      */

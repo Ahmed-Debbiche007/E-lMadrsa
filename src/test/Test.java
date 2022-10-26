@@ -1,44 +1,32 @@
- 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package test;
-//import entities.User;
 
-import com.google.common.hash.Hashing;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import entities.Recup;
+import static gui.AuthController.connectedUser;
+import java.security.Security;
+import java.util.Properties;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.Address;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Transport;
+import services.RecupService;
 
 /**
  *
- * @author ahmed
+ * @author Nour
  */
-public class Test extends Application {
-
-    private ArrayList<Thread> threads1;
+public class Test {
 
     public static void main(String[] args) {
-        launch(args);
-        
-       }
-
-    @Override
-    public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/AjoutUser.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("WorkShop PIDEV");
-        primaryStage.show();
+        System.out.println(System.getProperty("user.dir"));
 
     }
 
- 
 }
