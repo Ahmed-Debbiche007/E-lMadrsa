@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CatController">
+   <children>
+      <VBox layoutX="25.0" layoutY="230.0" prefHeight="93.0" prefWidth="198.0" spacing="15.0">
+         <children>
+            <Label text="Nom de Categorie">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label text="&lt;Image&gt;">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox layoutX="223.0" layoutY="230.0" prefHeight="31.0" prefWidth="163.0" spacing="15.0">
+         <children>
+            <TextField fx:id="tfnomcat" />
+         </children>
+      </VBox>
+      <TableView fx:id="tvcat" editable="true" layoutX="434.0" layoutY="96.0" minHeight="-Infinity" prefHeight="529.0" prefWidth="716.0">
+        <columns>
+            <TableColumn fx:id="realimage" prefWidth="358.0" text="realimage" />
+          <TableColumn fx:id="colimage" prefWidth="101.0" text="Image" visible="false" />
+          <TableColumn fx:id="colnomcat" prefWidth="357.0" text="Nom de categorie" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnajouter" layoutX="25.0" layoutY="361.0" mnemonicParsing="false" onAction="#ajouterCategory" prefHeight="31.0" prefWidth="116.0" text="Ajouter" />
+      <Button fx:id="btnmodifier" layoutX="134.0" layoutY="392.0" mnemonicParsing="false" onAction="#modifiercategory" prefHeight="31.0" prefWidth="116.0" text="Modifier" />
+      <Button fx:id="btnsupprimer" layoutX="250.0" layoutY="361.0" mnemonicParsing="false" onAction="#supprimerCategory" prefHeight="31.0" prefWidth="116.0" text="Supprimer" />
+      <Button fx:id="edit2" layoutX="134.0" layoutY="361.0" mnemonicParsing="false" onAction="#editcat2" prefHeight="31.0" prefWidth="116.0" text="selectionner" />
+      <Button fx:id="btnacceder" layoutX="1166.0" layoutY="338.0" mnemonicParsing="false" onAction="#acce" prefHeight="31.0" prefWidth="100.0" text="Acceder" />
+      <Label layoutX="579.0" layoutY="21.0" text="CATEGORIES" textFill="#ff0606">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Label>
+      <Button fx:id="chooseimg" layoutX="232.0" layoutY="277.0" mnemonicParsing="false" onAction="#ajouterimg" text="choose image" />
+   </children>
+</AnchorPane>
