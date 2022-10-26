@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" fx:id="ap" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Students.StudentTutorshipSessionsController">
+   <children>
+      <TableView fx:id="Sessions" layoutX="8.0" layoutY="46.0" prefHeight="200.0" prefWidth="582.0">
+        <columns>
+          <TableColumn fx:id="cltutor" prefWidth="75.0" text="Tuteur" />
+            <TableColumn fx:id="cltype" prefWidth="75.0" text="Type" />
+            <TableColumn fx:id="cldate" prefWidth="151.0" text="Date" />
+            <TableColumn fx:id="clurl" prefWidth="280.0" text="url" />
+        </columns>
+      </TableView>
+      <Button fx:id="connecter" layoutX="506.0" layoutY="273.0" mnemonicParsing="false" onAction="#connecter" text="Connecter" />
+      <Button fx:id="annuler" layoutX="410.0" layoutY="273.0" mnemonicParsing="false" onAction="#annuler" text="Supprimer" />
+   </children>
+</AnchorPane>

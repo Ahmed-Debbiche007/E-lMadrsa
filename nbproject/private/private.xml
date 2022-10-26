@@ -2,6 +2,9 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
+        <group/>
+=======
         <group>
 <<<<<<< HEAD
             <file>file:/C:/Users/User/Documents/NetBeansProjects/e_lmadrsa1/E-lMadrsa/src/services/ServiceParticipation.java</file>
@@ -28,5 +31,6 @@
             <file>file:/M:/E-lmadrsa/E-lMadrsa/src/gui/generateQuores.fxml</file>
 >>>>>>> d8830c0b19eba436c8ca2f7097fafbe0f99f6f79
         </group>
+>>>>>>> 9928149c4ae4b367f896e153472a4d05af21dca7
     </open-files>
 </project-private>
