@@ -8,7 +8,10 @@ public class Participation {
     private Long idParticipation ;
     private Double    resultat ; 
     private Long idUser ; 
-    private Long idFormation ; 
+    private Long idFormation ;
+    private String nomUser ; 
+    private String nomFormation ;
+    
 
     public Participation(Long idParticipation, Double resultat, Long idUser, Long idFormation) {
         this.idParticipation = idParticipation;
@@ -20,6 +23,11 @@ public class Participation {
     public Participation(Long idParticipation, Double resultat) {
         this.idParticipation = idParticipation;
         this.resultat = resultat;
+    }
+
+    public Participation(Long idUser, Long idFormation) {
+        this.idUser = idUser;
+        this.idFormation = idFormation;
     }
 
     public Participation(Double resultat, Long idUser, Long idFormation) {
@@ -65,6 +73,22 @@ public class Participation {
 
     public void setIdFormation(Long idFormation) {
         this.idFormation = idFormation;
+    }
+
+    public String getNomUser() {
+        return nomUser;
+    }
+
+    public void setNomUser(String nomUser) {
+        this.nomUser = nomUser;
+    }
+
+    public String getNomFormation() {
+        return nomFormation;
+    }
+
+    public void setNomFormation(String nomFormation) {
+        this.nomFormation = nomFormation;
     }
 
     @Override

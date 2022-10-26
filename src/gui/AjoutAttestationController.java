@@ -143,7 +143,7 @@ public class AjoutAttestationController implements Initializable {
             ResultSet rs = st.executeQuery(requete);
             
             while (rs.next()) {
-                list.add(new Attestation(rs.getLong(1),rs.getLong(2),rs.getDate(3)));
+                list.add(new Attestation(rs.getLong("idAttestation"),rs.getLong("idparticipation"),rs.getDate("dateAcq")));
             }
 
         } catch (SQLException ex) {

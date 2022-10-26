@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="665.0" prefWidth="1003.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ListReclamationsController">
+   <children>
+      <TableView fx:id="tvReclamations" layoutX="102.0" layoutY="213.0" prefHeight="315.0" prefWidth="846.0">
+        <columns>
+          <TableColumn fx:id="colSujet" prefWidth="198.0" text="Sujet" />
+          <TableColumn fx:id="colDesc" prefWidth="241.0" text="Description" />
+            <TableColumn fx:id="colDate" prefWidth="291.0" text="date" />
+            <TableColumn fx:id="colUser" prefWidth="115.0" text="user" />
+        </columns>
+      </TableView>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="252.0" layoutY="100.0" prefHeight="62.0" prefWidth="500.0" text="liste des réclamations" textFill="#750000">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Button layoutX="37.0" layoutY="46.0" mnemonicParsing="false" onAction="#backtomain" text="retour" />
+   </children>
+</AnchorPane>

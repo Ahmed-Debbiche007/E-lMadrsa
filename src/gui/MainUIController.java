@@ -4,9 +4,21 @@
  */
 package gui;
 
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import static com.itextpdf.text.html.HtmlTags.P;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,7 +55,6 @@ public class MainUIController implements Initializable {
 
     }
 
-    @FXML
     private void getQuizCrud(ActionEvent event) throws IOException {
     Stage stage ;
     Parent root = FXMLLoader.load(getClass().getResource("AjoutQuiz.fxml"));
@@ -63,7 +74,6 @@ public class MainUIController implements Initializable {
     stage.show();
     }
 
-    @FXML
     private void getOptionsCrud(ActionEvent event) throws IOException {
         
                             Stage stage ;
@@ -73,6 +83,91 @@ public class MainUIController implements Initializable {
     stage.setScene(scene);
     stage.show();
         
+    }
+
+    @FXML
+    private void getParticipationCrud(ActionEvent event) throws IOException {
+    Stage stage ;
+    Parent root = FXMLLoader.load(getClass().getResource("ParticipationCrud.fxml"));
+    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    Scene scene=new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+    }
+
+    @FXML
+    private void tutorAddQuiz(ActionEvent event) throws IOException {
+            Stage stage ;
+    Parent root = FXMLLoader.load(getClass().getResource("useraddexam.fxml"));
+    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    Scene scene=new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+    }
+
+    @FXML
+    private void studedntpassExam(ActionEvent event) throws IOException {
+            Stage stage ;
+    Parent root = FXMLLoader.load(getClass().getResource("useraddexam.fxml"));
+    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    Scene scene=new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+    }
+
+    @FXML
+    private void listExams(ActionEvent event) throws IOException {
+            Stage stage ;
+    Parent root = FXMLLoader.load(getClass().getResource("ListExams.fxml"));
+    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    Scene scene=new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+
+    }
+
+    @FXML
+    private void ajouterReclamation(ActionEvent event) throws IOException {
+            Stage stage ;
+    Parent root = FXMLLoader.load(getClass().getResource("AjoutRéclamations.fxml"));
+    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    Scene scene=new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+    }
+
+    @FXML
+    private void ConsulterReclamation(ActionEvent event) throws IOException {
+                    Stage stage ;
+    Parent root = FXMLLoader.load(getClass().getResource("listReclamations.fxml"));
+    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    Scene scene=new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+    }
+
+    @FXML
+    private void generatequotes(ActionEvent event) throws IOException, DocumentException {
+        
+        
+        
+    Stage stage ;
+    Parent root = FXMLLoader.load(getClass().getResource("generateQuores.fxml"));
+    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    Scene scene=new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+
+  
+        
+   
+    
+    
+    
+    
+    
+    
+    
     }
     
 }

@@ -13,11 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import outils.MyDB;
@@ -38,16 +34,21 @@ public class QuestionService implements IService<Question> {
     @Override
     public void ajouter(Question q) {
                 try {
-            String req = "insert into Question(ennonce,quizId) values(?,?) ; "  ;
+            String req = "INSERT INTO question ( ennonce,option1, option2, option3,answer,idExamen) VALUES (?, ?, ?, ?, ?, ?);"  ;
+            
             PreparedStatement st = cnx.prepareStatement(req);
             st.setString(1,q.getEnnonce());
-            st.setLong(2,q.getIdQuizz());
+            st.setString(2,q.getOption1());
+            st.setString(3,q.getOption2());
+            st.setString(4,q.getOption3());
+            st.setString(5,q.getAnswer());
+            st.setLong(6,q.getIdExamen()) ;
             st.execute();
             System.out.println("Question Ajoutée ! ");
-        } catch (SQLException ex) {
+         } catch (SQLException ex) {
             System.out.println("Erreur ! Question non ajoutée ! " + ex.getMessage());
         }
-    }
+     }
 
     @Override
     public void supprimer(Question q) {
@@ -67,15 +68,20 @@ public class QuestionService implements IService<Question> {
     @Override
     public void modifier(Question q) {
                     try {
-                String req ="update Question set ennonce=? where idQuestion=?" ;
+                String req ="update Question set ennonce=?,option1=?, option2=?,option3=?,answer=?,idExamen=? where idQuestion=?" ;
                 PreparedStatement st = cnx.prepareStatement(req); 
-                st.setString(1, q.getEnnonce());
-                st.setDouble(2,q.getIdQuestion());
+                st.setString(1,q.getEnnonce());
+                st.setString(2,q.getOption1());
+                st.setString(3,q.getOption2());
+                st.setString(4,q.getOption3());
+                st.setString(5,q.getAnswer());
+                st.setLong(6,q.getIdExamen()) ;
+                st.setLong(7,q.getIdQuestion()) ;
                 st.executeUpdate();
                 System.out.println("Question  modifiée ! ");
 
             } catch (SQLException ex) {
-                System.out.println(" Erreur ! Question non   modifiée ! ");
+                System.out.println(" Erreur ! Question non   modifiée ! " + ex.getMessage());
             }
     }
 
@@ -84,21 +90,26 @@ public class QuestionService implements IService<Question> {
                    ObservableList<Question> listQuestion = FXCollections.observableArrayList() ;
 
             try {
-                String req = "select * from Question" ;
+                 
+                String req = "SELECT * FROM question  JOIN Examen  ON examen.idExamen=question.idExamen ; " ;
                 PreparedStatement st = cnx.prepareCall(req) ; 
                 ResultSet rs = st.executeQuery(req) ;
                 
                 while(rs.next()) {
-                listQuestion.add(new Question(rs.getLong("idQuestion"),rs.getString("ennonce"),rs.getLong("quizId"))) ;
-
+                listQuestion.add(new Question(rs.getLong("idQuestion"),rs.getString("ennonce"),rs.getString("option1"),rs.getString("option2"),rs.getString("option3"),rs.getString("answer"),rs.getLong("idExamen"),rs.getString("nomExamen"))) ;
+ 
             }
                 
                 
             } catch (SQLException ex) {
-                System.out.println("erreur lors de la selection des questions ! ");
+                System.out.println("erreur lors de la selection des questions ! " + ex.getMessage());
                 
             }
               return listQuestion ;
     }
+    
+     
+    
+    
     
 }

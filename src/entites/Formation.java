@@ -12,17 +12,22 @@ public class Formation {
     public Long idFormation ; 
     private String sujet ;
     private String description ;
-    private difficulté difficulté ; 
+    private String difficulté ; 
     private int durée ; 
     private Long idPrerequis; 
     private Long idCompetence; 
     private Long idCategorie ;
     private Long idExamen;
+    private String nomCategorie;
+    private String nomCompetence;
+    private String nomPrerequis;
+    private String nomExamen ; 
+    
 
     public Formation() {
     }
 
-    public Formation(Long idFormation, String sujet, String description, difficulté difficulté, int durée, Long idPrerequis, Long idCompetence, Long idCategorie, Long idExamen) {
+    public Formation(Long idFormation, String sujet, String description, String difficulté, int durée, Long idPrerequis, Long idCompetence, Long idCategorie, Long idExamen) {
         this.idFormation = idFormation;
         this.sujet = sujet;
         this.description = description;
@@ -33,6 +38,32 @@ public class Formation {
         this.idCategorie = idCategorie;
         this.idExamen = idExamen;
     }
+    public Formation(Long idFormation, String sujet, String description, String difficulté, int durée, Long idPrerequis, Long idCompetence, Long idCategorie, Long idExamen, String nomCategorie,String nomCompetence) {
+        this.idFormation = idFormation;
+        this.sujet = sujet;
+        this.description = description;
+        this.difficulté = difficulté;
+        this.durée = durée;
+        this.idPrerequis = idPrerequis;
+        this.idCompetence = idCompetence;
+        this.idCategorie = idCategorie;
+        this.idExamen = idExamen;
+        this.nomCategorie=nomCategorie;
+        this.nomCompetence=nomCompetence;
+    }
+    public Formation(Long idFormation, String sujet, String description, String difficulté, int durée,  String nomCompetence,String nomCategorie) {
+        this.idFormation = idFormation;
+        this.sujet = sujet;
+        this.description = description;
+        this.difficulté = difficulté;
+        this.durée = durée;
+        this.nomCompetence=nomCompetence;
+         this.nomCompetence=nomCategorie;
+        
+        
+        
+    }
+
 
     public Formation(Long idFormation, String sujet, String description, int durée, Long idPrerequis, Long idCompetence, Long idCategorie, Long idExamen) {
         this.idFormation = idFormation;
@@ -44,6 +75,27 @@ public class Formation {
         this.idCategorie = idCategorie;
         this.idExamen = idExamen;
     }
+
+    public Formation(String sujet) {
+        this.sujet=sujet ; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Formation(Long idFormation, String sujet, String description, String difficulté, int durée, Long idPrerequis, Long idCompetence, Long idCategorie, Long idExamen, String nomCategorie, String nomCompetence, String nomPrerequis, String nomExamen) {
+        this.idFormation = idFormation;
+        this.sujet = sujet;
+        this.description = description;
+        this.difficulté = difficulté;
+        this.durée = durée;
+        this.idPrerequis = idPrerequis;
+        this.idCompetence = idCompetence;
+        this.idCategorie = idCategorie;
+        this.idExamen = idExamen;
+        this.nomCategorie = nomCategorie;
+        this.nomCompetence = nomCompetence;
+        this.nomPrerequis = nomPrerequis;
+        this.nomExamen = nomExamen;
+    }
+    
     
 
    
@@ -72,11 +124,11 @@ public class Formation {
         this.description = description;
     }
 
-    public difficulté getDifficulté() {
+    public String getDifficulté() {
         return difficulté;
     }
 
-    public void setDifficulté(difficulté difficulté) {
+    public void setDifficulté(String difficulté) {
         this.difficulté = difficulté;
     }
 
@@ -120,10 +172,41 @@ public class Formation {
         this.idExamen = idExamen;
     }
 
-    @Override
-    public String toString() {
-        return "Formation{" + "idFormation=" + idFormation + ", sujet=" + sujet + ", description=" + description + ", difficult\u00e9=" + difficulté + ", dur\u00e9e=" + durée + ", idPrerequis=" + idPrerequis + ", idCompetence=" + idCompetence + ", idCategorie=" + idCategorie + ", idExamen=" + idExamen + '}';
+    public String getNomCategorie() {
+        return nomCategorie;
     }
+
+    public void setNomCategorie(String nomCategorie) {
+        this.nomCategorie = nomCategorie;
+    }
+
+    public String getNomCompetence() {
+        return nomCompetence;
+    }
+
+    public void setNomCompetence(String nomCompetence) {
+        this.nomCompetence = nomCompetence;
+    }
+
+    public String getNomPrerequis() {
+        return nomPrerequis;
+    }
+
+    public void setNomPrerequis(String nomPrerequis) {
+        this.nomPrerequis = nomPrerequis;
+    }
+
+    public String getNomExamen() {
+        return nomExamen;
+    }
+
+    public void setNomExamen(String nomExamen) {
+        this.nomExamen = nomExamen;
+    }
+    
+    
+
+   
     
 
    

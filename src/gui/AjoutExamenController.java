@@ -4,6 +4,9 @@
  */
 package gui;
 
+import entites.Categorie;
+import entites.Formation;
+import entites.difficulté;
 import entities.Examen;
  import java.io.IOException;
  import java.net.URL;
@@ -13,6 +16,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
  import javafx.event.ActionEvent;
@@ -32,7 +37,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
  import javax.swing.JOptionPane;
 import outils.MyDB;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
+import org.controlsfx.control.Notifications;
+
 import services.ExamenService;
+import services.ServiceCategorie;
+import services.ServiceFormation;
  
 /**
  * FXML Controller class
@@ -56,9 +67,17 @@ public class AjoutExamenController implements Initializable {
     @FXML
     private TableColumn<Examen, Integer> colDureeExamen;
     @FXML
-    private TextField tfFormationIdExamen;
+    private TableView<Formation> tvFormations;
     @FXML
-    private TextField tfCategorieExamen;
+    private TableColumn<Formation, String> colSujetFormation;
+    @FXML
+    private TableView<Categorie> tvCategories;
+    @FXML
+    private TableColumn<Categorie, String> colNomCategorie;
+    @FXML
+    private TableColumn<Examen,Long > colFormationex;
+    @FXML
+    private TableColumn<Examen,Long > colCategorieex;
 
     /**
      * Initializes the controller class.
@@ -71,40 +90,57 @@ public class AjoutExamenController implements Initializable {
      @Override
     public void initialize(URL url, ResourceBundle rb) {
         showExams() ;
+        showcategorie() ;
+        showformation() ;
          // TODO
     }    
 
     @FXML
-    private void ajuoterExamen(ActionEvent event) {
+    private void ajuoterExamen(ActionEvent event) throws IOException {
         
         
-        if (tfNomExamen.getText().trim().equals(""))  
-                    JOptionPane.showMessageDialog(null," Veuillez remplir le champs nom examen ! ");
-        if (tfPourcentageExamen.getText().trim().isEmpty())  
-                    JOptionPane.showMessageDialog(null," Veuillez remplir le champs pourcentage ! ");
-        if (tfDureeExamen.getText().trim().isEmpty())  
-                    JOptionPane.showMessageDialog(null," Veuillez remplir le champs durée examen ! ");
+        if (tfNomExamen.getText().trim().equals("") ||
+                (tfPourcentageExamen.getText().trim().isEmpty()||
+                tfDureeExamen.getText().trim().isEmpty()))  
+                     {
+                     Notifications.create()
+                    .darkStyle()
+                    .position(Pos.CENTER)
+                    .text("tout les champs doivent être remplis")
+                    .title("Exam Title").showError();
+                     }     
+        else  {
  
-        
-        
-        
-        
-        
-        
+ 
+            
+ 
+ 
        
         ExamenService  SE = new ExamenService() ;
-        SE.ajouter(new Examen(  tfNomExamen.getText()  ,   Double.parseDouble(tfPourcentageExamen.getText())     , Integer.parseInt(tfDureeExamen.getText())      ));
-        showExams() ;
-        JOptionPane.showMessageDialog(null,"examen Ajoutée ! ");
+            if(SE.countExams(tfNomExamen.getText().trim())!=null)
+                {
+                     Notifications.create()
+                    .darkStyle()
+                    .position(Pos.CENTER)
+                    .text("this exam name already exist")
+                    .title("Exam Title").showError();
+                }        
+       
+           Formation f =  tvFormations.getSelectionModel().getSelectedItem() ;
+           Categorie c =  tvCategories.getSelectionModel().getSelectedItem() ; 
+           Examen newExam = new Examen(  tfNomExamen.getText()  ,   Double.parseDouble(tfPourcentageExamen.getText())     , Integer.parseInt(tfDureeExamen.getText() )    , f.getIdFormation() , c.getIdCategorie()   ) ; 
+           SE.ajouter(newExam);
+                                Notifications.create()
+                    .darkStyle()
+                    .position(Pos.CENTER)
+                    .text("Examen ajouté avec succée")
+                    .title("Exam Title").showInformation();
+           showExams() ;
+           //JOptionPane.showMessageDialog(null,"examen Ajoutée ! ");
         
+ 
         
-        //redirection vers l'interface thenya 
-        /*
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("detailPersonne.fxml")) ;
-        Parent root = loader.load() ; 
-        tfNomExamen.getScene().setRoot(root);
-        */
-        
+        }
  
     }
 
@@ -125,27 +161,7 @@ public class AjoutExamenController implements Initializable {
     
     
     
-    
-        public  ObservableList<Examen> afficher() {
-                   ObservableList<Examen>  listExamen =  FXCollections.observableArrayList() ;
-                       Connection cnx ; 
-                       cnx = MyDB.getInstance().getCnx();
-            try {
-                String req = "select * from Examen" ;
-                PreparedStatement st = cnx.prepareStatement(req) ; 
-                 ResultSet rs = st.executeQuery(req) ;
  
-                
-                            while (rs.next()) {
-                listExamen.add(new Examen( rs.getLong("idExamen"),rs.getString("nomExamen"), rs.getDouble("pourcentage"), rs.getInt("DureeExamen")));
-            }    
-            } catch (SQLException ex) {
-                System.out.println("error occured" +ex.getMessage());  
-            }
-              return listExamen ;
-     }
-    
-    
     
 
     @FXML
@@ -174,19 +190,34 @@ public class AjoutExamenController implements Initializable {
     }
     
       public void showExams() {
-        ObservableList<Examen> list = afficher() ;
+        ExamenService SE = new ExamenService() ; 
+        ObservableList<Examen> list = SE.afficher() ;
         System.out.println(list ) ; 
         colNomExamen.setCellValueFactory(new PropertyValueFactory<Examen,String>("nomExamen"));
         colPourcentageExamen.setCellValueFactory(new PropertyValueFactory<Examen,Double>("Pourcentage"));
         colDureeExamen.setCellValueFactory(new PropertyValueFactory<Examen,Integer>("DureeExamen"));
+        colFormationex.setCellValueFactory(new PropertyValueFactory<Examen,Long>("nomFor"));
+        colCategorieex.setCellValueFactory(new PropertyValueFactory<Examen,Long>("nomCat"));
+        
+        System.out.println("///////////////////////" + list); 
+ 
+        System.out.println(list); 
+        list.forEach((e)->{
+            ServiceCategorie es = new ServiceCategorie() ; 
+
+                });
         System.out.println(list);
+
         tvExamens.setItems(list);
+        
+         
+        
         
     }
 
     @FXML
     private void BackToMain(ActionEvent event) throws IOException {
-            Stage stage ;
+    Stage stage ;
     Parent root = FXMLLoader.load(getClass().getResource("MainUI.fxml"));
     stage = (Stage)((Node)event.getSource()).getScene().getWindow();
     Scene scene=new Scene(root);
@@ -208,4 +239,115 @@ public class AjoutExamenController implements Initializable {
                
     }                
     }
+    
+    
+        public void showcategorie(){
+            ServiceCategorie SC = new ServiceCategorie() ;
+        ObservableList<Categorie> ListCat =  SC.afficher() ; 
+        colNomCategorie.setCellValueFactory(new PropertyValueFactory<Categorie,String>("nomCategorie"));
+        tvCategories.setItems(ListCat);
+        System.out.print("*****" + ListCat);  
+    }
+        
+        public void showformation(){
+        ServiceFormation SF = new ServiceFormation() ;
+        ObservableList<Formation> ListCat =  SF.afficher() ; 
+        colSujetFormation.setCellValueFactory(new PropertyValueFactory<Formation,String>("Sujet"));
+        tvFormations.setItems(ListCat);
+            System.out.print("*****" + ListCat);   
+    }
+
+    @FXML
+    private void GOTOEXAM(ActionEvent event) {
+        try {
+            /*
+            //redirection vers l'interface thenya
+            //FXMLLoader loader = new FXMLLoader(getClass().getResource("detailPersonne.fxml")) ;
+            //Parent root = loader.load() ;
+            Examen e = tvExamens.getSelectionModel().getSelectedItem() ;
+            
+            Node node = (Node) event.getSource();
+            
+            // Step 3
+            Stage stage = (Stage) node.getScene().getWindow();
+            stage.close();
+            
+            
+            try {
+            // Step 4
+            
+            
+            
+            Parent root = FXMLLoader.load(getClass().getResource("oneExamINterface.fxml"));
+            
+            
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("detailPersonne.fxml")) ;
+            Parent root1 = loader.load() ;
+            OneExamINterfaceController dpc = loader.getController();
+            dpc.setExamName(e.getNomExamen());
+            
+            // Step 7
+            stage.show();
+            } catch (IOException ex) {
+            System.err.println(String.format("Errorffffffffffffffffffffffffffff: %s", ex.getMessage()));
+            }
+            */
+            
+            
+            
+            
+            
+            
+            // Step 1
+            Examen e = tvExamens.getSelectionModel().getSelectedItem() ;   Node node = (Node) event.getSource();
+            
+            
+            // Step 2
+            System.out.print("dddddddddddddddddddddddddddddddddddddddddddddddddddd");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("oneExamINterface.fxml"));
+            System.out.print("tttttttttttttttttt");
+            Parent root = loader.load() ;
+            tvExamens.getScene().setRoot(root);
+            
+            
+            // Step 3
+            OneExamINterfaceController controller =  loader.getController();
+            System.out.println(e.getNomExamen());
+            controller.setExamName(e.getNomExamen());
+        } catch (IOException ex) {
+            System.out.print("hahahahahhahahahhaha");        }
+ 
+ 
+        
+        
+       
+    }
+
+    @FXML
+    private void createQuestionGUI(ActionEvent event) throws IOException {
+        
+        
+                    
+            //  charger le new exam created 
+            Examen e = tvExamens.getSelectionModel().getSelectedItem() ;
+            Node node = (Node) event.getSource();
+            // go to the next interface : create questions 
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("oneExamINterface.fxml"));
+            Parent root = loader.load() ;
+            tvExamens.getScene().setRoot(root);
+            // Step 3
+            OneExamINterfaceController controller =  loader.getController();
+            System.out.println(e.getNomExamen());
+            controller.setExamName(e.getNomExamen());
+ 
+        
+        
+    }
+        
+    
+    
+    
+    
+    
 }

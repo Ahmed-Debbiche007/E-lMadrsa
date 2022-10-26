@@ -16,8 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 import javax.swing.JOptionPane;
-import services.QuizService;
-import services.ServicePersonne;
+ import services.ServicePersonne;
 
 /**
  * FXML Controller class
@@ -57,6 +56,15 @@ public class AjoutPersonneController implements Initializable {
         DetailPersonneController dpc = loader.getController();
         dpc.setLbNom(tfNom.getText());
         dpc.setLbPrenom(tfPrenom.getText());
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
   

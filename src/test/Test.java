@@ -2,17 +2,10 @@
 package test;
 //import entities.User;
 import entities.Examen;
-import entities.Option;
-import entities.Participation;
- import entities.Quiz;
-import java.util.ArrayList;
-import java.util.List;
+ 
 import outils.MyDB ;
 import services.ExamenService;
-import services.OptionService;
-import services.ParticipationsService;
-import services.QuestionService;
-import services.QuizService;
+ 
  
 public class Test {
     public static void main (String args[]) {
@@ -22,12 +15,13 @@ public class Test {
         //User u = new User(1,"ahmed","gouiaa",23);
         //UserService us = new UserService() ;
         // creation du service Examen : 
-        //ExamenService Es = new ExamenService() ; 
+        ExamenService Es = new ExamenService() ; 
         // création d'un examen 1
-        //Examen Ex1 = new Examen("symfony",12.0,60); 
+        Examen Ex1 = new Examen("fr",12.0,60); 
         //Examen Ex2 = new Examen(2,"francais",20.10,120); 
         // test ajout examen :
         //Es.ajouter(Ex1);
+       System.out.println("count :::::::"  + Es.getAll());  
        
         //System.out.println(Es.afficher());
 
@@ -104,9 +98,24 @@ public class Test {
          Qs.supprimer(q1);
          System.out.print(Qs.afficher()) ; 
         */
+        /*
          Participation p1 = new Participation(50.0) ; 
          ParticipationsService Ps = new ParticipationsService() ;
          Ps.ajouter(p1);
+*/
+        
+        
+       
+         
+        /*
+        Question question1 = new Question("html","opt1","opt2","opt3","opt3") ; 
+                      QuestionService Qservice = new QuestionService() ;
+
+        Qservice.afficher();
+        
+           
+         */
+ 
         
     }
     
