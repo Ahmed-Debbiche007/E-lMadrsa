@@ -12,8 +12,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -94,12 +97,41 @@ public class ServiceCategorie {
         }
     }
     
-    public ObservableList<Categorie> afficher() {
+
+   
+     public Categorie VerifUninciteCategorie( String Cat ) {
+          
+            try {
+                String req = "SELECT  *  FROM Categorie  where nomCategorie=? ";
+                PreparedStatement st = cnx.prepareStatement(req) ;
+                            st.setString(1, Cat);
+
+                ResultSet rs = st.executeQuery();
+            while (rs.next()){
+                Categorie C = new Categorie();
+                C.setIdCategorie(rs.getLong("idCategorie"));
+                C.setNomCategorie(rs.getString("nomCategorie"));
+                
+                return C;
+            }
+            } catch (SQLException ex) {
+                System.out.println("Categorie Introuvable "  + ex.getMessage());
+
+            }
+
+            return null ;
+
+
+}
+     
+      public ObservableList<Categorie> afficher_cat() {
+        
+
         ObservableList<Categorie> list = FXCollections.observableArrayList();
 
         try {
             String requete = "SELECT idCategorie,nomCategorie FROM Categorie ";
-            Statement st = cnx.createStatement();
+           Statement st = cnx.createStatement();
            
             ResultSet rs = st.executeQuery(requete);
             
@@ -113,5 +145,26 @@ public class ServiceCategorie {
 
         return list;
     }
+      public ObservableList<Categorie> afficher() {
+        
+        ObservableList<Categorie> list = FXCollections.observableArrayList();
+
+        try {
+            String requete = "SELECT idCategorie,nomCategorie FROM Categorie ";
+           Statement st = cnx.createStatement();
+           
+            ResultSet rs = st.executeQuery(requete);
+            
+            while (rs.next()) {
+                list.add(new Categorie(rs.getLong(1),rs.getString(2)));
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return list;
+    }
+    
     
 }

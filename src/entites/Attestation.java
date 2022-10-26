@@ -15,6 +15,8 @@ public class Attestation {
     public Long idAttestation;
     private Long idParticipation ;
     private Date dateAcq; 
+    private String nom;
+    private String prenom;
 
     public Attestation() {
     }
@@ -28,6 +30,14 @@ public class Attestation {
     public Attestation(Long idAttestation, Long idParticipation) {
         this.idAttestation = idAttestation;
         this.idParticipation = idParticipation;
+    }
+
+    public Attestation(Long idAttestation, Long idParticipation, Date dateAcq, String nom, String prenom) {
+        this.idAttestation = idAttestation;
+        this.idParticipation = idParticipation;
+        this.dateAcq = dateAcq;
+        this.nom = nom;
+        this.prenom = prenom;
     }
     
 
@@ -54,6 +64,23 @@ public class Attestation {
     public void setDateAcq(Date dateAcq) {
         this.dateAcq = dateAcq;
     }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+    
 
     @Override
     public String toString() {

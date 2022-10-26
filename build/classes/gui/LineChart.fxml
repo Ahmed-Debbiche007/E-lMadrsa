@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="628.0" prefWidth="932.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LineChartController">
+   <children>
+      <BarChart fx:id="BarchartForm" layoutX="65.0" layoutY="52.0" prefHeight="511.0" prefWidth="816.0" title="Statistiques des Participations Par Formation ">
+        <xAxis>
+          <CategoryAxis label="Nom de Formation " side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis label="Nombre de Participation " side="LEFT" />
+        </yAxis>
+      </BarChart>
+      <Button fx:id="btRetour" layoutX="51.0" layoutY="21.0" mnemonicParsing="false" onAction="#RetourGestion" prefHeight="31.0" prefWidth="88.0" text="Retour" />
+   </children>
+</AnchorPane>

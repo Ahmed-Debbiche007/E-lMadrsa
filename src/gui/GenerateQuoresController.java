@@ -8,7 +8,6 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import com.mastercard.api.crossborder.Quotes;
 import static com.sun.org.apache.xalan.internal.lib.ExsltDynamic.map;
 import java.io.IOException;
 import java.net.URL;

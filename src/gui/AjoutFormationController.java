@@ -10,7 +10,15 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
  import entites.Prerequis;
 import entites.Competences;
 import entites.Categorie;
+
+import entites.Prerequis;
+import entites.Competences;
+import entites.Categorie;
+import entities.Examen;
+import java.net.URL;
+
  import java.net.URL;
+
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,7 +34,12 @@ import services.ServiceFormation;
 import services.ServiceCompetences;
 import services.ServicePrerequis;
 import services.ServiceCategorie;
+
+import services.ExamenService;
+import java.sql.Connection;
+
  import java.sql.Connection;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -42,7 +55,10 @@ import entites.difficulté;
 import entities.Examen;
 import entities.Participation;
 import java.io.IOException;
+
+
 import java.security.Security;
+
 import java.sql.PreparedStatement;
 import static java.util.Arrays.equals;
 import static java.util.Arrays.equals;
@@ -147,8 +163,11 @@ public class AjoutFormationController implements Initializable {
     private TableColumn<Examen, String> colnomExamen;
     private TableColumn<Formation, String> colcat;
     private TableColumn<Formation, String> colcomp;
+
+
     @FXML
     private TableColumn<Formation, String> colpart;
+
 
     /**
      * Initializes the controller class.
@@ -156,6 +175,7 @@ public class AjoutFormationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         showformation();
+
         loadingg();
         showcompetences();
          showprerequis();
@@ -289,42 +309,13 @@ public class AjoutFormationController implements Initializable {
        
     }
     }
-    public ObservableList<Formation> afficher() {
-        System.out.println("1");
-        ObservableList<Formation> list = FXCollections.observableArrayList();
-       
-        
-        
 
-         try {
-            String requete = "SELECT * FROM formation JOIN categorie ON formation.idCategorie=categorie.idCategorie JOIN competences On formation.idCompetence= competences.idCompetence JOIN prerequis ON formation.idPrerequis=prerequis.idPrerequis JOIN examen ON examen.idExamen=formation.idExamen;";
-            PreparedStatement st = cnx.prepareStatement(requete) ;
-            ResultSet rs = st.executeQuery(requete);
-            difficulté dif [] = difficulté.values();
-            System.out.println(dif[0]);
-            System.out.println(rs);
-            while (rs.next()) {
-               
-                
-             
-                list.add(new Formation(rs.getLong("idFormation"), rs.getString("sujet"), rs.getString("description"),rs.getString("difficulté"),rs.getInt("durée"),rs.getLong("idPrerequis"),rs.getLong("idCompetence"),rs.getLong("idExamen"),rs.getLong("idCategorie"),rs.getString("nomCategorie"),rs.getString("nomCompetence"),rs.getString("nomPrerequis"),rs.getString("nomExamen")));
-                System.out.println("heeeeeeeeeeey" + list);
-            
-            
-            }
-            
-            
-            
-            
-
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        }
-
-        return list;
-    }
+   
     public void showformation(){
-        ObservableList<Formation> ListCat =  afficher() ; 
+        ServiceFormation SF = new ServiceFormation();
+        ObservableList<Formation> ListCat = SF.afficher() ; 
+
+  
         //System.out.println("pas de probleme");
         Formation F = new Formation();
         System.out.println(ListCat.size());
@@ -412,28 +403,12 @@ public class AjoutFormationController implements Initializable {
         
         
     }
-     public ObservableList<Prerequis> afficher_Pre() {
-        System.out.println("1");
-        ObservableList<Prerequis> list = FXCollections.observableArrayList();
 
-        try {
-            String requete = "SELECT idPrerequis,nomPrerequis FROM Prerequis ";
-            Statement st = cnx.createStatement();
-           
-            ResultSet rs = st.executeQuery(requete);
-            
-            while (rs.next()) {
-                list.add(new Prerequis(rs.getLong(1),rs.getString(2)));
-            }
-
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        }
-
-        return list;
-    }
+     
      public void showprerequis(){
-        ObservableList<Prerequis> ListCat =  afficher_Pre() ; 
+         ServicePrerequis SP = new ServicePrerequis() ; 
+        ObservableList<Prerequis> ListCat = SP.afficher_Pre()  ; 
+
         System.out.println("pas de probleme");
         
         colnomPrerequis.setCellValueFactory(new PropertyValueFactory<Prerequis,String>("nomPrerequis"));
@@ -445,28 +420,12 @@ public class AjoutFormationController implements Initializable {
         
         
     }
-      public ObservableList<Competences> afficher_comp() {
-        System.out.println("1");
-        ObservableList<Competences> list = FXCollections.observableArrayList();
 
-        try {
-            String requete = "SELECT idCompetence,nomCompetence FROM Competences ";
-            Statement st = cnx.createStatement();
-           
-            ResultSet rs = st.executeQuery(requete);
-            
-            while (rs.next()) {
-                list.add(new Competences(rs.getLong(1),rs.getString(2)));
-            }
-
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        }
-
-        return list;
-    }
+      
        public void showcompetences(){
-        ObservableList<Competences> ListCat =  afficher_comp() ; 
+        ServiceCompetences Scom = new ServiceCompetences();
+        ObservableList<Competences> ListCat = Scom.afficher_comp()  ; 
+
         //System.out.println("pas de probleme");
         
         colnomComp.setCellValueFactory(new PropertyValueFactory<Competences,String>("nomCompetence"));
@@ -478,28 +437,12 @@ public class AjoutFormationController implements Initializable {
         
         
     }
-       public ObservableList<Categorie> afficher_cat() {
-        
-        ObservableList<Categorie> list = FXCollections.observableArrayList();
 
-        try {
-            String requete = "SELECT idCategorie,nomCategorie FROM Categorie ";
-           Statement st = cnx.createStatement();
-           
-            ResultSet rs = st.executeQuery(requete);
-            
-            while (rs.next()) {
-                list.add(new Categorie(rs.getLong(1),rs.getString(2)));
-            }
-
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        }
-
-        return list;
-    }
+      
        public void showcategorie(){
-        ObservableList<Categorie> ListCat =  afficher_cat() ; 
+        ServiceCategorie SC = new ServiceCategorie();
+        ObservableList<Categorie> ListCat = SC.afficher_cat()  ; 
+
         
         
         colnomCat.setCellValueFactory(new PropertyValueFactory<Categorie,String>("nomCategorie"));
@@ -512,7 +455,11 @@ public class AjoutFormationController implements Initializable {
         
     }
        public void showcExamen(){
+
+          
+
            ExamenService SE= new ExamenService();
+
         ObservableList<Examen> ListCat =  SE.afficher() ; 
         
         
@@ -525,7 +472,8 @@ public class AjoutFormationController implements Initializable {
         
         
     }
-       
+
+
            private void loadingg() {
 
         showformation();
@@ -659,6 +607,7 @@ public class AjoutFormationController implements Initializable {
 
 
     }
+
 
     
     

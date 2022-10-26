@@ -60,6 +60,8 @@ public class AjoutPrerequisController implements Initializable {
     Connection cnx = DataDB.getInstance().getCnx();
     @FXML
     private Button idretour;
+    @FXML
+    private Button btenr;
 
     /**
      * Initializes the controller class.
@@ -85,15 +87,10 @@ public class AjoutPrerequisController implements Initializable {
 
     @FXML
     private void modifprerequis(ActionEvent event) {
-        Prerequis P =tab.getSelectionModel().getSelectedItem();
-        ServicePrerequis spPM= new ServicePrerequis();
-        System.out.println("Service prerequis Created");
-        
-        System.out.println("object  prerequis Created");
-        P.setNomPrerequis(tfnom.getText());
-        spPM.modifier_prerequise(P);
-        JOptionPane.showMessageDialog(null,"Prerequis Modifiée ! ");
-        showprerequis();
+        if(tab.getSelectionModel().getSelectedItem()!=null) {
+             Prerequis P =tab.getSelectionModel().getSelectedItem();
+             tfnom.setText(P.getNomPrerequis());
+        }
     }
 
     @FXML
@@ -107,28 +104,11 @@ public class AjoutPrerequisController implements Initializable {
         
         
     }
-     public ObservableList<Prerequis> afficher() {
-        System.out.println("1");
-        ObservableList<Prerequis> list = FXCollections.observableArrayList();
-
-        try {
-            String requete = "SELECT idPrerequis,nomPrerequis FROM Prerequis ";
-            Statement st = cnx.createStatement();
-           
-            ResultSet rs = st.executeQuery(requete);
-            
-            while (rs.next()) {
-                list.add(new Prerequis(rs.getLong(1),rs.getString(2)));
-            }
-
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        }
-
-        return list;
-    }
+     
      public void showprerequis(){
-        ObservableList<Prerequis> ListCat =  afficher() ; 
+         ServicePrerequis SP = new ServicePrerequis();
+         
+        ObservableList<Prerequis> ListCat =  SP.afficher() ; 
         System.out.println("pas de probleme");
         
         colnom.setCellValueFactory(new PropertyValueFactory<Prerequis,String>("nomPrerequis"));
@@ -149,6 +129,20 @@ public class AjoutPrerequisController implements Initializable {
         Scene scene=new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    private void enregistpre(ActionEvent event) {
+        Prerequis P =tab.getSelectionModel().getSelectedItem();
+        ServicePrerequis spPM= new ServicePrerequis();
+        System.out.println("Service prerequis Created");
+        
+        System.out.println("object  prerequis Created");
+        P.setNomPrerequis(tfnom.getText());
+        spPM.modifier_prerequise(P);
+        JOptionPane.showMessageDialog(null,"Prerequis Modifiée ! ");
+        showprerequis();
+        tfnom.setText("");
     }
     
 }
