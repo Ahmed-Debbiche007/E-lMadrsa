@@ -19,6 +19,7 @@ import outils.MyDB;
  * @author ahmed
  */
 public class UserService {
+    /*
 
     Connection cnx;
 
@@ -28,7 +29,7 @@ public class UserService {
 
     public void ajouterUser(User u) {
         try {
-            String req = "INSERT INTO users(nom,prenom,age,mail) VALUES('" + u.getNom() + "','" + u.getPrenom() + "'," + u.getAge()+","+u.getMail() + ")";
+            String req = "INSERT INTO users(nom,prenom,age,mail) VALUES('" + u.getNom() + "','" + u.getPrenom() + "'," + u.getAge()+","+u.get() + ")";
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("User added successfully!");
@@ -44,9 +45,8 @@ public class UserService {
             PreparedStatement st = cnx.prepareStatement(req);
             st.setString(1, u.getNom());
             st.setString(2, u.getPrenom());
-            st.setInt(3, u.getAge());
-            st.setString(4, u.getMail());
-            st.setInt(5, u.getId());
+            st.setString(4, u.getemail());
+            st.setLong(5, u.getId());
             st.executeUpdate();
             System.out.println("User modified successfully!");
         } catch (SQLException ex) {
@@ -138,4 +138,5 @@ public class UserService {
         }
         return null;
      }
+*/
 }

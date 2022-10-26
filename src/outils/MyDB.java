@@ -1,41 +1,39 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
+
 package outils;
 
-import java.sql.DriverManager;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 
 
 
-/**
- *
- * @author ahmed
- */
+
 public class MyDB {
-
-    String url = "jdbc:mysql://localhost:3306/pidev?useUnicode=true" + "&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&" + "serverTimezone=UTC";
-    String user = "brad";
-    String password = "Azerty2019/";
-    Connection cnx;
-    static MyDB instance;
-
+    
+    String url ="jdbc:mysql://localhost/e_lmadrsa11" ; 
+    String user ="root"; 
+    String password="" ;
+    Connection cnx  ; 
+    static  MyDB instance ; 
+    
     private MyDB() {
-        try {
-            cnx = DriverManager.getConnection(url, user, password);
-            System.out.println("Mysql: Connected Successfully!");
+        try { 
+            cnx = DriverManager.getConnection(url,user,password) ;
+            System.out.println("connected ");
         } catch (SQLException ex) {
-            System.out.println(ex);
+            System.out.println("not connected" + ex.getMessage());
         }
     }
-
+    
     public static MyDB getInstance() {
-        if (instance == null) {
+        if(instance==null)
             instance = new MyDB();
-        }
-        return instance;
+        return instance ; 
+    }
+
+    public MyDB(Connection cnx) {
+        this.cnx = cnx;
     }
 
     public Connection getCnx() {

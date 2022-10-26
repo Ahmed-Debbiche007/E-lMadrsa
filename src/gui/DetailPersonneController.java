@@ -13,14 +13,21 @@ import javafx.scene.control.Label;
 /**
  * FXML Controller class
  *
+<<<<<<< HEAD
  * @author ahmed
+=======
+ * @author Msi
+>>>>>>> 9928149c4ae4b367f896e153472a4d05af21dca7
  */
 public class DetailPersonneController implements Initializable {
 
     @FXML
-    private Label tfnom;
+
+
+    private Label lbNom;
     @FXML
-    private Label tfprenom;
+    private Label lbPrenom;
+
 
     /**
      * Initializes the controller class.
@@ -28,15 +35,25 @@ public class DetailPersonneController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
 
-    public void setTfnom(String tfnom) {
-        this.tfnom.setText(tfnom) ;
+    }   
+
+    public void setLbNom(String lbNom) {
+        this.lbNom.setText(lbNom);
     }
 
-    public void setTfprenom(String tfprenom) {
-        this.tfprenom.setText(tfprenom);
+    public void setLbPrenom(String lbPrenom) {
+        this.lbPrenom.setText(lbPrenom);
     }
+
+    public Label getLbNom() {
+        return lbNom;
+    }
+
+    public Label getLbPrenom() {
+        return lbPrenom;
+    }
+    
     
     
 }

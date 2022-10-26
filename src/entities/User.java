@@ -4,145 +4,176 @@
  */
 package entities;
 
+
+import java.sql.Date;
+
 /**
  *
- * @author ahmed
+ * @author Nour
  */
 public class User {
-
-    private int id, age;
-    private String nom, prenom, username, password, mail;
-    private UserStatus status;
-    private Role role;
+    
+    private Long idUtilisateur;
+    private String nom;
+    private String prenom;
+    private String nomUtilisateur;
+    private String tel;
+    private String email;
+    private String motDePasse;
+    private Date dateNaissance ;
+    private String image;
+    private String role;
+    private Double Resultat ; 
+    
     
 
     public User() {
+        
     }
 
-    public User(int id, int age, String nom, String prenom, String username, String password, UserStatus status, Role role, String mail) {
-        this.id = id;
-        this.age = age;
+    public User(Long idUtilisateur) {
+        this.idUtilisateur = idUtilisateur;
+    }
+
+    public User(Long idUtilisateur, String nom, String prenom, String nomUtilisateur,String tel, String email, String motDePasse, Date dateNaissance, String image, String role) {
+        this.idUtilisateur = idUtilisateur;
         this.nom = nom;
         this.prenom = prenom;
-        this.username = username;
-        this.password = password;
-        this.status = status;
+        this.nomUtilisateur = nomUtilisateur;
+        this.tel = tel;
+        this.email = email;
+        this.motDePasse = motDePasse;
+        this.dateNaissance = dateNaissance;
+        this.image = image;
         this.role = role;
-        this.mail=mail;
     }
 
-    public User(int age, String mail, String nom, String prenom, String username, String password, UserStatus status, Role role) {
-        this.age = age;
+    public User(Long idUtilisateur, String nom, String prenom, String nomUtilisateur, String tel, String email, String motDePasse, Date dateNaissance, String role) {
+        this.idUtilisateur = idUtilisateur;
         this.nom = nom;
         this.prenom = prenom;
-        this.username = username;
-        this.password = password;
-        this.status = status;
+        this.nomUtilisateur = nomUtilisateur;
+        this.tel = tel;
+        this.email = email;
+        this.motDePasse = motDePasse;
+        this.dateNaissance = dateNaissance;
         this.role = role;
-        this.mail=mail;
     }
 
-    public User(String nom, String prenom) {
+     public User( String nom, String prenom, String nomUtilisateur,String tel, String email, String motDePasse, Date dateNaissance, String image , String role) {
+        
         this.nom = nom;
         this.prenom = prenom;
-        this.age = 33;
+        this.nomUtilisateur = nomUtilisateur;
+        this.tel = tel;
+        this.email = email;
+        this.motDePasse = motDePasse;
+        this.dateNaissance = dateNaissance;
+        this.image = image;
+        this.role = role;
     }
 
-    public int getId() {
-        return id;
+    public Double getResultat() {
+        return Resultat;
     }
 
-    public int getAge() {
-        return age;
+    public void setResultat(Double Resultat) {
+        this.Resultat = Resultat;
+    }
+
+ 
+
+    public Long getId() {
+        return idUtilisateur;
+    }
+
+    public void setId(long idUtilisateur) {
+        this.idUtilisateur = idUtilisateur;
+
     }
 
     public String getNom() {
         return nom;
     }
 
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
 
     public void setNom(String nom) {
         this.nom = nom;
     }
 
+
+    public String getPrenom() {
+        return prenom;
+    }
+
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
-
-    public String getUsername() {
-        return username;
+    
+    public String getnomUtilisateur() {
+        return nomUtilisateur;
+    }
+    
+    public void setnomUtilisateur(String nomUtilisateur) {
+        this.nomUtilisateur = nomUtilisateur;
+    }
+    
+    public String gettel() {
+        return tel;
     }
 
-    public String getPassword() {
-        return password;
+    public void settel(String tel) {
+        this.tel = tel;
+    }
+    
+    public String getemail() {
+        return email;
     }
 
-    public UserStatus getStatus() {
-        return status;
+    public void setemail(String email) {
+        this.email = email;
+    }
+    
+    public String getmotDePasse() {
+        return motDePasse;
     }
 
-    public Role getRole() {
+    public void setmotDePasee(String motDePasse) {
+        this.motDePasse = motDePasse;
+    }
+    
+    public Date getdateNaissance() {
+        return dateNaissance;
+    }
+
+    public void setdateNaissance(Date dateNaissance) {
+        this.dateNaissance = dateNaissance;
+    }
+    
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+    
+    public String getrole() {
         return role;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setStatus(String status) {
-        boolean bb = false;
-        for (UserStatus t : UserStatus.values()) {
-            if (t.name().equals(status)) {
-                this.status = t;
-                bb = true;
-            }
-        }
-        if (bb == false) {
-            System.out.println("erroRoler");
-        }
-    }
-
-    public void setRole(String role) {
-        boolean c = false;
-        for (Role t : Role.values()) {
-            if (t.name().equals(role)) {
-                this.role = t;
-                c = true;
-            }
-        }
-        if (!c) {
-            System.out.println("erroRoler");
-        }
+    public void setrole(String role) {
+        this.role = role;
     }
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", age=" + age + ", nom=" + nom + ", prenom=" + prenom + ", username=" + username + ", password=" + password + ", status=" + status + ", role=" + role + '}';
+
+        return "user{" + "idUtilisateur=" + idUtilisateur + ", nom=" + nom + ", prenom=" + prenom + ", nomUtilisateur=" + nomUtilisateur + ", tel=" + tel + ", email=" + email + ", motDePasse=" + motDePasse + ", dateNaissance=" + dateNaissance + ", image=" + image +", role=" + role + '}';
     }
 
-    public String getMail() {
-        return mail;
-    }
+   
 
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
+
     
-    
-
 }
