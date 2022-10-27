@@ -19,7 +19,7 @@ import javafx.stage.Stage;
  *
  * @author Nour
  */
-public class guimain extends Application {
+public class auth extends Application {
     
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -43,3 +43,5 @@ public class guimain extends Application {
     }
     
 }
+
+

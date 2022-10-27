@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -99,13 +100,12 @@ public class UtilisateurService implements IService<User> {
             pst.setLong(2, n.getId());
 
             pst.executeUpdate();
-            
 
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
     }
-    
+
     public void approve(User n) {
         try {
             String requete = "UPDATE user SET approved=? WHERE idUtilisateur=?";
@@ -116,7 +116,7 @@ public class UtilisateurService implements IService<User> {
             pst.setLong(2, n.getId());
 
             pst.executeUpdate();
-           
+
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
@@ -161,7 +161,6 @@ public class UtilisateurService implements IService<User> {
         return list;
     }
 
-    
     public User getByUserName(String userName) {
         ObservableList<User> list = FXCollections.observableArrayList();
 
@@ -202,6 +201,27 @@ public class UtilisateurService implements IService<User> {
         return null;
     }
 
+    public long getByName(String userName) {
+        ObservableList<User> list = FXCollections.observableArrayList();
+
+        try {
+            String requete = "select * from user where nom=?";
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setString(1, userName);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                User u = new User(rs.getLong("idUtilisateur"), rs.getString("nom"), rs.getString("prenom"), rs.getString("nomUtilisateur"), rs.getString("tel"), rs.getString("email"), rs.getString("motDePasse"), rs.getDate("dateNaissance"), rs.getString("image"), rs.getString("role"), rs.getBoolean("approved"));
+
+                return u.getId();
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return 0;
+    }
+
     public User getByMail(String mail) {
         ObservableList<User> list = FXCollections.observableArrayList();
 
@@ -221,18 +241,39 @@ public class UtilisateurService implements IService<User> {
 
         return null;
     }
-    
-    public boolean usernameExists(String username){
+
+    public ObservableList<User> afficherTuteurs() {
+        ObservableList<User> list = FXCollections.observableArrayList();
+
+        try {
+            String requete = "SELECT * FROM user where role =?";
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setString(1, "Tutor");
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                User u = new User(rs.getLong("idUtilisateur"), rs.getString("nom"), rs.getString("prenom"), rs.getString("nomUtilisateur"), rs.getString("tel"), rs.getString("email"), rs.getString("motDePasse"), rs.getDate("dateNaissance"), rs.getString("image"), rs.getString("role"), rs.getBoolean("approved"));
+
+                list.add(u);
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return list;
+    }
+
+    public boolean usernameExists(String username) {
         try {
             String requete = "select * from user where nomUtilisateur=?";
             PreparedStatement pst = cnx.prepareStatement(requete);
             pst.setString(1, username);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                if (rs.getString("nomUtilisateur").equals(username)){
-                return true;    
+                if (rs.getString("nomUtilisateur").equals(username)) {
+                    return true;
                 }
-                
+
             }
 
         } catch (SQLException ex) {
@@ -241,7 +282,7 @@ public class UtilisateurService implements IService<User> {
 
         return false;
     }
-    
+
     public ObservableList<User> getAllByMail(String role) {
         ObservableList<User> list = FXCollections.observableArrayList();
 
