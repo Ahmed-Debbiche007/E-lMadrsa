@@ -4,7 +4,12 @@
  */
 package test;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -20,12 +25,12 @@ import javafx.stage.Stage;
  * @author aymen
  */
 public class guimain extends Application {
-    
+
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/cat.fxml")) ;
-        Parent root = loader.load() ; 
-        Scene scene = new Scene(root) ;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/cat.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Crud publication");
         primaryStage.show();
@@ -34,8 +39,8 @@ public class guimain extends Application {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         launch(args);
+
     }
-    
 }
