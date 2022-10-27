@@ -6,6 +6,7 @@ package gui;
 
 import com.google.common.hash.Hashing;
 import entities.User;
+import static gui.AuthController.connectedUser;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -21,7 +22,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javax.swing.JOptionPane;
-import services.UserService;
+import services.UtilisateurService;
 
 
 /**
@@ -44,7 +45,7 @@ public class AjoutUserController implements Initializable {
      * Initializes the controller class.
      * 
      */
-    private static User u1;
+    private static User u1 = connectedUser;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -53,7 +54,7 @@ public class AjoutUserController implements Initializable {
 
     @FXML
     private void AjoutPersonne(ActionEvent event) throws IOException {
-        UserService SP = new UserService();
+        UtilisateurService SP = new UtilisateurService();
         User u = SP.getByUserName(fnom.getText());
         //System.out.println(u);
         String pass;
@@ -66,12 +67,12 @@ public class AjoutUserController implements Initializable {
         
         if (u.getmotDePasse().equals(hashPass)) {
             JOptionPane.showMessageDialog(null, "Connected ");
-            u1=u;
+            
             FXMLLoader loader = null;
-            if (u.getrole().equals("Student")){
+            if (u.getrole().name().equals("Student")){
                 loader = new FXMLLoader(getClass().getResource("./Students/Home.fxml"));
             }
-            if (u.getrole().equals("Tutor")){
+            if (u.getrole().name().equals("Tutor")){
                 loader = new FXMLLoader(getClass().getResource("./Tutors/Home.fxml"));
             }
             

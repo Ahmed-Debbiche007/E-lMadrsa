@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
 package gui;
-import static gui.CatController.connectedUser;
+import static gui.AuthController.connectedUser;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import entities.post;
@@ -45,7 +45,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import static gui.CatController.connectedUser;
+
 import static gui.CatController.voice;
 import services.ServiceVote;
 import utils.Texttospeech;
@@ -118,12 +118,11 @@ public class PostController implements Initializable {
 
     }
 
-    @FXML
     private void supprimerpost(ActionEvent event) {
         
         post p = tvpost.getSelectionModel().getSelectedItem();
         
-        if ((connectedUser.getrole().equals("Admin"))||(connectedUser.getId()==p.getUserID())){
+        if ((connectedUser.getrole().name().equals("Admin"))||(connectedUser.getId()==p.getUserID())){
         
          ServicePost sp = new ServicePost();
 
@@ -153,7 +152,6 @@ public class PostController implements Initializable {
 
     }
 
-    @FXML
     private void modifierpost(ActionEvent event) throws IOException {
         
         if (tvpost.getSelectionModel().getSelectedItem() != null) {
@@ -283,7 +281,7 @@ public class PostController implements Initializable {
                         deleteIcon.setOnMouseClicked((MouseEvent event) -> {
                            post p = tvpost.getSelectionModel().getSelectedItem();
         
-        if ((connectedUser.getrole().equals("Admin"))||(connectedUser.getId()==p.getUserID())){
+        if ((connectedUser.getrole().name().equals("Admin"))||(connectedUser.getId()==p.getUserID())){
         
          ServicePost sp = new ServicePost();
 
@@ -313,8 +311,10 @@ public class PostController implements Initializable {
         
                         });
                         editIcon.setOnMouseClicked((MouseEvent event) -> {
+                            System.out.println("*************** : " +connectedUser.getrole().name() ) ; 
                             post p=tvpost.getSelectionModel().getSelectedItem();
-                            if ((connectedUser.getrole().equals("Admin"))||(connectedUser.getId()==p.getUserID())){
+                            if ((connectedUser.getrole().name().equals("Admin"))||(connectedUser.getId()==p.getUserID())){
+                                
                             if (tvpost.getSelectionModel().getSelectedItem() != null) {
                                 staticpost = tvpost.getSelectionModel().getSelectedItem();
                                 FXMLLoader loader = new FXMLLoader(getClass().getResource("post_edit_add.fxml"));
@@ -479,5 +479,15 @@ public class PostController implements Initializable {
          }
    
      } 
+
+    @FXML
+    private void gohome(ActionEvent event) throws IOException {
+        Stage stage;
+        Parent root = FXMLLoader.load(getClass().getResource("nexte.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
          
 }

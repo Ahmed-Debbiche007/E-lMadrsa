@@ -13,7 +13,7 @@ import com.twilio.type.PhoneNumber;
  */
 public class SendSMS {
     public static final String ACCOUNT_SID = "ACf4766383c3b2f72cfebbb4d17dbd239e";
-    public static final String AUTH_TOKEN = "3eea56202231c29faf6f1e0d83d1f70d";
+    public static final String AUTH_TOKEN = "3b6b8c11460b3059d84fb785dfef3a57";
 
     public SendSMS() {
     }

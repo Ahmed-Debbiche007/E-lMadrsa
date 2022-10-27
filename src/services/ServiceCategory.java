@@ -52,9 +52,9 @@ public class ServiceCategory  implements IService<category> {
     @Override
     public void supprimer(category t) {
         try {
-            String requete = "DELETE FROM category WHERE categoryNAME=?";
+            String requete = "DELETE FROM category WHERE categoryID=?";
             PreparedStatement pst = cnx.prepareStatement(requete);
-            pst.setString(1, t.getCategoryNAME());
+            pst.setLong(1, t.getCategoryID());
             pst.executeUpdate();
             System.out.println("category deleted !");
 

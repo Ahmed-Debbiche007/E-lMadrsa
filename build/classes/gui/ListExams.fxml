@@ -31,5 +31,6 @@
         </columns>
       </TableView>
       <Button layoutX="563.0" layoutY="180.0" mnemonicParsing="false" onAction="#chercherparcategorie" prefHeight="48.0" prefWidth="139.0" text="chercher " />
+      <Button layoutX="50.0" layoutY="38.0" mnemonicParsing="false" onAction="#backToMain" text="retour" />
    </children>
 </AnchorPane>

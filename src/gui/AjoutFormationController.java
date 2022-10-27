@@ -54,6 +54,7 @@ import javafx.scene.control.cell.PropertyValueFactory ;
 import entites.difficulté;
 import entities.Examen;
 import entities.Participation;
+import static gui.AuthController.connectedUser;
 import java.io.IOException;
 
 
@@ -563,8 +564,8 @@ public class AjoutFormationController implements Initializable {
                                      
                                     Examen CurrentExam = ES.getExamById(f.getIdExamen()) ;
                                   //  User currentUser = US.getByUserId(CurrentExam.get)
-                                    
-                                    message.setRecipients(Message.RecipientType.TO,InternetAddress.parse("springforfever@gmail.com") );
+                                    System.out.println("**************" + connectedUser.getemail());
+                                    message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(connectedUser.getemail()) );
                                     message.setSubject("formation news from elmadrsa");
                                     message.setText("Bonjour vous avez participer a la formatoin :" + f.getSujet());
                                     Transport.send(message);

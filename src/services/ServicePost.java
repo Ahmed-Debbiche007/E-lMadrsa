@@ -4,7 +4,7 @@
  */
 package services;
 
-import static gui.CatController.connectedUser;
+import static gui.AuthController.connectedUser;
 
 import entities.category;
 import entities.post;

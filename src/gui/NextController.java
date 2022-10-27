@@ -39,37 +39,32 @@ public class NextController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    
-    
     @FXML
     private void Retour(ActionEvent event) throws IOException {
-        Stage stage ;
+        Stage stage;
         Parent root = FXMLLoader.load(getClass().getResource("auth.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Scene scene=new Scene(root);
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        
+
     }
-    
-    
-    
-     @FXML
+
+    @FXML
     private void goadmin(ActionEvent event) throws IOException {
-        Stage stage ;
+        Stage stage;
         Parent root = FXMLLoader.load(getClass().getResource("AjoutPersonne.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Scene scene=new Scene(root);
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
         connectedUser = null;
     }
-    
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     void setVisible(boolean b) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -77,13 +72,43 @@ public class NextController implements Initializable {
 
     @FXML
     private void goapprove(ActionEvent event) throws IOException {
-        
-        Stage stage ;
+
+        Stage stage;
         Parent root = FXMLLoader.load(getClass().getResource("PendinUsers.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Scene scene=new Scene(root);
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
-    
+
+    @FXML
+    private void toHome(ActionEvent event) throws IOException {
+
+        Stage stage;
+
+        if (AuthController.connectedUser.getrole().name().equals("Student")) {
+            Parent root = FXMLLoader.load(getClass().getResource("mainuiiistudent.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+
+        } else if (AuthController.connectedUser.getrole().name().equals("Tutor")) {
+            Parent root = FXMLLoader.load(getClass().getResource("mainuiiiteacher.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } else if (AuthController.connectedUser.getrole().name().equals("Admin")) {
+
+            Parent root = FXMLLoader.load(getClass().getResource("mainuiiiadmin.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+
+        }
+
+    }
+
 }

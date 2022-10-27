@@ -135,5 +135,15 @@ public class ListExamsController implements Initializable {
     }
         
     }
+
+    @FXML
+    private void backToMain(ActionEvent event) throws IOException {
+             Stage stage ;
+    Parent root = FXMLLoader.load(getClass().getResource("MainUI.fxml"));
+    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    Scene scene=new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+    }
     
 }

@@ -21,7 +21,9 @@ import java.net.UnknownHostException;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import services.UserService;
+import services.UtilisateurService;
+
+
 import services.UtilisateurService;
 
 public class Client implements Runnable {

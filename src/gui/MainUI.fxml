@@ -84,5 +84,6 @@
             <Insets right="32.0" top="53.0" />
          </opaqueInsets>
       </Button>
+      <Button layoutX="70.0" layoutY="45.0" mnemonicParsing="false" onAction="#gohome" text="Button" />
    </children>
 </AnchorPane>

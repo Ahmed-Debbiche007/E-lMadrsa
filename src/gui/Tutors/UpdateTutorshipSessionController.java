@@ -10,6 +10,7 @@ import entities.User;
 import gui.AjoutUserController;
 import java.io.IOException;
 import java.net.URL;
+import java.security.GeneralSecurityException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -26,7 +27,9 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javax.swing.JOptionPane;
+import outils.CalendarQuickstart;
 import services.TutorshipSessionService;
+import services.UtilisateurService;
 
 /**
  * FXML Controller class
@@ -66,15 +69,23 @@ public class UpdateTutorshipSessionController implements Initializable {
     }    
 
     @FXML
-    private void valider(ActionEvent event) throws IOException {
+    private void valider(ActionEvent event) throws IOException, GeneralSecurityException {
         TutorsTutorshipSessionsController ttsc = new TutorsTutorshipSessionsController();
         TutorshipSession t = ttsc.getT();
         TutorshipSessionService sp = new TutorshipSessionService();
         String date = cldate.getValue().toString() + " " + (int) hspinner.getValue() + ":" + (int) mspinner.getValue() + ":00";
         Timestamp time = Timestamp.valueOf(date);
         AjoutUserController cs = new AjoutUserController();
-        User u = cs.getU();          
-        sp.update(new TutorshipSession(t.getIdTutorshipSession(),t.getIdTutor(),t.getIdStudent(),t.getIdRequest(),"url", cmtype.getValue(),time));
+        UtilisateurService service = new UtilisateurService();
+        User student = service.getByUserId((int)t.getIdStudent());
+        User u = cs.getU(); 
+        String url = null;
+        if(t.getType().name().equals("MessagesChat")){
+            CalendarQuickstart calendar = new CalendarQuickstart();
+            String time1 = t.decompose().get(0)+"T"+t.decompose().get(1)+":"+t.decompose().get(2)+":00Z";
+             url = calendar.generateMeetURL("Modified", time1, student) ;
+         }
+        sp.update(new TutorshipSession(t.getIdTutorshipSession(),t.getIdTutor(),t.getIdStudent(),t.getIdRequest(),url, cmtype.getValue(),time));
         JOptionPane.showMessageDialog(null,"Demande Modifiée ! ");
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("TutorsTutorshipSessions.fxml"));

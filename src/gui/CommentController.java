@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this templateé
  */
 package gui;
-import static gui.CatController.connectedUser;
+import static gui.AuthController.connectedUser;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import entities.comment;
@@ -27,7 +27,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -38,6 +40,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import javax.swing.JOptionPane;
 import services.ServiceComment;
@@ -175,7 +178,6 @@ public class CommentController implements Initializable {
      
     }
     
-    @FXML
     private void supprimerComment(ActionEvent event) {
         comment c = tvcomment.getSelectionModel().getSelectedItem();
         if ((connectedUser.getrole().equals("Admin"))||(connectedUser.getId()==c.getUserID())){
@@ -240,6 +242,7 @@ public class CommentController implements Initializable {
     }
     
     
+    @FXML
     public void upvote1(ActionEvent event) {
         ServiceVote sv = new ServiceVote();
          post p = staticpost;
@@ -282,6 +285,7 @@ public class CommentController implements Initializable {
          }
      }
     
+    @FXML
     public void downvote1(ActionEvent event) {
          ServiceVote sv = new ServiceVote();
          post p = staticpost;
@@ -573,6 +577,16 @@ public class CommentController implements Initializable {
          }
    
      } 
+
+    @FXML
+    private void gohome(ActionEvent event) throws IOException {
+        Stage stage;
+        Parent root = FXMLLoader.load(getClass().getResource("nexte.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
          
 }
 

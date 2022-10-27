@@ -35,7 +35,9 @@ import outils.CalendarQuickstart;
 import services.ChatSessionService;
 import services.TutorshipRequestService;
 import services.TutorshipSessionService;
-import services.UserService;
+import services.UtilisateurService;
+
+
 import services.UtilisateurService;
 
 /**
@@ -81,7 +83,7 @@ public class TutorTutorshipRequestsController implements Initializable {
             cltype.setCellValueFactory(new PropertyValueFactory<TutorshipRequest, String>("requestType"));
             cldate.setCellValueFactory(new PropertyValueFactory<TutorshipRequest, Timestamp>("sessionDate"));
             clobject.setCellValueFactory(new PropertyValueFactory<TutorshipRequest, String>("requestBody"));
-            requests.setItems(sp.getList("idStudent", u.getId()));
+            requests.setItems(sp.getList("idTutor", u.getId()));
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

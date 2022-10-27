@@ -63,6 +63,7 @@ import javafx.stage.Window;
 import javafx.util.Callback;
 import javax.imageio.ImageIO;
 import utils.Texttospeech;
+import static gui.AuthController.connectedUser;
 
 /**
  * FXML Controller class
@@ -73,8 +74,6 @@ public class CatController implements Initializable {
 
     @FXML
     private TextField tfnomcat;
-    @FXML
-    private TextField tfimage;
     @FXML
     private TableView<category> tvcat;
     @FXML
@@ -103,7 +102,7 @@ public class CatController implements Initializable {
     public static int block = 0;
     public String img;
     
-     public static User connectedUser = new User(7L, "azaz", "Student");
+     
 
     @FXML
     private Button chooseimg;
@@ -214,7 +213,7 @@ public class CatController implements Initializable {
         ServiceCategory sc = new ServiceCategory();
         sc.modifier(new category(c.getCategoryID(), tfnomcat.getText(), img));
         JOptionPane.showMessageDialog(null, "categorie modifié ! ");
-        //showguicat();
+        showguicat();
     }
 
     @FXML
@@ -260,7 +259,7 @@ public class CatController implements Initializable {
             File source = new File(file.getAbsolutePath());
             File destination = new File(System.getProperty("user.dir") + "\\src\\images\\" + file.getName());
             copy(source, destination);
-
+showguicat();
         }
 
         img = file.getName();
@@ -298,6 +297,16 @@ public class CatController implements Initializable {
 
         System.out.println("File copied");
         showguicat();
+    }
+
+    @FXML
+    private void gohome(ActionEvent event) throws IOException {
+        Stage stage;
+        Parent root = FXMLLoader.load(getClass().getResource("nexte.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 }

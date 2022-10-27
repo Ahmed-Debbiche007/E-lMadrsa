@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
 package gui;
-import static gui.CatController.connectedUser;
+import static gui.AuthController.connectedUser;
 import entities.category;
 import entities.post;
 import java.io.IOException;
@@ -20,8 +20,11 @@ import services.ServicePost;
 import static gui.CatController.staticcat;
 import static gui.CatController.staticpost;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -34,7 +37,6 @@ public class Post_edit_addController implements Initializable {
     private TextArea tapostcontent;
     @FXML
     private TextArea taposttitle;
-    @FXML
     private TextField tfuseridpost;
 
     public TextArea getTapostcontent() {
@@ -98,6 +100,18 @@ public class Post_edit_addController implements Initializable {
         tapostcontent.getScene().setRoot(root); 
         PostController pc =loader.getController();
         pc.setLbcatpost(staticcat.getCategoryNAME());}
+
+    @FXML
+    private void gohome(ActionEvent event) throws IOException {Stage stage;
+        Parent root = FXMLLoader.load(getClass().getResource("nexte.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        
+        
+        
+    }
        
 
     }

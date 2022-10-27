@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="833.0" prefWidth="1237.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AjoutPersonneController">
+<AnchorPane id="AnchorPane" prefHeight="833.0" prefWidth="1237.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AjoutPersonneControllerAuth">
    <children>
       <TextField fx:id="tfNom" layoutX="263.0" layoutY="130.0" />
       <TextField fx:id="tfPrenom" layoutX="263.0" layoutY="172.0" />

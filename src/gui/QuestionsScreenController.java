@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
 package gui;
+import static gui.AuthController.connectedUser;
 import Listners.NewScreenListener;
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.Document;
@@ -319,7 +320,7 @@ public class QuestionsScreenController implements Initializable {
                                 
                                 }
                                 ParticipationsService PS = new ParticipationsService() ;
-                                long l = 1 ; 
+                                long l =  connectedUser.getId() ; 
                                 System.out.println("id formation  : " +  examen.getFormationId() ) ; 
                                 System.out.println("id part  : " +   PS.getParticipation(l, examen.getFormationId())) ; 
                                 Participation  p = PS.getParticipation(l, examen.getFormationId());

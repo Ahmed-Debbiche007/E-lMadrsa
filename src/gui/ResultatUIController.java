@@ -6,6 +6,7 @@ package gui;
 import entities.Examen;
 import entities.Question;
 import entities.User;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.util.List;
@@ -200,7 +201,7 @@ Stage newStage = new Stage();
     
           public void showTopStudents() {
         ParticipationsService SE = new ParticipationsService() ;
-        //long x=1 ;
+      
         System.out.println("**************** formation idddddd" + this.lidcat) ; 
          ObservableList<User> list = SE.getParticipation(QuestionsScreenController.examen.getFormationId());
         System.out.println(list ) ; 
@@ -215,8 +216,13 @@ Stage newStage = new Stage();
     }
 
     @FXML
-    private void top3onpress(ActionEvent event) {
-        //showTopStudents() ;
+    private void backToMain(ActionEvent event) throws IOException {
+            Stage stage ;
+    Parent root = FXMLLoader.load(getClass().getResource("MainUI.fxml"));
+    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    Scene scene=new Scene(root);
+    stage.setScene(scene);
+    stage.show();
          
      }
 }

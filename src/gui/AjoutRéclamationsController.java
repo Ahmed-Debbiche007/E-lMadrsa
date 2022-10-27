@@ -32,6 +32,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import org.controlsfx.control.Notifications;
+import outils.SendSMS;
 import services.ExamenService;
 import services.ReclamationServices;
 import services.UtilisateurService;
@@ -108,6 +109,8 @@ public class AjoutRéclamationsController implements Initializable {
                                     message.setSubject(tfSujet.getText());
                                     message.setText(tfDescription.getText() );
                                     Transport.send(message);
+                                    SendSMS m = new SendSMS();
+                                    m.apiTwilio(tfSujet.getText()+": "+tfDescription.getText());
 
                                 } catch (MessagingException mex) {
                                     System.out.println("send failed, exception: " + mex.getMessage());

@@ -64,8 +64,7 @@ public class AuthController implements Initializable {
     ResultSet rs;
 
     public static User connectedUser;
-
-    @FXML
+     @FXML
     public void show(ActionEvent event) {
 
         if (jcheckb.isSelected()) {

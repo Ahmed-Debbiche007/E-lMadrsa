@@ -29,6 +29,21 @@ public class User {
 
     }
 
+    public User(long l, String username, String role) {
+        boolean c = false ; 
+        this.idUtilisateur = l ; 
+        this.nomUtilisateur = username ; 
+                for (Role t : Role.values()) {
+            if (t.name().equals(role)) {
+                this.role = t;
+                c = true;
+            }
+        }
+        if (!c) {
+            System.out.println("erroRoler");
+        }
+    }
+
     public String getRole() {
         return role.name();
     }
