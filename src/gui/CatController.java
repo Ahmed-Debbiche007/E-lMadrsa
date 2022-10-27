@@ -9,6 +9,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import entities.category;
 import entities.post;
 import entities.OLD;
+import entities.Role;
 import entities.User;
 import static gui.CatController.staticpost;
 
@@ -101,8 +102,8 @@ public class CatController implements Initializable {
     public static int voice = 0;
     public static int block = 0;
     public String img;
-
-    public static User connectedUser = new User(7L, "azaz", "Student");
+    
+     public static User connectedUser = new User(7L, "azaz", "Student");
 
     @FXML
     private Button chooseimg;
