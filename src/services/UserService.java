@@ -20,139 +20,125 @@ import outils.MyDB;
  *
  * @author ahmed
  */
-public class UserService {
+public class UserService implements IService<User> {
  
 
-    Connection cnx;
+    Connection cnx = MyDB.getInstance().getCnx();
 
-    public UserService() {
-        cnx = MyDB.getInstance().getCnx();
-    }
-/*
-    public void ajouterUser(User u) {
+    @Override
+    public void ajouter(User n) {
         try {
-            String req = "INSERT INTO users(nom,prenom,age,mail) VALUES('" + u.getNom() + "','" + u.getPrenom() + "',"+u.get() + ")";
-            Statement st = cnx.createStatement();
-            st.executeUpdate(req);
-            System.out.println("User added successfully!");
+            String requete = "INSERT INTO user (nom,prenom,nomUtilisateur,tel,email,motDePasse,dateNaissance,image,role) VALUES(?,?,?,?,?,?,?,?,?)";
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setString(1, n.getNom());
+            pst.setString(2, n.getPrenom());
+            pst.setString(3, n.getnomUtilisateur());
+            pst.setString(4, n.gettel());
+            pst.setString(5, n.getemail());
+            pst.setString(6, n.getmotDePasse());
+            pst.setDate(7, n.getdateNaissance());
+            pst.setString(8, n.getImage());
+            pst.setString(9, n.getRole());
+
+            pst.executeUpdate();
+            System.out.println("user ajouté");
+
         } catch (SQLException ex) {
-            System.out.println("Error!");
-            System.out.println(ex);
-        }
-    }
-*/
-    /*
-    public void modifierUser(User u) {
-        try {
-            String req = "UPDATE user SET nom=?, prenom=?, age=?, email=? WHERE idUtilisateur=?";
-            PreparedStatement st = cnx.prepareStatement(req);
-            st.setString(1, u.getNom());
-            st.setString(2, u.getPrenom());
-            st.setString(4, u.getemail());
-            st.setLong(5, u.getId());
-            st.executeUpdate();
-            System.out.println("User modified successfully!");
-        } catch (SQLException ex) {
-            System.out.println("Error!");
-            System.out.println(ex);
-        }
-    }
-*/
-    public void supprimerUser(User u) {
-        try {
-            String req = "DELETE FROM user WHERE idUtilisateur=?";
-            PreparedStatement st = cnx.prepareStatement(req);
-            st.setLong(1, u.getId());
-            System.out.println("User deleted successfully!");
-        } catch (SQLException ex) {
-            System.out.println("Error!");
-            System.out.println(ex);
+            System.err.println(ex.getMessage());
         }
     }
 
-    public List<User> afficherUsers() {
-        List<User> users = new ArrayList<>();
+    @Override
+    public void supprimer(User n) {
         try {
-            String req = "SELECT * FROM user";
-            Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery(req);
-            
-            while (rs.next()){
-                User u = new User();
-                u.setId(rs.getLong("idUtilisateur"));
-                //u.setAge(rs.getInt("age"));
-                u.setNom(rs.getString("nom"));
-                u.setPrenom(rs.getString("prenom"));
-                u.setemail(rs.getString("email"));
-                users.add(u);
-            }
+            String requete = "DELETE FROM user WHERE idUtilisateur=?";
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setLong(1, n.getId());
+            pst.executeUpdate();
+            System.out.println("user supprimée !");
+
         } catch (SQLException ex) {
-            System.out.println("Error!");
-            System.out.println(ex);
+            System.err.println(ex.getMessage());
         }
-        return users;
     }
-    
-    public User getUserByID(long id){
-        List<User> users = new ArrayList<>();
+
+    @Override
+    public void modifier(User n) {
         try {
-            String req = "SELECT * FROM user WHERE idUtilisateur= "+ id;
-            Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery(req);
-             User u = new User();
-            while (rs.next()){
-                
-                u.setId(rs.getInt("idUtilisateur"));
-               // u.setAge(rs.getInt("age"));
-                u.setNom(rs.getString("nom"));
-                u.setPrenom(rs.getString("prenom"));
-                u.setemail(rs.getString("email"));
-               return u;
-            }
+            String requete = "UPDATE user SET nom=?,prenom=?,nomUtilisateur=?,tel=?,email=?,motDePasse=?,dateNaissance=?,image=?,role=? WHERE idUtilisateur=?";
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setString(1, n.getNom());
+            pst.setString(2, n.getPrenom());
+            pst.setString(3, n.getnomUtilisateur());
+            pst.setString(4, n.gettel());
+            pst.setString(5, n.getemail());
+            pst.setString(6, n.getmotDePasse());
+            pst.setDate(7, n.getdateNaissance());
+            pst.setString(8, n.getImage());
+            pst.setString(9, n.getRole());
+            pst.setLong(10, n.getId());
+
+            pst.executeUpdate();
+            System.out.println("user modifiée !");
+
         } catch (SQLException ex) {
-            System.out.println("Error!");
-            System.out.println(ex);
+            System.err.println(ex.getMessage());
         }
-       return null;
     }
-    
-     public User getUserByName(String nom, String prenom){
-        try {
-            String req = "SELECT * FROM user WHERE nom = '"+ nom+"'"+"and prenom ="+prenom;
-            Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery(req);
-            
-            while (rs.next()){
-                User u = new User();
-                u.setId(rs.getInt("idUtilisateur"));
-                //u.setAge(rs.getInt("age"));
-                u.setNom(rs.getString("nom"));
-                u.setPrenom(rs.getString("prenom"));
-                u.setmotDePasee(rs.getString("motDePasse"));
-                u.setnomUtilisateur(rs.getString("nomUtilisateur"));
-                u.setrole(rs.getString("role"));
-                //u.setStatus(rs.getString("status"));
-                u.setemail(rs.getString("email"));
-               return u;
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error!");
-            System.out.println(ex);
-        }
-        return null;
-     }
-     
-     
-        public User getByUserName(String userName) {
+
+    @Override
+    public ObservableList<User> afficher() {
         ObservableList<User> list = FXCollections.observableArrayList();
-       
+
+        try {
+            String requete = "SELECT * FROM user";
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+
+                User u = new User(rs.getLong("idUtilisateur"), rs.getString("nom"), rs.getString("prenom"), rs.getString("nomUtilisateur"), rs.getString("tel"), rs.getString("email"), rs.getString("motDePasse"), rs.getDate("dateNaissance"), rs.getString("image"), rs.getString("role"), rs.getBoolean("approved"));
+                list.add(u);
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return list;
+    }
+
+    public ObservableList<User> afficherTuteurs() {
+        ObservableList<User> list = FXCollections.observableArrayList();
+
+        try {
+            String requete = "SELECT * FROM user where role =?";
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setString(1, "Tutor");
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                User u = new User(rs.getLong("idUtilisateur"), rs.getString("nom"), rs.getString("prenom"), rs.getString("nomUtilisateur"), rs.getString("tel"), rs.getString("email"), rs.getString("motDePasse"), rs.getDate("dateNaissance"), rs.getString("image"), rs.getString("role"), rs.getBoolean("approved"));
+
+                list.add(u);
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return list;
+    }
+
+    public User getByUserName(String userName) {
+        ObservableList<User> list = FXCollections.observableArrayList();
+
         try {
             String requete = "select * from user where nomUtilisateur=?";
             PreparedStatement pst = cnx.prepareStatement(requete);
             pst.setString(1, userName);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                User u = new User(rs.getLong("idUtilisateur"), rs.getString("nom"), rs.getString("prenom"), rs.getString("nomUtilisateur"), rs.getString("tel"), rs.getString("email"),rs.getString("motDePasse"), rs.getDate("dateNaissance"), rs.getString("image"),rs.getString("role")) ;
+                User u = new User(rs.getLong("idUtilisateur"), rs.getString("nom"), rs.getString("prenom"), rs.getString("nomUtilisateur"), rs.getString("tel"), rs.getString("email"), rs.getString("motDePasse"), rs.getDate("dateNaissance"), rs.getString("image"), rs.getString("role"), rs.getBoolean("approved"));
+
                 return u;
             }
 
@@ -162,5 +148,157 @@ public class UserService {
 
         return null;
     }
- 
+
+    public long getByName(String userName) {
+        ObservableList<User> list = FXCollections.observableArrayList();
+
+        try {
+            String requete = "select * from user where nom=?";
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setString(1, userName);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                User u = new User(rs.getLong("idUtilisateur"), rs.getString("nom"), rs.getString("prenom"), rs.getString("nomUtilisateur"), rs.getString("tel"), rs.getString("email"), rs.getString("motDePasse"), rs.getDate("dateNaissance"), rs.getString("image"), rs.getString("role"), rs.getBoolean("approved"));
+
+                return u.getId();
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return 0;
+    }
+
+    public User getByUserId(int id) {
+        ObservableList<User> list = FXCollections.observableArrayList();
+
+        try {
+            String requete = "select * from user where idUtilisateur=?";
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                User u = new User(rs.getLong("idUtilisateur"), rs.getString("nom"), rs.getString("prenom"), rs.getString("nomUtilisateur"), rs.getString("tel"), rs.getString("email"), rs.getString("motDePasse"), rs.getDate("dateNaissance"), rs.getString("image"), rs.getString("role"), rs.getBoolean("approved"));
+
+                return u;
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return null;
+    }
+
+    public boolean usernameExists(String username) {
+        try {
+            String requete = "select * from user where nomUtilisateur=?";
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setString(1, username);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                if (rs.getString("nomUtilisateur").equals(username)) {
+                    return true;
+                }
+
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return false;
+    }
+
+    public ObservableList<User> getAllByMail(String role) {
+        ObservableList<User> list = FXCollections.observableArrayList();
+
+        try {
+            String requete = "SELECT * FROM user where role = ?";
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setString(1, role);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                User u = new User(rs.getLong("idUtilisateur"), rs.getString("nom"), rs.getString("prenom"), rs.getString("nomUtilisateur"), rs.getString("tel"), rs.getString("email"), rs.getString("motDePasse"), rs.getDate("dateNaissance"), rs.getString("image"), rs.getString("role"), rs.getBoolean("approved"));
+                list.add(u);
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return list;
+    }
+
+    public User getByMail(String mail) {
+        ObservableList<User> list = FXCollections.observableArrayList();
+
+        try {
+            String requete = "select * from user where email=?";
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setString(1, mail);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                User u = new User(rs.getLong("idUtilisateur"), rs.getString("nom"), rs.getString("prenom"), rs.getString("nomUtilisateur"), rs.getString("tel"), rs.getString("email"), rs.getString("motDePasse"), rs.getDate("dateNaissance"), rs.getString("image"), rs.getString("role"), rs.getBoolean("approved"));
+                return u;
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return null;
+    }
+      public void updatePassword(User n) {
+        try {
+            String requete = "UPDATE user SET motDePasse=? WHERE idUtilisateur=?";
+            PreparedStatement pst = cnx.prepareStatement(requete);
+
+            pst.setString(1, n.getmotDePasse());
+
+            pst.setLong(2, n.getId());
+
+            pst.executeUpdate();
+            
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+      
+      public void approve(User n) {
+        try {
+            String requete = "UPDATE user SET approved=? WHERE idUtilisateur=?";
+            PreparedStatement pst = cnx.prepareStatement(requete);
+
+            pst.setBoolean(1, n.isApproved());
+
+            pst.setLong(2, n.getId());
+
+            pst.executeUpdate();
+           
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+      
+         public ObservableList<User> afficherPending() {
+        ObservableList<User> list = FXCollections.observableArrayList();
+
+        try {
+            String requete = "SELECT * FROM user where approved = 0";
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                User u = new User(rs.getLong("idUtilisateur"), rs.getString("nom"), rs.getString("prenom"), rs.getString("nomUtilisateur"), rs.getString("tel"), rs.getString("email"), rs.getString("motDePasse"), rs.getDate("dateNaissance"), rs.getString("image"), rs.getString("role"), rs.getBoolean("approved"));
+                list.add(u);
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return list;
+    } 
 }

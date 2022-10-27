@@ -1,94 +1,59 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package entities;
-
 
 import java.sql.Date;
 
 /**
  *
- * @author Nour
+ * @author aissa
  */
-public class User {
-    
+public class Utilisateur {
+
     private Long idUtilisateur;
     private String nom;
     private String prenom;
     private String nomUtilisateur;
-    private String tel;
     private String email;
     private String motDePasse;
     private Date dateNaissance ;
     private String image;
-    private String role;
-    private Double Resultat ; 
+    
     
     
 
-    public User() {
+    public Utilisateur() {
         
     }
 
-    public User(Long idUtilisateur) {
+    public Utilisateur(Long idUtilisateur) {
         this.idUtilisateur = idUtilisateur;
     }
 
-    public User(Long idUtilisateur, String nomUtilisateur, String role) {
-        this.idUtilisateur = idUtilisateur;
-        this.nomUtilisateur = nomUtilisateur;
-        this.role = role;
-    }
-    
-
-    public User(Long idUtilisateur, String nom, String prenom, String nomUtilisateur,String tel, String email, String motDePasse, Date dateNaissance, String image, String role) {
+    public Utilisateur(Long idUtilisateur, String nom, String prenom, String nomUtilisateur, String email, String motDePasse, Date dateNaissance, String image) {
         this.idUtilisateur = idUtilisateur;
         this.nom = nom;
         this.prenom = prenom;
         this.nomUtilisateur = nomUtilisateur;
-        this.tel = tel;
         this.email = email;
         this.motDePasse = motDePasse;
         this.dateNaissance = dateNaissance;
         this.image = image;
-        this.role = role;
     }
 
-    public User(Long idUtilisateur, String nom, String prenom, String nomUtilisateur, String tel, String email, String motDePasse, Date dateNaissance, String role) {
-        this.idUtilisateur = idUtilisateur;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.nomUtilisateur = nomUtilisateur;
-        this.tel = tel;
-        this.email = email;
-        this.motDePasse = motDePasse;
-        this.dateNaissance = dateNaissance;
-        this.role = role;
-    }
-
-     public User( String nom, String prenom, String nomUtilisateur,String tel, String email, String motDePasse, Date dateNaissance, String image , String role) {
+     public Utilisateur( String nom, String prenom, String nomUtilisateur, String email, String motDePasse, Date dateNaissance, String image) {
         
         this.nom = nom;
         this.prenom = prenom;
         this.nomUtilisateur = nomUtilisateur;
-        this.tel = tel;
         this.email = email;
         this.motDePasse = motDePasse;
         this.dateNaissance = dateNaissance;
         this.image = image;
-        this.role = role;
     }
-
-    public Double getResultat() {
-        return Resultat;
-    }
-
-    public void setResultat(Double Resultat) {
-        this.Resultat = Resultat;
-    }
-
- 
 
     public Long getId() {
         return idUtilisateur;
@@ -96,18 +61,15 @@ public class User {
 
     public void setId(long idUtilisateur) {
         this.idUtilisateur = idUtilisateur;
-
     }
 
     public String getNom() {
         return nom;
     }
 
-
     public void setNom(String nom) {
         this.nom = nom;
     }
-
 
     public String getPrenom() {
         return prenom;
@@ -123,14 +85,6 @@ public class User {
     
     public void setnomUtilisateur(String nomUtilisateur) {
         this.nomUtilisateur = nomUtilisateur;
-    }
-    
-    public String gettel() {
-        return tel;
-    }
-
-    public void settel(String tel) {
-        this.tel = tel;
     }
     
     public String getemail() {
@@ -164,23 +118,27 @@ public class User {
     public void setImage(String image) {
         this.image = image;
     }
-    
-    public String getrole() {
-        return role;
-    }
-
-    public void setrole(String role) {
-        this.role = role;
-    }
 
     @Override
     public String toString() {
-
-        return "user{" + "idUtilisateur=" + idUtilisateur + ", nom=" + nom + ", prenom=" + prenom + ", nomUtilisateur=" + nomUtilisateur + ", tel=" + tel + ", email=" + email + ", motDePasse=" + motDePasse + ", dateNaissance=" + dateNaissance + ", image=" + image +", role=" + role + '}';
+        return "Utilisateur{" + "idUtilisateur=" + idUtilisateur + ", nom=" + nom + ", prenom=" + prenom + ",nomUtilisateur=" + nomUtilisateur + ",email=" + email + "motDePasse=" + motDePasse + "dateNaissance=" + dateNaissance + "image=" + image+ '}';
     }
 
-   
+    public void setDateAcq(Date dateDB) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
-
-    
 }
+
+
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+/**
+ *
+ * @author Nour
+ */
+
