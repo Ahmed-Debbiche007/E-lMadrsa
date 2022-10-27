@@ -39,19 +39,25 @@ import services.ServicePost;
 import gui.PostController;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Timestamp;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.TableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.util.Callback;
 import javax.imageio.ImageIO;
@@ -95,10 +101,9 @@ public class CatController implements Initializable {
     public static int voice = 0;
     public static int block = 0;
     public String img;
-    
-    
-    public static User connectedUser= new User(2L,"hamma","rkhis");
-    
+
+    public static User connectedUser = new User(7L, "azaz", "Student");
+
     @FXML
     private Button chooseimg;
 
@@ -107,7 +112,7 @@ public class CatController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         if (block == 0) {
+        /*if (block == 0) {
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("text to speech ");
             alert.setHeaderText("text to speech ");
@@ -131,7 +136,7 @@ public class CatController implements Initializable {
                 voice = 0;
                 alert.hide();
             }
-        }
+        }*/
         showguicat();
 
     }
@@ -143,18 +148,15 @@ public class CatController implements Initializable {
         colnomcat.setCellValueFactory(new PropertyValueFactory<category, String>("categoryNAME"));
         colimage.setCellValueFactory(new PropertyValueFactory<category, String>("categoryIMAGE"));
         realimage.setCellValueFactory(new PropertyValueFactory<category, ImageView>("image"));
-        lista.forEach(new Consumer<category>() {
-            @Override
-            public void accept(category item) {
-                String path = "/images/"+item.getCategoryIMAGE();
-                ImageView img =new ImageView(new Image(CatController.this.getClass().getResourceAsStream(path)));
-                img.setFitHeight(50);
-                img.setFitWidth(50);
-                item.setImage(img);
-            }
-            
-        });
-        System.out.println(lista.get(0).getImage().getImage().getWidth());
+        lista.forEach(item -> {
+            String path = "/images/" + item.getCategoryIMAGE();
+            ImageView img = new ImageView(new Image(this.getClass().getResourceAsStream(path)));
+            img.setFitHeight(50);
+            img.setFitWidth(50);
+            item.setImage(img);
+        }
+        );
+        // System.out.println(lista.get(0).getImage().getImage().getWidth());
         tvcat.setItems(lista);
         if (voice == 1) {
             Texttospeech t = new Texttospeech();
@@ -170,12 +172,13 @@ public class CatController implements Initializable {
         if (!tfnomcat.getText().trim().matches(".*[0-9].*") && !img.trim().equals("")) {
             sp.ajouter(new category(tfnomcat.getText(), img)); //la méthode getText() retourne toujours une chaine de caractère 
             JOptionPane.showMessageDialog(null, "Category Ajoutée !");
+
             showguicat();
         } else {
             JOptionPane.showMessageDialog(null, " le champs doit contenir des lettres seulement ! ");
-            
+
         }
-        //showguicat();
+        // showguicat();
     }
 
     @FXML
@@ -210,7 +213,7 @@ public class CatController implements Initializable {
         ServiceCategory sc = new ServiceCategory();
         sc.modifier(new category(c.getCategoryID(), tfnomcat.getText(), img));
         JOptionPane.showMessageDialog(null, "categorie modifié ! ");
-        showguicat();
+        //showguicat();
     }
 
     @FXML
@@ -219,7 +222,7 @@ public class CatController implements Initializable {
             category c = tvcat.getSelectionModel().getSelectedItem();
 
             tfnomcat.setText(c.getCategoryNAME());
-            //tfimage.setText(c.getCategoryIMAGE());
+            img = c.getCategoryIMAGE();
 
         }
 
@@ -250,12 +253,50 @@ public class CatController implements Initializable {
         filechooser.setTitle("Choose image");
         Window ownerWindow = null;
         File file = filechooser.showOpenDialog(ownerWindow);
-        
-        String command = "cp "+file.getAbsolutePath()+" "+System.getProperty("user.dir")+"\\src\\images\\"+file.getName();
-        Process process = Runtime.getRuntime().exec(command);
+//        System.out.println(file.getAbsolutePath() + "  **" + System.getProperty("user.dir"));
+
+        if (file.getAbsoluteFile().toString() != null) {
+            File source = new File(file.getAbsolutePath());
+            File destination = new File(System.getProperty("user.dir") + "\\src\\images\\" + file.getName());
+            copy(source, destination);
+
+        }
+
         img = file.getName();
 
     }
 
-   
+    private void copy(File source, File destination) throws IOException {
+
+        InputStream input = null;
+        OutputStream output = null;
+        try {
+            // Create FileInputStream and FileOutputStream objects
+            input = new FileInputStream(source);
+            output = new FileOutputStream(destination);
+            byte[] buf = new byte[1024];
+            int bytesRead;
+
+            // Write bytes to the destination
+            while ((bytesRead = input.read(buf)) > 0) {
+                output.write(buf, 0, bytesRead);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Could not copy the file to the destination: " + destination.getPath() + ". Check if the folder or file already exists.");
+        } finally {
+            // Close the streams
+            if (input != null) {
+                input.close();
+            }
+
+            if (output != null) {
+                output.close();
+            }
+        }
+
+        System.out.println("File copied");
+        showguicat();
+    }
+
 }
