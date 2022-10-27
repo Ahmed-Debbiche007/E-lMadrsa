@@ -4,7 +4,6 @@
  */
 package entities;
 
-
 import java.sql.Date;
 
 /**
@@ -12,7 +11,7 @@ import java.sql.Date;
  * @author Nour
  */
 public class User {
-    
+
     private Long idUtilisateur;
     private String nom;
     private String prenom;
@@ -20,22 +19,27 @@ public class User {
     private String tel;
     private String email;
     private String motDePasse;
-    private Date dateNaissance ;
+    private Date dateNaissance;
     private String image;
-    private String role;
+    private Role role;
+    private boolean approved;
     private Double Resultat ; 
-    
-    
 
     public User() {
-        
+
     }
+
+    public String getRole() {
+        return role.name();
+    }
+    
+    
 
     public User(Long idUtilisateur) {
         this.idUtilisateur = idUtilisateur;
     }
 
-    public User(Long idUtilisateur, String nom, String prenom, String nomUtilisateur,String tel, String email, String motDePasse, Date dateNaissance, String image, String role) {
+    public User(Long idUtilisateur, String nom, String prenom, String nomUtilisateur, String tel, String email, String motDePasse, Date dateNaissance, String image, String role, boolean approved) {
         this.idUtilisateur = idUtilisateur;
         this.nom = nom;
         this.prenom = prenom;
@@ -45,35 +49,21 @@ public class User {
         this.motDePasse = motDePasse;
         this.dateNaissance = dateNaissance;
         this.image = image;
-        this.role = role;
-    }
 
-    public User(Long idUtilisateur, String nom, String prenom, String nomUtilisateur, String tel, String email, String motDePasse, Date dateNaissance, String role) {
-        this.idUtilisateur = idUtilisateur;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.nomUtilisateur = nomUtilisateur;
-        this.tel = tel;
-        this.email = email;
-        this.motDePasse = motDePasse;
-        this.dateNaissance = dateNaissance;
-        this.role = role;
+        this.approved = approved;
+        boolean c = false;
+        for (Role t : Role.values()) {
+            if (t.name().equals(role)) {
+                this.role = t;
+                c = true;
+            }
+        }
+        if (!c) {
+            System.out.println("erroRoler");
+        }
     }
-
-     public User( String nom, String prenom, String nomUtilisateur,String tel, String email, String motDePasse, Date dateNaissance, String image , String role) {
-        
-        this.nom = nom;
-        this.prenom = prenom;
-        this.nomUtilisateur = nomUtilisateur;
-        this.tel = tel;
-        this.email = email;
-        this.motDePasse = motDePasse;
-        this.dateNaissance = dateNaissance;
-        this.image = image;
-        this.role = role;
-    }
-
-    public Double getResultat() {
+    
+     public Double getResultat() {
         return Resultat;
     }
 
@@ -81,7 +71,28 @@ public class User {
         this.Resultat = Resultat;
     }
 
- 
+    public User(String nom, String prenom, String nomUtilisateur, String tel, String email, String motDePasse, Date dateNaissance, String image, String role, boolean approved) {
+
+        this.nom = nom;
+        this.prenom = prenom;
+        this.nomUtilisateur = nomUtilisateur;
+        this.tel = tel;
+        this.email = email;
+        this.motDePasse = motDePasse;
+        this.dateNaissance = dateNaissance;
+        this.image = image;
+        this.approved = approved;
+        boolean c = false;
+        for (Role t : Role.values()) {
+            if (t.name().equals(role)) {
+                this.role = t;
+                c = true;
+            }
+        }
+        if (!c) {
+            System.out.println("erroRoler");
+        }
+    }
 
     public Long getId() {
         return idUtilisateur;
@@ -89,18 +100,15 @@ public class User {
 
     public void setId(long idUtilisateur) {
         this.idUtilisateur = idUtilisateur;
-
     }
 
     public String getNom() {
         return nom;
     }
 
-
     public void setNom(String nom) {
         this.nom = nom;
     }
-
 
     public String getPrenom() {
         return prenom;
@@ -109,15 +117,15 @@ public class User {
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
-    
+
     public String getnomUtilisateur() {
         return nomUtilisateur;
     }
-    
+
     public void setnomUtilisateur(String nomUtilisateur) {
         this.nomUtilisateur = nomUtilisateur;
     }
-    
+
     public String gettel() {
         return tel;
     }
@@ -125,7 +133,7 @@ public class User {
     public void settel(String tel) {
         this.tel = tel;
     }
-    
+
     public String getemail() {
         return email;
     }
@@ -133,7 +141,7 @@ public class User {
     public void setemail(String email) {
         this.email = email;
     }
-    
+
     public String getmotDePasse() {
         return motDePasse;
     }
@@ -141,7 +149,7 @@ public class User {
     public void setmotDePasee(String motDePasse) {
         this.motDePasse = motDePasse;
     }
-    
+
     public Date getdateNaissance() {
         return dateNaissance;
     }
@@ -149,7 +157,7 @@ public class User {
     public void setdateNaissance(Date dateNaissance) {
         this.dateNaissance = dateNaissance;
     }
-    
+
     public String getImage() {
         return image;
     }
@@ -157,23 +165,35 @@ public class User {
     public void setImage(String image) {
         this.image = image;
     }
-    
-    public String getrole() {
+
+    public Role getrole() {
         return role;
     }
 
-    public void setrole(String role) {
-        this.role = role;
+    public void setRole(String role) {
+        boolean c = false;
+        for (Role t : Role.values()) {
+            if (t.name().equals(role)) {
+                this.role = t;
+                c = true;
+            }
+        }
+        if (!c) {
+            System.out.println("erroRoler");
+        }
+    }
+
+    public boolean isApproved() {
+        return approved;
+    }
+
+    public void setApproved(boolean approved) {
+        this.approved = approved;
     }
 
     @Override
     public String toString() {
-
-        return "user{" + "idUtilisateur=" + idUtilisateur + ", nom=" + nom + ", prenom=" + prenom + ", nomUtilisateur=" + nomUtilisateur + ", tel=" + tel + ", email=" + email + ", motDePasse=" + motDePasse + ", dateNaissance=" + dateNaissance + ", image=" + image +", role=" + role + '}';
+        return "user{" + "idUtilisateur=" + idUtilisateur + ", nom=" + nom + ", prenom=" + prenom + ", nomUtilisateur=" + nomUtilisateur + ", tel=" + tel + ", email=" + email + ", motDePasse=" + motDePasse + ", dateNaissance=" + dateNaissance + ", image=" + image + ", role=" + role + '}';
     }
 
-   
-
-
-    
 }
