@@ -64,7 +64,7 @@ public class event_service {
         //ReservationService r = new ReservationService();
                 CategorieEvService cs = new CategorieEvService();
 
-        UserService us = new UserService();
+        UtilisateurService us = new UtilisateurService();
 
                     List<evenement> list=new ArrayList<>();
         try {
@@ -91,7 +91,7 @@ public Map<String,Integer> readStat() {
         //ReservationService r = new ReservationService();
                 CategorieEvService cs = new CategorieEvService();
 
-        UserService us = new UserService();
+        UtilisateurService us = new UtilisateurService();
 
                   
         try {
@@ -150,7 +150,7 @@ public Map<String,Integer> readStat() {
         
     String req = "select * from evenement where id_evenement="+id;
         evenement e = new evenement();
-        UserService us = new UserService();
+        UtilisateurService us = new UtilisateurService();
         CategorieEvService cs = new CategorieEvService();
 
         
@@ -178,7 +178,7 @@ public Map<String,Integer> readStat() {
         
     String req = "select * from evenement where nom_evenement LIKE '%"+name+"%'";
         evenement e = new evenement();
-        UserService us = new UserService();
+        UtilisateurService us = new UtilisateurService();
         CategorieEvService cs = new CategorieEvService();
 
         

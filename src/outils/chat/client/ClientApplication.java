@@ -32,7 +32,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import services.MessagesService;
-import services.UserService;
+import services.UtilisateurService;
 
 public class ClientApplication extends Application {
 

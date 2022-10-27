@@ -35,7 +35,8 @@ import outils.CalendarQuickstart;
 import services.ChatSessionService;
 import services.TutorshipRequestService;
 import services.TutorshipSessionService;
-import services.UserService;
+
+import services.UtilisateurService;
 
 /**
  * FXML Controller class
@@ -112,8 +113,8 @@ public class TutorTutorshipRequestsController implements Initializable {
     private void valider(ActionEvent event) throws IOException, GeneralSecurityException {
         TutorshipRequest t = requests.getSelectionModel().getSelectedItem();
         TutorshipRequestService ts = new TutorshipRequestService();
-        UserService service = new UserService();
-        User student = service.getUserByID((int)t.getIdStudent());
+        UtilisateurService service = new UtilisateurService();
+        User student = service.getByUserId((int)t.getIdStudent());
         ts.delete(t);
          String url = null;
         if(t.getRequestType().name().equals("VideoChat")){

@@ -21,7 +21,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javax.swing.JOptionPane;
-import services.UserService;
+import services.UtilisateurService;
 
 
 /**
@@ -53,7 +53,7 @@ public class AjoutUserController implements Initializable {
 
     @FXML
     private void AjoutPersonne(ActionEvent event) throws IOException {
-        UserService SP = new UserService();
+        UtilisateurService SP = new UtilisateurService();
         User u = SP.getByUserName(fnom.getText());
         //System.out.println(u);
         String pass;

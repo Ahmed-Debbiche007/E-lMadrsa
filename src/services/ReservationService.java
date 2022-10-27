@@ -104,7 +104,7 @@ public class ReservationService {
         String req;
         req = "select * from reservation ";
         
-        UserService us = new UserService();
+        UtilisateurService us = new UtilisateurService();
         event_service ev = new event_service();
 
                     List<Reservation> list=new ArrayList<>();
@@ -127,7 +127,7 @@ public class ReservationService {
         String req;
         req = "select * from reservation order by id_reservation desc limit 1";
         
-        UserService us = new UserService();
+        UtilisateurService us = new UtilisateurService();
         event_service ev = new event_service();
 
  
@@ -154,7 +154,7 @@ public class ReservationService {
     
         String req = "select * from reservation where id_reservation="+id;
         Reservation r = new Reservation();
-        UserService us = new UserService();
+        UtilisateurService us = new UtilisateurService();
         event_service ev = new event_service();
         
         
@@ -179,7 +179,7 @@ public class ReservationService {
     
         String req = "select * from reservation where id_reservation LIKE '%"+name+"%'";
         Reservation r = new Reservation();
-        UserService us = new UserService();
+        UtilisateurService us = new UtilisateurService();
         event_service ev = new event_service();
         
         

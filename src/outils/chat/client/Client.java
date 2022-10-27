@@ -21,7 +21,8 @@ import java.net.UnknownHostException;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import services.UserService;
+
+import services.UtilisateurService;
 
 public class Client implements Runnable {
 
@@ -80,8 +81,8 @@ public class Client implements Runnable {
     }
 
     public void writeOldMessage(Messages message) {
-        UserService userservice = new UserService();
-        User sender = userservice.getUserByID((int) message.getIdSender());
+        UtilisateurService userservice = new UtilisateurService();
+        User sender = userservice.getByUserId((int) message.getIdSender());
         chatLog.add(sender.getNom()+" : "+message.getMessage());
     }
 }

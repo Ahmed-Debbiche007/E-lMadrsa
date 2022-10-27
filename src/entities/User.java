@@ -29,6 +29,10 @@ public class User {
 
     }
 
+    public User(long l, String azaz, String student) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public String getRole() {
         return role.name();
     }
