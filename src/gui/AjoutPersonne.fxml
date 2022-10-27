@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="833.0" prefWidth="1237.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AjoutPersonneController">
+   <children>
+      <TextField fx:id="tfNom" layoutX="263.0" layoutY="130.0" />
+      <TextField fx:id="tfPrenom" layoutX="263.0" layoutY="172.0" />
+      <Label layoutX="86.0" layoutY="131.0" text="Nom :">
+         <font>
+            <Font name="Arial Black" size="20.0" />
+         </font></Label>
+      <Label layoutX="70.0" layoutY="173.0" text="Prenom :">
+         <font>
+            <Font name="Arial Black" size="20.0" />
+         </font></Label>
+      <Button fx:id="btnAjoute" layoutX="178.0" layoutY="553.0" mnemonicParsing="false" onAction="#ajouterPersonne" prefHeight="60.0" prefWidth="152.0" text="Ajouter">
+         <font>
+            <Font name="Arial Black" size="20.0" />
+         </font></Button>
+      <TextField fx:id="tfNomUtilisateur" layoutX="263.0" layoutY="217.0" />
+      <TextField fx:id="tfemail" layoutX="263.0" layoutY="302.0" />
+      <TextField fx:id="tfmotdepasse" layoutX="263.0" layoutY="350.0" prefHeight="29.0" prefWidth="171.0" />
+      <DatePicker fx:id="tfdatenaissance" layoutX="254.0" layoutY="439.0" prefHeight="31.0" prefWidth="216.0" />
+      <Label layoutX="18.0" layoutY="218.0" text="Nom d'utilisateur :">
+         <font>
+            <Font name="Arial Black" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="80.0" layoutY="303.0" text="E-mail :">
+         <font>
+            <Font name="Arial Black" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="10.0" layoutY="440.0" text="Date de naissance :">
+         <font>
+            <Font name="Arial Black" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="42.0" layoutY="350.0" text="Mot de passe :">
+         <font>
+            <Font name="Arial Black" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="77.0" layoutY="491.0" text="Image :">
+         <font>
+            <Font name="Arial Black" size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnModifie" layoutX="178.0" layoutY="651.0" mnemonicParsing="false" onAction="#modifierPersonne" prefHeight="60.0" prefWidth="152.0" text="Modifier">
+         <font>
+            <Font name="Arial Black" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnSupprime" layoutX="178.0" layoutY="749.0" mnemonicParsing="false" onAction="#supprimerPersonne" prefHeight="60.0" prefWidth="152.0" text="Supprimer">
+         <font>
+            <Font name="Arial Black" size="20.0" />
+         </font>
+      </Button>
+      <TableView fx:id="tvUtilisateur" layoutX="546.0" layoutY="59.0" prefHeight="760.0" prefWidth="677.0">
+        <columns>
+          <TableColumn fx:id="colNom" prefWidth="60.0" text="Nom" />
+          <TableColumn fx:id="colPrenom" prefWidth="78.0" text="Prenom" />
+            <TableColumn fx:id="colNomUtilisateur" prefWidth="144.0" text="Nom d'utilisateur" />
+            <TableColumn fx:id="coltlf" prefWidth="54.0" text="TLF" />
+            <TableColumn fx:id="colemail" prefWidth="68.0" text="E-mail" />
+            <TableColumn fx:id="coldatenaissance" minWidth="0.0" prefWidth="138.0" text="Date de naissance" />
+            <TableColumn fx:id="colImage" prefWidth="67.0" text="Image" />
+            <TableColumn fx:id="colrole" prefWidth="85.0" text="Role" />
+        </columns>
+      </TableView>
+      <Label layoutX="26.0" layoutY="34.0" prefHeight="72.0" prefWidth="490.0" text="interface Dédiée aux administrateurs" textAlignment="CENTER" textFill="RED" underline="true">
+         <font>
+            <Font name="Arial Black" size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnselecte" layoutX="345.0" layoutY="666.0" mnemonicParsing="false" onAction="#editcat2" text="select" textFill="#4800ff" />
+      <Button fx:id="btndcnx" layoutX="42.0" layoutY="18.0" mnemonicParsing="false" onAction="#Retour" text="déconnexion" textFill="#0101f5">
+         <font>
+            <Font name="Arial Narrow" size="18.0" />
+         </font>
+      </Button>
+      <Line endX="16.0" endY="580.0" layoutX="507.0" layoutY="210.0" startX="16.0" startY="-97.0" />
+      <Label layoutX="100.0" layoutY="260.0" text="tel :">
+         <font>
+            <Font name="Arial Black" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tftel" layoutX="263.0" layoutY="259.0" />
+      <TextField fx:id="tfdate" layoutX="263.0" layoutY="393.0" visible="false" />
+      <Label layoutX="89.0" layoutY="394.0" text="Role :">
+         <font>
+            <Font name="Arial Black" size="21.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="tfrole" layoutX="263.0" layoutY="396.0" prefHeight="26.0" prefWidth="171.0" />
+      <ComboBox fx:id="roles" layoutX="923.0" layoutY="22.0" prefWidth="150.0" />
+      <Button layoutX="1085.0" layoutY="21.0" mnemonicParsing="false" onAction="#refresh" text="Refresh" />
+      <Button layoutX="254.0" layoutY="493.0" mnemonicParsing="false" onAction="#ajouterimage" text="+" />
+   </children>
+</AnchorPane>

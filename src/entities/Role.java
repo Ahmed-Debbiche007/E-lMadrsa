@@ -9,6 +9,7 @@ package entities;
  * @author ahmed
  */
 public enum Role {
+    Admin, 
     Student,
-    Tutor
+    Tutor,
 }

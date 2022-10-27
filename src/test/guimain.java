@@ -4,12 +4,7 @@
  */
 package test;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,25 +17,29 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author aymen
+ * @author Nour
  */
 public class guimain extends Application {
-
+    
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/cat.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Crud publication");
-        primaryStage.show();
-    }
-
+       FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/auth.fxml"));
+       
+       Parent root = loader.load();
+       
+       Scene scene = new Scene(root);
+       primaryStage.setScene(scene);
+       primaryStage.setTitle("E-lMadrsa");     //////titre de la page 
+       primaryStage.show();
+    
+       }
+    
+  
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         launch(args);
-
     }
+    
 }
