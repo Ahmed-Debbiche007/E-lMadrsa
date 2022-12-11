@@ -112,7 +112,7 @@ public class CatController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        /*if (block == 0) {
+        if (block == 0) {
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("text to speech ");
             alert.setHeaderText("text to speech ");
@@ -136,7 +136,7 @@ public class CatController implements Initializable {
                 voice = 0;
                 alert.hide();
             }
-        }*/
+        }
         showguicat();
 
     }

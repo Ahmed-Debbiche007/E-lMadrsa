@@ -47,7 +47,8 @@ public class CategorieEvService {
         } catch (SQLException ex) {
             Logger.getLogger(CategorieEvService.class.getName()).log(Level.SEVERE, null, ex);
         
-        }}
+        }
+    }
 
   
     public void delete(int id) {

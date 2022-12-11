@@ -16,14 +16,7 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import outils.MyDB;
-
-/*
-   private int idExamen ; 
-   private String nomExamen ;  
-   private Double pourcentage  ; 
-   private int DureeExamen ;  
-*/
-
+ 
 public class ExamenService implements IService<Examen> {
     
         public ExamenService() {
@@ -48,7 +41,7 @@ public class ExamenService implements IService<Examen> {
 
             
         } catch (SQLException ex) {
-                        System.out.println("erreur ! examen n'est pas ajouté") ; 
+                        System.out.println("erreur ! examen n'est pas ajouté" + ex.getMessage()) ; 
         }
      }
     

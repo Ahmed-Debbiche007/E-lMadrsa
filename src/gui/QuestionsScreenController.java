@@ -320,7 +320,7 @@ public class QuestionsScreenController implements Initializable {
                                 
                                 }
                                 ParticipationsService PS = new ParticipationsService() ;
-                                long l =  connectedUser.getId() ; 
+                                long l =  1 ; 
                                 System.out.println("id formation  : " +  examen.getFormationId() ) ; 
                                 System.out.println("id part  : " +   PS.getParticipation(l, examen.getFormationId())) ; 
                                 Participation  p = PS.getParticipation(l, examen.getFormationId());
