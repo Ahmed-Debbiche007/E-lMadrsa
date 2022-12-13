@@ -5,7 +5,7 @@
  */
 package gui.Students;
 
-import entities.ChatSession;
+
 import entities.TutorshipRequest;
 import entities.TutorshipSession;
 import entities.User;
@@ -29,7 +29,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import services.ChatSessionService;
+
 import services.TutorshipRequestService;
 import services.TutorshipSessionService;
 
@@ -78,7 +78,7 @@ public class StudentTutorshipRequestsController implements Initializable {
             cltype.setCellValueFactory(new PropertyValueFactory<TutorshipRequest, String>("requestType"));
             cldate.setCellValueFactory(new PropertyValueFactory<TutorshipRequest, Timestamp>("sessionDate"));
             clobject.setCellValueFactory(new PropertyValueFactory<TutorshipRequest, String>("requestBody"));
-            requests.setItems(sp.getList("idStudent", u.getId()));
+            requests.setItems(sp.getList("id_student_id", u.getId()));
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -134,7 +134,6 @@ public class StudentTutorshipRequestsController implements Initializable {
         TutorshipSessionService ss = new TutorshipSessionService();
         ss.add(s);
         s = ss.getLatest();
-        ChatSessionService cs = new ChatSessionService();
-        cs.add(new ChatSession(s.getIdTutorshipSession()));
+        
     }
 }

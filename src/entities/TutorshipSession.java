@@ -15,7 +15,7 @@ import java.util.List;
 public class TutorshipSession {
 
     long idTutorshipSession, idTutor, idStudent, idRequest;
-    String url;
+    String url, body;
     RequestType type;
     Timestamp date;
     private String nomTut, nomStudent;
@@ -191,6 +191,15 @@ public class TutorshipSession {
     public void setNomStudent(String nomStudent) {
         this.nomStudent = nomStudent;
     }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+    
     
     
 

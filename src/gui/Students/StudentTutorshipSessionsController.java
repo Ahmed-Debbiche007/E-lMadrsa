@@ -26,7 +26,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import outils.chat.client.Client;
 import outils.chat.client.ClientApplication;
-import services.ChatSessionService;
+
 import services.TutorshipSessionService;
 
 /**
@@ -78,7 +78,7 @@ public class StudentTutorshipSessionsController implements Initializable {
             cltype.setCellValueFactory(new PropertyValueFactory<TutorshipSession, String>("type"));
             cldate.setCellValueFactory(new PropertyValueFactory<TutorshipSession, Timestamp>("date"));
             clurl.setCellValueFactory(new PropertyValueFactory<TutorshipSession, String>("url"));
-            //Sessions.setItems(sp.getList("idStudent", u.getId()));
+            Sessions.setItems(sp.getList("id_student_id", u.getId()));
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -109,24 +109,23 @@ public class StudentTutorshipSessionsController implements Initializable {
     @FXML
     private void connecter(ActionEvent event) throws IOException, InterruptedException {
         t = Sessions.getSelectionModel().getSelectedItem();
-        //Thread.sleep(3000);
         if (t.getType().name().equals("MessagesChat")) {
-            this.clientchatapp().show();
+            this.clientchatapp(t).show();
         }else {
-            String command = "xdg-open "+t.getUrl();
+            String command = "cmd /c start "+t.getUrl();
 
-        Process proc = Runtime.getRuntime().exec(command);
+        Process process = Runtime.getRuntime().exec(command);
 
 
         }
 
     }
 
-    private Stage clientchatapp() throws IOException, InterruptedException {
+    private Stage clientchatapp(TutorshipSession t) throws IOException, InterruptedException {
         Thread.sleep(3000);
         AjoutUserController cs = new AjoutUserController();
         User u = cs.getU();
-        Client client = new Client("localhost", 8081, u.getNom());
+        Client client = new Client("localhost", 8082, u.getNom());
         Thread clientThread = new Thread(client);
         clientThread.setDaemon(true);
         clientThread.start();
@@ -135,18 +134,10 @@ public class StudentTutorshipSessionsController implements Initializable {
         ClientApplication ca = new ClientApplication();
         Stage primaryStage = (Stage) ap.getScene().getWindow();
         primaryStage.close();
-        primaryStage.setScene(ca.makeChatUI(client, this.getSessionId()));
+        primaryStage.setScene(ca.makeChatUI(client, (int) t.getIdTutorshipSession()));
         return primaryStage;
     }
 
-    public int getSessionId() {
-        ChatSessionService css = new ChatSessionService();
-        try {
-            return (int) css.getSession("idTutorshipSession", (int) this.getT().getIdTutorshipSession()).getIdTutorshipSession();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return 0;
-    }
+    
 
 }

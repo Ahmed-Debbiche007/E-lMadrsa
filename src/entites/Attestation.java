@@ -4,6 +4,7 @@
  */
 package entites;
 
+import entities.Participation;
 import java.util.Date;
 
 /**
@@ -15,31 +16,7 @@ public class Attestation {
     public Long idAttestation;
     private Long idParticipation ;
     private Date dateAcq; 
-    private String nom;
-    private String prenom;
-
-    public Attestation() {
-    }
-
-    public Attestation(Long idAttestation, Long idParticipation, Date dateAcq) {
-        this.idAttestation = idAttestation;
-        this.idParticipation = idParticipation;
-        this.dateAcq = dateAcq;
-    }
-
-    public Attestation(Long idAttestation, Long idParticipation) {
-        this.idAttestation = idAttestation;
-        this.idParticipation = idParticipation;
-    }
-
-    public Attestation(Long idAttestation, Long idParticipation, Date dateAcq, String nom, String prenom) {
-        this.idAttestation = idAttestation;
-        this.idParticipation = idParticipation;
-        this.dateAcq = dateAcq;
-        this.nom = nom;
-        this.prenom = prenom;
-    }
-    
+    private int participation;
 
     public Long getIdAttestation() {
         return idAttestation;
@@ -65,27 +42,41 @@ public class Attestation {
         this.dateAcq = dateAcq;
     }
 
-    public String getNom() {
-        return nom;
+    public int getParticipation() {
+        return participation;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setParticipation(int participation) {
+        this.participation = participation;
     }
 
-    public String getPrenom() {
-        return prenom;
+    public Attestation() {
     }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
+    public Attestation(Long idAttestation, Long idParticipation, Date dateAcq, int participation) {
+        this.idAttestation = idAttestation;
+        this.idParticipation = idParticipation;
+        this.dateAcq = dateAcq;
+        this.participation = participation;
     }
-    
+
+    public Attestation(Long idParticipation, Date dateAcq, int participation) {
+        this.idParticipation = idParticipation;
+        this.dateAcq = dateAcq;
+        this.participation = participation;
+    }
+
+    public Attestation(Long idParticipation, Date dateAcq) {
+        this.idParticipation = idParticipation;
+        this.dateAcq = dateAcq;
+    }
 
     @Override
     public String toString() {
-        return "Attestation{" + "idAttestation=" + idAttestation + ", idParticipation=" + idParticipation + ", dateAcq=" + dateAcq + '}';
+        return "Attestation{" + "idAttestation=" + idAttestation + ", idParticipation=" + idParticipation + ", dateAcq=" + dateAcq + ", participation=" + participation + '}';
     }
     
     
+    
+      
 }

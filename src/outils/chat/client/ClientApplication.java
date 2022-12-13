@@ -151,17 +151,17 @@ public class ClientApplication extends Application {
          */
         TextField chatTextField = new TextField();
         MessagesService ms = new MessagesService();
-        if (ms.getSingle("idSession", id).isEmpty()){
-            ms.getSingle("idSession", id).forEach(message -> client.writeOldMessage(message));
+        if (!ms.getSingle("idsession_id", id).isEmpty()){
+            ms.getSingle("idsession_id", id).forEach(message -> client.writeOldMessage(message));
         }
         
         chatTextField.setOnAction((ActionEvent event) -> {
             // TODO Auto-generated method stub
             Timestamp t = new Timestamp(System.currentTimeMillis());
             if (u.getrole().equals("Student")) {
-                ms.add(new Messages(ms.getSingle("idSession", id).get(0).getIdSession(), u.getId(), chatTextField.getText(), "Delivered", t));
+                ms.add(new Messages(id, u.getId(), chatTextField.getText(), "Delivered", t));
             } else {
-                ms.add(new Messages(ms.getSingle("idSession", id).get(0).getIdSession(), u.getId(), chatTextField.getText(), "Delivered", t));
+                ms.add(new Messages(id, u.getId(), chatTextField.getText(), "Delivered", t));
             }
             client.writeToServer(chatTextField.getText(), u.getNom());
             chatTextField.clear();

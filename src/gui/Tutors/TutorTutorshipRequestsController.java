@@ -5,7 +5,7 @@
  */
 package gui.Tutors;
 
-import entities.ChatSession;
+
 import entities.TutorshipRequest;
 import entities.TutorshipSession;
 import entities.User;
@@ -32,7 +32,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import outils.CalendarQuickstart;
-import services.ChatSessionService;
+
 import services.TutorshipRequestService;
 import services.TutorshipSessionService;
 import services.UtilisateurService;
@@ -83,7 +83,7 @@ public class TutorTutorshipRequestsController implements Initializable {
             cltype.setCellValueFactory(new PropertyValueFactory<TutorshipRequest, String>("requestType"));
             cldate.setCellValueFactory(new PropertyValueFactory<TutorshipRequest, Timestamp>("sessionDate"));
             clobject.setCellValueFactory(new PropertyValueFactory<TutorshipRequest, String>("requestBody"));
-            requests.setItems(sp.getList("idTutor", u.getId()));
+            requests.setItems(sp.getList("id_tutor_id", u.getId()));
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -116,22 +116,21 @@ public class TutorTutorshipRequestsController implements Initializable {
         TutorshipRequest t = requests.getSelectionModel().getSelectedItem();
         TutorshipRequestService ts = new TutorshipRequestService();
         UtilisateurService service = new UtilisateurService();
+        System.out.println(t.getIdStudent());
         User student = service.getByUserId((int)t.getIdStudent());
-        ts.delete(t);
+        
          String url = null;
-        if(t.getRequestType().name().equals("VideoChat")){
+       
             CalendarQuickstart calendar = new CalendarQuickstart();
             String time = t.decompose().get(0)+"T"+t.decompose().get(1)+":"+t.decompose().get(2)+":00Z";
              url = calendar.generateMeetURL(t.getRequestBody(), time, student) ;
-         }
+         
         TutorshipSession s = new TutorshipSession(t.getIdTutor(), t.getIdStudent(), t.getIdRequest(), url,t.getRequestType(),t.getSessionDate());
+        s.setBody(t.getRequestBody());
         TutorshipSessionService ss = new TutorshipSessionService();
         ss.add(s);
         s = ss.getLatest();
-        if(t.getRequestType().name().equals("MessagesChat")){
-            ChatSessionService cs = new ChatSessionService();
-        cs.add(new ChatSession(s.getIdTutorshipSession()));
-        }
+       
         
         JOptionPane.showMessageDialog(null, "Sceance Planifiée! ");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));

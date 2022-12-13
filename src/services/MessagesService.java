@@ -31,13 +31,12 @@ public class MessagesService implements GenericService<Messages> {
     @Override
     public void add(Messages t) {
        try {
-            String req = "INSERT INTO messages(idSession, idSender, status, body, statusDate) VALUES(?,?,?,?,?)";
+            String req = "INSERT INTO messages(idsession_id, idsender, body, statusDate) VALUES(?,?,?,?)";
             PreparedStatement st = cnx.prepareStatement(req);
             st.setLong(1,t.getIdSession());
             st.setLong(2,t.getIdSender());
-            st.setString(3, t.getStatus().name());
-            st.setString(4, t.getMessage());
-            st.setTimestamp(5, t.getStatusDate());
+            st.setString(3, t.getMessage());
+            st.setTimestamp(4, t.getStatusDate());
             st.executeUpdate();
             System.out.println("Message added successfully!");
         } catch (SQLException ex) {
@@ -49,7 +48,7 @@ public class MessagesService implements GenericService<Messages> {
     @Override
     public void update(Messages t) {
        try {
-             String req = "UPDATE messages SET idSession=?, idSender=?, staus=?, body=? WHERE idMessage=?";
+             String req = "UPDATE messages SET idsession_id=?, idsender=?, body=? WHERE idmessage=?";
             PreparedStatement st = cnx.prepareStatement(req);
             st.setLong(1,t.getIdSession());
             st.setLong(2,t.getIdSender());
@@ -87,11 +86,10 @@ public class MessagesService implements GenericService<Messages> {
             
             while (rs.next()){
                 Messages t = new Messages();
-                t.setIdMessage(rs.getLong("IdMessage"));
-                t.setIdSession(rs.getLong("IdSession"));
-                t.setIdSender(rs.getLong("idSender"));
+                t.setIdMessage(rs.getLong("Idmessage"));
+                t.setIdSession(rs.getLong("idsession_id"));
+                t.setIdSender(rs.getLong("idsender"));
                 t.setMessage(rs.getString("body"));
-                t.setStatus(rs.getString("status"));
                 t.setStatusDate(rs.getTimestamp("statusDate"));
                 messages.add(t);
             }
@@ -106,17 +104,16 @@ public class MessagesService implements GenericService<Messages> {
     public ObservableList<Messages> getSingle(String query, int filter) {
        ObservableList<Messages> messages = FXCollections.observableArrayList();
         try {
-            String req = "SELECT * FROM messages WHERE "+query+"="+filter;
+            String req = "SELECT * FROM messages WHERE idsession_id="+filter;
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
             
             while (rs.next()){
                 Messages t = new Messages();
-                t.setIdMessage(rs.getLong("IdMessage"));
-                t.setIdSession(rs.getLong("IdSession"));
-                t.setIdSender(rs.getLong("idSender"));
+                t.setIdMessage(rs.getLong("Idmessage"));
+                t.setIdSession(rs.getLong("idsession_id"));
+                t.setIdSender(rs.getLong("idsender"));
                 t.setMessage(rs.getString("body"));
-                t.setStatus(rs.getString("status"));
                 t.setStatusDate(rs.getTimestamp("statusDate"));
                 messages.add(t);
             }

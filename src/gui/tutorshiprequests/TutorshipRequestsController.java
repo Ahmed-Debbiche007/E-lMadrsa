@@ -5,7 +5,6 @@
  */
 package gui.tutorshiprequests;
 
-import entities.ChatSession;
 import entities.TutorshipRequest;
 import entities.TutorshipSession;
 import java.io.IOException;
@@ -27,7 +26,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import services.ChatSessionService;
+
 import services.TutorshipRequestService;
 import services.TutorshipSessionService;
 
@@ -128,7 +127,6 @@ public class TutorshipRequestsController implements Initializable {
         TutorshipSessionService ss = new TutorshipSessionService();
         ss.add(s);
         s = ss.getLatest();
-        ChatSessionService cs = new ChatSessionService();
-        cs.add(new ChatSession(s.getIdTutorshipSession()));
+
     }
 }

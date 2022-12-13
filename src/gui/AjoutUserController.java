@@ -45,7 +45,7 @@ public class AjoutUserController implements Initializable {
      * Initializes the controller class.
      * 
      */
-    private static User u1 = connectedUser;
+    private static User u1 ;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -67,7 +67,7 @@ public class AjoutUserController implements Initializable {
         
         if (u.getmotDePasse().equals(hashPass)) {
             JOptionPane.showMessageDialog(null, "Connected ");
-            
+            u1 = u;
             FXMLLoader loader = null;
             if (u.getrole().name().equals("Student")){
                 loader = new FXMLLoader(getClass().getResource("./Students/Home.fxml"));

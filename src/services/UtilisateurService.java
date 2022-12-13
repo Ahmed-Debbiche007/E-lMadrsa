@@ -118,7 +118,7 @@ public class UtilisateurService implements IService<User> {
             pst.setString(1, "Tutor");
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                User u = new User(rs.getLong("idUtilisateur"), rs.getString("nom"), rs.getString("prenom"), rs.getString("nomUtilisateur"), rs.getString("tel"), rs.getString("email"), rs.getString("motDePasse"), rs.getDate("dateNaissance"), rs.getString("image"), rs.getString("role"), rs.getBoolean("approved"));
+                User u = new User(rs.getLong("id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("username"),"555555", rs.getString("email"), rs.getString("password"), rs.getDate("date_naissance"), rs.getString("image"), rs.getString("role"), rs.getBoolean("approved"));
 
                 list.add(u);
             }
@@ -134,12 +134,12 @@ public class UtilisateurService implements IService<User> {
         ObservableList<User> list = FXCollections.observableArrayList();
 
         try {
-            String requete = "select * from user where nomUtilisateur=?";
+            String requete = "select * from user where username=?";
             PreparedStatement pst = cnx.prepareStatement(requete);
             pst.setString(1, userName);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                User u = new User(rs.getLong("idUtilisateur"), rs.getString("nom"), rs.getString("prenom"), rs.getString("nomUtilisateur"), rs.getString("tel"), rs.getString("email"), rs.getString("motDePasse"), rs.getDate("dateNaissance"), rs.getString("image"), rs.getString("role"), rs.getBoolean("approved"));
+                User u = new User(rs.getLong("id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("username"),"5555", rs.getString("email"), rs.getString("password"), rs.getDate("date_naissance"), rs.getString("Image"), rs.getString("role"), rs.getBoolean("approved"));
 
                 return u;
             }
@@ -160,7 +160,7 @@ public class UtilisateurService implements IService<User> {
             pst.setString(1, userName);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                User u = new User(rs.getLong("idUtilisateur"), rs.getString("nom"), rs.getString("prenom"), rs.getString("nomUtilisateur"), rs.getString("tel"), rs.getString("email"), rs.getString("motDePasse"), rs.getDate("dateNaissance"), rs.getString("image"), rs.getString("role"), rs.getBoolean("approved"));
+                User u = new User(rs.getLong("id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("username"), "555555", rs.getString("email"), rs.getString("password"), rs.getDate("date_naissance"), rs.getString("image"), rs.getString("role"), rs.getBoolean("approved"));
 
                 return u.getId();
             }
@@ -176,12 +176,12 @@ public class UtilisateurService implements IService<User> {
         ObservableList<User> list = FXCollections.observableArrayList();
 
         try {
-            String requete = "select * from user where idUtilisateur=?";
+            String requete = "select * from user where id=?";
             PreparedStatement pst = cnx.prepareStatement(requete);
             pst.setInt(1, id);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                User u = new User(rs.getLong("idUtilisateur"), rs.getString("nom"), rs.getString("prenom"), rs.getString("nomUtilisateur"), rs.getString("tel"), rs.getString("email"), rs.getString("motDePasse"), rs.getDate("dateNaissance"), rs.getString("image"), rs.getString("role"), rs.getBoolean("approved"));
+                 User u = new User(rs.getLong("id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("username"), "555555", rs.getString("email"), rs.getString("password"), rs.getDate("date_naissance"), rs.getString("image"), rs.getString("role"), rs.getBoolean("approved"));
 
                 return u;
             }
@@ -195,12 +195,12 @@ public class UtilisateurService implements IService<User> {
 
     public boolean usernameExists(String username) {
         try {
-            String requete = "select * from user where nomUtilisateur=?";
+            String requete = "select * from user where username=?";
             PreparedStatement pst = cnx.prepareStatement(requete);
             pst.setString(1, username);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                if (rs.getString("nomUtilisateur").equals(username)) {
+                if (rs.getString("username").equals(username)) {
                     return true;
                 }
 

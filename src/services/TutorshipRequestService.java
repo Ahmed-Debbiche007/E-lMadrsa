@@ -27,7 +27,7 @@ public class TutorshipRequestService implements GenericService<TutorshipRequest>
     @Override
     public void add(TutorshipRequest t) {
           try {
-            String req = "INSERT INTO requests(idTutor,idStudent,type,body,date) VALUES(?,?,?,?,?)";
+            String req = "INSERT INTO requests(id_tutor_id,id_student_id,type,body,date) VALUES(?,?,?,?,?)";
             PreparedStatement st = cnx.prepareStatement(req);
             st.setLong(1,t.getIdStudent());
             st.setLong(2, t.getIdTutor());
@@ -45,7 +45,7 @@ public class TutorshipRequestService implements GenericService<TutorshipRequest>
     @Override
     public void update(TutorshipRequest t) {
            try {
-            String req = "UPDATE requests SET idStudent=?, idTutor=?, body=?, date=?, type=? WHERE idRequest=?";
+            String req = "UPDATE requests SET id_student_id=?, id_tutor_id=?, body=?, date=?, type=? WHERE id=?";
             PreparedStatement st = cnx.prepareStatement(req);
             st.setLong(1,t.getIdStudent());
             st.setLong(2, t.getIdTutor());
@@ -64,7 +64,7 @@ public class TutorshipRequestService implements GenericService<TutorshipRequest>
     @Override
     public void delete(TutorshipRequest t) {
          try {
-            String req = "DELETE FROM requests WHERE idRequest="+t.getIdRequest();
+            String req = "DELETE FROM requests WHERE id="+t.getIdRequest();
             Statement st = cnx.prepareStatement(req);
             st.executeUpdate(req);
             System.out.println("Request deleted successfully!");
@@ -84,9 +84,9 @@ public class TutorshipRequestService implements GenericService<TutorshipRequest>
             
             while (rs.next()){
                 TutorshipRequest t = new TutorshipRequest();
-                t.setIdRequest(rs.getLong("idRequest"));
-                t.setIdStudent(rs.getLong("idStudent"));
-                t.setIdTutor(rs.getLong("idTutor"));
+                t.setIdRequest(rs.getLong("id"));
+                t.setIdStudent(rs.getLong("id_student_id"));
+                t.setIdTutor(rs.getLong("id_tutor_id"));
                 t.setRequestBody(rs.getString("body"));
                 t.setSessionDate(rs.getTimestamp("date"));
                 t.setRequestType(rs.getString("type"));
@@ -113,9 +113,9 @@ public class TutorshipRequestService implements GenericService<TutorshipRequest>
             
             while (rs.next()){
                 TutorshipRequest t = new TutorshipRequest();
-                t.setIdRequest(rs.getLong("idRequest"));
-                t.setIdStudent(rs.getLong("idStudent"));
-                t.setIdTutor(rs.getLong("idTutor"));
+                t.setIdRequest(rs.getLong("id"));
+                t.setIdStudent(rs.getLong("id_student_id"));
+                t.setIdTutor(rs.getLong("id_tutor_id"));
                 t.setRequestBody(rs.getString("body"));
                 t.setSessionDate(rs.getTimestamp("date"));
                 t.setRequestType(rs.getString("type"));
@@ -138,9 +138,9 @@ public class TutorshipRequestService implements GenericService<TutorshipRequest>
             
             while (rs.next()){
                 TutorshipRequest t = new TutorshipRequest();
-                t.setIdRequest(rs.getLong("idRequest"));
-                t.setIdStudent(rs.getLong("idStudent"));
-                t.setIdTutor(rs.getLong("idTutor"));
+                t.setIdRequest(rs.getLong("id"));
+                t.setIdStudent(rs.getLong("id_student_id"));
+                t.setIdTutor(rs.getLong("id_tutor_id"));
                 t.setRequestBody(rs.getString("body"));
                 t.setSessionDate(rs.getTimestamp("date"));
                 t.setRequestType(rs.getString("type"));
@@ -156,15 +156,15 @@ public class TutorshipRequestService implements GenericService<TutorshipRequest>
     public ObservableList<TutorshipRequest> getList(String query, long filter) {
         ObservableList<TutorshipRequest> requests = FXCollections.observableArrayList();
         try {
-            String req = "select user.nom, requests.*, u.nom as tutor from user join requests on requests.idStudent=user.idUtilisateur join user as u on u.idUtilisateur=requests.idTutor WHERE " + query + "=" + filter;
+            String req = "select user.nom, requests.*, u.nom as tutor from user join requests on requests.id_student_id=user.id join user as u on u.id=requests.id_tutor_id WHERE " + query + "=" + filter;
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
 
             while (rs.next()) {
                 TutorshipRequest t = new TutorshipRequest();
-                t.setIdRequest(rs.getLong("idRequest"));
-                t.setIdStudent(rs.getLong("idStudent"));
-                t.setIdTutor(rs.getLong("idTutor"));
+                t.setIdRequest(rs.getLong("id"));
+                t.setIdStudent(rs.getLong("id_student_id"));
+                t.setIdTutor(rs.getLong("id_tutor_id"));
                 t.setRequestBody(rs.getString("body"));
                 t.setSessionDate(rs.getTimestamp("date"));
                 t.setRequestType(rs.getString("type"));

@@ -28,7 +28,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import outils.chat.client.Client;
 import outils.chat.client.ClientApplication;
-import services.ChatSessionService;
+
 import services.TutorshipSessionService;
 
 /**
@@ -80,7 +80,7 @@ public class TutorsTutorshipSessionsController implements Initializable {
             cltype.setCellValueFactory(new PropertyValueFactory<TutorshipSession, String>("type"));
             cldate.setCellValueFactory(new PropertyValueFactory<TutorshipSession, Timestamp>("date"));
             clurl.setCellValueFactory(new PropertyValueFactory<TutorshipSession, String>("url"));
-            Sessions.setItems(sp.getList("idTutor", u.getId()));
+            Sessions.setItems(sp.getList("id_tutor_id", u.getId()));
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -124,7 +124,7 @@ public class TutorsTutorshipSessionsController implements Initializable {
     private void connecter(ActionEvent event) throws IOException, InterruptedException {
         t = Sessions.getSelectionModel().getSelectedItem();
         if (t.getType().name().equals("MessagesChat")) {
-            this.clientchatapp().show();
+            this.clientchatapp(t).show();
         }else {
             String command = "cmd /c start "+t.getUrl();
 
@@ -134,7 +134,7 @@ public class TutorsTutorshipSessionsController implements Initializable {
         }
     }
 
-    private Stage clientchatapp() throws IOException, InterruptedException {
+    private Stage clientchatapp(TutorshipSession t) throws IOException, InterruptedException {
         Thread.sleep(3000);
         AjoutUserController cs = new AjoutUserController();
         User u = cs.getU();
@@ -147,18 +147,9 @@ public class TutorsTutorshipSessionsController implements Initializable {
         ClientApplication ca = new ClientApplication();
         Stage primaryStage = (Stage) ap.getScene().getWindow();
         primaryStage.close();
-        primaryStage.setScene(ca.makeChatUI(client, this.getSessionId()));
+        primaryStage.setScene(ca.makeChatUI(client, (int) t.getIdTutorshipSession()));
         return primaryStage;
     }
 
-    public int getSessionId() {
-        ChatSessionService css = new ChatSessionService();
-        try {
-            return (int) css.getSession("idTutorshipSession", (int) this.getT().getIdTutorshipSession()).getIdTutorshipSession();
-        } catch (Exception e) {
-            System.out.println("aa" + e.getMessage());
-        }
-        return 0;
-    }
-
+   
 }
