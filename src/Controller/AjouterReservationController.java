@@ -78,7 +78,7 @@ public class AjouterReservationController implements Initializable {
 
     @FXML
     private void Retour(ActionEvent event) {
-         final FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/GUI/AfficherReservation.fxml"));
+         final FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../GUI/AfficherReservation.fxml"));
         final Node node;
         try {
             node = fxmlLoader.load();

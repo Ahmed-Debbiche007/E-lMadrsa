@@ -6,6 +6,7 @@
 package Controller;
 
 import entities.evenement;
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
@@ -32,10 +33,9 @@ public class QRcodeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        Image img = null ;
-       
-         System.out.println(System.getProperty("user.dir")+"/src/images/eve3.jpg");
+       File image = new File ("/home/ahmed/PiDev/E-lMadrsa-Web/public/uploads/images/");
         
-               img = new Image("/images/eve"+x+".jpg");
+               img = new Image(image.toURI().toString()+"eve"+x+".jpg");
                 qrimage.setImage(img);
         
 // TODO

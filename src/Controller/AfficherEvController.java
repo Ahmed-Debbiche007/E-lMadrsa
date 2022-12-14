@@ -11,7 +11,9 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 import entities.User;
+import entities.category;
 import entities.evenement;
+import java.io.File;
 import services.event_service;
 import java.io.IOException;
 import java.net.URL;
@@ -36,6 +38,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -70,7 +73,7 @@ public class AfficherEvController implements Initializable {
     @FXML
     private Button retourc;
     @FXML
-    private TableColumn<evenement, String> imageEv;
+    private TableColumn<evenement, ImageView> imageEv;
     @FXML
     private TableColumn<evenement, String> typeev;
     @FXML
@@ -134,7 +137,17 @@ public class AfficherEvController implements Initializable {
         nomev.setCellValueFactory(new PropertyValueFactory("nom_ev"));
 
         dateev.setCellValueFactory(new PropertyValueFactory("date"));
-        imageEv.setCellValueFactory(new PropertyValueFactory("image_ev"));
+        imageEv.setCellValueFactory(new PropertyValueFactory<evenement, ImageView>("image"));
+        list.forEach(item -> {
+            String path = "/home/ahmed/PiDev/E-lMadrsa-Web/public/uploads/images/" + item.getImage_ev();
+            File image = new File(path);
+            Image imgg = new Image (image.toURI().toString());
+            ImageView img = new ImageView(imgg);
+            img.setFitHeight(50);
+            img.setFitWidth(50);
+            item.setImage(img);
+        }
+        );
         userev.setCellValueFactory(new PropertyValueFactory("id_user"));
         desc.setCellValueFactory(new PropertyValueFactory("desc_ev"));
         etat_ev.setCellValueFactory(new PropertyValueFactory("etat"));

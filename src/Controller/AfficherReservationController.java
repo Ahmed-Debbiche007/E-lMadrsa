@@ -7,7 +7,9 @@ package Controller;
 import Controller.AfficherEvController;
 import Controller.QRcodeController;
 import entities.Reservation;
+import entities.User;
 import entities.evenement;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
@@ -30,9 +32,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import services.ReservationService;
+import services.UtilisateurService;
 import services.event_service;
 
 /**
@@ -57,7 +62,7 @@ public class AfficherReservationController implements Initializable {
     @FXML
     private Button retourc;
     @FXML
-    private TableColumn<Reservation, Integer> iduser;
+    private TableColumn<Reservation, ImageView> iduser;
     @FXML
     private TableColumn<Reservation, Integer> idev;
     @FXML
@@ -142,10 +147,21 @@ public class AfficherReservationController implements Initializable {
         ReservationService ev = new ReservationService();
         ObservableList<Reservation> list = FXCollections.observableArrayList();
         list.addAll(ev.read());
-
+        UtilisateurService us = new UtilisateurService();
         datereser.setCellValueFactory(new PropertyValueFactory("dateReservation"));
         idev.setCellValueFactory(new PropertyValueFactory("id_ev"));
-        iduser.setCellValueFactory(new PropertyValueFactory("id_user"));
+        iduser.setCellValueFactory(new PropertyValueFactory<Reservation, ImageView>("img"));
+        list.forEach(item -> {
+            User u = us.getByUserId((int)(long)item.getId_user().getId());
+            String path = "/home/ahmed/PiDev/E-lMadrsa-Web/public/uploads/images/" + u.getImage();
+            File image = new File(path);
+            Image imgg = new Image (image.toURI().toString());
+            ImageView img = new ImageView(imgg);
+            img.setFitHeight(50);
+            img.setFitWidth(50);
+            item.setImg(img);
+        }
+        );
         table.setItems(list);
     }
 

@@ -10,7 +10,11 @@ import com.twilio.type.PhoneNumber;
 import java.net.URL;
 import entities.*;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -144,13 +148,55 @@ public class AjouterEveController implements Initializable {
         }
     }
 
-    @FXML
-    private void choisirImage(ActionEvent event) {
+     @FXML
+     private void choisirImage(ActionEvent event) throws IOException {
         FileChooser filechooser = new FileChooser();
         filechooser.setTitle("Choose image");
         Window ownerWindow = null;
         File file = filechooser.showOpenDialog(ownerWindow);
-        img = file.getAbsolutePath();
+
+
+        if (file.getAbsoluteFile().toString() != null) {
+            File source = new File(file.getAbsolutePath());
+            File destination = new File("/home/ahmed/PiDev/E-lMadrsa-Web/public/uploads/images/" + file.getName());
+            copy(source, destination);
+        }
+
+        img = file.getName();
+
+    }
+
+    private void copy(File source, File destination) throws IOException {
+
+        InputStream input = null;
+        OutputStream output = null;
+        try {
+            // Create FileInputStream and FileOutputStream objects
+            input = new FileInputStream(source);
+            output = new FileOutputStream(destination);
+            byte[] buf = new byte[1024];
+            int bytesRead;
+
+            // Write bytes to the destination
+            while ((bytesRead = input.read(buf)) > 0) {
+                output.write(buf, 0, bytesRead);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Could not copy the file to the destination: " + destination.getPath() + ". Check if the folder or file already exists.");
+        } finally {
+            // Close the streams
+            if (input != null) {
+                input.close();
+            }
+
+            if (output != null) {
+                output.close();
+            }
+        }
+
+        System.out.println("File copied");
+ 
     }
 
 }
