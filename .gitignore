@@ -1,13 +1,7 @@
-<<<<<<< HEAD
 tokens
 nbproject/private/
 build/
-nbbuild/
+nbproject/
 dist/
-nbdist/
-nbactions.xml
-nb-configuration.xmlt
-=======
-/E-lmadrsa/nbproject/private/
->>>>>>> 9928149c4ae4b367f896e153472a4d05af21dca7
-/mariem1/nbproject/private/
+.idea
+nb-configuration.xml

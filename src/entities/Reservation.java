@@ -6,6 +6,7 @@ package entities;
 
 import java.util.Date;
 import java.util.Objects;
+import javafx.scene.image.ImageView;
 
 /**
  *
@@ -16,6 +17,7 @@ public class Reservation {
     private Date dateReservation;
     private evenement id_ev;
     private User id_user;
+    private ImageView img;
 
     public Reservation( evenement id_ev, User id_user) {
         this.id_ev = id_ev;
@@ -106,6 +108,14 @@ public class Reservation {
             return false;
         }
         return Objects.equals(this.id_user, other.id_user);
+    }
+
+    public ImageView getImg() {
+        return img;
+    }
+
+    public void setImg(ImageView img) {
+        this.img = img;
     }
     
     

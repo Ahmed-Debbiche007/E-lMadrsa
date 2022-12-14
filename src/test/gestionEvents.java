@@ -32,7 +32,7 @@ public class gestionEvents extends Application{
        */
         
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../GUI/AfficherEv.fxml")) ;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../GUI/AfficherReservation.fxml")) ;
         Parent root = loader.load() ; 
         Scene scene = new Scene(root) ;
         primaryStage.setScene(scene);

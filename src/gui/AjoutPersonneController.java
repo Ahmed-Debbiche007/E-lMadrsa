@@ -7,6 +7,7 @@ package gui;
 import com.google.common.hash.Hashing;
 import entities.Role;
 import entities.User;
+import entities.evenement;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
@@ -37,6 +38,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -84,7 +87,7 @@ public class AjoutPersonneController implements Initializable {
     @FXML
     private TableColumn<User, Date> coldatenaissance;
     @FXML
-    private TableColumn<User, String> colImage;
+    private TableColumn<User, ImageView> colImage;
 
     @FXML
     private Button btnselecte;
@@ -125,7 +128,17 @@ public class AjoutPersonneController implements Initializable {
         colemail.setCellValueFactory(new PropertyValueFactory<User, String>("email"));
         colrole.setCellValueFactory(new PropertyValueFactory<User, Role>("role"));
         coldatenaissance.setCellValueFactory(new PropertyValueFactory<User, Date>("dateNaissance"));
-        colImage.setCellValueFactory(new PropertyValueFactory<User, String>("image"));
+        colImage.setCellValueFactory(new PropertyValueFactory<User, ImageView>("img"));
+        liste.forEach(item -> {
+            String path = "/home/ahmed/PiDev/E-lMadrsa-Web/public/uploads/images/" + item.getImage();
+            File image = new File(path);
+            Image imgg = new Image(image.toURI().toString());
+            ImageView img = new ImageView(imgg);
+            img.setFitHeight(50);
+            img.setFitWidth(50);
+            item.setImg(img);
+        }
+        );
 
         tvUtilisateur.setItems(liste);
 
@@ -286,7 +299,17 @@ public class AjoutPersonneController implements Initializable {
             colemail.setCellValueFactory(new PropertyValueFactory<User, String>("email"));
             colrole.setCellValueFactory(new PropertyValueFactory<User, Role>("role"));
             coldatenaissance.setCellValueFactory(new PropertyValueFactory<User, Date>("dateNaissance"));
-            colImage.setCellValueFactory(new PropertyValueFactory<User, String>("image"));
+            colImage.setCellValueFactory(new PropertyValueFactory<User, ImageView>("img"));
+            liste.forEach(item -> {
+                String path = "/home/ahmed/PiDev/E-lMadrsa-Web/public/uploads/images/" + item.getImage();
+                File image = new File(path);
+                Image imgg = new Image(image.toURI().toString());
+                ImageView img = new ImageView(imgg);
+                img.setFitHeight(50);
+                img.setFitWidth(50);
+                item.setImg(img);
+            }
+            );
 
             tvUtilisateur.setItems(liste);
 

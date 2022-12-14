@@ -6,6 +6,7 @@ package entities;
 
 import java.util.Date;
 import java.util.Objects;
+import javafx.scene.image.ImageView;
 
 /**
  *
@@ -20,6 +21,7 @@ public class evenement {
     private int id_user;
     private Date date; 
     private String etat;
+    private ImageView image;
 
     public evenement() {
     }
@@ -163,6 +165,16 @@ public class evenement {
         }
         return Objects.equals(this.date, other.date);
     }
+
+    public ImageView getImage() {
+        return image;
+    }
+
+    public void setImage(ImageView image) {
+        this.image = image;
+    }
+    
+    
 
     
 }

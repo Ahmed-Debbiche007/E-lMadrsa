@@ -5,6 +5,7 @@
 package entities;
 
 import java.sql.Date;
+import javafx.scene.image.ImageView;
 
 /**
  *
@@ -24,6 +25,7 @@ public class User {
     private Role role;
     private boolean approved;
     private Double Resultat ; 
+    private ImageView img;
 
     public User() {
 
@@ -222,5 +224,23 @@ public class User {
     public String toString() {
         return "user{" + "idUtilisateur=" + idUtilisateur + ", nom=" + nom + ", prenom=" + prenom + ", nomUtilisateur=" + nomUtilisateur + ", tel=" + tel + ", email=" + email + ", motDePasse=" + motDePasse + ", dateNaissance=" + dateNaissance + ", image=" + image + ", role=" + role + '}';
     }
+
+    public Long getIdUtilisateur() {
+        return idUtilisateur;
+    }
+
+    public void setIdUtilisateur(Long idUtilisateur) {
+        this.idUtilisateur = idUtilisateur;
+    }
+
+    public ImageView getImg() {
+        return img;
+    }
+
+    public void setImg(ImageView img) {
+        this.img = img;
+    }
+    
+    
 
 }

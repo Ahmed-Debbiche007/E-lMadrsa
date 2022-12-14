@@ -149,11 +149,13 @@ public class CatController implements Initializable {
         colimage.setCellValueFactory(new PropertyValueFactory<category, String>("categoryIMAGE"));
         realimage.setCellValueFactory(new PropertyValueFactory<category, ImageView>("image"));
         lista.forEach(item -> {
-            String path = "/images/" + item.getCategoryIMAGE();
-/*            ImageView img = new ImageView(new Image(this.getClass().getResourceAsStream(path)));
+            String path = "/home/ahmed/PiDev/E-lMadrsa-Web/public/uploads/images/" + item.getCategoryIMAGE();
+            File image = new File(path);
+            Image imgg = new Image (image.toURI().toString());
+            ImageView img = new ImageView(imgg);
             img.setFitHeight(50);
             img.setFitWidth(50);
-            item.setImage(img);*/
+            item.setImage(img);
         }
         );
         // System.out.println(lista.get(0).getImage().getImage().getWidth());
@@ -257,7 +259,7 @@ public class CatController implements Initializable {
 
         if (file.getAbsoluteFile().toString() != null) {
             File source = new File(file.getAbsolutePath());
-            File destination = new File(System.getProperty("user.dir") + "\\src\\images\\" + file.getName());
+            File destination = new File("/home/ahmed/PiDev/E-lMadrsa-Web/public/uploads/images/" + file.getName());
             copy(source, destination);
 showguicat();
         }

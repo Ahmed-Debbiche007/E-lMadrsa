@@ -115,7 +115,7 @@ public class MainuiiistudentController implements Initializable {
     @FXML
     private void RECLAMATIONSTUDENT(ActionEvent event) throws IOException {
         Stage stage;
-        Parent root = FXMLLoader.load(getClass().getResource("MainUI.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../GUI/AfficherReservation.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -123,7 +123,8 @@ public class MainuiiistudentController implements Initializable {
     }
 
     @FXML
-    private void gotoreclamationsADMIN(MouseEvent event) {
+    private void gotoreclamationsADMIN(MouseEvent event) throws IOException {
+        
     }
 
     @FXML

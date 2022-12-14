@@ -112,11 +112,18 @@ public class MainuiiiadminController implements Initializable {
     }
 
     @FXML
-    private void RECLAMATIONADMIN(ActionEvent event) {
+    private void RECLAMATIONADMIN(ActionEvent event) throws IOException {
+        Stage stage;
+        Parent root = FXMLLoader.load(getClass().getResource("../GUI/AfficherReservation.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
-    private void gotoreclamationsADMIN(MouseEvent event) {
+    private void gotoreclamationsADMIN(MouseEvent event) throws IOException {
+        
     }
 
     @FXML

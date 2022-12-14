@@ -64,7 +64,8 @@ public class AuthController implements Initializable {
     ResultSet rs;
 
     public static User connectedUser;
-     @FXML
+
+    @FXML
     public void show(ActionEvent event) {
 
         if (jcheckb.isSelected()) {
@@ -123,7 +124,7 @@ public class AuthController implements Initializable {
 
     @FXML
     private void log(KeyEvent event) throws IOException {
-        if (event.getCode().toString().equals("ENTER")){
+        if (event.getCode().toString().equals("ENTER")) {
             login();
         }
     }
@@ -154,7 +155,15 @@ public class AuthController implements Initializable {
                 JOptionPane.showMessageDialog(null, "Successfully Login!");
                 System.out.println(u.getRole().name());
                 Stage stage;
-                Parent root = FXMLLoader.load(getClass().getResource("nexte.fxml"));
+                Parent root;
+                if (u.getRole().name().equals("Admin")) {
+                    root = FXMLLoader.load(getClass().getResource("nexte.fxml"));
+                } else if (u.getRole().name().equals("Tutor")) {
+                    root = FXMLLoader.load(getClass().getResource("../GUI/mainuiiistudent.fxml"));
+                } else {
+                    root = FXMLLoader.load(getClass().getResource("../GUI/mainuiiistudent.fxml"));
+                }
+
                 stage = (Stage) tfusername.getScene().getWindow();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
