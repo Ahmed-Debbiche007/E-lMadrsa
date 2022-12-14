@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import outils.MyDB;
 import utils.DataSource;
 
 /**
@@ -21,7 +22,7 @@ import utils.DataSource;
  * @author SBS
  */
 public class ServiceVotecomment implements IService<votecomment>{
-     Connection cnx = DataSource.getInstance().getCnx();
+     Connection cnx = MyDB.getInstance().getCnx();
 
     @Override
     public void ajouter(votecomment t) {

@@ -8,6 +8,7 @@ import entities.RequestType;
 import entities.TutorshipSession;
 import entities.User;
 import gui.AjoutUserController;
+import static gui.AuthController.connectedUser;
 import java.io.IOException;
 import java.net.URL;
 import java.security.GeneralSecurityException;
@@ -78,7 +79,7 @@ public class UpdateTutorshipSessionController implements Initializable {
         AjoutUserController cs = new AjoutUserController();
         UtilisateurService service = new UtilisateurService();
         User student = service.getByUserId((int)t.getIdStudent());
-        User u = cs.getU(); 
+        User u = connectedUser; 
         String url = null;
         if(t.getType().name().equals("MessagesChat")){
             CalendarQuickstart calendar = new CalendarQuickstart();

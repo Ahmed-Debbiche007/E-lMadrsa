@@ -30,7 +30,7 @@ public class ServiceCategorie {
     
     public void ajouter_categorie (Categorie C ) {
         try {
-            String requete = "INSERT INTO Categorie (nomCategorie) VALUES ('" + C.getNomCategorie() + "')";
+            String requete = "INSERT INTO categorie (nomCategorie) VALUES ('" + C.getNomCategorie() + "')";
             System.out.println("1C");
             Statement st = cnx.createStatement();
             System.out.println("2C");
@@ -49,7 +49,7 @@ public class ServiceCategorie {
     public Categorie getById(Long id ) {
         
         
-        String req = "Select * from Categorie where idCategore=?; " ;
+        String req = "Select * from categorie where idCategore=?; " ;
         PreparedStatement st;
         Categorie c ; 
         try {
@@ -74,7 +74,7 @@ public class ServiceCategorie {
     public void modifier_categorie (Categorie C) {
         try {
             
-            String requete = "UPDATE Categorie SET nomCategorie='" +C.getNomCategorie()  + "' WHERE idCategorie=" + C.getIdCategorie() ;
+            String requete = "UPDATE categorie SET nomCategorie='" +C.getNomCategorie()  + "' WHERE idCategorie=" + C.getIdCategorie() ;
             Statement st = cnx.createStatement();
             st.executeUpdate(requete);
             System.out.println("Categorie modifiée !");
@@ -86,7 +86,7 @@ public class ServiceCategorie {
     
     public void supprimer_categorie(Categorie C ) {
         try {
-            String requete = "DELETE FROM Categorie WHERE idCategorie=" + C.getIdCategorie() ;
+            String requete = "DELETE FROM categorie WHERE idCategorie=" + C.getIdCategorie() ;
             Statement st = cnx.createStatement();
 
             st.executeUpdate(requete);
@@ -102,7 +102,7 @@ public class ServiceCategorie {
      public Categorie VerifUninciteCategorie( String Cat ) {
           
             try {
-                String req = "SELECT  *  FROM Categorie  where nomCategorie=? ";
+                String req = "SELECT  *  FROM categorie  where nomCategorie=? ";
                 PreparedStatement st = cnx.prepareStatement(req) ;
                             st.setString(1, Cat);
 
@@ -130,7 +130,7 @@ public class ServiceCategorie {
         ObservableList<Categorie> list = FXCollections.observableArrayList();
 
         try {
-            String requete = "SELECT idCategorie,nomCategorie FROM Categorie ";
+            String requete = "SELECT idCategorie,nomCategorie FROM categorie ";
            Statement st = cnx.createStatement();
            
             ResultSet rs = st.executeQuery(requete);
@@ -150,7 +150,7 @@ public class ServiceCategorie {
         ObservableList<Categorie> list = FXCollections.observableArrayList();
 
         try {
-            String requete = "SELECT idCategorie,nomCategorie FROM Categorie ";
+            String requete = "SELECT idCategorie,nomCategorie FROM categorie ";
            Statement st = cnx.createStatement();
            
             ResultSet rs = st.executeQuery(requete);

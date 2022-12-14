@@ -25,7 +25,7 @@ public class RecupService implements IService<Recup> {
     @Override
     public void ajouter(Recup n) {
         try {
-            String requete = "INSERT INTO recup (idUser, code) VALUES(?,?)";
+            String requete = "INSERT INTO recup (Iduser, code) VALUES(?,?)";
             PreparedStatement pst = cnx.prepareStatement(requete);
             pst.setLong(1, n.getIdUser());
             pst.setString(2, n.getCode());
@@ -41,7 +41,7 @@ public class RecupService implements IService<Recup> {
     @Override
     public void supprimer(Recup n) {
         try {
-            String requete = "DELETE FROM recup WHERE idRecup=?";
+            String requete = "DELETE FROM recup WHERE id=?";
             PreparedStatement pst = cnx.prepareStatement(requete);
             pst.setLong(1, n.getId());
             pst.executeUpdate();
@@ -55,7 +55,7 @@ public class RecupService implements IService<Recup> {
     @Override
     public void modifier(Recup n) {
         try {
-            String requete = "UPDATE recup SET idUser=?, code=? WHERE id=?";
+            String requete = "UPDATE recup SET iduser=?, code=? WHERE id=?";
             PreparedStatement pst = cnx.prepareStatement(requete);
             pst.setLong(1, n.getIdUser());
             pst.setString(2, n.getCode());
@@ -74,7 +74,7 @@ public class RecupService implements IService<Recup> {
             PreparedStatement pst = cnx.prepareStatement(requete);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                User u = new User(rs.getLong("idUtilisateur"), rs.getString("nom"), rs.getString("prenom"), rs.getString("nomUtilisateur"), rs.getString("tel"), rs.getString("email"), rs.getString("motDePasse"), rs.getDate("dateNaissance"), rs.getString("image"), rs.getString("role"), rs.getBoolean("approved"));
+                User u = new User(rs.getLong("Iduser"), rs.getString("nom"), rs.getString("prenom"), rs.getString("nomUtilisateur"), rs.getString("tel"), rs.getString("email"), rs.getString("motDePasse"), rs.getDate("dateNaissance"), rs.getString("image"), rs.getString("role"), rs.getBoolean("approved"));
                 
             }
 
@@ -88,7 +88,7 @@ public class RecupService implements IService<Recup> {
     public Recup getByUserId(long id) {
 
         try {
-            String requete = "select * from recup where idUser=? order by id desc limit 1";
+            String requete = "select * from recup where iduser=? order by id desc limit 1";
             PreparedStatement pst = cnx.prepareStatement(requete);
             pst.setLong(1, id);
             ResultSet rs = pst.executeQuery();

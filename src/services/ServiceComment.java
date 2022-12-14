@@ -23,12 +23,13 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import outils.MyDB;
 /**
  *
  * @author SBS
  */
 public class ServiceComment implements IService<comment>{
-    Connection cnx = DataSource.getInstance().getCnx();
+    Connection cnx = MyDB.getInstance().getCnx();
    
     @Override
     public void ajouter(comment c) {

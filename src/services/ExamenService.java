@@ -29,7 +29,7 @@ public class ExamenService implements IService<Examen> {
     @Override
     public void ajouter(Examen e) {
                 try {
-            String req = "insert into Examen (nomExamen,pourcentage,DureeExamen,formationId ,idcategorie) values(?,?,?,?,?)"  ;
+            String req = "insert into examen (nomExamen,pourcentage,DureeExamen,formationId ,idcategorie) values(?,?,?,?,?)"  ;
             PreparedStatement st = cnx.prepareStatement(req) ; 
             st.setString(1, e.getNomExamen());
             st.setDouble(2, e.getPourcentage());
@@ -47,7 +47,7 @@ public class ExamenService implements IService<Examen> {
     
 public Examen getLatest() {
         try {
-            String req = "SELECT * FROM Examen ORDER BY idExamen DESC LIMIT 1 ";
+            String req = "SELECT * FROM examen ORDER BY idExamen DESC LIMIT 1 ";
             PreparedStatement st = cnx.prepareStatement(req) ;
             ResultSet rs = st.executeQuery();
 
@@ -69,7 +69,7 @@ public Examen getLatest() {
     }
 public Examen getExamById(Long id ) {
         try {
-            String req = "SELECT * FROM Examen  where idExamen = ? ";
+            String req = "SELECT * FROM examen  where idExamen = ? ";
             PreparedStatement st = cnx.prepareStatement(req) ;
             st.setLong(1, id);
             ResultSet rs = st.executeQuery();
@@ -94,7 +94,7 @@ public Examen getExamById(Long id ) {
 
 public Examen countExams( String nom ) {
             try {
-                String req = "SELECT  *  FROM Examen  where nomExamen=? ";
+                String req = "SELECT  *  FROM examen  where nomExamen=? ";
                 PreparedStatement st = cnx.prepareStatement(req) ;
                             st.setString(1, nom);
 
@@ -133,7 +133,7 @@ public Examen countExams( String nom ) {
     @Override
     public void supprimer(Examen e) {
                 try {
-            String req = "DELETE FROM Examen WHERE idExamen=? ;"  ;
+            String req = "DELETE FROM examen WHERE idExamen=? ;"  ;
             PreparedStatement st = cnx.prepareStatement(req); 
             st.setLong(1, e.getIdExamen());
             st.executeUpdate();
@@ -147,7 +147,7 @@ public Examen countExams( String nom ) {
     @Override
     public void modifier(Examen E) {
                     try {
-                String req ="update Examen set nomExamen=?,pourcentage=?,DureeExamen=? where idExamen=?" ;
+                String req ="update examen set nomExamen=?,pourcentage=?,DureeExamen=? where idExamen=?" ;
                 PreparedStatement st = cnx.prepareStatement(req); 
                 st.setString(1, E.getNomExamen());
                 st.setDouble(2,E.getPourcentage());
@@ -198,7 +198,7 @@ public Examen countExams( String nom ) {
             try {
 
                 
-                String req = " SELECT * from Examen e join Question q on e.idExamen=q.idExamen ;"  ;
+                String req = " SELECT * from examen e join Question q on e.idExamen=q.idExamen ;"  ;
                 PreparedStatement st = cnx.prepareStatement(req) ;
                 ResultSet rs = st.executeQuery() ;
                 while(rs.next()) {
@@ -298,7 +298,7 @@ public Examen countExams( String nom ) {
             try {
 
                 
-                String req = " select * , count(*) as c   from  examen  join question on examen.idExamen = question.idExamen group by examen.idExamen ;";
+                String req = " select * , count(*) as c   from  examen  join question on examen.idExamen = question.IdExamen group by examen.idExamen ;";
                 
                 PreparedStatement st = cnx.prepareStatement(req) ;
                 ResultSet rs = st.executeQuery() ;
@@ -334,13 +334,13 @@ public Examen countExams( String nom ) {
 
             try {
 
-                String req = "SELECT * FROM examen  where examen.idcategorie= ? ;" ;
+                String req = "SELECT * FROM examen  where examen.IdCategorie= ? ;" ;
                 PreparedStatement st = cnx.prepareStatement(req) ; 
                 st.setLong(1, id);
                  ResultSet rs = st.executeQuery() ;
                 
                 while(rs.next()) {
-                listExamen.add(new Examen( rs.getLong("idExamen"),rs.getString("nomExamen"), rs.getDouble("pourcentage"), rs.getInt("DureeExamen") , rs.getLong("formationId") ,rs.getLong("idCategorie") ));
+                listExamen.add(new Examen( rs.getLong("IdExamen"),rs.getString("nomExamen"), rs.getDouble("pourcentage"), rs.getInt("DureeExamen") , rs.getLong("formationId") ,rs.getLong("IdCategorie") ));
  
             }
 

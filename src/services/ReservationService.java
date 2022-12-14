@@ -206,7 +206,7 @@ public class ReservationService {
         Reservation rs=ts.readById(id);
         System.out.println(ts.readById(id));
         String data = rs.toString();
-        String path = "M:\\E-lmadrsa\\E-lMadrsa\\src\\GUI\\Images"+id+".jpg";
+        String path = System.getProperty("user.dir")+"/src/images/eve"+id+".jpg";
         
         BitMatrix mx = null;
         try {

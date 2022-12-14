@@ -8,6 +8,7 @@ import entities.RequestType;
 import entities.TutorshipRequest;
 import entities.User;
 import gui.AjoutUserController;
+import static gui.AuthController.connectedUser;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -87,7 +88,7 @@ public class UpdateTutorshipRequestController implements Initializable {
         String date = cldate.getValue().toString() + " " + (int) hspinner.getValue() + ":" + (int) mspinner.getValue() + ":00";
         Timestamp time = Timestamp.valueOf(date);
         AjoutUserController cs = new AjoutUserController();
-        User u = cs.getU();
+        User u =connectedUser;
         UtilisateurService us = new UtilisateurService();
         sp.update(new TutorshipRequest(t.getIdRequest(), u.getId(),us.getByName(cmtutor.getValue()), tobject.getText(), cmtype.getValue(), time));
         JOptionPane.showMessageDialog(null, "Demande Modifiée ! ");

@@ -10,6 +10,7 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
+import com.google.zxing.common.ByteMatrix;
 import com.google.zxing.qrcode.encoder.QRCode;
 
 import com.itextpdf.text.BadElementException;
@@ -84,9 +85,9 @@ import javax.swing.JOptionPane;
 public class GestionAttestationController implements Initializable {
 
     @FXML
-    private TableColumn<Participation, Long> coliduser;
+    private TableColumn<Participation, String> coliduser;
     @FXML
-    private TableColumn<Participation, Long> colidprenom;
+    private TableColumn<Participation, String> colidprenom;
     @FXML
     private TableColumn<Participation, Double> colRes;
     @FXML
@@ -147,10 +148,10 @@ public class GestionAttestationController implements Initializable {
         System.out.println(ListCat.size());
         
         colidpart.setCellValueFactory(new PropertyValueFactory<Participation,Long>("idParticipation"));
-        coliduser.setCellValueFactory(new PropertyValueFactory<Participation,Long>("nom"));
+        coliduser.setCellValueFactory(new PropertyValueFactory<Participation,String>("nom"));
         
         //colidPrerequis.setCellValueFactory(new PropertyValueFactory<Formation,Long>("idPrerequis"));
-        colidprenom.setCellValueFactory(new PropertyValueFactory<Participation,Long>("prenom"));
+        colidprenom.setCellValueFactory(new PropertyValueFactory<Participation,String>("prenom"));
         colRes.setCellValueFactory(new PropertyValueFactory<Participation,Double>("resultat"));
          colnomFormation.setCellValueFactory(new PropertyValueFactory<Participation,Long>("sujet"));
         
@@ -180,10 +181,10 @@ public class GestionAttestationController implements Initializable {
         Document Doc = new Document();
         GenererCodeQR();
         try {
-            PdfWriter.getInstance(Doc,new FileOutputStream("C:\\Attestation\\Etudiant.pdf") );
+            PdfWriter.getInstance(Doc,new FileOutputStream(System.getProperty("user.dir")+"/src/images/att.pdf") );
             Doc.open();
             Doc.add(new Paragraph("E-lmadrsa "));
-            Image img= Image.getInstance("C:\\signature\\Att1.png ");
+            Image img= Image.getInstance(System.getProperty("user.dir")+"/src/images/symfony_black_01.png");
             img.scaleAbsoluteHeight(90);
             img.scaleAbsoluteWidth(600);
             img.setAlignment(Image.ALIGN_CENTER);
@@ -194,12 +195,12 @@ public class GestionAttestationController implements Initializable {
             Doc.add(new Paragraph("\n "));
             Doc.add(new Paragraph("\n "));
             Doc.add(new Paragraph("\n "));
-            Image img1 = Image.getInstance("C:\\signature\\1.png ");
+            Image img1 = Image.getInstance(System.getProperty("user.dir")+"/src/images/symfony_black_01.png");
             img1.setAlignment(Image.ALIGN_LEFT);
             img1.scaleAbsoluteHeight(70);
             img1.scaleAbsoluteWidth(400);
             Doc.add(img1);
-            Image img2 = Image.getInstance("C:\\signature\\code.png ");
+            Image img2 = Image.getInstance(System.getProperty("user.dir")+"/src/images/code.png");
             img2.setAlignment(Image.ORIGINAL_PNG);
             img2.scaleAbsoluteHeight(200);
             img2.scaleAbsoluteWidth(200);
@@ -208,7 +209,7 @@ public class GestionAttestationController implements Initializable {
             
             //Doc.add(new Paragraph("atteste que :\n" +"\n" +"Madame / Monsieur " + P.getNom()+ P.getPrenom() ));
             Doc.close();
-            Desktop.getDesktop().open(new File("C:\\Attestation\\Etudiant.pdf"));
+            Desktop.getDesktop().open(new File(System.getProperty("user.dir")+"/src/images/att.pdf"));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(GestionAttestationController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (BadElementException ex) {
@@ -240,7 +241,7 @@ public class GestionAttestationController implements Initializable {
      public void GenererCodeQR() throws WriterException, IOException{
          Participation P = tabGestionAtt.getSelectionModel().getSelectedItem() ;
          String details=" Cette Attestation est délivrée à "+P.getNom()+""+ P.getPrenom()+ " aprés son réussite à la formation "+P.getSujet()+" Par E-lmadrsa";
-         String path="C:\\signature\\code.png";
+        String path = System.getProperty("user.dir")+"/src/images/code.png";
          BitMatrix matrix = new MultiFormatWriter().encode(details, BarcodeFormat.QR_CODE, 500, 500) ;
          MatrixToImageWriter.writeToFile(matrix,"png", new File(path));
      }

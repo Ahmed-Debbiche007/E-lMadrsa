@@ -30,7 +30,7 @@ public class ParticipationsService implements IService<Participation> {
     @Override
     public void ajouter(Participation p) {
                         try {
-            String req="insert into Participation(idFormation,idUser) values(?,?);" ;
+            String req="insert into participation(IdFormation,IdUser) values(?,?);" ;
             PreparedStatement st = cnx.prepareStatement(req);
             st.setLong(1, p.getIdFormation());
             st.setLong(2, p.getIdUser());
@@ -46,7 +46,7 @@ public class ParticipationsService implements IService<Participation> {
      }
     public void AffecterResultat(double Resultat, Long id) {
                         try {
-            String req="UPDATE participation SET resultat=? WHERE  idParticipation=?;" ;
+            String req="UPDATE participation SET resultat=? WHERE  IdParticipation=?;" ;
             PreparedStatement st = cnx.prepareStatement(req);
             st.setDouble(1, Resultat);
             st.setLong(2, id);
@@ -63,7 +63,7 @@ public class ParticipationsService implements IService<Participation> {
     @Override
     public void supprimer(Participation p) {
                         try {
-            String req = "DELETE FROM participation WHERE idParticipation=? ;"  ;
+            String req = "DELETE FROM participation WHERE IdParticipation=? ;"  ;
             PreparedStatement st = cnx.prepareStatement(req); 
             st.setLong(1, p.getIdParticipation());
             st.executeUpdate();
@@ -77,7 +77,7 @@ public class ParticipationsService implements IService<Participation> {
     @Override
     public void modifier(Participation p) {
                             try {
-                String req ="update participation set resultat=? where idParticipation=?" ;
+                String req ="update participation set resultat=? where IdParticipation=?" ;
                 PreparedStatement st = cnx.prepareStatement(req); 
                 st.setDouble(1, p.getResultat());
                 st.setLong(2,p.getIdParticipation());
@@ -97,7 +97,7 @@ public class ParticipationsService implements IService<Participation> {
         
         try {
             
-                 String req="SELECT * FROM participation p  JOIN formation f ON f.idFormation=p.idFormation JOIN user On user.idUtilisateur=p.idUser ;";
+                 String req="SELECT * FROM participation p  JOIN formation f ON f.idFormation=p.idFormation JOIN user On user.id=p.idUser ;";
                  PreparedStatement st = cnx.prepareCall(req); 
                  ResultSet rs= st.executeQuery();
                 while(rs.next()){
@@ -163,7 +163,7 @@ public class ParticipationsService implements IService<Participation> {
        ObservableList<User> list = FXCollections.observableArrayList();
         try {
             
-                 String req="SELECT * FROM participation p INNER JOIN user u  ON p.idUser = u.idUtilisateur  JOIN formation f ON p.idFormation = f.idFormation  where p.idFormation=? ORDER BY p.resultat desc limit 3";
+                 String req="SELECT * FROM participation p INNER JOIN user u  ON p.idUser = u.id  JOIN formation f ON p.idFormation = f.idFormation  where p.idFormation=? ORDER BY p.resultat desc limit 3";
                  PreparedStatement st = cnx.prepareCall(req); 
                 st.setDouble(1,id );
                  ResultSet rs= st.executeQuery();

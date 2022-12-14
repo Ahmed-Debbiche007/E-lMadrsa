@@ -17,6 +17,7 @@ public class Attestation {
     private Long idParticipation ;
     private Date dateAcq; 
     private int participation;
+    private String nom, prenom;
 
     public Long getIdAttestation() {
         return idAttestation;
@@ -70,6 +71,38 @@ public class Attestation {
         this.idParticipation = idParticipation;
         this.dateAcq = dateAcq;
     }
+    
+    public Attestation(Long idAttestation, Long idParticipation, Date dateAcq) {
+        this.idAttestation = idAttestation;
+        this.idParticipation = idParticipation;
+        this.dateAcq = dateAcq;
+    }
+    
+     public Attestation(Long idAttestation, Long idParticipation, Date dateAcq, String nom, String prenom) {
+        this.idAttestation = idAttestation;
+        this.idParticipation = idParticipation;
+        this.dateAcq = dateAcq;
+        this.nom = nom;
+        this.prenom= prenom;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+     
+     
 
     @Override
     public String toString() {

@@ -98,7 +98,7 @@ public class UtilisateurService implements IService<User> {
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
 
-                User u = new User(rs.getLong("idUtilisateur"), rs.getString("nom"), rs.getString("prenom"), rs.getString("nomUtilisateur"), rs.getString("tel"), rs.getString("email"), rs.getString("motDePasse"), rs.getDate("dateNaissance"), rs.getString("image"), rs.getString("role"), rs.getBoolean("approved"));
+                User u = new User(rs.getLong("id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("username"), "5555", rs.getString("email"), rs.getString("password"), rs.getDate("date_naissance"), rs.getString("image"), rs.getString("role"), rs.getBoolean("approved"));
                 list.add(u);
             }
 

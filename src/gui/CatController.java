@@ -119,11 +119,11 @@ public class CatController implements Initializable {
             alert.setContentText("would you like to activate text to speech ");
             Texttospeech t = new Texttospeech();
 
-            t.speak("would you like to activate text to speech ?");
+          /*  t.speak("would you like to activate text to speech ?");
 
             t.speak("if so please press enter");
 
-            t.speak("if not press the right arrow then enter");
+            t.speak("if not press the right arrow then enter");*/
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
@@ -150,10 +150,10 @@ public class CatController implements Initializable {
         realimage.setCellValueFactory(new PropertyValueFactory<category, ImageView>("image"));
         lista.forEach(item -> {
             String path = "/images/" + item.getCategoryIMAGE();
-            ImageView img = new ImageView(new Image(this.getClass().getResourceAsStream(path)));
+/*            ImageView img = new ImageView(new Image(this.getClass().getResourceAsStream(path)));
             img.setFitHeight(50);
             img.setFitWidth(50);
-            item.setImage(img);
+            item.setImage(img);*/
         }
         );
         // System.out.println(lista.get(0).getImage().getImage().getWidth());
@@ -232,7 +232,7 @@ public class CatController implements Initializable {
     private void acce(ActionEvent event) throws IOException {
         if (tvcat.getSelectionModel().getSelectedItem() != null) {
             staticcat = tvcat.getSelectionModel().getSelectedItem();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("post.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Post.fxml"));
             Parent root = loader.load();
             tvcat.getScene().setRoot(root);
             PostController pc = loader.getController();

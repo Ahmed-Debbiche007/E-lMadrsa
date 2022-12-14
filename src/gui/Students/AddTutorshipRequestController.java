@@ -30,6 +30,7 @@ import javafx.scene.control.TextArea;
 import javax.swing.JOptionPane;
 import services.TutorshipRequestService;
 import services.UtilisateurService;
+import static gui.AuthController.connectedUser;
 
 /**
  * FXML Controller class
@@ -90,7 +91,7 @@ public class AddTutorshipRequestController implements Initializable {
             String date = cldate.getValue().toString() + " " + (int) hspinner.getValue() + ":" + (int) mspinner.getValue() + ":00";
             Timestamp time = Timestamp.valueOf(date);
             AjoutUserController cs = new AjoutUserController();
-            User u = cs.getU();
+            User u = connectedUser;
             UtilisateurService us = new UtilisateurService();
             sp.add(new TutorshipRequest((long) us.getByName(cmtutor.getValue()), u.getId(), tobject.getText(), cmtype.getValue(), time));
             JOptionPane.showMessageDialog(null, "Demande Ajoutée ! ");

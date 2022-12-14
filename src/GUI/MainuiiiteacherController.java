@@ -57,7 +57,7 @@ public class MainuiiiteacherController implements Initializable {
     @FXML
     private void FORMATIONTEACHER(ActionEvent event) throws IOException {
         Stage stage;
-        Parent root = FXMLLoader.load(getClass().getResource("../gui/Welcome.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../gui/welcome.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);

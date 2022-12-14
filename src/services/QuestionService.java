@@ -68,7 +68,7 @@ public class QuestionService implements IService<Question> {
     @Override
     public void modifier(Question q) {
                     try {
-                String req ="update Question set ennonce=?,option1=?, option2=?,option3=?,answer=?,idExamen=? where idQuestion=?" ;
+                String req ="update question set ennonce=?,option1=?, option2=?,option3=?,answer=?,idExamen=? where idQuestion=?" ;
                 PreparedStatement st = cnx.prepareStatement(req); 
                 st.setString(1,q.getEnnonce());
                 st.setString(2,q.getOption1());
@@ -91,7 +91,7 @@ public class QuestionService implements IService<Question> {
 
             try {
                  
-                String req = "SELECT * FROM question  JOIN Examen  ON examen.idExamen=question.idExamen ; " ;
+                String req = "SELECT * FROM question  JOIN examen  ON examen.idExamen=question.idExamen ; " ;
                 PreparedStatement st = cnx.prepareCall(req) ; 
                 ResultSet rs = st.executeQuery(req) ;
                 

@@ -15,15 +15,14 @@ import java.sql.SQLException;
 public class DataSource {
 
     private static DataSource instance;
-    private Connection cnx;
-
-    private final String URL = "jdbc:mysql://localhost:3306/E_lmadrsa11";
-    private final String LOGIN = "root";
-    private final String PASSWORD = "";
+    String url ="jdbc:mysql://localhost:3306/springfever" ; 
+    String user ="root"; 
+    String password="password" ;
+    Connection cnx  ; 
 
     private DataSource() {
         try {
-            cnx = DriverManager.getConnection(URL, LOGIN, PASSWORD);
+            cnx = DriverManager.getConnection(url, user, password);
             System.out.println("Conncting !");
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());

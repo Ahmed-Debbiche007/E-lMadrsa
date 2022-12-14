@@ -45,7 +45,7 @@ public class gestionFormation extends Application {
         }
         */
                // FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/Welcome.fxml")) ;
-                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/Welcome.fxml")) ;
+                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/welcome.fxml")) ;
         Parent root = loader.load() ; 
         Scene scene = new Scene(root) ;
         primaryStage.setScene(scene);

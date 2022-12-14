@@ -10,6 +10,7 @@ import entities.TutorshipRequest;
 import entities.TutorshipSession;
 import entities.User;
 import gui.AjoutUserController;
+import static gui.AuthController.connectedUser;
 import java.io.IOException;
 import java.net.URL;
 import java.security.GeneralSecurityException;
@@ -78,7 +79,7 @@ public class TutorTutorshipRequestsController implements Initializable {
         TutorshipRequestService sp = new TutorshipRequestService();
         try {
             AjoutUserController cs = new AjoutUserController();
-            User u = cs.getU();
+            User u = connectedUser;
             clstudnet.setCellValueFactory(new PropertyValueFactory<TutorshipRequest, Long>("nomStudent"));
             cltype.setCellValueFactory(new PropertyValueFactory<TutorshipRequest, String>("requestType"));
             cldate.setCellValueFactory(new PropertyValueFactory<TutorshipRequest, Timestamp>("sessionDate"));

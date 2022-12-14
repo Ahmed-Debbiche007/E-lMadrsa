@@ -24,7 +24,7 @@ public class ServicePrerequis {
     
      public void ajouter_Prerequis (Prerequis P ) {
         try {
-            String requete = "INSERT INTO Prerequis (nomPrerequis) VALUES ('" + P.getNomPrerequis() + "')";
+            String requete = "INSERT INTO prerequis (nomPrerequis) VALUES ('" + P.getNomPrerequis() + "')";
             System.out.println("1P");
             Statement st = cnx.createStatement();
             System.out.println("2");
@@ -40,7 +40,7 @@ public class ServicePrerequis {
      
       public void modifier_prerequise (Prerequis P) {
         try {
-            String requete = "UPDATE Prerequis SET nomPrerequis='" +P.getNomPrerequis()  + "' WHERE idPrerequis=" + P.getIdPrerequis() ;
+            String requete = "UPDATE prerequis SET nomPrerequis='" +P.getNomPrerequis()  + "' WHERE idPrerequis=" + P.getIdPrerequis() ;
             Statement st = cnx.createStatement();
             st.executeUpdate(requete);
             System.out.println("Prerequis modifiée !");
@@ -52,7 +52,7 @@ public class ServicePrerequis {
       
        public void supprimer_prerequis(Prerequis P ) {
         try {
-            String requete = "DELETE FROM Prerequis WHERE idPrerequis=" + P.getIdPrerequis() ;
+            String requete = "DELETE FROM prerequis WHERE idPrerequis=" + P.getIdPrerequis() ;
             Statement st = cnx.createStatement();
             st.executeUpdate(requete);
             System.out.println(" Prerequis supprimée !");
@@ -66,7 +66,7 @@ public class ServicePrerequis {
         ObservableList<Prerequis> list = FXCollections.observableArrayList();
 
         try {
-            String requete = "SELECT idPrerequis,nomPrerequis FROM Prerequis ";
+            String requete = "SELECT idPrerequis,nomPrerequis FROM prerequis ";
             Statement st = cnx.createStatement();
            
             ResultSet rs = st.executeQuery(requete);

@@ -21,12 +21,13 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import outils.MyDB;
 /**
  *
  * @author SBS
  */
 public class ServicePost implements IService<post>{
-    Connection cnx = DataSource.getInstance().getCnx();
+    Connection cnx = MyDB.getInstance().getCnx();
     @Override
     public void ajouter(post c) {
        try {
@@ -108,7 +109,7 @@ public class ServicePost implements IService<post>{
         ObservableList<post> list = FXCollections.observableArrayList();
 
         try {
-            String requete = "SELECT post.*, user.nom FROM post JOIN user on post.userID=user.idUtilisateur where categoryID =?";
+            String requete = "SELECT post.*, user.nom FROM post JOIN user on post.userID=user.id where categoryID =?";
             PreparedStatement pst = cnx.prepareStatement(requete);
             pst.setLong(1,c.getCategoryID());
             ResultSet rs = pst.executeQuery();

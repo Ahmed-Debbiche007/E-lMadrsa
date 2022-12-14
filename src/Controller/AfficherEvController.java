@@ -137,8 +137,8 @@ public class AfficherEvController implements Initializable {
         imageEv.setCellValueFactory(new PropertyValueFactory("image_ev"));
         userev.setCellValueFactory(new PropertyValueFactory("id_user"));
         desc.setCellValueFactory(new PropertyValueFactory("desc_ev"));
-        etat_ev.setCellValueFactory(new PropertyValueFactory("etat_evenement"));
-        typeev.setCellValueFactory(new PropertyValueFactory("id_Cat"));
+        etat_ev.setCellValueFactory(new PropertyValueFactory("etat"));
+        typeev.setCellValueFactory(new PropertyValueFactory("id_categorie"));
         table.setItems(list);
     }
 

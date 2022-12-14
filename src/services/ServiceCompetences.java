@@ -24,7 +24,7 @@ public class ServiceCompetences {
     Connection cnx = DataDB.getInstance().getCnx();
     public void ajouter_competence (Competences Comp ) {
         try {
-            String requete = "INSERT INTO Competences (nomCompetence) VALUES ('" + Comp.getNomCompetence() + "')";
+            String requete = "INSERT INTO competences (nomCompetence) VALUES ('" + Comp.getNomCompetence() + "')";
             System.out.println("1Comp");
             Statement st = cnx.createStatement();
             System.out.println("2Comp");
@@ -41,7 +41,7 @@ public class ServiceCompetences {
     
     public void modifier_competence (Competences Comp) {
         try {
-            String requete = "UPDATE Competences SET nomCompetence='" +Comp.getNomCompetence()  + "' WHERE idCompetence=" + Comp.getIdCompetence() ;
+            String requete = "UPDATE competences SET nomCompetence='" +Comp.getNomCompetence()  + "' WHERE idCompetence=" + Comp.getIdCompetence() ;
             Statement st = cnx.createStatement();
             st.executeUpdate(requete);
             System.out.println("Competence modifiée !");
@@ -53,7 +53,7 @@ public class ServiceCompetences {
     
     public void supprimer_competence(Competences Comp ) {
         try {
-            String requete = "DELETE FROM Competences WHERE idCompetence=" + Comp.getIdCompetence() ;
+            String requete = "DELETE FROM competences WHERE idCompetence=" + Comp.getIdCompetence() ;
             Statement st = cnx.createStatement();
             st.executeUpdate(requete);
             System.out.println(" Competence supprimée !");
@@ -86,7 +86,7 @@ public class ServiceCompetences {
         ObservableList<Competences> list = FXCollections.observableArrayList();
 
         try {
-            String requete = "SELECT idCompetence,nomCompetence FROM Competences ";
+            String requete = "SELECT idCompetence,nomCompetence FROM competences ";
             Statement st = cnx.createStatement();
            
             ResultSet rs = st.executeQuery(requete);
@@ -106,7 +106,7 @@ public class ServiceCompetences {
         ObservableList<Competences> list = FXCollections.observableArrayList();
 
         try {
-            String requete = "SELECT idCompetence,nomCompetence FROM Competences ";
+            String requete = "SELECT idCompetence,nomCompetence FROM competences ";
             Statement st = cnx.createStatement();
            
             ResultSet rs = st.executeQuery(requete);

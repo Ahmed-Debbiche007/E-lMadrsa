@@ -41,7 +41,7 @@ public class ModifierCategorieController implements Initializable {
         String type;
     @FXML
     private Button retourmr;
-
+private CategorieEv e;
 
     /**
      * Initializes the controller class.
@@ -50,6 +50,8 @@ public class ModifierCategorieController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         type=ev.getType_ev();
        tfcat.setText(ev.getType_ev());
+       CategorieEvService cs = new CategorieEvService();
+        e = cs.readByName(ev.getType_ev());
     }    
 
     @FXML
@@ -62,7 +64,7 @@ public class ModifierCategorieController implements Initializable {
         }else{
         CategorieEv cat = new CategorieEv(tfcat.getText());
         CategorieEvService cs = new CategorieEvService();
-        cs.updateCat(cat,type);
+        cs.updateCat(e,tfcat.getText());
         Alert alert=new Alert(Alert.AlertType.CONFIRMATION);
                         alert.setContentText("le evenement est Modifier avec succé");
                         alert.show();

@@ -27,7 +27,7 @@ public class ServiceFormation {
     
      public void ajouter_formation(Formation F) {
         try {
-            String requete = "INSERT INTO Formation (sujet,description,difficulté,durée,idPrerequis,idCompetence,idCategorie,idExamen) VALUES ('" + F.getSujet() + "','" + F.getDescription() +"','" + F.getDifficulté() + "','" + F.getDurée() + "','" + F.getIdPrerequis()
+            String requete = "INSERT INTO formation (sujet,description,difficulte,duree,idPrerequis,idCompetence,idCategorie,idExamen) VALUES ('" + F.getSujet() + "','" + F.getDescription() +"','" + F.getDifficulté() + "','" + F.getDurée() + "','" + F.getIdPrerequis()
                     + "','" + F.getIdCompetence() + "','" + F.getIdCategorie() +  "','" + F.getIdExamen() +  "')";
             System.out.println("1");
             Statement st = cnx.createStatement();
@@ -44,7 +44,7 @@ public class ServiceFormation {
      
      public void modifier_formation(Formation F) {
         try {
-            String requete = "UPDATE Formation SET sujet='" +F.getSujet()  +"',description='" + F.getDescription()+"',difficulté='" + F.getDifficulté()+"',durée='" + F.getDurée()+ "' WHERE idFormation=" + F.getIdFormation() ;
+            String requete = "UPDATE formation SET sujet='" +F.getSujet()  +"',description='" + F.getDescription()+"',difficulte='" + F.getDifficulté()+"',duree='" + F.getDurée()+ "' WHERE idFormation=" + F.getIdFormation() ;
             Statement st = cnx.createStatement();
             st.executeUpdate(requete);
             System.out.println("Formation modifiée !");
@@ -55,7 +55,7 @@ public class ServiceFormation {
     }
       public void supprimer_formation(Formation F) {
         try {
-            String requete = "DELETE FROM Formation WHERE idFormation=" + F.getIdFormation() ;
+            String requete = "DELETE FROM formation WHERE idFormation=" + F.getIdFormation() ;
             Statement st = cnx.createStatement();
             st.executeUpdate(requete);
             System.out.println("Formation supprimée !");
@@ -70,7 +70,7 @@ public class ServiceFormation {
       public Formation VerifUninciteFormation( String sujet ) {
           
             try {
-                String req = "SELECT  *  FROM Formation  where sujet=? ";
+                String req = "SELECT  *  FROM formation  where sujet=? ";
                 PreparedStatement st = cnx.prepareStatement(req) ;
                             st.setString(1, sujet);
 
@@ -80,7 +80,7 @@ public class ServiceFormation {
                 F.setIdFormation(rs.getLong("idFormation"));
                 F.setSujet(rs.getString("sujet"));
                 F.setDescription(rs.getString("description"));
-                F.setDifficulté(rs.getString("difficulté"));
+                F.setDifficulté(rs.getString("difficulte"));
                 F.setIdPrerequis(rs.getLong("idPrerequis"));
                 F.setIdCompetence(rs.getLong("idCompetence"));
                 F.setIdExamen(rs.getLong("idExamen"));
@@ -116,7 +116,7 @@ public class ServiceFormation {
                
                 
              
-                list.add(new Formation(rs.getLong("idFormation"), rs.getString("sujet"), rs.getString("description"),rs.getString("difficulté"),rs.getInt("durée"),rs.getLong("idPrerequis"),rs.getLong("idCompetence"),rs.getLong("idExamen"),rs.getLong("idCategorie"),rs.getString("nomCategorie"),rs.getString("nomCompetence"),rs.getString("nomPrerequis"),rs.getString("nomExamen")));
+                list.add(new Formation(rs.getLong("idFormation"), rs.getString("sujet"), rs.getString("description"),rs.getString("difficulte"),rs.getInt("duree"),rs.getLong("idPrerequis"),rs.getLong("idCompetence"),rs.getLong("idExamen"),rs.getLong("idCategorie"),rs.getString("nomCategorie"),rs.getString("nomCompetence"),rs.getString("nomPrerequis"),rs.getString("nomExamen")));
                 System.out.println("heeeeeeeeeeey" + list);
             
             
@@ -158,7 +158,7 @@ public class ServiceFormation {
                
                 
              
-                list.add(new Formation(rs.getLong("idFormation"), rs.getString("sujet"), rs.getString("description"),rs.getString("difficulté"),rs.getInt("durée"),rs.getLong("idPrerequis"),rs.getLong("idCompetence"),rs.getLong("idCategorie")));
+                list.add(new Formation(rs.getLong("idFormation"), rs.getString("sujet"), rs.getString("description"),rs.getString("difficulte"),rs.getInt("duree"),rs.getLong("idPrerequis"),rs.getLong("idCompetence"),rs.getLong("idCategorie")));
                 System.out.println("heeeeeeeeeeey" + list);
             
             
@@ -181,7 +181,7 @@ public class ServiceFormation {
         //String query1="select * from "+db+".vehicules where ( '"+s+"'='"+re+"' ) ";
 
         try {
-            String requete = "SELECT sujet,description FROM Formation JOIN Categorie ON Formation.idCategorie=Categorie.idCategorie  ";
+            String requete = "SELECT sujet,description FROM formation JOIN categorie ON formation.idCategorie=categorie.idCategorie  ";
            Statement st = cnx.createStatement();
            System.out.println("cv ");
             ResultSet rs = st.executeQuery(requete);

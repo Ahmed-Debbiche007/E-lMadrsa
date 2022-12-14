@@ -33,9 +33,9 @@ public class QRcodeController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
        Image img = null ;
        
-         System.out.println(x);
+         System.out.println(System.getProperty("user.dir")+"/src/images/eve3.jpg");
         
-               img = new Image("/GUI/"+"images"+x+".jpg");
+               img = new Image("/images/eve"+x+".jpg");
                 qrimage.setImage(img);
         
 // TODO

@@ -59,7 +59,7 @@ public class AjouterEveController implements Initializable {
     @FXML
     private ComboBox<CategorieEv> Type_ev;
     @FXML
-    private ComboBox<User> user_ev;
+    private ComboBox<String> user_ev;
     @FXML
     private DatePicker date;
     @FXML
@@ -74,17 +74,22 @@ public class AjouterEveController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         CategorieEvService cs = new CategorieEvService();
+        UtilisateurService ss = new UtilisateurService();
         cs.read().forEach((e) -> {
             Type_ev.getItems().add(e);
         });
 
+        ss.afficher().forEach(u->{
+        user_ev.getItems().add(u.getnomUtilisateur());
+        });
     }
 
     @FXML
     private void AjouterEvenement(ActionEvent event) throws ParseException, Exception {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        User us = user_ev.getSelectionModel().getSelectedItem();
-        User uu = new User(9L);
+        String us = user_ev.getSelectionModel().getSelectedItem();
+        UtilisateurService ss = new UtilisateurService();
+        User uu = ss.getByUserName(us);
         CategorieEv Ts = Type_ev.getSelectionModel().getSelectedItem();
         LocalDate dat = date.getValue();
         if (tfnom.getText().isEmpty() || Type_ev.getSelectionModel().isEmpty() || tadesc.getText().isEmpty()) {
@@ -94,7 +99,7 @@ public class AjouterEveController implements Initializable {
             alert.showAndWait();
         } else if (dat.isAfter(LocalDate.now())) {
             evenement ev;
-            ev = new evenement(Ts, tfnom.getText(), tadesc.getText(), img, uu, df.parse(date.getValue().toString()), "en cours");
+            ev = new evenement(Ts, tfnom.getText(), tadesc.getText(), img, (int) (long)uu.getId(), df.parse(date.getValue().toString()), "en cours");
             event_service evs = new event_service();
             evs.insert(ev);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -105,7 +110,7 @@ public class AjouterEveController implements Initializable {
    System.getenv("d12bb8dc7c5c5eb8a39231e60cef4491"));
              */
             
-            javaMailUtil.sendMail("mondher.souissi@esprit.tn", ev.getNom_ev());
+            //javaMailUtil.sendMail("mondher.souissi@esprit.tn", ev.getNom_ev());
             Twilio.init("ACc2294319aa2eaba8e91273055538a50e", "54df389d2dfc92cb4caee9de31578a4e");
             
             Message message = Message.creator(

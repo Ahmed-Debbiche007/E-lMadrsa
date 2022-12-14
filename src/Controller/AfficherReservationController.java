@@ -96,7 +96,7 @@ public class AfficherReservationController implements Initializable {
 //        System.out.println(c.toString());
         mr.SetEv(c);
 
-        final FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ModifierReservation.fxml"));
+        final FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../GUI/ModifierReservation.fxml"));
         final Node node;
         try {
             node = fxmlLoader.load();
@@ -159,7 +159,7 @@ public class AfficherReservationController implements Initializable {
         QRcodeController qrc = new QRcodeController();
         qrc.setQR(c.getId_reservation());
 
-        final FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/QrCode.fxml"));
+        final FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../GUI/QrCode.fxml"));
         final Node node;
         try {
             node = fxmlLoader.load();

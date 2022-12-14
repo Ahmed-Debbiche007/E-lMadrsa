@@ -7,6 +7,7 @@ package gui.Tutors;
 import entities.TutorshipSession;
 import entities.User;
 import gui.AjoutUserController;
+import static gui.AuthController.connectedUser;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -75,7 +76,7 @@ public class TutorsTutorshipSessionsController implements Initializable {
         TutorshipSessionService sp = new TutorshipSessionService();
         try {
             AjoutUserController cs = new AjoutUserController();
-            User u = cs.getU();
+            User u = connectedUser;
             clstudnet.setCellValueFactory(new PropertyValueFactory<TutorshipSession, Long>("nomStudent"));
             cltype.setCellValueFactory(new PropertyValueFactory<TutorshipSession, String>("type"));
             cldate.setCellValueFactory(new PropertyValueFactory<TutorshipSession, Timestamp>("date"));
@@ -137,7 +138,7 @@ public class TutorsTutorshipSessionsController implements Initializable {
     private Stage clientchatapp(TutorshipSession t) throws IOException, InterruptedException {
         Thread.sleep(3000);
         AjoutUserController cs = new AjoutUserController();
-        User u = cs.getU();
+        User u = connectedUser;
         Client client = new Client("localhost", 8082, u.getNom());
         Thread clientThread = new Thread(client);
         clientThread.setDaemon(true);

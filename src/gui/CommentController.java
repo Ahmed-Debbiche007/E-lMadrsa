@@ -40,6 +40,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javax.swing.JOptionPane;
@@ -76,6 +77,8 @@ public class CommentController implements Initializable {
     private TextArea tfcomment;
     @FXML
     private Label lbpostvote;
+    @FXML
+    private WebView webview;
 
     public Label getLbposttitle() {
         return lbposttitle;
@@ -91,7 +94,8 @@ public class CommentController implements Initializable {
     }
 
     public void setLbpostcontent(String lbpostcontent) {
-        this.lbpostcontent.setText(lbpostcontent);
+        //this.lbpostcontent.setText(lbpostcontent);
+        webview.getEngine().loadContent(lbpostcontent);
         //Texttospeech t= new Texttospeech();
        // t.speak(lbpostcontent);
     }

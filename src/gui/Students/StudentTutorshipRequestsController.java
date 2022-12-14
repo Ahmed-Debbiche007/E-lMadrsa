@@ -10,6 +10,7 @@ import entities.TutorshipRequest;
 import entities.TutorshipSession;
 import entities.User;
 import gui.AjoutUserController;
+import static gui.AuthController.connectedUser;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -73,7 +74,7 @@ public class StudentTutorshipRequestsController implements Initializable {
         TutorshipRequestService sp = new TutorshipRequestService();
         try {
             AjoutUserController cs = new AjoutUserController();
-            User u = cs.getU();
+            User u = connectedUser;
             cltutor.setCellValueFactory(new PropertyValueFactory<TutorshipRequest, Long>("nomTut"));
             cltype.setCellValueFactory(new PropertyValueFactory<TutorshipRequest, String>("requestType"));
             cldate.setCellValueFactory(new PropertyValueFactory<TutorshipRequest, Timestamp>("sessionDate"));

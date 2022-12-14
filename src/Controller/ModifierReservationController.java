@@ -78,7 +78,7 @@ public class ModifierReservationController implements Initializable {
  
         
                 Stage stage;
-        Parent root = FXMLLoader.load(getClass().getResource("../gui/AfficherReservation.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../GUI/AfficherReservation.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);

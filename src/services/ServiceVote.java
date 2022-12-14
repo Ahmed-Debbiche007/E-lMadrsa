@@ -16,6 +16,7 @@ import static java.util.Collections.list;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import outils.MyDB;
 import utils.DataSource;
 
 /**
@@ -23,7 +24,7 @@ import utils.DataSource;
  * @author aymen
  */
 public class ServiceVote implements IService<vote> {
-    Connection cnx = DataSource.getInstance().getCnx();
+    Connection cnx = MyDB.getInstance().getCnx();
 
     @Override
     public void ajouter(vote t) {

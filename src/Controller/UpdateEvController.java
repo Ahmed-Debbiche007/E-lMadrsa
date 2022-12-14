@@ -39,6 +39,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Window;
 import static jdk.nashorn.tools.ShellFunctions.input;
 import services.CategorieEvService;
+import services.UtilisateurService;
 
 /**
  * FXML Controller class
@@ -63,7 +64,7 @@ public class UpdateEvController implements Initializable {
     @FXML
     private ComboBox<CategorieEv> Type_ev;
     @FXML
-    private ComboBox<User> user_ev;
+    private ComboBox<String> user_ev;
     @FXML
     private DatePicker date;
     private static final evenement ev = new evenement();
@@ -84,6 +85,10 @@ public class UpdateEvController implements Initializable {
              tfnom.setText(ev.getNom_ev());
              tadesc.setText(ev.getDesc_ev());
              Type_ev.getSelectionModel().select(ev.getId_categorie());
+        });
+         UtilisateurService ss = new UtilisateurService();
+          ss.afficher().forEach(u->{
+        user_ev.getItems().add(u.getnomUtilisateur());
         });
     }    
 

@@ -47,7 +47,7 @@ public class CategorieEvService {
     }
 
     public void delete(int id) {
-        String req = "DELETE FROM Categorie WHERE id_Cat=?";
+        String req = "DELETE FROM Categorie WHERE Id=?";
         try {
             pst = conn.prepareStatement(req);
             pst.setInt(1, id);
@@ -61,7 +61,7 @@ public class CategorieEvService {
     public void update(CategorieEv t) {
         try {
 
-            String req = "update Categorie set type_evenement=? where id_Cat=?";
+            String req = "update Categorie set type_evenement=? where Id=?";
             pst = conn.prepareStatement(req);
             pst.setString(1, t.getType_ev());
             pst.setInt(2, t.getId_categorie());
@@ -76,10 +76,11 @@ public class CategorieEvService {
     public void updateCat(CategorieEv t, String type) {
         try {
 
-            String req = "update Categorie set type_evenement=? where id_Cat=?";
+            String req = "update categorie_ev set type_evenement=? where Id=?";
             pst = conn.prepareStatement(req);
-            pst.setString(1, t.getType_ev());
-            pst.setString(2, type);
+            System.out.println(t.getType_ev()+ " " +t.getId_categorie() + " " + type);
+            pst.setInt(2, t.getId_categorie());
+            pst.setString(1, type);
             pst.executeUpdate();
             pst.close();
 
@@ -98,7 +99,7 @@ public class CategorieEvService {
             rs = ste.executeQuery(req);
 
             while (rs.next()) {
-                list.add(new CategorieEv(rs.getInt("id_Cat"), rs.getString("type_evenement")));
+                list.add(new CategorieEv(rs.getInt("id"), rs.getString("type_evenement")));
             }
 
         } catch (SQLException ex) {
@@ -109,14 +110,14 @@ public class CategorieEvService {
 
     public CategorieEv readById(int id) {
 
-        String req = "select * from categorie_ev where id_Cat=" + id;
+        String req = "select * from categorie_ev where Id=" + id;
         CategorieEv d = new CategorieEv();
 
         try {
             ste = conn.createStatement();
             rs = ste.executeQuery(req);
             while (rs.next()) {
-                d.setId_categorie(rs.getInt("id_Cat"));
+                d.setId_categorie(rs.getInt("Id"));
                 d.setType_ev(rs.getString("type_evenement"));
 
             }
@@ -128,13 +129,14 @@ public class CategorieEvService {
 
     public CategorieEv readByName(String type_ev) {
 
-        String req = "select * from Categorie where type_evenement LIKE '%" + type_ev + "%'";
+        String req = "select * from categorie_ev where type_evenement LIKE '%" + type_ev + "%'";
         CategorieEv d = new CategorieEv();
 
         try {
             ste = conn.createStatement();
             rs = ste.executeQuery(req);
             while (rs.next()) {
+                d.setId_categorie(rs.getInt("id"));
                 d.setType_ev(rs.getString("type_evenement"));
 
             }

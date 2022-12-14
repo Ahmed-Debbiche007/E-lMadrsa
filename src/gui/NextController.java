@@ -87,21 +87,20 @@ public class NextController implements Initializable {
         Stage stage;
 
         if (AuthController.connectedUser.getrole().name().equals("Student")) {
-            Parent root = FXMLLoader.load(getClass().getResource("mainuiiistudent.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("../GUI/mainuiiistudent.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
 
         } else if (AuthController.connectedUser.getrole().name().equals("Tutor")) {
-            Parent root = FXMLLoader.load(getClass().getResource("mainuiiiteacher.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("../GUI/mainuiiiteacher.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
         } else if (AuthController.connectedUser.getrole().name().equals("Admin")) {
-
-            Parent root = FXMLLoader.load(getClass().getResource("mainuiiiadmin.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("../GUI/mainuiiiadmin.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);

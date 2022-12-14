@@ -45,7 +45,7 @@ public class gestionEvents extends Application{
           CategorieEvService cs = new CategorieEvService();
           ReservationService r = new ReservationService();
           Reservation res = r.getLatest();
-          System.out.println(res.toString());
+//          System.out.println(res.toString());
           
     
     }
