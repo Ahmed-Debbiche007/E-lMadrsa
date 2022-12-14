@@ -63,7 +63,7 @@ public class NvmdpController implements Initializable {
 
         } else {
             String hashPass = Hashing.sha256().hashString(nvmdp.getText(), StandardCharsets.UTF_8).toString();
-            connectedUser.setmotDePasee(hashPass);
+            connectedUser.setMotDePasee(hashPass);
             UtilisateurService u = new UtilisateurService();
             u.updatePassword(connectedUser);
             Stage stage;

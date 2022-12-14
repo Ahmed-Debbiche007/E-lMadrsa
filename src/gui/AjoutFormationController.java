@@ -564,8 +564,8 @@ public class AjoutFormationController implements Initializable {
                                      
                                     Examen CurrentExam = ES.getExamById(f.getIdExamen()) ;
                                   //  User currentUser = US.getByUserId(CurrentExam.get)
-                                    System.out.println("**************" + connectedUser.getemail());
-                                    message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(connectedUser.getemail()) );
+                                    System.out.println("**************" + connectedUser.getEmail());
+                                    message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(connectedUser.getEmail()) );
                                     message.setSubject("formation news from elmadrsa");
                                     message.setText("Bonjour vous avez participer a la formatoin :" + f.getSujet());
                                     Transport.send(message);

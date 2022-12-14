@@ -65,14 +65,14 @@ public class AjoutUserController implements Initializable {
         }
         String  hashPass = Hashing.sha256().hashString(pass, StandardCharsets.UTF_8).toString();
         
-        if (u.getmotDePasse().equals(hashPass)) {
+        if (u.getMotDePasse().equals(hashPass)) {
             JOptionPane.showMessageDialog(null, "Connected ");
             u1 = u;
             FXMLLoader loader = null;
-            if (u.getrole().name().equals("Student")){
+            if (u.getRole().name().equals("Student")){
                 loader = new FXMLLoader(getClass().getResource("./Students/Home.fxml"));
             }
-            if (u.getrole().name().equals("Tutor")){
+            if (u.getRole().name().equals("Tutor")){
                 loader = new FXMLLoader(getClass().getResource("./Tutors/Home.fxml"));
             }
             

@@ -138,7 +138,7 @@ public class AuthController implements Initializable {
         } else {
             UtilisateurService su = new UtilisateurService();
             User u = su.getByUserName(nomUtilisateur);
-            if (!hashPass.equals(u.getmotDePasse())) {
+            if (!hashPass.equals(u.getMotDePasse())) {
                 JOptionPane.showMessageDialog(null, "Wrong Username/Password! ");
                 tfusername.setText("");
                 jpswd.setText("");
@@ -152,6 +152,7 @@ public class AuthController implements Initializable {
             } else {
                 connectedUser = u;
                 JOptionPane.showMessageDialog(null, "Successfully Login!");
+                System.out.println(u.getRole().name());
                 Stage stage;
                 Parent root = FXMLLoader.load(getClass().getResource("nexte.fxml"));
                 stage = (Stage) tfusername.getScene().getWindow();

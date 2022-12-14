@@ -88,7 +88,7 @@ public class UpdateEvController implements Initializable {
         });
          UtilisateurService ss = new UtilisateurService();
           ss.afficher().forEach(u->{
-        user_ev.getItems().add(u.getnomUtilisateur());
+        user_ev.getItems().add(u.getNomUtilisateur());
         });
     }    
 

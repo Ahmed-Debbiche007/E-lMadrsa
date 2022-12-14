@@ -53,7 +53,7 @@ public class NextController implements Initializable {
     @FXML
     private void goadmin(ActionEvent event) throws IOException {
         Stage stage;
-        Parent root = FXMLLoader.load(getClass().getResource("AjoutPersonne.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../gui/AjoutPersonne.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -86,20 +86,20 @@ public class NextController implements Initializable {
 
         Stage stage;
 
-        if (AuthController.connectedUser.getrole().name().equals("Student")) {
+        if (AuthController.connectedUser.getRole().name().equals("Student")) {
             Parent root = FXMLLoader.load(getClass().getResource("../GUI/mainuiiistudent.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
 
-        } else if (AuthController.connectedUser.getrole().name().equals("Tutor")) {
+        } else if (AuthController.connectedUser.getRole().name().equals("Tutor")) {
             Parent root = FXMLLoader.load(getClass().getResource("../GUI/mainuiiiteacher.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        } else if (AuthController.connectedUser.getrole().name().equals("Admin")) {
+        } else if (AuthController.connectedUser.getRole().name().equals("Admin")) {
             Parent root = FXMLLoader.load(getClass().getResource("../GUI/mainuiiiadmin.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);

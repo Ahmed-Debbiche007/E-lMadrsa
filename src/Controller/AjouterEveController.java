@@ -33,6 +33,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
+import outils.SendMail;
 import test.javaMailUtil;
 
 /**
@@ -80,7 +81,7 @@ public class AjouterEveController implements Initializable {
         });
 
         ss.afficher().forEach(u->{
-        user_ev.getItems().add(u.getnomUtilisateur());
+        user_ev.getItems().add(u.getNomUtilisateur());
         });
     }
 
@@ -110,7 +111,7 @@ public class AjouterEveController implements Initializable {
    System.getenv("d12bb8dc7c5c5eb8a39231e60cef4491"));
              */
             
-            //javaMailUtil.sendMail("mondher.souissi@esprit.tn", ev.getNom_ev());
+            SendMail.send("New Event", ev.toString(), "ahmed.debbiche@esprit.tn");
             Twilio.init("ACc2294319aa2eaba8e91273055538a50e", "54df389d2dfc92cb4caee9de31578a4e");
             
             Message message = Message.creator(

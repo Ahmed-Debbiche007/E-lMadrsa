@@ -184,7 +184,7 @@ public class CommentController implements Initializable {
     
     private void supprimerComment(ActionEvent event) {
         comment c = tvcomment.getSelectionModel().getSelectedItem();
-        if ((connectedUser.getrole().equals("Admin"))||(connectedUser.getId()==c.getUserID())){
+        if ((connectedUser.getRole().name().equals("Admin"))||(connectedUser.getId()==c.getUserID())){
       
         ServiceComment sc = new ServiceComment();
         
@@ -230,7 +230,7 @@ public class CommentController implements Initializable {
     private void modifiercomment(ActionEvent event) {
         
         comment c = tvcomment.getSelectionModel().getSelectedItem();
-        if ((connectedUser.getrole().equals("Admin"))||(connectedUser.getId()==c.getUserID())){
+        if ((connectedUser.getRole().name().equals("Admin"))||(connectedUser.getId()==c.getUserID())){
         //System.out.println(" ***********"  + e);  
         ServiceComment sc = new ServiceComment();
         sc.modifier(new comment( c.getCommentID(),tfcomment.getText()));
@@ -398,7 +398,7 @@ public class CommentController implements Initializable {
                         deleteIcon.setOnMouseClicked((MouseEvent event) -> {
                             
                             comment c = tvcomment.getSelectionModel().getSelectedItem();
-        if ((connectedUser.getrole().equals("Admin"))||(connectedUser.getId()==c.getUserID())){
+        if ((connectedUser.getRole().name().equals("Admin"))||(connectedUser.getId()==c.getUserID())){
       
         ServiceComment sc = new ServiceComment();
         
@@ -423,7 +423,7 @@ public class CommentController implements Initializable {
                         });
                         editIcon.setOnMouseClicked((MouseEvent event) -> {
                             comment c = tvcomment.getSelectionModel().getSelectedItem();
-        if ((connectedUser.getrole().equals("Admin"))||(connectedUser.getId()==c.getUserID())){
+        if ((connectedUser.getRole().equals("Admin"))||(connectedUser.getId()==c.getUserID())){
         //System.out.println(" ***********"  + e);  
         ServiceComment sc = new ServiceComment();
         sc.modifier(new comment( c.getCommentID(),tfcomment.getText()));

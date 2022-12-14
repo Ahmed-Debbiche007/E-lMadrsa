@@ -5,6 +5,7 @@
 package gui;
 
 import com.google.common.hash.Hashing;
+import entities.Role;
 import entities.User;
 import java.io.File;
 import java.io.IOException;
@@ -48,7 +49,7 @@ import services.UtilisateurService;
  *
  * @author Nour
  */
-public class AjoutPersonneControllerAuth implements Initializable {
+public class AjoutPersonneController implements Initializable {
 
     @FXML
     private TextField tfNom;
@@ -81,7 +82,7 @@ public class AjoutPersonneControllerAuth implements Initializable {
     @FXML
     private TableColumn<User, String> colemail;
     @FXML
-    private TableColumn<User, String> coldatenaissance;
+    private TableColumn<User, Date> coldatenaissance;
     @FXML
     private TableColumn<User, String> colImage;
 
@@ -101,7 +102,7 @@ public class AjoutPersonneControllerAuth implements Initializable {
     @FXML
     private ComboBox<String> tfrole;
     @FXML
-    private TableColumn<User, String> colrole;
+    private TableColumn<User, Role> colrole;
     ObservableList typeChoices = FXCollections.observableArrayList("Student", "Admin", "Tutor");
     ObservableList rolesList = FXCollections.observableArrayList("All", "Student", "Admin", "Tutor");
 
@@ -117,14 +118,13 @@ public class AjoutPersonneControllerAuth implements Initializable {
 
         UtilisateurService us = new UtilisateurService();
         ObservableList<User> liste = us.afficher();
-
         colNom.setCellValueFactory(new PropertyValueFactory<User, String>("nom"));
         colPrenom.setCellValueFactory(new PropertyValueFactory<User, String>("prenom"));
-        colNomUtilisateur.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getnomUtilisateur()));
-        coltlf.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().gettel()));
-        colemail.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getemail()));
-        colrole.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getrole().toString()));
-        coldatenaissance.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getdateNaissance().toString()));
+        colNomUtilisateur.setCellValueFactory(new PropertyValueFactory<User, String>("nomUtilisateur"));
+        coltlf.setCellValueFactory(new PropertyValueFactory<User, String>("tel"));
+        colemail.setCellValueFactory(new PropertyValueFactory<User, String>("email"));
+        colrole.setCellValueFactory(new PropertyValueFactory<User, Role>("role"));
+        coldatenaissance.setCellValueFactory(new PropertyValueFactory<User, Date>("dateNaissance"));
         colImage.setCellValueFactory(new PropertyValueFactory<User, String>("image"));
 
         tvUtilisateur.setItems(liste);
@@ -189,7 +189,7 @@ public class AjoutPersonneControllerAuth implements Initializable {
             tftel.setText("");
             tfemail.setText("");
             tfdatenaissance.getEditor().clear();
-            
+
             tfrole.setValue("");
         }
     }
@@ -211,16 +211,16 @@ public class AjoutPersonneControllerAuth implements Initializable {
         User n = x;
         UtilisateurService us = new UtilisateurService();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date dateStr = df.parse(n.getdateNaissance().toString());
+        java.util.Date dateStr = df.parse(n.getDateNaissance().toString());
         java.sql.Date dateDB = new java.sql.Date(dateStr.getTime());
 
-        n.setdateNaissance(dateDB);
+        n.setDateNaissance(dateDB);
         n.setNom(tfNom.getText());
         n.setPrenom(tfPrenom.getText());
-        n.setnomUtilisateur(tfNomUtilisateur.getText());
-        n.settel(tftel.getText());
-        n.setemail(tfemail.getText());
-        n.setmotDePasee(hashPass);
+        n.setNomUtilisateur(tfNomUtilisateur.getText());
+        n.setTel(tftel.getText());
+        n.setEmail(tfemail.getText());
+        n.setMotDePasee(hashPass);
         if (!img.isEmpty()) {
             n.setImage(img);
         }
@@ -239,12 +239,12 @@ public class AjoutPersonneControllerAuth implements Initializable {
             x = n;
             tfNom.setText(n.getNom());
             tfPrenom.setText(n.getPrenom());
-            tfNomUtilisateur.setText(n.getnomUtilisateur());
-            tftel.setText(n.gettel());
-            tfemail.setText(n.getemail());
-            tfdatenaissance.setValue(n.getdateNaissance().toLocalDate());
-            img=n.getImage();
-            tfrole.setValue(n.getrole().name());
+            tfNomUtilisateur.setText(n.getNomUtilisateur());
+            tftel.setText(n.getTel());
+            tfemail.setText(n.getEmail());
+            tfdatenaissance.setValue(n.getDateNaissance().toLocalDate());
+            img = n.getImage();
+            tfrole.setValue(n.getRole().name());
 
         }
     }
@@ -281,11 +281,11 @@ public class AjoutPersonneControllerAuth implements Initializable {
 
             colNom.setCellValueFactory(new PropertyValueFactory<User, String>("nom"));
             colPrenom.setCellValueFactory(new PropertyValueFactory<User, String>("prenom"));
-            colNomUtilisateur.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getnomUtilisateur()));
-            coltlf.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().gettel()));
-            colemail.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getemail()));
-            colrole.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getrole().toString()));
-            coldatenaissance.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getdateNaissance().toString()));
+            colNomUtilisateur.setCellValueFactory(new PropertyValueFactory<User, String>("nomUtilisateur"));
+            coltlf.setCellValueFactory(new PropertyValueFactory<User, String>("tel"));
+            colemail.setCellValueFactory(new PropertyValueFactory<User, String>("email"));
+            colrole.setCellValueFactory(new PropertyValueFactory<User, Role>("role"));
+            coldatenaissance.setCellValueFactory(new PropertyValueFactory<User, Date>("dateNaissance"));
             colImage.setCellValueFactory(new PropertyValueFactory<User, String>("image"));
 
             tvUtilisateur.setItems(liste);

@@ -87,7 +87,7 @@ public class MainuiiistudentController implements Initializable {
     @FXML
     private void EVENEMENTSTUDENT(ActionEvent event) throws IOException {
         Stage stage;
-        Parent root = FXMLLoader.load(getClass().getResource("AfficherEv.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../GUI/AfficherEv.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);

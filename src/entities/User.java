@@ -44,8 +44,8 @@ public class User {
         }
     }
 
-    public String getRole() {
-        return role.name();
+    public Role getRole() {
+        return role;
     }
 
     public User(Long idUtilisateur, String nomUtilisateur, String role) {
@@ -148,43 +148,43 @@ public class User {
         this.prenom = prenom;
     }
 
-    public String getnomUtilisateur() {
+    public String getNomUtilisateur() {
         return nomUtilisateur;
     }
 
-    public void setnomUtilisateur(String nomUtilisateur) {
+    public void setNomUtilisateur(String nomUtilisateur) {
         this.nomUtilisateur = nomUtilisateur;
     }
 
-    public String gettel() {
+    public String getTel() {
         return tel;
     }
 
-    public void settel(String tel) {
+    public void setTel(String tel) {
         this.tel = tel;
     }
 
-    public String getemail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setemail(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getmotDePasse() {
+    public String getMotDePasse() {
         return motDePasse;
     }
 
-    public void setmotDePasee(String motDePasse) {
+    public void setMotDePasee(String motDePasse) {
         this.motDePasse = motDePasse;
     }
 
-    public Date getdateNaissance() {
+    public Date getDateNaissance() {
         return dateNaissance;
     }
 
-    public void setdateNaissance(Date dateNaissance) {
+    public void setDateNaissance(Date dateNaissance) {
         this.dateNaissance = dateNaissance;
     }
 
@@ -196,9 +196,6 @@ public class User {
         this.image = image;
     }
 
-    public Role getrole() {
-        return role;
-    }
 
     public void setRole(String role) {
         boolean c = false;

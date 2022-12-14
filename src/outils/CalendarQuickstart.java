@@ -161,7 +161,7 @@ public class CalendarQuickstart {
         String[] recurrence = new String[]{"RRULE:FREQ=DAILY;COUNT=1"};
         event.setRecurrence(Arrays.asList(recurrence));
 
-        String s1 = u.getemail();
+        String s1 = u.getEmail();
 
         EventAttendee[] attendees = new EventAttendee[]{
             new EventAttendee().setEmail(s1)};

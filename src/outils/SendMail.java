@@ -24,7 +24,7 @@ public class SendMail {
     public SendMail() {
     }
     
-    public void send (String subject, String body, String mail){
+    public static void send (String subject, String body, String mail){
         String username = "springforfever@gmail.com";
         String password = "kmcovmkdwmxwscsz";
         Properties props = new Properties();

@@ -158,7 +158,7 @@ public class ClientApplication extends Application {
         chatTextField.setOnAction((ActionEvent event) -> {
             // TODO Auto-generated method stub
             Timestamp t = new Timestamp(System.currentTimeMillis());
-            if (u.getrole().equals("Student")) {
+            if (u.getRole().name().equals("Student")) {
                 ms.add(new Messages(id, u.getId(), chatTextField.getText(), "Delivered", t));
             } else {
                 ms.add(new Messages(id, u.getId(), chatTextField.getText(), "Delivered", t));

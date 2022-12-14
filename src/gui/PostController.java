@@ -122,7 +122,7 @@ public class PostController implements Initializable {
         
         post p = tvpost.getSelectionModel().getSelectedItem();
         
-        if ((connectedUser.getrole().name().equals("Admin"))||(connectedUser.getId()==p.getUserID())){
+        if ((connectedUser.getRole().name().equals("Admin"))||(connectedUser.getId()==p.getUserID())){
         
          ServicePost sp = new ServicePost();
 
@@ -281,7 +281,7 @@ public class PostController implements Initializable {
                         deleteIcon.setOnMouseClicked((MouseEvent event) -> {
                            post p = tvpost.getSelectionModel().getSelectedItem();
         
-        if ((connectedUser.getrole().name().equals("Admin"))||(connectedUser.getId()==p.getUserID())){
+        if ((connectedUser.getRole().name().equals("Admin"))||(connectedUser.getId()==p.getUserID())){
         
          ServicePost sp = new ServicePost();
 
@@ -311,9 +311,9 @@ public class PostController implements Initializable {
         
                         });
                         editIcon.setOnMouseClicked((MouseEvent event) -> {
-                            System.out.println("*************** : " +connectedUser.getrole().name() ) ; 
+                            System.out.println("*************** : " +connectedUser.getRole().name()) ; 
                             post p=tvpost.getSelectionModel().getSelectedItem();
-                            if ((connectedUser.getrole().name().equals("Admin"))||(connectedUser.getId()==p.getUserID())){
+                            if ((connectedUser.getRole().name().equals("Admin"))||(connectedUser.getId()==p.getUserID())){
                                 
                             if (tvpost.getSelectionModel().getSelectedItem() != null) {
                                 staticpost = tvpost.getSelectionModel().getSelectedItem();

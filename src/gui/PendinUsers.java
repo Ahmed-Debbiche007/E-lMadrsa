@@ -4,9 +4,11 @@
  */
 package gui;
 
+import entities.Role;
 import entities.User;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.util.ResourceBundle;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ObservableList;
@@ -43,11 +45,11 @@ public class PendinUsers implements Initializable {
     @FXML
     private TableColumn<User, String> colemail;
     @FXML
-    private TableColumn<User, String> coldatenaissance;
+    private TableColumn<User, Date> coldatenaissance;
     @FXML
     private TableColumn<User, String> colImage;
     @FXML
-    private TableColumn<User, String> colrole;
+    private TableColumn<User, Role> colrole;
 
     /**
      * Initializes the controller class.
@@ -65,7 +67,7 @@ public class PendinUsers implements Initializable {
         us.approve(u);
         SendSMS s = new SendSMS();
         String body = "Hello "+u.getNom()+" "+u.getPrenom()+": Your account has been approved!";
-        s.apiTwilio(body);
+//        s.apiTwilio(body);
         afficherPersonne();
     }
 
@@ -94,11 +96,12 @@ public class PendinUsers implements Initializable {
 
         colNom.setCellValueFactory(new PropertyValueFactory<User, String>("nom"));
         colPrenom.setCellValueFactory(new PropertyValueFactory<User, String>("prenom"));
-        colNomUtilisateur.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getnomUtilisateur()));
-        coltlf.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().gettel()));
-        colemail.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getemail()));
-        colrole.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getrole().name()));
-        coldatenaissance.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getdateNaissance().toString()));
+        colNomUtilisateur.setCellValueFactory(new PropertyValueFactory<User, String>("nomUtilisateur"));
+        coltlf.setCellValueFactory(new PropertyValueFactory<User, String>("tel"));
+        colemail.setCellValueFactory(new PropertyValueFactory<User, String>("email"));
+        colrole.setCellValueFactory(new PropertyValueFactory<User, Role>("role"));
+        coldatenaissance.setCellValueFactory(new PropertyValueFactory<User, Date>("dateNaissance"));
+        colImage.setCellValueFactory(new PropertyValueFactory<User, String>("image"));
         colImage.setCellValueFactory(new PropertyValueFactory<User, String>("image"));
 
         tvUtilisateur.setItems(liste);

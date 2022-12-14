@@ -116,7 +116,7 @@ public class InscriptionController implements Initializable {
             java.sql.Date dateDB = new java.sql.Date(dateStr.getTime());
 
             User u = new User(tfNomm.getText(), tfPrenomm.getText(), tfNomUtilisateurr.getText(), tftlf.getText(), tfemaill.getText(), hashPass, (Date) dateDB, img, tfrolee.getValue(), false);
-
+            u.setApproved(false);
             us.ajouter(u);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Sign up Message");
